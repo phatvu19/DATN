@@ -70,7 +70,7 @@ const getOrderHistory = async (id: number) => {
     try {
         const response = await httpRequest.get(`/bill-stores-with-bill/${id}`)
         return response.data.data
-    } catch (error) {
+    } catch (error:any) {
         toast.error(error?.response?.data.message)
     }
 }

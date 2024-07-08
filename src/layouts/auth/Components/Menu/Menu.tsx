@@ -53,7 +53,7 @@ const items = [
     {
         key: "8",
         icon: <OrderedListOutlined />,
-        label: <Link to="admin/quan-ly-orders">Orders</Link>,
+        label: <Link to="/admin/quan-ly-orders">Orders</Link>,
     },
     {
         key: "9",

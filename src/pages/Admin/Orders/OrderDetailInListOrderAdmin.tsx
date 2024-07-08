@@ -13,9 +13,10 @@ import formatNumber from "@/utilities/FormatTotal"
 import ProductOrderDetailInAdmin from "./ProductOrderDetailInAdmin"
 import { getOrderHistory } from "@/api/services/Order"
 import { getUser } from "@/api/services/UserService"
+import HistoryOrder from "./HistoryOrder"
 
 const OrderDetailInListOrderAdmin = () => {
-    const { id } = useParams()
+    const { id }:any = useParams()
     const [bill, setBill] = useState<any>()
     const [totalPrice, setTotalPrice] = useState(0)
     const [loading, setloading] = useState(true)
@@ -35,8 +36,8 @@ const OrderDetailInListOrderAdmin = () => {
             const billStory = data.bill_story
 
             // Iterate through bill_story to fetch user names
-            const updatedBillHistory = await Promise.all(
-                billStory.map(async (bill) => {
+            const updatedBillHistory:any = await Promise.all(
+                billStory.map(async (bill:any) => {
                     const userId = bill.user_id
                     const { name } = await getUser(userId)
                     return {
@@ -84,7 +85,7 @@ const OrderDetailInListOrderAdmin = () => {
             setcolor("warning")
             setstatus("Chờ xác nhận")
             setcheck(true)
-        } else if (bill?.status == "Confirm") {
+        } else if (bill?.status == "confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         } else if (bill?.status == "Paid") {
@@ -107,12 +108,14 @@ const OrderDetailInListOrderAdmin = () => {
         ? bill?.Recipient_address?.split(";").map((part: any) => part.trim())
         : ""
     const [name, descbill, address] = parts
+    console.log(billHistory);
+    
     return (
         <>
             <div className="w-full bg-white p-5 pl-10 pr-10">
                 <div className="w-full">
                     <div className="flex">
-                        <Link to="/quan-ly-orders">
+                        <Link to="/admin/quan-ly-orders">
                             <button>
                                 <LeftOutlined /> Quay lại
                             </button>
@@ -306,32 +309,17 @@ const OrderDetailInListOrderAdmin = () => {
                                 <table className="mb-10 w-full bg-gray-200">
                                     <thead>
                                         <tr>
-                                            <th className="p-2">Người update</th>
-                                            <th className="p-2">Nội dung update</th>
-                                            <th className="p-2">Thời gian update</th>
+                                            <th className="p-2">Người hành động</th>
+                                            <th className="p-2">Nội dung hành động</th>
+                                            <th className="p-2">Thời gian hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white text-center align-middle">
-                                        {billHistory.map((item, index) => (
-                                            <tr
-                                                key={index}
-                                                className="w-1/4 border border-gray-200"
-                                            >
-                                                <td className="border border-gray-200 p-2 font-normal">
-                                                    {item.name}
-                                                </td>
-                                                <td className="border border-gray-200 p-2 font-normal">
-                                                    {item.description}
-                                                </td>
-                                                <td className="border border-gray-200 p-2 font-normal">
-                                                    {moment(item.updated_at)
-                                                        .locale("vi")
-                                                        .format(
-                                                            "DD/MM/YYYY HH:mm:ss",
-                                                        )}
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {billHistory?.map((item: any, index: any) => {
+                                            return (
+                                                <HistoryOrder key={index} data={item}/>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

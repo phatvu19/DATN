@@ -17,7 +17,7 @@ import WardInCheckOut from "./WardInCheckOut"
 import CartInCheckOut from "./CartInCheckOut"
 import formatNumber from "@/utilities/FormatTotal"
 import { useLocation, useNavigate } from "react-router-dom"
-import { addBill, addBillDetail } from "@/api/services/Bill"
+import { addBill, addBillDetail, addHistoryBills } from "@/api/services/Bill"
 import { toast } from "react-toastify"
 import { getCartOrder } from "@/api/services/Order"
 import { getAllSale, getAllSaleProduct } from "@/api/services/Sale"
@@ -247,8 +247,14 @@ const CheckOut = () => {
                 }),
             )
 
-            await addBillDetail(data2).then((data) => {
+            await addBillDetail(data2).then(async (data) => {
                 if (data?.data?.status == true) {
+                    const data = {
+                        bill_id: response?.data?.id,
+                        user_id: user?.data?.id,
+                        description: `Khách hàng vừa đặt đơn hàng mới`,
+                    }
+                    await addHistoryBills(data)
                     toast.success("Đặt hàng thành công")
                     setloadings(false)
                     localStorage.removeItem("cart")
@@ -326,8 +332,8 @@ const CheckOut = () => {
         console.log(discountCode)
         const check: any = voucher
             ? voucher?.data?.find(
-                  (data1: any) => data1?.voucher_code == discountCode,
-              )?.discount_amount
+                (data1: any) => data1?.voucher_code == discountCode,
+            )?.discount_amount
             : ""
         console.log(check)
 
@@ -691,10 +697,10 @@ const CheckOut = () => {
                                         <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
                                             {priceDiscount
                                                 ? formatNumber(
-                                                      totalprice +
-                                                          30000 -
-                                                          priceDiscount,
-                                                  )
+                                                    totalprice +
+                                                    30000 -
+                                                    priceDiscount,
+                                                )
                                                 : formatNumber(totalprice + 30000)}
                                             đ
                                         </h5>
