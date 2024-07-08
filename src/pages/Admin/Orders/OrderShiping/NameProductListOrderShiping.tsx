@@ -119,7 +119,7 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
                             >
                                 Đã nhận hàng
                             </button>
-                            <Link to={`/quan-ly-orders/${data?.id}`}>
+                                <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                                 <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
                                     Chi tiết
                                 </button>

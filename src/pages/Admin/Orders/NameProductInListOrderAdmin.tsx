@@ -37,7 +37,7 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
             setcolor("warning")
             setstatus("Chờ xác nhận")
             setcheck(true)
-        } else if (data?.status == "Confirm") {
+        } else if (data?.status == "confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         } else if (data?.status == "Paid") {
@@ -181,7 +181,7 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
                                     >
                                         Xác nhận
                                     </button>
-                                    <Link to={`/quan-ly-orders/${billdetail?.id}`}>
+                                        <Link to={`/admin/quan-ly-orders/${billdetail?.id}`}>
                                         <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
                                             Chi tiết
                                         </button>
@@ -189,7 +189,7 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
                                 </>
                             ) : (
                                 <>
-                                    <Link to={`/quan-ly-orders/${billdetail?.id}`}>
+                                            <Link to={`/admin/quan-ly-orders/${billdetail?.id}`}>
                                         <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
                                             Chi tiết
                                         </button>

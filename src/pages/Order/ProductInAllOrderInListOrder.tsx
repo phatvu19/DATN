@@ -32,7 +32,7 @@ const ProductInAllOrderInListOrder = ({ data }: any) => {
         if (data?.status == "Pending") {
             setcolor("warning")
             setstatus("Chờ xác nhận")
-        } else if (data?.status == "Confirm") {
+        } else if (data?.status == "confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         } else if (data?.status == "Paid") {

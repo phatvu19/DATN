@@ -30,7 +30,7 @@ const NameProductInListOrderConfirm = ({ data, onCheck }: any) => {
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
     useEffect(() => {
-        if (data?.status == "Confirm") {
+        if (data?.status == "confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         }
@@ -117,7 +117,7 @@ const NameProductInListOrderConfirm = ({ data, onCheck }: any) => {
                             >
                                 Đã lấy
                             </button>
-                            <Link to={`/quan-ly-orders/${data?.id}`}>
+                                <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                                 <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
                                     Chi tiết
                                 </button>
