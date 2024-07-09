@@ -99,8 +99,8 @@ const ListOrderAdmin = () => {
                             <thead className="text-center align-middle">
                                 <tr>
                                     <th className="p-2">ID</th>
-                                    <th className="p-2">Tên sản phẩm</th>
-                                    <th className="p-2">Ảnh</th>
+                                    {/* <th className="p-2">Tên sản phẩm</th>
+                                    <th className="p-2">Ảnh</th> */}
                                     <th className="p-2">Địa chỉ/Sđt</th>
                                     <th className="p-2">Giá</th>
                                     <th className="p-2">Ngày</th>
@@ -121,14 +121,14 @@ const ListOrderAdmin = () => {
                         </table>
 
                     )}
-                    <div className="mt-5 flex items-center justify-center">
+                    {/* <div className="mt-5 flex items-center justify-center">
                         <Pagination
                             current={currentPage}
                             total={bill?.length}
                             pageSize={itemsPerPage}
                             onChange={handlePageChange}
                         />
-                    </div>
+                    </div> */}
                     {filterStatus === "paid" && <ListOrderPaid />}
                     {filterStatus === "pending" && <ListOrderPending />}
                     {filterStatus === "confirmed" && <ListOrderConFirm />}

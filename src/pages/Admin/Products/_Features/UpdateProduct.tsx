@@ -27,7 +27,7 @@ const UpdateProduct = () => {
     const [attributes, setAttributes] = useState<Attribute[]>([])
     const [attributeValues, setAttributeValues] = useState({})
     const navigate = useNavigate()
-    const { id } = useParams()
+    const { id }:any = useParams()
 
     const {
         control,
@@ -53,7 +53,7 @@ const UpdateProduct = () => {
     const fetchProductDetails = useCallback(async () => {
         if (id) {
             try {
-                const product = await getProductById(id)
+                const product :any= await getProductById(id)
                 setValue("name", product?.name)
                 setValue("category_id", product?.category_id)
                 setValue("brand", product?.brand)
@@ -128,7 +128,7 @@ const UpdateProduct = () => {
     // Fetch all attribute values from API and organize them by attribute_id
     const fetchAttributeValues = async () => {
         const values = await getAllAttributeValue()
-        const organizedValues = values.reduce((acc, item) => {
+        const organizedValues = values.reduce((acc:any, item:any) => {
             if (!acc[item.attribute_id]) {
                 acc[item.attribute_id] = []
             }
@@ -156,7 +156,7 @@ const UpdateProduct = () => {
         }
         console.log(formattedData)
         try {
-            const jsonData = JSON.stringify(formattedData)
+            const jsonData:any = JSON.stringify(formattedData)
             const response = await updateProduct(id, jsonData)
             console.log("Product updated successfully:", response)
             toast.success("Product updated successfully.")

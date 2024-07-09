@@ -219,7 +219,7 @@ const CheckOut = () => {
             total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
             status: "Pending",
             pay: paymentMethod,
-            voucher: priceDiscount,
+            voucher: "sed",
             // bill_date: "2004-08-29",
         }
         const response: any = await addBill(data)
@@ -241,7 +241,7 @@ const CheckOut = () => {
                             : cartt?.data[index]?.price,
                         quantity: element?.quantity,
                         bill_id: response?.data?.id,
-                        sale: priceDiscount ? `${priceDiscount}` : "null",
+                        sale: sale,
                         image: element?.image,
                     }
                     data2.data.push(data1)

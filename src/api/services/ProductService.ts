@@ -46,7 +46,7 @@ const updateProduct = async (
     product: Product,
 ): Promise<Product | undefined> => {
     try {
-        const response: AxiosResponse<{ data: Product }> = await httpRequest.put(
+        const response: AxiosResponse<{ data: Product }> = await httpRequest.put (
             `/products/${id}`,
             product,
         )

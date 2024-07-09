@@ -5,21 +5,6 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 const NameProductListOrderDone = ({ data }: any) => {
-    const [billdetail, setBillDetail] = useState<any>()
-    const [loading, setloading] = useState<any>(true)
-    const fetchBillDetail = async () => {
-        try {
-            const data1: any = await getBillsDetail(data?.id)
-            setBillDetail(data1)
-        } catch (error) {
-            console.error("Error fetching bill details:", error)
-        } finally {
-            setloading(false)
-        }
-    }
-    useEffect(() => {
-        fetchBillDetail()
-    }, [])
     // const billsProduct = billdetail?.find((item: any) => item?.bill_id == data?.id)
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
@@ -29,28 +14,12 @@ const NameProductListOrderDone = ({ data }: any) => {
             setstatus("Hoàn thành")
         }
     }, [data])
-    const total: any = Number(billdetail?.total_amount)
+    const total: any = Number(data?.total_amount)
 
     return (
         <>
             <tr className="items-center justify-center p-2" key={data?.id}>
                 <td className="p-2 text-center font-normal">{data?.id}</td>
-                <td className="p-2 text-center font-normal">
-                    {billdetail?.bill_details[0]
-                        ? billdetail?.bill_details[0].product_name
-                        : ""}
-                </td>
-                <td className="w-1/9 flex items-center justify-center p-2">
-                    <img
-                        className="h-26 w-20"
-                        src={
-                            billdetail?.bill_details[0]
-                                ? billdetail?.bill_details[0].image
-                                : ""
-                        }
-                        alt=""
-                    />
-                </td>
                 <td className="p-2 text-center font-normal" style={{ width: "20%" }}>
                     <span className="font-bold">Đ/c</span>: {data?.Recipient_address}
                     <br />

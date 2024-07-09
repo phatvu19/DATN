@@ -1,12 +1,15 @@
 import { getAllProduct } from '@/api/services/ProductService'
-import { getAllSale } from '@/api/services/Sale'
+import { getAllSale, updateSale } from '@/api/services/Sale'
 import { Button, Select, Space, Table, Tag } from 'antd'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import SaleDetail from './SaleDetail'
 
 type Props = {}
 
 const ListSaleProduct = (props: Props) => {
     const [products, setproduct] = useState<any>()
+    const [idSale, setIdsale] = useState<any>()
     useEffect(() => {
         const fetchPro = async () => {
             const product = await getAllProduct()
@@ -14,14 +17,25 @@ const ListSaleProduct = (props: Props) => {
         }
         fetchPro()
     }, [])
-    const [sales, setsale] = useState<any>()
-    useEffect(() => {
-        const fetchPro = async () => {
-            const sale = await getAllSale()
-            setsale(sale)
-        }
-        fetchPro()
-    }, [])
+
+    const handleChange = async (value: any) => {
+        setIdsale(value);
+    }
+    const HandleUpdate = async (id: any) => {
+        const data = {
+            id: id.id,
+            sale_id: {
+                sale_id: idSale
+            }
+        };
+        console.log(data);
+        await updateSale(data)
+        toast.success('Thành công')
+    }
+    // const saleName = sales?.find(
+    //     (item: any) => item?.sale_id == data?.sale_id
+    // )?.sale_id;
+
     const columns: any = [
         {
             title: 'ID',
@@ -42,40 +56,52 @@ const ListSaleProduct = (props: Props) => {
         {
             title: 'Sale',
             key: 'sale',
-            render: () => (
-                <>
-                    <Select
-                        defaultValue="Chọn Giảm giá"
-                        style={{ width: 160 }}
-                        // onChange={handleChange}
-                        options={sales?.map((data: any) => ({ value: data?.name, label: `Giảm giá ${data?.name}%` }))}
-                    />
-                </>
-            ),
+            render: (data: any) => {
+                return (
+                    <SaleDetail data={data} onValue={handleChange} />
+                )
+
+            }
         },
         {
             title: 'Action',
             key: 'action',
-            render: () => (
-                <Button size="middle">
+            render: (id: any) => (
+                <Button size="middle" onClick={() => HandleUpdate(id)}>
                     Update
                 </Button>
             ),
         },
     ];
-    console.log(sales);
 
     const data: any = products?.map((data: any) => ({
         key: data?.id,
         id: data?.id,
         name: data?.name,
         price: data?.variants[0]?.price,
-
+        sale_id: data?.sale_id
     }))
     return (
         <>
             <div className="w-full border border-gray-300">
-                <Table columns={columns} dataSource={data} pagination={false}/>
+                <table className="min-w-full text-left text-sm font-light">
+                    <thead className="border-b font-medium dark:border-neutral-500">
+                        <tr>
+                            <th scope="col" className="px-6 py-4">#</th>
+                            <th scope="col" className="px-6 py-4">Name</th>
+                            <th scope="col" className="px-6 py-4">Price</th>
+                            <th scope="col" className="px-6 py-4">Sale</th>
+                            <th scope="col" className="px-6 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products?.map((data: any) => {
+                            return (
+                                <SaleDetail data={data} key={data?.id}/>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
         </>
     )
