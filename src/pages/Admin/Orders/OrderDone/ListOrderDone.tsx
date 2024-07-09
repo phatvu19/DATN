@@ -40,8 +40,6 @@ const ListOrderDones = () => {
                 <thead className="text-center align-middle">
                     <tr>
                         <th className="p-2">ID</th>
-                        <th className="p-2">Tên sản phẩm</th>
-                        <th className="p-2">Ảnh</th>
                         <th className="p-2">Địa chỉ/Sđt</th>
                         <th className="p-2">Giá</th>
                         <th className="p-2">Ngày</th>

@@ -18,5 +18,13 @@ const getAllSaleProduct = async (id: any): Promise<Product[]> => {
         return []
     }
 }
+const updateSale = async (data: any): Promise<Product[]> => {
+    try {
+        const response: any = await httpRequest.put(`/update-sale-in-product/${data?.id}`, data?.sale_id)
+        return response.data?.data?.sales ?? []
+    } catch (error) {
+        return []
+    }
+}
 
-export { getAllSale, getAllSaleProduct }
+export { getAllSale, getAllSaleProduct, updateSale }
