@@ -77,7 +77,7 @@ const ProductDetail = () => {
     }
     const [sizevalues, setsizevalue] = useState()
     const sizes = (idvarian: any, idattributevalue: any, sizeValue: any) => {
-        // console.log(idvarian)
+        console.log(idvarian)
 
         setSizevalue(idvarian)
         setid_attribute_size(idattributevalue)
@@ -86,7 +86,6 @@ const ProductDetail = () => {
     const price = (value: any) => {
         setprices(value)
     }
-    // console.log(sizevalues)
 
     const HandleAddtoCart = async () => {
         const data = {

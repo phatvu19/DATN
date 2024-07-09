@@ -1,6 +1,8 @@
+import ListSaleProduct from "@/pages/Admin/Sale/ListSaleProduct"
 import {
     AppstoreOutlined,
     BarChartOutlined,
+    FallOutlined,
     OrderedListOutlined,
     SettingOutlined,
     ShoppingCartOutlined,
@@ -57,6 +59,11 @@ const items = [
     },
     {
         key: "9",
+        icon: <FallOutlined />,
+        label: <Link to="/admin/quan-ly-sale">Quản lý sale</Link>,
+    },
+    {
+        key: "10",
         icon: <SettingOutlined />,
         label: "Settings",
     },
