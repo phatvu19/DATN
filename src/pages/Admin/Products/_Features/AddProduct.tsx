@@ -30,7 +30,7 @@ const AddProduct = () => {
     const { control, handleSubmit } = useForm()
 
     const handleGoBack = () => {
-        navigate("/quan-ly-san-pham")
+        navigate("/admin/quan-ly-san-pham")
     }
 
     // Fetch categories, attributes, and attribute values on component mount
@@ -92,7 +92,7 @@ const AddProduct = () => {
             const response = await createProduct(formattedData)
             console.log("Product created successfully:", response)
             toast.success("Product created successfully.")
-            navigate("/quan-ly-san-pham")
+            navigate("/admin/quan-ly-san-pham")
         } catch (error) {
             console.error("Failed to create product:", error)
             toast.error("Failed to create product. Please try again later.")

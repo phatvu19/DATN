@@ -12,17 +12,16 @@ const SizeInProductDetail = ({
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
+    const variant = value?.find((data1:any)=> data1?.size == data?.value)?.variant
     const HandleClick = (values: any) => {
         onActive(values)
-        onSize(value[index]?.variant, values, values)
+        onSize(variant, values, values)
     }
     const filteredSizes = value
         ? value
               .filter((data1: any) => data1?.color === data1?.color)
               .map((data2: any) => data2?.size)
         : []
-    // console.log(value[index]?.variant)
-
     return (
         <>
             {filteredSizes.includes(data?.value) ? (

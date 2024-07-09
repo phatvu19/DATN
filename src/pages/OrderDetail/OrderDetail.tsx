@@ -69,7 +69,7 @@ const OrderDetail = () => {
             setcolor("warning")
             setstatus("Chờ xác nhận")
             setcheck(true)
-        } else if (bill?.status == "Confirm") {
+        } else if (bill?.status == "confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         } else if (bill?.status == "Paid") {

@@ -80,7 +80,7 @@ const ListOrderAdmin = () => {
                         <Option value="cancelled">Đã hủy</Option>
                     </Select>
                     <RangePicker
-                        onChange={(dates) => handleFilterChange("dateRange", dates)}
+                        onChange={(dates: any) => handleFilterChange(dates)}
                         className="w-72"
                     />
                 </div>
@@ -117,8 +117,18 @@ const ListOrderAdmin = () => {
                                     />
                                 ))}
                             </tbody>
+
                         </table>
+
                     )}
+                    <div className="mt-5 flex items-center justify-center">
+                        <Pagination
+                            current={currentPage}
+                            total={bill?.length}
+                            pageSize={itemsPerPage}
+                            onChange={handlePageChange}
+                        />
+                    </div>
                     {filterStatus === "paid" && <ListOrderPaid />}
                     {filterStatus === "pending" && <ListOrderPending />}
                     {filterStatus === "confirmed" && <ListOrderConFirm />}

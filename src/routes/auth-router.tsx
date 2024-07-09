@@ -6,6 +6,7 @@ import OrderDetailInListOrderAdmin from "@/pages/Admin/Orders/OrderDetailInListO
 import AddProduct from "@/pages/Admin/Products/_Features/AddProduct"
 import UpdateProduct from "@/pages/Admin/Products/_Features/UpdateProduct"
 import ProductManagement from "@/pages/Admin/Products/ProductList"
+import ListSaleProduct from "@/pages/Admin/Sale/ListSaleProduct"
 import UserManagement from "@/pages/Admin/Users"
 import AddUser from "@/pages/Admin/Users/_Features/AddUser"
 import UpdateUser from "@/pages/Admin/Users/_Features/UpdateUser"
@@ -55,4 +56,9 @@ export const AuthRouter = [
         path: pathName.ATTR_MANAGEMENT,
         element: <AttributeManagement />,
     },
+    {
+        path: pathName.SALE,
+        element: <ListSaleProduct />,
+    },
+
 ]

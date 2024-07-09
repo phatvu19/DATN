@@ -25,9 +25,16 @@ function App() {
                                       element={childRoute.element}
                                   />
                               ))}
+                            {route.path === '/admin' && (
+                                <Route
+                                    path="/admin"
+                                    element={<Navigate to="/admin/thong-ke" />}
+                                />
+                            )}
                           </Route>
                       ))
                     : ""}
+                
                 <Route path={"/"} element={RootUnAuthRouter[0]?.element}>
                     {RootUnAuthRouter[0]?.children?.map((route, index) => (
                         <Route
@@ -42,6 +49,7 @@ function App() {
                 ) : (
                     ""
                 )}
+                
             </Routes>
         </Router>
     )
