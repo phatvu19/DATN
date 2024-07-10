@@ -21,7 +21,7 @@ const ProductInListProductBuy3 = ({ data }: any) => {
         fetchProduct()
     }, [])
     const totalPrice = (pro?.variants[0]?.price * discount) / 100
-    console.log(totalPrice)
+    console.log(discount)
 
     return (
         <>
@@ -31,15 +31,13 @@ const ProductInListProductBuy3 = ({ data }: any) => {
                         <div className="group relative rounded border border-gray-500 p-2 pb-5 hover:border-2 hover:border-red-300">
                             <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat p-2">
                                 <img src={data?.image} alt="" />
-                                {discount ? (
-                                    <>
-                                        <button className="absolute top-5  flex flex-col gap-2 bg-red-500 p-1 pl-3 pr-3 text-sm text-white opacity-0 opacity-100 transition-opacity duration-300">
-                                            -{discount}%
-                                        </button>{" "}
-                                    </>
-                                ) : (
-                                    <></>
-                                )}
+
+
+                                <button className="absolute top-5  flex flex-col gap-2 bg-red-500 p-1 pl-3 pr-3 text-sm text-white opacity-0 opacity-100 transition-opacity duration-300">
+                                    -{discount}%
+                                </button>{" "}
+
+
                                 <div className="absolute right-3 top-8 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     <Link to={`/products/${data?.id}`}>
                                         <ShoppingCartOutlined className="text-2xl" />

@@ -66,8 +66,7 @@ const AddProduct = () => {
     }
 
     const onSubmit = async (data: FieldValues) => {
-        console.log(data)
-        if (!data.image || data.image.length === 0) {
+        if (!uploadedImages) {
             toast.error("Please upload an image.")
             return // Exit early if image is not provided
         }
@@ -76,7 +75,7 @@ const AddProduct = () => {
             category_id: data.category_id,
             brand: data.brand,
             description: data.description,
-            image: data.image[0].originFileObj,
+            image: uploadedImages,
             variants: variants.map((variant) => ({
                 price: variant.price,
                 price_promotional: variant.price_promotional,
@@ -127,6 +126,21 @@ const AddProduct = () => {
         newVariants[index].attributes[attributeName] = value
         setVariants(newVariants)
     }
+    const [uploadedImages, setUploadedImages] = useState([]);
+    const props: any = {
+        action: "https://api.cloudinary.com/v1_1/dsul0ahfu/image/upload",
+        onChange({ file }: any) {
+            if (file.status !== "uploading") {
+                // Sử dụng một hàm setState để cập nhật mảng uploadedImages
+                setUploadedImages(file.response.secure_url);
+            }
+        },
+        data: {
+            upload_preset: "dant_phat",
+            folder: "datn",
+        },
+    };
+    console.log(uploadedImages);
 
     // Form rendering
     return (
@@ -215,25 +229,14 @@ const AddProduct = () => {
                             />
                         </Form.Item>
                     </div>
-                    <Form.Item label="Image">
-                        <Controller
-                            name="image"
-                            control={control}
-                            defaultValue={[]}
-                            render={({ field }) => (
-                                <Upload
-                                    listType="picture"
-                                    beforeUpload={() => false}
-                                    onChange={({ fileList }) =>
-                                        field.onChange(fileList)
-                                    }
-                                >
-                                    <Button icon={<UploadOutlined />}>
-                                        Click to upload
-                                    </Button>
-                                </Upload>
-                            )}
-                        />
+                    <Form.Item
+                        name="image"
+                        className="col-md-10"
+                        validateTrigger={["onChange", "onBlur"]}
+                    >
+                        <Upload.Dragger {...props} multiple accept=".jpg,.png">
+                            <Button icon={<UploadOutlined />}>Upload</Button>
+                        </Upload.Dragger>
                     </Form.Item>
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">Sản phẩm biến thể</h3>
