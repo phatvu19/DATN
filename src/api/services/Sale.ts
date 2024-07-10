@@ -2,6 +2,14 @@ import { Product } from "@/@types/product"
 import httpRequest from "@/api/axios-instance"
 import { toast } from "react-toastify"
 
+const AddSale = async (data: any): Promise<Product[]> => {
+    try {
+        const response: any = await httpRequest.post(`/sales`, data)
+        return response.data
+    } catch (error) {
+        return []
+    }
+}
 const getAllSale = async (): Promise<Product[]> => {
     try {
         const response: any = await httpRequest.get("/sales")
@@ -27,4 +35,4 @@ const updateSale = async (data: any): Promise<Product[]> => {
     }
 }
 
-export { getAllSale, getAllSaleProduct, updateSale }
+export { getAllSale, getAllSaleProduct, updateSale, AddSale }

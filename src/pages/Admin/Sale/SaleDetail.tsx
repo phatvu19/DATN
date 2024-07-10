@@ -2,12 +2,16 @@ import { getAllSale, updateSale } from "@/api/services/Sale"
 import { Button, Select } from "antd"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import formatNumber from '@/utilities/FormatTotal';
 
 
-const SaleDetail = ({ data, onValue }: any) => {
+const SaleDetail = ({ data, onValue, check ,onLoad}: any) => {
+    console.log(data);
+    const [currentSaleId, setCurrentSaleId] = useState(false);
     const [sales, setsale] = useState<any>()
     const [idSale, setIdsale] = useState<any>()
     const [saleNmae, setsalename] = useState<any>(data?.sale_id)
+    const [load, setload] = useState<any>(false)
     useEffect(() => {
         const fetchPro = async () => {
             const sale = await getAllSale()
@@ -18,44 +22,71 @@ const SaleDetail = ({ data, onValue }: any) => {
             setsalename(saleName)
         }
         fetchPro()
-    }, [])
+    }, [check, load])
 
     const handleChange = (value: any) => {
         onValue(value)
     }
     const HandleUpdate = async (id: any) => {
+        setCurrentSaleId(true)
         const data = {
             id: id,
             sale_id: {
                 sale_id: idSale
             }
         };
-        console.log(data);
         await updateSale(data)
+        setload(true)
+        onLoad(idSale)
         toast.success('Thành công')
     }
-    console.log(saleNmae);
-  
+    const saleName = sales?.find(
+        (item: any) => item?.id == data?.sale_id
+    )?.name;
+    const totalDi = (data?.variants[0]?.price*saleName) /100
+    console.log(totalDi);
 
     return (
         <>
             <tr className="border-b dark:border-neutral-500" key={data?.id}>
                 <td className="whitespace-nowrap px-6 py-4 font-medium">{data?.id}</td>
                 <td className="whitespace-nowrap px-6 py-4">{data?.name}</td>
-                <td className="whitespace-nowrap px-6 py-4">{data?.variants[0]?.price}</td>
                 <td className="whitespace-nowrap px-6 py-4">
-                    <select
+                    {saleName ? <> <span className="line-through mr-4"> {formatNumber(data?.variants[0]?.price)}đ</span> <span className="text-red-500"> {formatNumber(data?.variants[0]?.price - totalDi)}đ</span> </> :`${formatNumber(data?.variants[0]?.price)}đ`
+                    
+                    }
+                 </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                    {idSale ? <select
                         id="largeSelect"
                         className="form-select form-select-lg"
-                        value={saleNmae ? saleNmae :""}
+                        // salesReady && sales && sales.length > 0 ? sales[0].id : "0"
+
+                        defaultValue={!currentSaleId ? undefined : saleNmae}
+
                         style={{ width: "150px", height: "90%" }}
                         onChange={(e) => setIdsale(e.target.value)}
                     >
-                        <option value="null">Chọn sale</option>
+                        <option value="0">Chọn sale</option>
                         {sales?.map((data: any) => (
                             <option value={data?.id}>Mã sale {data?.name}%</option>
                         ))}
-                    </select></td>
+                    </select> : <select
+                        id="largeSelect"
+                        className="form-select form-select-lg"
+                        // salesReady && sales && sales.length > 0 ? sales[0].id : "0"
+
+                        value={!currentSaleId ? saleNmae : undefined}
+
+                        style={{ width: "150px", height: "90%" }}
+                        onChange={(e) => setIdsale(e.target.value)}
+                    >
+                        <option value="0">Chọn sale</option>
+                        {sales?.map((data: any) => (
+                            <option value={data?.id}>Mã sale {data?.name}%</option>
+                        ))}
+                    </select>}
+                </td>
                 <td className="whitespace-nowrap px-6 py-4"> <Button size="middle" onClick={() => HandleUpdate(data?.id)}>
                     Update
                 </Button></td>
