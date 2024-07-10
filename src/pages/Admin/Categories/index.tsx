@@ -14,7 +14,7 @@ const CategoryManagement = () => {
     const [categories, setCategories] = useState<Category[]>([])
     const [isAddModalVisible, setIsAddModalVisible] = useState(false)
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
-    const [currentCategory, setCurrentCategory] = useState<Category | null>(null)
+    const [currentCategory, setCurrentCategory] = useState<any>(null)
     const [form] = Form.useForm()
 
     useEffect(() => {
@@ -84,11 +84,6 @@ const CategoryManagement = () => {
             title: "Tên Danh Mục",
             dataIndex: "name",
             key: "name",
-        },
-        {
-            title: "Sản Phẩm",
-            dataIndex: "quantity",
-            key: "quantity",
         },
         {
             title: "Thao Tác",
