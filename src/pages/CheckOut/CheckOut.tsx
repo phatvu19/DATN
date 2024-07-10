@@ -57,7 +57,7 @@ const CheckOut = () => {
             total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
             status: "Paid",
             pay: "ONLINE",
-            bill_date: "2004-08-29",
+            voucher: "sed",
         }
         const response: any = await addBill(data)
         setres(response)
