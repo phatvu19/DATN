@@ -17,10 +17,10 @@ const getAllAttribute = async (): Promise<Attribute[]> => {
 
 const getAttributeById = async (id: number): Promise<Attribute | undefined> => {
     try {
-        const response: AxiosResponse<{ data: { attributes: Attribute } }> =
+        const response: any=
             await httpRequest.get(`attributes/${id}`)
 
-        return response.data?.data?.attributes
+        return response?.data?.data?.attribute?.attribute_values
     } catch (error) {
         console.error("An error occurred while fetching Attribute")
         toast.error("Failed to fetch attribute. Please try again later.")
@@ -110,7 +110,7 @@ const createAttributeValue = async (
         return null
     }
 }
-const deleteAttributeValue = async (id: string): Promise<boolean> => {
+const deleteAttributeValue = async (id: any)=> {
     try {
         await httpRequest.delete(`attribute-values/${id}`)
         return true // Return true if deletion is successful

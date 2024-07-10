@@ -7,6 +7,7 @@ import {
     createAttributeValue,
     deleteAttributeValue,
     updateAttributeValue,
+    getAttributeById,
 } from "@/api/services/AttributeService"
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons"
 import { Button, Form, Input, Modal, Space, Table } from "antd"
@@ -17,10 +18,12 @@ const AttributeManagement = () => {
     const [isAddModalVisible, setIsAddModalVisible] = useState(false)
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
     const [isValueModalVisible, setIsValueModalVisible] = useState(false)
-    const [currentAttribute, setCurrentAttribute] = useState<Attribute | null>(null)
+    const [currentAttribute, setCurrentAttribute] = useState<any>(null)
     const [currentAttributeValue, setCurrentAttributeValue] =
-        useState<AttributeValue | null>(null)
+        useState<any>(null)
+    const [attributesid, setAttributesid] = useState<any>([])
     const [form] = Form.useForm()
+    console.log(attributesid);
 
     useEffect(() => {
         fetchAttributes()
@@ -35,8 +38,22 @@ const AttributeManagement = () => {
         }
     }
 
+    const fetchAttributesId = async (id: any) => {
+        try {
+            const data = await getAttributeById(id)
+            setAttributesid(data)
+        } catch (error) {
+            console.error("Failed to fetch attributes:", error)
+        }
+    }
+
+
     const handleAddAttribute = async (values: Attribute) => {
         try {
+            const data: any = {
+                value: values,
+                attribute_id: currentAttribute?.id
+            }
             await createAttribute(values)
             fetchAttributes()
             setIsAddModalVisible(false)
@@ -69,7 +86,11 @@ const AttributeManagement = () => {
     const handleAddAttributeValue = async (values: AttributeValue) => {
         try {
             if (currentAttribute) {
-                await createAttributeValue(values)
+                const data: any = {
+                    value: values?.value,
+                    attribute_id: currentAttribute?.id
+                }
+                await createAttributeValue(data)
                 fetchAttributes()
                 setIsValueModalVisible(false)
                 form.resetFields()
@@ -94,10 +115,10 @@ const AttributeManagement = () => {
 
     const handleDeleteAttributeValue = async (
         attributeId: number,
-        attributeValueId: number,
+        attributeValueId: any,
     ) => {
         try {
-            await deleteAttributeValue(attributeId, attributeValueId)
+            await deleteAttributeValue(attributeId)
             fetchAttributes()
         } catch (error) {
             console.error("Failed to delete attribute value:", error)
@@ -168,12 +189,32 @@ const AttributeManagement = () => {
                     >
                         Add Value
                     </Button>
+                    <Button
+                        onClick={() => showModal(record?.id)}
+                    >
+                        View
+                    </Button>
                 </Space>
             ),
         },
     ]
 
-    const valueColumns = (attribute: Attribute) => [
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = (id: any) => {
+        console.log(id);
+        fetchAttributesId(id)
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+    const valueColumns = [
         {
             title: "ID",
             dataIndex: "id",
@@ -190,29 +231,30 @@ const AttributeManagement = () => {
             },
         },
 
-        {
-            title: "Action",
-            key: "action",
-            render: (record: AttributeValue) => (
-                <Space size="middle">
-                    <Button
-                        icon={<EditOutlined />}
-                        onClick={() => {
-                            setCurrentAttributeValue(record)
-                            form.setFieldsValue(record)
-                            setIsValueModalVisible(true)
-                        }}
-                    />
-                    <Button
-                        icon={<DeleteOutlined />}
-                        onClick={() => showDeleteValueConfirm(attribute.id, record)}
-                        danger
-                    />
-                </Space>
-            ),
-        },
+        // {
+        //     title: "Action",
+        //     key: "action",
+        //     render: (record: AttributeValue) => (
+        //         <Space size="middle" className="w-1/3">
+        //             <Button
+        //                 icon={<EditOutlined />}
+        //                 onClick={() => {
+        //                     setCurrentAttributeValue(record)
+        //                     form.setFieldsValue(record)
+        //                     setIsValueModalVisible(true)
+        //                 }}
+        //             />
+        //             <Button
+        //                 icon={<DeleteOutlined />}
+        //                 // onClick={() => showDeleteValueConfirm(attribute.id, record)}
+        //                 danger
+        //             />
+        //         </Space>
+        //     ),
+        // },
     ]
     return (
+
         <div className="content">
             <Button
                 type="primary"
@@ -227,16 +269,6 @@ const AttributeManagement = () => {
                 columns={attributeColumns}
                 dataSource={attributes}
                 rowKey={"id"}
-                expandable={{
-                    expandedRowRender: (record) => (
-                        <Table
-                            columns={valueColumns(record)}
-                            dataSource={record.attribute_values}
-                            rowKey={"id"}
-                            pagination={false}
-                        />
-                    ),
-                }}
             />
 
             <Modal
@@ -265,6 +297,11 @@ const AttributeManagement = () => {
                     </Form.Item>
                 </Form>
             </Modal>
+            {/* modal con */}
+            <Modal title="Attribute_value" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Table columns={valueColumns} dataSource={attributesid} pagination={false} />
+            </Modal>
+
 
             <Modal
                 title="Edit Attribute"
