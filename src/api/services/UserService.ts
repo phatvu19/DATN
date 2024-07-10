@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 const getAllUser = async () => {
     try {
         const response = await httpRequest.get("/users")
-        return response.data.data.users
+        return response.data.data
     } catch (error) {
         console.log(error)
     }

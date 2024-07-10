@@ -335,7 +335,7 @@ const AddUser: React.FC = () => {
                                     size="large"
                                     type="default"
                                     className="bg-red-500 text-white"
-                                    onClick={() => navigate("/quan-ly-nguoi-dung")}
+                                    onClick={() => navigate("/admin/quan-ly-nguoi-dung")}
                                     icon={<ArrowLeftOutlined />}
                                 >
                                     Quay Lại

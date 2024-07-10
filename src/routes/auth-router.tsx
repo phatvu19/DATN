@@ -9,7 +9,6 @@ import ProductManagement from "@/pages/Admin/Products/ProductList"
 import ListSaleProduct from "@/pages/Admin/Sale/ListSaleProduct"
 import UserManagement from "@/pages/Admin/Users"
 import AddUser from "@/pages/Admin/Users/_Features/AddUser"
-import UpdateUser from "@/pages/Admin/Users/_Features/UpdateUser"
 import { pathName } from "@/routes/path-name"
 export const AuthRouter = [
     {
@@ -39,10 +38,6 @@ export const AuthRouter = [
     {
         path: pathName.ADD_USER,
         element: <AddUser />,
-    },
-    {
-        path: pathName.UPDATE_USER,
-        element: <UpdateUser />,
     },
     {
         path: pathName.ORDER_MANAGEMENT,
