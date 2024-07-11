@@ -3,6 +3,7 @@ import Pay from './Pay'
 import Categories from './Categories'
 import { getDoanhThuDay, getDoanhThuMonth, getDoanhThuWeek } from '@/api/services/Dashboard'
 import formatNumber from '@/utilities/FormatTotal';
+import { Select } from 'antd';
 
 const DataDay = () => {
     const [doanhsoday, setdoanhsodatyy] = useState<any>()
@@ -54,20 +55,22 @@ const DataDay = () => {
         <>
             <div className="flex ">
                 <div className="w-3/5 border border-gray-400 p-4">
-                    <span className='flex font-bold text-sm'>Dữ Liệu Ngày Hôm Nay   <select
-                        className='ml-auto p-2 border border-gray-300 rounded'
+                    <span className='flex font-bold text-sm'>Dữ Liệu Ngày Hôm Nay   <Select
+                        className='ml-auto '
                         defaultValue="Ngày"
                         style={{ width: 120 }}
-                        onChange={(e) => {
-                            if (e.target.value === 'Ngày') handleChangeDay();
-                            if (e.target.value === 'Tuần') handleChangeWeek();
-                            if (e.target.value === 'Tháng') handleChangeMonth();
+                        onChange={(e:any) => {
+                            if (e === 'Ngày') handleChangeDay();
+                            if (e === 'Tuần') handleChangeWeek();
+                            if (e === 'Tháng') handleChangeMonth();
                         }}
-                    >
-                        <option value="Ngày">Ngày</option>
-                        <option value="Tuần">Tuần</option>
-                        <option value="Tháng">Tháng</option>
-                    </select>
+                        options={[
+                            { value: 'Ngày', label: 'Ngày' },
+                            { value: 'Tuần', label: 'Tuần' },
+                            { value: 'Tháng', label: 'Tháng' },
+                        ]}
+                    />
+                   
 
                     </span>
                     <div className="flex w-full">
