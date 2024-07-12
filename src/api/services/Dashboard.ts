@@ -65,5 +65,14 @@ const getProductTop = async (top:any) => {
         return []
     }
 }
+const getDoanhthuThang = async (data: any) => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.post(`revenue-by-month`,data)
+        return response?.data?.data?.data
+    } catch (error) {
+        return []
+    }
+}
 
-export { getDoanhThuDay, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop }
+export { getDoanhThuDay, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang }
