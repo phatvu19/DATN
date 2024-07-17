@@ -44,6 +44,8 @@ const OrderDetail = () => {
     useEffect(() => {
         fetchBillDetail()
     }, [])
+    console.log(billdetail);
+    
     const ProductInbill = billdetail?.filter((data: any) => data?.bill_id == id)
     useEffect(() => {
         const totalPrice: any = calculateTotalClick()
@@ -126,6 +128,7 @@ const OrderDetail = () => {
         ? bill?.Recipient_address?.split(";").map((part: any) => part.trim())
         : ""
     const [name, descbill, address] = parts
+    console.log(ProductInbill);
 
     return (
         <>

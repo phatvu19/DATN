@@ -82,7 +82,7 @@ function HomePage() {
 
     useEffect(() => {
         document.title =
-            "TokyoLife.vn | Hàng tiêu dùng Nhật Bản & thời trang thông minh"
+            "Gentleman's.vn | Hàng tiêu dùng Nhật Bản & thời trang thông minh"
     }, [])
 
     return (
@@ -177,11 +177,11 @@ function HomePage() {
                     <div className="group-text absolute left-0 top-1/2 flex w-1/2 -translate-y-1/2 transform flex-col items-start justify-start gap-3 px-10">
                         <h4>HỆ THỐNG CỬA HÀNG</h4>
                         <h3 className="font-bold">
-                            <span className="text-red-600">TOKYOLIFE</span> CÓ HỆ
+                            <span className="text-red-600"> GENTLEMAN'S</span> CÓ HỆ
                             THỐNG CỬA HÀNG <br /> TRÊN TOÀN VIỆT NAM
                         </h3>
                         <p>
-                            Trải dài trên khắp Việt Nam, TokyoLife mang đến cuộc sống
+                            Trải dài trên khắp Việt Nam,  GENTLEMAN'S mang đến cuộc sống
                             hiện đại,
                             <br /> thông minh và chất lượng hơn tới hàng triệu người
                             tiêu dùng Việt.
@@ -193,25 +193,25 @@ function HomePage() {
                 </div>
             </div>
             <div className="mx-auto my-10 flex w-full max-w-7xl flex-col items-center bg-red-600 p-8 text-white">
-                <h1 className="mb-4 text-3xl font-bold">TOKYOLIFE</h1>
+                <h1 className="mb-4 text-3xl font-bold"> GENTLEMAN'S</h1>
                 <p className="mb-4 text-center italic">
                     <span className="text-lg font-semibold">
-                        TokyoLife trân trọng cảm ơn Quý Khách đã ủng hộ và góp phần
+                         GENTLEMAN'S trân trọng cảm ơn Quý Khách đã ủng hộ và góp phần
                         tạo thêm cơ hội việc làm cho 142 người khuyết tật.
                     </span>
                 </p>
                 <p className="max-w-4xl text-center leading-relaxed">
-                    TokyoLife là cửa hàng bán lẻ đồ gia dụng, hóa mỹ phẩm, phụ kiện
-                    chính hãng các thương hiệu Nhật Bản: Inomata, Ebisu, ORP Tokyo,
+                     GENTLEMAN'S là cửa hàng bán lẻ đồ gia dụng, hóa mỹ phẩm, phụ kiện
+                    chính hãng các thương hiệu Nhật Bản: Inomata, Ebisu,
                     Momotani, Naturie, Rohto (Hada Labo, Melano CC...), Kose (Dòng
                     Softymo), Shiseido (Dòng Senka, Anessa, Tsubaki, Uno, D.Program),
                     KAO (Biore, Laurier), Rosette, Unicharm, Rocket, Naris, Meishoku,
                     Chuchu Baby, Deonatulle, Kumano, Taiyo Brush, Okamura, Dentultra,
-                    KAI, Pelican... Nước hoa TokyoLife sản xuất tại Pháp. Hóa phẩm
-                    lành tính TokyoLife sản xuất tại Nhật Bản. Mỹ phẩm TokyoLife sản
+                    KAI, Pelican... Nước hoa  GENTLEMAN'S sản xuất tại Pháp. Hóa phẩm
+                    lành tính  GENTLEMAN'S sản xuất tại Nhật Bản. Mỹ phẩm  GENTLEMAN'S sản
                     xuất tại Nhật Bản, Hàn Quốc. Sản phẩm Thời trang và Phụ kiện
-                    hiệu: TokyoLife, TokyoNow, TokyoBasic, TokyoSmart, TokyoSecret.
-                    Sản phẩm tiêu dùng hiệu: TokyoLife, TokyoHome, TokyoSword... và
+                    hiệu:  GENTLEMAN'S.
+                    Sản phẩm tiêu dùng hiệu:  GENTLEMAN'S và
                     nhiều thương hiệu khác sản xuất tại Việt Nam, Trung Quốc, Thái
                     Lan...
                 </p>

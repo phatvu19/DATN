@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
-import Pay from './Pay'
-import Categories from './Categories'
-import { getDoanhThuDay, getDoanhThuMonth, getDoanhThuWeek, getDoanhthuThang } from '@/api/services/Dashboard'
+import {  getDoanhThuDay, getDoanhThuMonth, getDoanhThuWeek } from '@/api/services/Dashboard'
 import formatNumber from '@/utilities/FormatTotal';
-import { DatePicker, Modal, Select } from 'antd';
-import { CalendarOutlined } from '@ant-design/icons';
-import { CartesianGrid, Legend, Line, LineChart, XAxis, YAxis, Tooltip } from "recharts"
+import { Dropdown, Menu } from 'antd';
+import User from './User';
+import Order from './Order';
 
 const DataDay = () => {
     const [doanhsoday, setdoanhsodatyy] = useState<any>()
@@ -35,8 +33,7 @@ const DataDay = () => {
         }
         fetch()
     }, [])
-    console.log(doanhsoweek);
-    
+
     const handleChangeDay = () => {
         setday(true);
         setweek(false);
@@ -52,124 +49,110 @@ const DataDay = () => {
         setweek(false);
         setmonth(true);
     };
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+   
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-    const [months,setmonths] = useState<any>()
-    const [totalm, settotalm] = useState<any>()
-    const [total ,settotal] = useState<any>()
-    const [year , setyear] = useState<any>()
-    const onChange: any =async (date:any, dateString:any) => {
-        
-        const month = dateString.split('-')[1];
-        setyear(dateString.split('-')[0])
-        setmonths(month);
-        const data={
-            "month": month
-        }
-        const response = await getDoanhthuThang(data) 
-        settotalm(response?.original?.total_revenue)
-        settotal(response?.original?.daily_revenues)
-    };
-    const daysInMonth = (month: number, year: number) => {
-        return new Date(year, month, 0).getDate();
-    };
-
-    const fullMonthData = Array.from({ length: daysInMonth(months, 2024) }, (_, i) => {
-        const day = (i + 1).toString();
-        const monthData = total?total.find((item: any) => {
-            const itemMonth = item?.date.split('-')[1]; 
-            return itemMonth == months && item?.date.split('-')[2] == day;
-        })?.total_revenue : "";
-        return {
-            name: `Ngày ${day}`,
-            Total: monthData ? formatNumber(monthData) : 0
-        };
-    });
-    
-    const data = fullMonthData?.map((data1: any) => ({ "name": data1?.name, "Total": data1?.Total }))
-    
+    const menu = (
+        <Menu onClick={(e: any) => {
+            if (e?.key === 'Ngày') handleChangeDay();
+            if (e?.key === 'Tuần') handleChangeWeek();
+            if (e?.key === 'Tháng') handleChangeMonth();
+        }}>
+            <Menu.Item key="Ngày">Ngày</Menu.Item>
+            <Menu.Item key="Tuần">Tuần</Menu.Item>
+            <Menu.Item key="Tháng">Tháng</Menu.Item>
+        </Menu>
+    );
     return (
         <>
-            <div className="flex ">
-                <div className="w-3/5 border border-gray-400 p-4">
-                    <span className='flex font-bold text-sm'>Dữ Liệu Ngày Hôm Nay   
-                        <div className='ml-auto '>
-                    <Select
-                        // className='ml-auto '
-                        defaultValue="Ngày"
-                        style={{ width: 120 }}
-                        onChange={(e:any) => {
-                            if (e === 'Ngày') handleChangeDay();
-                            if (e === 'Tuần') handleChangeWeek();
-                            if (e === 'Tháng') handleChangeMonth();
-                        }}
-                        options={[
-                            { value: 'Ngày', label: 'Ngày' },
-                            { value: 'Tuần', label: 'Tuần' },
-                            { value: 'Tháng', label: 'Tháng' },
-                        ]} 
-                    />
-                   
-                            <CalendarOutlined className=" ml-4 p-1.5 border border-gray-300 bg-white rounded " onClick={showModal} />
-                            <Modal width={'70%'} title="Doanh thu cả tháng" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                                <DatePicker picker="month" onChange={onChange} className="mb-4"/>
-                                <br className='mt-4'/>
-                                {!months ? <span className='font-bold text-xl'>Hãy chọn tháng.</span> : <span className=' text-xl'>Doanh thu của {months} là: <span className='font-bold text-xl'>{formatNumber(totalm)}đ </span></span>}
-                                {months ? <LineChart width={1050} height={280} data={data}
-                                    margin={{ right: 54, left: -20, top: 20 }}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" style={{ fontSize: '0.8em' }} />
-                                    <Tooltip />
-                                    <YAxis  style={{ fontSize: '0.8em' }} />
-                                    <Line type="monotone" dataKey="Total" stroke="#8884d8" />
-                                </LineChart> :""}
-                                
-                            </Modal>
+            <div className='flex ml-auto mb-2'>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+                <div className="bg-white shadow-lg rounded-lg p-6 animate__animated animate__fadeIn">
+                    <div className="flex items-center">
+                        <div className="flex-grow overflow-hidden">
+                            <p className="text-uppercase font-medium text-gray-500 truncate mb-0">Doanh số ({!day && !week && !month && (
+                                `ngày`
+                            )}{ day && (
+                               `ngày`
+                            )}
+                                {week && (
+                                    `tuần`
+                                )}
+                                {month && (
+                                    `tháng`
+                                )})</p>
                         </div>
-                    </span>
-                    <div className="flex w-full">
-                        <div className="w-1/3 p-10 flex justify-center items-center flex-col">
-                            {!day && !week && !month && (
-                                <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
-                            )}
-                            {day && (
-                                <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
-                            )}
-                            {week && (
-                                <p className='font-bold text-xl p-2'>{formatNumber(doanhsoweek?.original?.total_revenue)}đ</p>
-                            )}
-                            {month && (
-                                <p className='font-bold text-xl p-2'>{formatNumber(doanhsomonth?.total_revenue)}đ</p>
-                            )}
-                            <span>Doanh số</span>
-                        </div>
-                        <div className="w-1/3 p-10  flex justify-center items-center flex-col">
-                            <p className='font-bold text-xl p-2'>0</p>
-                            <span>Sản Phẩm Đã Bán</span>
-                        </div>
-                        <div className="w-1/3 p-10  flex justify-center items-center flex-col">
-                            <p className='font-bold text-xl p-2'>0</p>
-                            <span>Đơn Hàng</span>
+                        <div className="flex-shrink-0">
+                            <h5 className="text-green-500 text-sm mb-0">
+                                {/* <i className="ri-arrow-right-up-line text-xs align-middle"></i> +16.24 % */}
+                                <Dropdown overlay={menu} trigger={['click']} >
+                                    <i className=" ri-more-2-fill text-black"></i>
+                                </Dropdown>
+                            </h5>
                         </div>
                     </div>
+                    <div className="flex items-end justify-between mt-4">
+                        <div>
+                            <h4 className="text-2xl font-semibold mb-4"> {!day && !week && !month && (
+                                <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
+                            )}
+                                {day && (
+                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
+                                )}
+                                {week && (
+                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsoweek?.original?.total_revenue)}đ</p>
+                                )}
+                                {month && (
+                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsomonth?.total_revenue)}đ</p>
+                                )}</h4>
+                            {/* <a href="#" className="text-blue-500 underline">View net earnings</a> */}
+                        </div>
+                        <div className="flex-shrink-0">
+                            <span className="inline-block p-2 bg-green-100 rounded text-green-500">
+                                <i className="bx bx-dollar-circle text-xl"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
-                </div>
-                <div className="w-1/5 border border-black ml-4">
-                    <Pay />
-                </div>
-                <div className="w-1/5 border border-black ml-2">
-                    <Categories />
+               <Order/>
+
+               <User/>
+
+                <div className="bg-white shadow-lg rounded-lg p-6 animate__animated animate__fadeIn">
+                    <div className="flex items-center">
+                        <div className="flex-grow overflow-hidden">
+                            <p className="text-uppercase font-medium text-gray-500 truncate mb-0">Đã thanh toán</p>
+                        </div>
+                        <div className="flex-shrink-0">
+                            {/* <h5 className="text-gray-500 text-sm mb-0">+0.00 %</h5> */}
+                        </div>
+                    </div>
+                    <div className="flex items-end justify-between mt-4">
+                        <div>
+                            <h4 className="text-2xl font-semibold mb-4"> {!day && !week && !month && (
+                                <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
+                            )}
+                                {day && (
+                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
+                                )}
+                                {week && (
+                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsoweek?.original?.total_revenue)}đ</p>
+                                )}
+                                {month && (
+                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsomonth?.total_revenue)}đ</p>
+                                )}</h4>
+                            {/* <a href="#" className="text-blue-500 underline">Withdraw money</a> */}
+                        </div>
+                        <div className="flex-shrink-0">
+                            <span className="inline-block p-2 bg-blue-100 rounded text-blue-500">
+                                <i className="bx bx-wallet text-xl"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

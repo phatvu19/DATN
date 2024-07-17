@@ -12,25 +12,7 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const NameProductInListOrderAdmin = ({ data }: any) => {
-    console.log(data);
-
-    // const [billdetail, setBillDetail] = useState<any>()
     const [check, setcheck] = useState<any>(false)
-    // const [loading, setloading] = useState<any>(true)
-    // const fetchBillDetail = async () => {
-    //     try {
-    //         const data1: any = await getBillsDetail(data?.id)
-    //         setBillDetail(data1)
-    //     } catch (error) {
-    //         console.error("Error fetching bill details:", error)
-    //     } finally {
-    //         setloading(false)
-    //     }
-    // }
-    // useEffect(() => {
-    //     fetchBillDetail()
-    // }, [])
-    // const billsProduct = billdetail?.find((item: any) => item?.bill_id == data?.id)
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
 
@@ -109,18 +91,6 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
     const total: any = Number(data?.total_amount)
     return (
         <>
-            {/* {loading ? (
-                <>
-                    <tr>
-                        <td colSpan={9}>
-                            <div className="mt-5 flex h-24 items-center justify-center">
-                                <Skeleton active />
-                            </div>
-                        </td>
-                    </tr>
-                </>
-            ) : (
-                <> */}
             <tr
                 className="items-center justify-center p-2"
                 key={data?.id}
@@ -128,22 +98,6 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
                 <td className="p-2 text-center font-normal">
                     {data?.id}
                 </td>
-                {/* <td className="p-2 text-center font-normal">
-                            {billdetail?.bill_details[0]
-                                ? billdetail?.bill_details[0]?.product_name
-                                : ""}
-                        </td> */}
-                {/* <td className="w-1/9 flex items-center justify-center p-2">
-                            <img
-                                className="h-26 w-20"
-                                src={
-                                    billdetail?.bill_details[0]
-                                        ? billdetail?.bill_details[0]?.image
-                                        : ""
-                                }
-                                alt=""
-                            />
-                        </td> */}
                 <td
                     className="p-2 text-center font-normal"
                     style={{ width: "20%" }}

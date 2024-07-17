@@ -72,7 +72,9 @@ const CheckOut = () => {
         const data = { data: storedCarts }
         const allCart: any = await getCartOrder(data)
         if (response) {
-            const data2: any = { data: [], token: `${user?.token}` }
+            const data2: any = { data: [], bill_id: response?.data?.id,token: `${user?.token}` }
+            console.log(data2);
+            
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
                     const sales = await getAllSale()
@@ -88,9 +90,9 @@ const CheckOut = () => {
                             ? allCart?.data[index]?.price - totalPrice
                             : allCart?.data[index]?.price,
                         quantity: element?.quantity,
-                        bill_id: response?.data?.id,
-                        voucher: priceDiscount ? `${priceDiscount}` : "null",
+                        sale: priceDiscount ? `${priceDiscount}` : "null",
                         image: element?.image,
+                        price_origin: 1
                     }
                     data2.data.push(data1)
                 }),
@@ -224,7 +226,7 @@ const CheckOut = () => {
         }
         const response: any = await addBill(data)
         if (response) {
-            const data2: any = { data: [], token: `${user?.token}` }
+            const data2: any = { data: [], bill_id: response?.data?.id, token: `${user?.token}` }
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
                     const sales = await getAllSale()
@@ -243,6 +245,7 @@ const CheckOut = () => {
                         bill_id: response?.data?.id,
                         sale: sale,
                         image: element?.image,
+                        price_origin: 1
                     }
                     data2.data.push(data1)
                 }),
