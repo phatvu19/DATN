@@ -7,8 +7,8 @@ const ProductInTopProduct = ({data}:any) => {
         <>
             {data?.map((data1:any,index:any)=>{
                 return (
-                    <>
-                        <div className="flex p-2">
+                    
+                        <div className="flex p-2" key={index+1}>
                             <div className='w-16 border '>
                                 <span>{index+1 }</span>
                             </div>
@@ -22,7 +22,7 @@ const ProductInTopProduct = ({data}:any) => {
                                 <span className='font-bold text-sm'>{data1?.sold_count} lượt bán</span>
                             </div>
                         </div>
-                        </>
+                        
                 )
             })}
         </>

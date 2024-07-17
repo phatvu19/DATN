@@ -12,7 +12,7 @@ function Footer() {
                 <div className="footer-content flex justify-center space-x-20">
                     <div className="flex w-9/12 flex-wrap">
                         <div className="w-1/4">
-                            <h3 className="mb-4 font-bold">VỀ TOKYOLIFE</h3>
+                            <h3 className="mb-4 font-bold">VỀ GENTLEMAN'S</h3>
                             <ul>
                                 <li>Chúng tôi là ai</li>
                                 <li>Cam kết của chúng tôi</li>
@@ -45,7 +45,7 @@ function Footer() {
                                     Hỗ trợ tư vấn mua online:
                                 </h4>
                                 <p>Hotline: 0247 308 2882</p>
-                                <p>Email: contact@tokyolife.vn</p>
+                                <p>Email: contact@gentleman's.vn</p>
                                 <p>Giờ làm việc: 8:30 - 22:00 hằng ngày.</p>
                             </div>
                             <div className="font-medium text-gray-700">
@@ -53,7 +53,7 @@ function Footer() {
                                     Hỗ trợ khiếu nại và bảo hành sản phẩm:
                                 </h4>
                                 <p>Hotline: 024 7300 6999</p>
-                                <p>Email: cskh@tokyolife.vn</p>
+                                <p>Email: cskh@gentleman's.vn</p>
                                 <p>Giờ làm việc: 8:30 - 22:00 hằng ngày.</p>
                             </div>
                         </div>
@@ -216,7 +216,7 @@ function Footer() {
                     </div>
                     <div className="b flex w-3/12 flex-col">
                         <h2 className="mb-5 text-sm font-bold">
-                            ĐĂNG KÝ NHẬN TIN TỪ TOKYOLIFE
+                            ĐĂNG KÝ NHẬN TIN TỪ  GENTLEMAN'S
                         </h2>
                         <div className="mt-2 flex space-x-2">
                             <input
@@ -273,9 +273,9 @@ function Footer() {
                         29/04/2021.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Nơi cấp:</u> Cục
                         cảnh sát quản lý hành chính về trật tự xã hội.
                         <br />
-                        <u>Điện thoại:</u>{" "}
+                        <u>Điện thoại:</u>
                         024.7300.6999&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <u>Email:</u> cskh@tokyolife.vn
+                        <u>Email:</u> cskh@gentleman's.vn
                     </span>
                 </div>
             </div>
@@ -284,7 +284,7 @@ function Footer() {
                     <img src={logo} alt="logo" />
                 </div>
                 <div className="copyright">
-                    Copyright © 2014-2024 Tokyolife.vn All Rights Reserved.
+                    Copyright © 2014-2024 Gentleman's.vn All Rights Reserved.
                 </div>
             </div>
         </footer>

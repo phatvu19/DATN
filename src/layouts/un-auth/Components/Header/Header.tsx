@@ -119,13 +119,7 @@ function Header() {
                                             href="https://tokyolife.vn/landing-page/hot-100"
                                             className="text-bold text-sm text-white"
                                         >
-                                            <span className="relative">
-                                                &lt;&lt;
-                                            </span>{" "}
-                                            XEM NGAY{" "}
-                                            <span className="relative">
-                                                &gt;&gt;
-                                            </span>
+                                            gentleman's 
                                         </a>
                                     </div>
                                 </div>
@@ -138,8 +132,8 @@ function Header() {
                 >
                     <div className="header-content container mx-auto flex h-[63px] max-w-7xl items-center justify-between">
                         <div className="logo">
-                            <a href="/">
-                                <img src={logo} alt="logo" className="h-10 w-auto" />
+                            <a href="/" className="font-bold text-2xl">
+                                GENTLEMAN'S
                             </a>
                         </div>
                         <div className="search mx-4 flex w-full max-w-3xl justify-center">

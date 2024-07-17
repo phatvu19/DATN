@@ -6,10 +6,11 @@ const Top = () => {
     return (
         <>
             <div className="flex ">
-                <div className="w-2/4 border border-gray-400">
+                <div className=" w-2/4 bg-white shadow rounded-lg m-1">
                     <TopProduct/>
                 </div>
-                <div className="w-2/4 border border-black ml-4">
+             
+                <div className=" w-2/4 bg-white shadow rounded-lg m-1">
                     <TopUser />
                 </div>
 

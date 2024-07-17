@@ -162,9 +162,9 @@ const ListSaleProduct = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products?.map((data: any) => {
+                        {products?.map((data: any,index:any) => {
                             return (
-                                <SaleDetail data={data} key={data?.id} check={check} onLoad={load}/>
+                                <SaleDetail key={index+1} data={data} check={check} onLoad={load}/>
                             )
                         })}
                     </tbody>

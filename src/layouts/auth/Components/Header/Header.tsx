@@ -11,7 +11,7 @@ interface Props {
 
 const AppHeader: React.FC<Props> = ({ collapsed, toggleCollapsed }) => {
     return (
-        <Header style={{ padding: 0 }}>
+        <Header style={{ padding: 0 , background:'white'}}>
             <Button
                 type="text"
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
