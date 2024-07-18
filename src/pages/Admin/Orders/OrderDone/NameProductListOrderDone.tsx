@@ -18,7 +18,7 @@ const NameProductListOrderDone = ({ data }: any) => {
 
     return (
         <>
-            <tr className="items-center justify-center p-2" key={data?.id}>
+            <tr className="items-center justify-center p-2 h-36 border border-gray-300" key={data?.id}>
                 <td className="p-2 text-center font-normal">{data?.id}</td>
                 <td className="p-2 text-center font-normal" style={{ width: "20%" }}>
                     <span className="font-bold">Đ/c</span>: {data?.Recipient_address}
@@ -46,69 +46,7 @@ const NameProductListOrderDone = ({ data }: any) => {
                     </Link>
                 </td>
             </tr>
-            {/* {loading ? (
-                <>
-                    <tr className="mt-2">
-                        <td colSpan={9}>
-                            <div className="mt-5 flex h-24 items-center justify-center">
-                                <Skeleton active />
-                            </div>
-                        </td>
-                    </tr>
-                </>
-            ) : (
-                <>
-                    <tr className="items-center justify-center p-2" key={data?.id}>
-                        <td className="p-2 text-center font-normal">{data?.id}</td>
-                        <td className="p-2 text-center font-normal">
-                            {billdetail?.bill_details[0]
-                                ? billdetail?.bill_details[0].product_name
-                                : ""}
-                        </td>
-                        <td className="w-1/9 flex items-center justify-center p-2">
-                            <img
-                                className="h-26 w-20"
-                                src={
-                                    billdetail?.bill_details[0]
-                                        ? billdetail?.bill_details[0].image
-                                        : ""
-                                }
-                                alt=""
-                            />
-                        </td>
-                        <td
-                            className="p-2 text-center font-normal"
-                            style={{ width: "20%" }}
-                        >
-                            <span className="font-bold">Đ/c</span>:{" "}
-                            {data?.Recipient_address}
-                            <br />
-                            <span className="font-bold">Sđt</span>:{" "}
-                            {data?.Recipient_phone}
-                        </td>
-                        <td
-                            className="p-2 text-center font-normal "
-                            style={{ width: "10%" }}
-                        >
-                            {formatNumber(data?.total_amount)} đ
-                        </td>
-                        <td className="p-2 text-center font-normal">
-                            {data?.created_at.substring(0, 19)}
-                        </td>
-                        <td className="p-2 text-center font-normal">COD</td>
-                        <td className="p-2 text-center font-normal">
-                            <Tag color={color}>{status}</Tag>
-                        </td>
-                        <td className="p-2 font-normal" style={{ width: "10%" }}>
-                            <Link to={`/quan-ly-orders/${data?.id}`}>
-                                <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
-                                    Chi tiết
-                                </button>
-                            </Link>
-                        </td>
-                    </tr>
-                </>
-            )} */}
+           
         </>
     )
 }

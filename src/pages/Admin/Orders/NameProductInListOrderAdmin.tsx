@@ -1,18 +1,16 @@
 import {
     addHistoryBills,
-    getAllBillDetail,
-    getBillsDetail,
     updateCancel,
     updateConfirm,
 } from "@/api/services/Bill"
 import { useEffect, useState } from "react"
 import formatNumber from "@/utilities/FormatTotal"
-import { Skeleton, Tag } from "antd"
+import { Tag } from "antd"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const NameProductInListOrderAdmin = ({ data }: any) => {
-    const [check, setcheck] = useState<any>(false)
+    const [check, setcheck] = useState<any>()
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
 
@@ -20,23 +18,27 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
         if (data?.status == "Pending") {
             setcolor("warning")
             setstatus("Chờ xác nhận")
-            setcheck(true)
+            setcheck("Pending")
         } else if (data?.status == "confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
+            setcheck("confirm")
         } else if (data?.status == "Paid") {
             setcolor("brown")
             setstatus("Chờ xác nhận")
-            setcheck(true)
+            setcheck("Paid")
         } else if (data?.status == "Shiping") {
             setcolor("purple")
             setstatus("Đang giao hàng")
+            setcheck("Shiping")
         } else if (data?.status == "Done") {
             setcolor("green")
             setstatus("Hoàn thành")
+            setcheck("Done")
         } else if (data?.status == "Cancel") {
             setcolor("error")
             setstatus("Hủy hàng")
+            setcheck("Cancel")
         }
     }, [data])
     const HandleCancel = async (id: any) => {
@@ -92,10 +94,10 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
     return (
         <>
             <tr
-                className="items-center justify-center p-2"
+                className="items-center justify-center h-36 border border-gray-300"
                 key={data?.id}
             >
-                <td className="p-2 text-center font-normal">
+                <td className=" text-center font-normal">
                     {data?.id}
                 </td>
                 <td
@@ -123,7 +125,7 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
                     <Tag color={color}>{status}</Tag>
                 </td>
                 <td className="p-2 font-normal" style={{ width: "10%" }}>
-                    {check ? (
+                    {check == "Pending" || check == "Paid" ? (
                         <>
                             <button
                                 className="mb-1 w-24 rounded bg-red-500 p-1 text-white"
@@ -143,20 +145,59 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
                                 </button>
                             </Link>
                         </>
-                    ) : (
-                        <>
+                    ) : ""}
+                    {
+                        check == "confirm" ? <>
+                            <button
+                                className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
+                                onClick={() => HandleConfirm(data?.id)}
+                            >
+                                Giao hàng
+                            </button>
                             <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                                 <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
                                     Chi tiết
                                 </button>
                             </Link>
-                        </>
-                    )}
+                        </> : ""
+                    }
+                    {
+                        check == "Shiping" ? <>
+                            <button
+                                className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
+                                onClick={() => HandleConfirm(data?.id)}
+                            >
+                                Đã nhận hàng
+                            </button>
+                            <Link to={`/admin/quan-ly-orders/${data?.id}`}>
+                                <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
+                                    Chi tiết
+                                </button>
+                            </Link>
+                        </> : ""
+                    }
+                    {
+                        check == "Done" ? <>
+
+                            <Link to={`/admin/quan-ly-orders/${data?.id}`}>
+                                <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
+                                    Chi tiết
+                                </button>
+                            </Link>
+                        </> : ""
+                    }
+                    {
+                        check == "Cancel" ? <>
+
+                            <Link to={`/admin/quan-ly-orders/${data?.id}`}>
+                                <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
+                                    Chi tiết
+                                </button>
+                            </Link>
+                        </> : ""
+                    }
                 </td>
             </tr>
-            
-            {/* </>
-            )} */}
         </>
     )
 }

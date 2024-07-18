@@ -17,7 +17,7 @@ const NameProductInListOrderConfirm = ({ data, onCheck }: any) => {
     useEffect(() => {
         if (data?.status == "confirm") {
             setcolor("processing")
-            setstatus("Chờ giao hàng")
+            setstatus("Đã xác nhận")
         }
     }, [data])
     const HandleShiping = async (id: any) => {
@@ -43,7 +43,7 @@ const NameProductInListOrderConfirm = ({ data, onCheck }: any) => {
         <>
 
             {" "}
-            <tr className="items-center justify-center p-2" key={data?.id}>
+            <tr className="items-center justify-center p-2 h-36 border border-gray-300" key={data?.id}>
                 <td className="p-2 text-center font-normal">{data?.id}</td>
 
                 <td
@@ -74,7 +74,7 @@ const NameProductInListOrderConfirm = ({ data, onCheck }: any) => {
                         className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
                         onClick={() => HandleShiping(data?.id)}
                     >
-                        Đã lấy
+                        Giao hàng
                     </button>
                     <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                         <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">

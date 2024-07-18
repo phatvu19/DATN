@@ -261,6 +261,17 @@ const GetBillCancelWithUser = async (id: any) => {
         return undefined
     }
 }
+const SearchBillByPhone = async (data:any)=>{
+    try {
+        const response: AxiosResponse<{ data: any }> = await httpRequest.get(
+            `bills-with-phone/${data}`,
+        )
+        const createdProduct = response.data?.data
+        return createdProduct
+    } catch (error) {
+        return undefined
+    }
+}
 export {
     addBill,
     getAllBill,
@@ -285,4 +296,5 @@ export {
     GetBillShipingWithUser,
     GetBillDoneWithUser,
     GetBillCancelWithUser,
+    SearchBillByPhone
 }

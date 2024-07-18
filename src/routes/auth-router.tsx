@@ -9,6 +9,7 @@ import ProductManagement from "@/pages/Admin/Products/ProductList"
 import ListSaleProduct from "@/pages/Admin/Sale/ListSaleProduct"
 import UserManagement from "@/pages/Admin/Users"
 import AddUser from "@/pages/Admin/Users/_Features/AddUser"
+import ListVoucher from "@/pages/Admin/Voucher/ListVoucher"
 import { pathName } from "@/routes/path-name"
 export const AuthRouter = [
     {
@@ -55,5 +56,10 @@ export const AuthRouter = [
         path: pathName.SALE,
         element: <ListSaleProduct />,
     },
+    {
+        path: pathName.VOUCHER,
+        element: <ListVoucher />,
+    },
+
 
 ]
