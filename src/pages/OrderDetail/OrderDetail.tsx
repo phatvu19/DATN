@@ -258,7 +258,7 @@ const OrderDetail = () => {
                         </div>
                     </div>
                 </div>
-                {bill?.status == "Pending" || bill?.status == "Paid" ? (
+                {bill?.status == "Pending" ? (
                     <button
                         className="rounded bg-red-500 p-2 pl-5 pr-5 text-white"
                         onClick={() => HandleCancel(bill?.id)}

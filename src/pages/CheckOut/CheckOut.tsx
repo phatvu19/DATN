@@ -16,14 +16,11 @@ import DistrictInCheckOut from "./DistrictInCheckOut"
 import WardInCheckOut from "./WardInCheckOut"
 import CartInCheckOut from "./CartInCheckOut"
 import formatNumber from "@/utilities/FormatTotal"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { addBill, addBillDetail, addHistoryBills } from "@/api/services/Bill"
 import { toast } from "react-toastify"
 import { getCartOrder } from "@/api/services/Order"
 import { getAllSale, getAllSaleProduct } from "@/api/services/Sale"
-import { Vnpay } from "@/api/services/vnpay"
-import CryptoJS from "crypto-js"
-import moment from "moment"
 import { getAllVoucher } from "@/api/services/Voucher"
 const CheckOut = () => {
     const [form] = Form.useForm()
@@ -49,20 +46,23 @@ const CheckOut = () => {
     const [res, setres] = useState<any>()
 
     const HandleVnpay = async () => {
-        setloadings(true)
-        const data = {
-            user_id: user?.data?.id,
-            recipient_address: `${name ? name : form.getFieldValue("name")}; ${descbill};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`,
-            recipient_phone: phone,
-            total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
-            status: "Paid",
-            pay: "ONLINE",
-            voucher: "sed",
+        const check = confirm('Nếu chọn thanh toán ONLINE thì bạn sẽ không thể hủy đơn khi thanh toán thành công!')
+        if (check) {
+            setloadings(true)
+            const data = {
+                user_id: user?.data?.id,
+                recipient_address: `${name ? name : form.getFieldValue("name")}; ${descbill};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`,
+                recipient_phone: phone,
+                total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
+                status: "Paid",
+                pay: "ONLINE",
+                voucher: "sed",
+            }
+            const response: any = await addBill(data)
+            setres(response)
+            localStorage.setItem("response", JSON.stringify(response))
+            window.location.href = `http://localhost:8000/api/pay/${response?.data?.id}/${data?.total_amount}/VNPAY`
         }
-        const response: any = await addBill(data)
-        setres(response)
-        localStorage.setItem("response", JSON.stringify(response))
-        window.location.href = `http://localhost:8000/api/pay/${response?.data?.id}/${data?.total_amount}/VNPAY`
     }
 
     const adddetailAndsendemail = async () => {
@@ -72,9 +72,9 @@ const CheckOut = () => {
         const data = { data: storedCarts }
         const allCart: any = await getCartOrder(data)
         if (response) {
-            const data2: any = { data: [], bill_id: response?.data?.id,token: `${user?.token}` }
+            const data2: any = { data: [], bill_id: response?.data?.id, token: `${user?.token}` }
             console.log(data2);
-            
+
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
                     const sales = await getAllSale()
@@ -90,7 +90,7 @@ const CheckOut = () => {
                             ? allCart?.data[index]?.price - totalPrice
                             : allCart?.data[index]?.price,
                         quantity: element?.quantity,
-                        sale: priceDiscount ? `${priceDiscount}` : "null",
+                        sale: priceDiscount ? `${priceDiscount}` : 0,
                         image: element?.image,
                         price_origin: 1
                     }
@@ -242,8 +242,7 @@ const CheckOut = () => {
                             ? cartt?.data[index]?.price - totalPrice
                             : cartt?.data[index]?.price,
                         quantity: element?.quantity,
-                        bill_id: response?.data?.id,
-                        sale: sale,
+                        sale: 0,
                         image: element?.image,
                         price_origin: 1
                     }
@@ -339,8 +338,7 @@ const CheckOut = () => {
                 (data1: any) => data1?.voucher_code == discountCode,
             )?.discount_amount
             : ""
-        console.log(check)
-
+        const voucherTotal = ((totalprice * check) / 100)
         if (discountCode.toLowerCase() == "xinchao") {
             if (checkvoucher == false) {
                 if (totalprice >= 499000 && totalprice < 670000) {
@@ -356,8 +354,8 @@ const CheckOut = () => {
             } else {
                 toast.warning("Voucher của shop đã được áp dụng!")
             }
-        } else if (check) {
-            setPriceDiscount(check)
+        } else if (voucherTotal) {
+            setPriceDiscount(voucherTotal)
         } else {
             toast.error("Bạn đã nhập sai voucher của shop!")
         }

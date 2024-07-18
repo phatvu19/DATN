@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import "moment/locale/vi" // Import the Vietnamese locale
-import { Pagination, Spin, Input, Select, DatePicker } from "antd"
+import { Spin, Input, Select, DatePicker, Button, Pagination } from "antd"
 import { LoadingOutlined } from "@ant-design/icons"
 import NameProductInListOrderAdmin from "./NameProductInListOrderAdmin"
 import ListOrderConFirm from "./OrderConFirm/ListOrderConFirm"
@@ -9,7 +9,7 @@ import ListOrderSiping from "./OrderShiping/ListOrderSiping"
 import ListOrderCancel from "./OrderCancel/ListOrderCancel"
 import ListOrderPaid from "./OrderPaid/ListOrderPaid"
 import ListOrderDones from "./OrderDone/ListOrderDone"
-import { getAllBill } from "@/api/services/Bill" // Adjust the import path as per your project structure
+import { SearchBillByPhone, getAllBill } from "@/api/services/Bill" // Adjust the import path as per your project structure
 
 const { Search } = Input
 const { Option } = Select
@@ -44,12 +44,20 @@ const ListOrderAdmin = () => {
     const handlePageChange = (page: number) => {
         setCurrentPage(page)
     }
+    const [searchBill, setsearchBill] = useState<any>([])
+    const [check, setcheck] = useState<any>(false)
+    const handleSearch = async (value: string) => {
+        setcheck(true)
+        const response = await SearchBillByPhone(value)
+        setsearchBill(response)
+        console.log(response);
+        if (response) {
+            setsearchBill(response)
+        } else {
+            alert('Không tìm thấy đơn hàng')
+        }
 
-    const handleSearch = (value: string) => {
-        // Implement search logic here
-        console.log("Searching for:", value)
     }
-
     const handleFilterChange = (value: string) => {
         // Implement filter change logic here
         console.log("Filter status:", value)
@@ -60,7 +68,7 @@ const ListOrderAdmin = () => {
         <>
             <div className="mb-4 flex items-center justify-between">
                 <Search
-                    placeholder="Tìm kiếm theo tên sản phẩm"
+                    placeholder="Tìm kiếm theo số điện thoại đơn hàng"
                     onSearch={handleSearch}
                     className="w-1/3"
                 />
@@ -68,21 +76,21 @@ const ListOrderAdmin = () => {
                     <Select
                         placeholder="Chọn trạng thái"
                         onChange={handleFilterChange}
-                        className="w-1/3"
+                        className="w-3/3"
                         value={filterStatus}
                     >
                         <Option value="">Tất cả đơn hàng</Option>
                         <Option value="paid">Đã thanh toán</Option>
-                        <Option value="pending">Chờ thanh toán</Option>
+                        <Option value="pending">Chờ xác nhận</Option>
                         <Option value="confirmed">Đã xác nhận</Option>
                         <Option value="shipping">Đang giao</Option>
                         <Option value="delivered">Đã giao</Option>
                         <Option value="cancelled">Đã hủy</Option>
                     </Select>
-                    <RangePicker
+                    {/* <RangePicker
                         onChange={(dates: any) => handleFilterChange(dates)}
                         className="w-72"
-                    />
+                    /> */}
                 </div>
             </div>
 
@@ -95,7 +103,7 @@ const ListOrderAdmin = () => {
             ) : (
                 <>
                     {filterStatus === "" && (
-                        <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black">
+                        <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black file:">
                             <thead className="text-center align-middle">
                                 <tr>
                                     <th className="p-2">ID</th>
@@ -110,25 +118,40 @@ const ListOrderAdmin = () => {
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
-                                {currentItems?.map((data: any) => (
+                                {check ? "" : currentItems?.map((data: any) => (
                                     <NameProductInListOrderAdmin
                                         key={data.id}
                                         data={data}
                                     />
                                 ))}
+                                {searchBill != undefined ? searchBill?.data?.map((data: any) => (
+                                    <NameProductInListOrderAdmin
+                                        key={data.id}
+                                        data={data}
+                                    />
+                                )) : currentItems?.map((data: any) => (
+                                    <NameProductInListOrderAdmin
+                                        key={data.id}
+                                        data={data}
+                                    />
+                                )) }
+
+
+
                             </tbody>
 
                         </table>
 
                     )}
-                    {/* <div className="mt-5 flex items-center justify-center">
+                    {filterStatus === "" && <div className="mt-5 flex items-center justify-center">
                         <Pagination
                             current={currentPage}
                             total={bill?.length}
                             pageSize={itemsPerPage}
                             onChange={handlePageChange}
                         />
-                    </div> */}
+                    </div>}
+
                     {filterStatus === "paid" && <ListOrderPaid />}
                     {filterStatus === "pending" && <ListOrderPending />}
                     {filterStatus === "confirmed" && <ListOrderConFirm />}

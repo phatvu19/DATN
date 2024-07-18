@@ -3,6 +3,7 @@ import {
     AppstoreOutlined,
     BarChartOutlined,
     FallOutlined,
+    FormatPainterOutlined,
     OrderedListOutlined,
     SettingOutlined,
     ShoppingCartOutlined,
@@ -35,11 +36,8 @@ const items = [
             {
                 key: "4",
                 label: <Link to="/admin/quan-ly-san-pham/them">Thêm sản phẩm</Link>,
-            },
-            {
-                key: "5",
-                label: <Link to="/admin/quan-ly-san-pham/sua">Sửa sản phẩm</Link>,
-            },
+            }
+           
         ],
     },
     {
@@ -64,9 +62,9 @@ const items = [
     },
     {
         key: "10",
-        icon: <SettingOutlined />,
-        label: "Settings",
-    },
+        icon: < FormatPainterOutlined /> ,
+        label: <Link to="/admin/voucher">Quản lý voucher</Link>,
+    }
 ]
 
 function MenuSidebar() {

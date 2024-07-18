@@ -43,7 +43,7 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
     return (
         <>
 
-            <tr className="items-center justify-center p-2" key={data?.id}>
+            <tr className="items-center justify-center p-2 h-36 border border-gray-300" key={data?.id}>
                 <td className="p-2 text-center font-normal">{data?.id}</td>
 
                 <td
