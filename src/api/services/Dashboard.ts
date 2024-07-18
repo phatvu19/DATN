@@ -92,4 +92,22 @@ const doanhThu7Day = async (data: any) => {
         return []
     }
 }
-export { getDoanhThuDay, getUserTop, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang, doanhThu7Day }
+const ProInCategory = async () => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.get(`revenue-category`)
+        return response?.data?.data?.data
+    } catch (error) {
+        return []
+    }
+}
+const OrderInDay = async () => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.get(`revenue-sevent-last-day`)
+        return response?.data?.data?.data
+    } catch (error) {
+        return []
+    }
+}
+export { getDoanhThuDay, getUserTop, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang, doanhThu7Day, ProInCategory, OrderInDay }
