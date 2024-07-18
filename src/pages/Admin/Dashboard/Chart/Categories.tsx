@@ -1,9 +1,21 @@
+import { ProInCategory } from '@/api/services/Dashboard';
+import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
 
 
 const Categories = () => {
-    const series = [44, 55, 13]
+    const [pro, setpro] = useState<any>()
+    useEffect(() => {
+        const ferchPro = async () => {
+            const resposive = await ProInCategory()
+            setpro(resposive)
+        }
+        ferchPro()
+    }, [])
+    console.log(pro);
+    
+    const series = pro?.original?.categories ? pro?.original?.categories.map((data: any) => (data?.products_count)) : [44, 55, 13]
     const options: any = {
         chart: {
             type: 'pie',
@@ -11,9 +23,9 @@ const Categories = () => {
         title: {
             text: 'Danh mục',
             align: 'center'
-          
+
         },
-        labels: ['Desktop', 'Mobile', 'Tablet'],
+        labels: pro?.original?.categories?.map((data: any) => (data?.name)),
         legend: {
             position: 'bottom' // Di chuyển chú giải xuống dưới
         },
@@ -25,7 +37,7 @@ const Categories = () => {
                     position: 'bottom'
                 }
             },
-            
+
         }]
     }
     return (

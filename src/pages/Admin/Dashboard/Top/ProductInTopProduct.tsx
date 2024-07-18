@@ -1,6 +1,4 @@
-import React from 'react'
 
-type Props = {}
 
 const ProductInTopProduct = ({data}:any) => {
     return (

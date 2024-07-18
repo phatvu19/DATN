@@ -1,6 +1,44 @@
+import { OrderInDay } from '@/api/services/Dashboard';
+import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
 const Data7Day = () => {
+    const [data, setdata] = useState<any>()
+    useEffect(() => {
+        const fetchData = async () => {
+            const resposive = await OrderInDay()
+            setdata(resposive)
+        }
+        fetchData()
+    }, [])
+
+    const [processedOrders, setProcessedOrders] = useState([]);
+    const generateDates = (startDate:any, days:any) => {
+        const dates = [];
+        for (let i = 0; i < days; i++) {
+            const date = new Date(startDate);
+            date.setDate(date.getDate() - i);
+            dates.push(date.toISOString().split('T')[0]); // Chuyển đổi ngày thành chuỗi định dạng YYYY-MM-DD
+        }
+        return dates;
+    };
+    useEffect(() => {
+        const startDate = new Date(); // Ngày hiện tại
+        const days = 7; // Số ngày cần kiểm tra
+
+        const dates = generateDates(startDate, days);
+
+        const processed:any = dates.map(date => {
+            const order = data?.original?.daily_revenues.find((order: any) => order?.date == date);
+            return {
+                date: date,
+                orderCount: order ? order.total_quantity_sold : 0
+            };
+        });
+
+        setProcessedOrders(processed);
+    }, []);
+    console.log(processedOrders);
     const apiData = [
         { month: "Jan", orders: 310 },
         { month: "Feb", orders: 30 },
@@ -12,9 +50,9 @@ const Data7Day = () => {
     ];
     const series = [{
         name: "Orders",
-        data: apiData.map(item => item.orders)
+        data: processedOrders.map((item:any) => item.orderCount)
     }];
-    const options:any = {
+    const options: any = {
         chart: {
             type: "line",
             height: 350,
@@ -33,7 +71,7 @@ const Data7Day = () => {
             curve: "smooth"
         },
         xaxis: {
-            categories: apiData.map(item => item.month),
+            categories: processedOrders.map((item:any) => item.date),
         }
     };
 
@@ -48,7 +86,7 @@ const Data7Day = () => {
                             series={series}
                             type="line"
                             height={300}
-                            
+
                         />
                     </div>
                 </div>
