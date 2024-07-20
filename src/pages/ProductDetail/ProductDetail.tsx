@@ -15,6 +15,8 @@ import SizeInProductDetail from "./SizeInProductDetail"
 import { toast } from "react-toastify"
 import QuantityInProductDetail from "./QuantityInProductDetail"
 import { getAllAttributeValue } from "@/api/services/AttributeService"
+import Comment from "./Comment"
+import TextArea from "antd/es/input/TextArea"
 const ProductDetail = () => {
     const { id }: any = useParams()
     const images = [
@@ -54,12 +56,10 @@ const ProductDetail = () => {
     useEffect(() => {
         fetchAttributeValues()
     }, [])
-    // console.log(attributeValues);
 
     const [idColor, setIdcolor] = useState()
     const HandlePrice = (value: any) => {
         setIdcolor(value)
-        // console.log(value)
     }
     const [idsize, setIdsize] = useState()
     const [id_attribute_value, setid_attribute_value] = useState()
@@ -77,8 +77,6 @@ const ProductDetail = () => {
     }
     const [sizevalues, setsizevalue] = useState()
     const sizes = (idvarian: any, idattributevalue: any, sizeValue: any) => {
-        console.log(idvarian)
-
         setSizevalue(idvarian)
         setid_attribute_size(idattributevalue)
         setsizevalue(sizeValue)
@@ -136,27 +134,6 @@ const ProductDetail = () => {
         <>
             <div className="flex pl-40 pr-40 pt-5 ">
                 <div className="flex w-2/3 ">
-                    {/* <List
-                        className="h-600 overflow-y-auto"
-                        dataSource={images}
-                        style={{
-                            maxHeight: "500px",
-                            overflowX: "hidden",
-                            overflowY: "auto",
-                            width: "100px",
-                            scrollbarColor: "#ffffff #ffffff",
-                        }}
-                        renderItem={(item) => (
-                            <List.Item>
-                                <img
-                                    className="w-1/2"
-                                    src={item}
-                                    alt="Thumbnail"
-                                    onClick={() => handleImageClick(item)}
-                                />
-                            </List.Item>
-                        )}
-                    /> */}
                     <div className="thumbnails ml-10 mr-10">
                         <Image
                             className=""
@@ -181,19 +158,19 @@ const ProductDetail = () => {
                         )}
                     </div>
                     <div className="mt-3 text-xl font-bold">{product?.name}</div>
-                    <span>SKU: F9UVC020M-015</span>
+                    <CategoryInProductDetail data={product?.category} />
                     <div className="mt-4 flex">
-                        <span>
+                        {/* <span>
                             <Rate disabled defaultValue={5} />
-                        </span>
-                        <p className="ml-2 font-bold">5 sao</p> |
-                        <p className="ml-2 font-bold">5 </p>đánh giá |
+                        </span> */}
+                        {/* <p className="ml-2 font-bold">5 sao</p> |
+                        <p className="ml-2 font-bold">5 </p>đánh giá | */}
                         <QuantityInProductDetail
                             product={product?.variants}
                             variant={idsize}
                         />
                     </div>
-                    <CategoryInProductDetail data={product?.category} />
+                    
 
                     <PriceInProductDetail
                         data={product?.variants}
@@ -283,328 +260,8 @@ const ProductDetail = () => {
                 <hr className="my-4  w-full border-t border-dashed border-gray-400" />
                 <p>{product?.description}</p>
             </div>
-            <div className=" pb-20 pl-40 pr-40">
-                <span className="text-sl font-bold">ĐÁNH GIÁ TỪ NGƯỜI MUA</span>
-                <hr className="my-4  w-full border-t border-dashed border-gray-400" />
-                <div className="flex">
-                    <div style={{ textAlign: "center" }} className="w-1/6">
-                        <p style={{ fontSize: "50px", fontWeight: "600" }}>
-                            4.8
-                            <span style={{ fontSize: "40px", fontWeight: "normal" }}>
-                                /
-                            </span>
-                            <span style={{ fontSize: "30px", fontWeight: "normal" }}>
-                                5
-                            </span>
-                        </p>
-                        <Rate disabled defaultValue={5} />
-                        <p>5 đánh giá</p>
-                    </div>
-                    <div className="flex flex-col">
-                        <Rate disabled defaultValue={5} />
-                        <Rate disabled defaultValue={4} />
-                        <Rate disabled defaultValue={3} />
-                        <Rate disabled defaultValue={2} />
-                        <Rate disabled defaultValue={1} />
-                    </div>
-                </div>
-                <hr className="my-4 w-full transform border-t border-dashed border-gray-400 " />
-                <div>
-                    <span className="text-sm font-bold">Lọc đánh giá</span>
-                    <button className="bg-white-500 m-1 mx-1 ml-5 h-10 w-20 border border-red-500 text-red-500">
-                        Tất cả
-                    </button>
-                    <button className="m-1 mx-1 h-10 w-20 bg-gray-200 ">
-                        5 sao
-                    </button>
-                    <button className="m-1 mx-1 h-10 w-20 bg-gray-200 ">
-                        4 sao
-                    </button>
-                    <button className="m-1 mx-1 h-10 w-20  bg-gray-200 ">
-                        3 sao
-                    </button>
-                    <button className="m-1 mx-1 h-10 w-20  bg-gray-200 ">
-                        2 sao
-                    </button>
-                    <button className="m-1 mx-1 h-10 w-20  bg-gray-200 ">
-                        1 sao
-                    </button>
-                </div>
-                <hr className="my-4 w-full transform border-t border-dashed border-gray-400 " />
-                <div>
-                    <div className="flex">
-                        <button className="m-1 mx-1 h-10 w-10 rounded-full bg-black"></button>
-                        <div className="ml-2 flex flex-col">
-                            <a className="font-bold">liennk89</a>
-                            <Rate
-                                disabled
-                                defaultValue={5}
-                                style={{ fontSize: "12px" }}
-                            />
-                        </div>
-                    </div>
-                    <div className="ml-14 flex flex-col">
-                        <span className="mt-2 text-sm text-gray-400">
-                            Màu sắc: Xanh-10, Kích thước: L
-                        </span>
-                        <span className="mt-4 text-sm">
-                            Shop giao hàng nhanh, áo không dày quá mặc lên thoáng, đi
-                            đường gió thổi vào mát mát á. 1m62, 58kg, mặc size L vẫn
-                            rộng nhé
-                        </span>
-                        <div className="mt-4 flex">
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-12 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                        </div>
-                    </div>
-
-                    <hr className="my-4 w-full transform border-t border-dashed border-gray-400 " />
-                </div>
-                <div>
-                    <div className="flex">
-                        <button className="m-1 mx-1 h-10 w-10 rounded-full bg-black"></button>
-                        <div className="ml-2 flex flex-col">
-                            <a className="font-bold">liennk89</a>
-                            <Rate
-                                disabled
-                                defaultValue={5}
-                                style={{ fontSize: "12px" }}
-                            />
-                        </div>
-                    </div>
-                    <div className="ml-14 flex flex-col">
-                        <span className="mt-2 text-sm text-gray-400">
-                            Màu sắc: Xanh-10, Kích thước: L
-                        </span>
-                        <span className="mt-4 text-sm">
-                            Shop giao hàng nhanh, áo không dày quá mặc lên thoáng, đi
-                            đường gió thổi vào mát mát á. 1m62, 58kg, mặc size L vẫn
-                            rộng nhé
-                        </span>
-                        <div className="mt-4 flex">
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-12 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                        </div>
-                    </div>
-
-                    <hr className="my-4 w-full transform border-t border-dashed border-gray-400 " />
-                </div>
-                <div>
-                    <div className="flex">
-                        <button className="m-1 mx-1 h-10 w-10 rounded-full bg-black"></button>
-                        <div className="ml-2 flex flex-col">
-                            <a className="font-bold">liennk89</a>
-                            <Rate
-                                disabled
-                                defaultValue={5}
-                                style={{ fontSize: "12px" }}
-                            />
-                        </div>
-                    </div>
-                    <div className="ml-14 flex flex-col">
-                        <span className="mt-2 text-sm text-gray-400">
-                            Màu sắc: Xanh-10, Kích thước: L
-                        </span>
-                        <span className="mt-4 text-sm">
-                            Shop giao hàng nhanh, áo không dày quá mặc lên thoáng, đi
-                            đường gió thổi vào mát mát á. 1m62, 58kg, mặc size L vẫn
-                            rộng nhé
-                        </span>
-                        <div className="mt-4 flex">
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-12 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                        </div>
-                    </div>
-
-                    <hr className="my-4 w-full transform border-t border-dashed border-gray-400 " />
-                </div>
-                <div>
-                    <div className="flex">
-                        <button className="m-1 mx-1 h-10 w-10 rounded-full bg-black"></button>
-                        <div className="ml-2 flex flex-col">
-                            <a className="font-bold">liennk89</a>
-                            <Rate
-                                disabled
-                                defaultValue={5}
-                                style={{ fontSize: "12px" }}
-                            />
-                        </div>
-                    </div>
-                    <div className="ml-14 flex flex-col">
-                        <span className="mt-2 text-sm text-gray-400">
-                            Màu sắc: Xanh-10, Kích thước: L
-                        </span>
-                        <span className="mt-4 text-sm">
-                            Shop giao hàng nhanh, áo không dày quá mặc lên thoáng, đi
-                            đường gió thổi vào mát mát á. 1m62, 58kg, mặc size L vẫn
-                            rộng nhé
-                        </span>
-                        <div className="mt-4 flex">
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-12 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                            <Image
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75"
-                                className=" h-32 p-2"
-                                style={{ width: "120px" }}
-                            />
-                        </div>
-                    </div>
-
-                    <hr className="my-4 w-full transform border-t border-dashed border-gray-400 " />
-                </div>
-            </div>
-            <div className=" pb-20 pl-40 pr-40">
-                <span className="font-bold">SẢN PHẨM GỢI Ý</span>
-                <div className="block-new-product-item mt-5 grid grid-cols-1 gap-4 md:grid-cols-5">
-                    <div className="group relative">
-                        <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat">
-                            <img
-                                src={
-                                    "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17162866319763913_512.jpg&w=1920&q=75"
-                                }
-                                alt=""
-                            />
-                            <div className="absolute bottom-52 right-2 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                <ShoppingCartOutlined className="text-xl" />
-                                <HeartOutlined className="text-xl" />
-                            </div>
-                        </div>
-                        <div className="pt-3">
-                            <h5 className="mb-2 text-xl font-medium leading-tight">
-                                Product 1
-                            </h5>
-                            <p className="text-base">description</p>
-                        </div>
-                    </div>
-                    <div className="group relative">
-                        <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat">
-                            <img
-                                src={
-                                    "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17162866319763913_512.jpg&w=1920&q=75"
-                                }
-                                alt=""
-                            />
-                            <div className="absolute bottom-52 right-2 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                <ShoppingCartOutlined className="text-xl" />
-                                <HeartOutlined className="text-xl" />
-                            </div>
-                        </div>
-                        <div className="pt-3">
-                            <h5 className="mb-2 text-xl font-medium leading-tight">
-                                Product 1
-                            </h5>
-                            <p className="text-base">description</p>
-                        </div>
-                    </div>
-                    <div className="group relative">
-                        <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat">
-                            <img
-                                src={
-                                    "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17162866319763913_512.jpg&w=1920&q=75"
-                                }
-                                alt=""
-                            />
-                            <div className="absolute bottom-52 right-2 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                <ShoppingCartOutlined className="text-xl" />
-                                <HeartOutlined className="text-xl" />
-                            </div>
-                        </div>
-                        <div className="pt-3">
-                            <h5 className="mb-2 text-xl font-medium leading-tight">
-                                Product 1
-                            </h5>
-                            <p className="text-base">description</p>
-                        </div>
-                    </div>
-                    <div className="group relative">
-                        <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat">
-                            <img
-                                src={
-                                    "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17162866319763913_512.jpg&w=1920&q=75"
-                                }
-                                alt=""
-                            />
-                            <div className="absolute bottom-52 right-2 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                <ShoppingCartOutlined className="text-xl" />
-                                <HeartOutlined className="text-xl" />
-                            </div>
-                        </div>
-                        <div className="pt-3">
-                            <h5 className="mb-2 text-xl font-medium leading-tight">
-                                Product 1
-                            </h5>
-                            <p className="text-base">description</p>
-                        </div>
-                    </div>
-                    <div className="group relative">
-                        <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat">
-                            <img
-                                src={
-                                    "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17162866319763913_512.jpg&w=1920&q=75"
-                                }
-                                alt=""
-                            />
-                            <div className="absolute bottom-52 right-2 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                <ShoppingCartOutlined className="text-xl" />
-                                <HeartOutlined className="text-xl" />
-                            </div>
-                        </div>
-                        <div className="pt-3">
-                            <h5 className="mb-2 text-xl font-medium leading-tight">
-                                Product 1
-                            </h5>
-                            <p className="text-base">description</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Comment data={product?.id} name={product?.name}/>
+         
         </>
     )
 }

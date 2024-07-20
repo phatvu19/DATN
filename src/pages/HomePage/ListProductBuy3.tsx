@@ -28,7 +28,7 @@ const ListProductBuy3 = () => {
                     {filteredProducts?.map((data: any) => {
                         return (
                             <>
-                                <ProductInListProductBuy3 data={data} />
+                                <ProductInListProductBuy3 data={data} key={data?.id}/>
                             </>
                         )
                     })}

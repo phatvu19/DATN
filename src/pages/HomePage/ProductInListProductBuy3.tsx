@@ -14,20 +14,17 @@ const ProductInListProductBuy3 = ({ data }: any) => {
             const product: any = await getProductById(data?.id)
             const sale: any = await getAllSaleProduct(product?.sale_id)
             setdiscount(sale?.name)
-            console.log(sale)
-
             setpro(product)
         }
         fetchProduct()
     }, [])
     const totalPrice = (pro?.variants[0]?.price * discount) / 100
-    console.log(discount)
 
     return (
         <>
             {pro && discount ? (
                 <>
-                    <Link to={`/products/${data?.id}`}>
+                    <Link to={`/products/${data?.id}`} key={data?.id}>
                         <div className="group relative rounded border border-gray-500 p-2 pb-5 hover:border-2 hover:border-red-300">
                             <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat p-2">
                                 <img src={data?.image} alt="" />

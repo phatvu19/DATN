@@ -16,8 +16,6 @@ const ColorInProductDetail = ({
     let idvarians: any = undefined
     let id_attribute_value: any = undefined
     const idAttributeValues: any = []
-    // console.log(product)
-
     product?.forEach((item) => {
         const foundObj = item.attribute_values[0]
 
