@@ -11,14 +11,12 @@ const PriceInProductDetail = ({ data, idcolor, onPrice, sale_id }: any) => {
     const priceProduct = data?.find((data) =>
         data?.attribute_values?.find((data3: any) => data3?.value === idcolor),
     )?.price
-    // console.log(priceProduct)
 
     useEffect(() => {
         if (priceProduct !== undefined) {
             onPrice(priceProduct)
         }
     }, [priceProduct, onPrice])
-    // console.log(sale_id)
     const [sales, setsale] = useState<any>([])
     useEffect(() => {
         const fetchSale = async () => {
