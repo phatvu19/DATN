@@ -20,7 +20,7 @@ const Pay = () => {
         },
         labels: payday?.map((data: any) => (data?.pay)),
         legend: {
-            position: 'bottom' // Di chuyển chú giải xuống dưới
+            position: 'bottom'
 
         },
         colors: ['#34c38f', '#f1b44c', '#50a5f1'],

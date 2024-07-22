@@ -1,5 +1,4 @@
 import { getAllBill } from "@/api/services/Bill"
-import { EllipsisOutlined } from "@ant-design/icons"
 import { Dropdown, Menu } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
@@ -35,7 +34,6 @@ const Order = () => {
                   </div>
                   <div className="flex-shrink-0">
                       <h5 className="text-red-500 text-sm mb-0">
-                          {/* <i className="ri-arrow-right-down-line text-xs align-middle"></i> -3.57 % */}
                           <Dropdown overlay={menu} trigger={['click']}>
                               <i className=" ri-more-2-fill text-black"></i> 
                           </Dropdown>

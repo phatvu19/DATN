@@ -1,7 +1,6 @@
-import { GetProductBuy3, getAllProduct } from "@/api/services/ProductService"
+import {  getAllProduct } from "@/api/services/ProductService"
 import { useEffect, useState } from "react"
 import ProductInListProductBuy3 from "./ProductInListProductBuy3"
-import { getAllSale } from "@/api/services/Sale"
 import { Link } from "react-router-dom"
 
 const ListProductBuy3 = () => {
