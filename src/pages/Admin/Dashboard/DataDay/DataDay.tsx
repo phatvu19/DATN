@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {  getDoanhThuDay, getDoanhThuMonth, getDoanhThuWeek } from '@/api/services/Dashboard'
+import {  GetTotalPaid, getDoanhThuDay, getDoanhThuMonth, getDoanhThuWeek } from '@/api/services/Dashboard'
 import formatNumber from '@/utilities/FormatTotal';
 import { Dropdown, Menu } from 'antd';
 import User from './User';
@@ -9,6 +9,7 @@ const DataDay = () => {
     const [doanhsoday, setdoanhsodatyy] = useState<any>()
     const [doanhsoweek, setdoanhsoweek] = useState<any>()
     const [doanhsomonth, setdoanhsomonth] = useState<any>()
+    const [totalpaid, settotalpaid] = useState<any>()
     const [day, setday] = useState<any>(false)
     const [week, setweek] = useState<any>(false)
     const [month, setmonth] = useState<any>(false)
@@ -16,6 +17,13 @@ const DataDay = () => {
         const fetch = async () => {
             const data = await getDoanhThuDay()
             setdoanhsodatyy(data)
+        }
+        fetch()
+    }, [])
+    useEffect(() => {
+        const fetch = async () => {
+            const data = await GetTotalPaid()
+            settotalpaid(data)
         }
         fetch()
     }, [])
@@ -52,6 +60,7 @@ const DataDay = () => {
 
    
 
+    console.log(totalpaid);
 
     const menu = (
         <Menu onClick={(e: any) => {
@@ -125,7 +134,7 @@ const DataDay = () => {
                 <div className="bg-white shadow-lg rounded-lg p-6 animate__animated animate__fadeIn">
                     <div className="flex items-center">
                         <div className="flex-grow overflow-hidden">
-                            <p className="text-uppercase font-medium text-gray-500 truncate mb-0">Đã thanh toán</p>
+                            <p className="text-uppercase font-medium text-gray-500 truncate mb-0">Đã trả tiền (ONLINE)</p>
                         </div>
                         <div className="flex-shrink-0">
                             {/* <h5 className="text-gray-500 text-sm mb-0">+0.00 %</h5> */}
@@ -133,19 +142,8 @@ const DataDay = () => {
                     </div>
                     <div className="flex items-end justify-between mt-4">
                         <div>
-                            <h4 className="text-2xl font-semibold mb-4"> {!day && !week && !month && (
-                                <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
-                            )}
-                                {day && (
-                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsoday)}đ</p>
-                                )}
-                                {week && (
-                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsoweek?.original?.total_revenue)}đ</p>
-                                )}
-                                {month && (
-                                    <p className='font-bold text-xl p-2'>{formatNumber(doanhsomonth?.total_revenue)}đ</p>
-                                )}</h4>
-                            {/* <a href="#" className="text-blue-500 underline">Withdraw money</a> */}
+                            <h4 className="text-2xl font-semibold mb-4">{formatNumber(totalpaid?.total_revenue)} đ</h4>
+                       
                         </div>
                         <div className="flex-shrink-0">
                             <span className="inline-block p-2 bg-blue-100 rounded text-blue-500">

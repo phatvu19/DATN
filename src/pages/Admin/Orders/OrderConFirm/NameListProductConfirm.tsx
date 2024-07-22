@@ -15,7 +15,7 @@ const NameProductInListOrderConfirm = ({ data, onCheck }: any) => {
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
     useEffect(() => {
-        if (data?.status == "confirm") {
+        if (data?.status == "Confirm") {
             setcolor("processing")
             setstatus("Đã xác nhận")
         }

@@ -28,8 +28,6 @@ const Data7Day = () => {
         const dates = generateDates(startDate, days);
         const processed: any = dates.map(date => {
             const order = data?.original?.daily_revenues.find((order: any) => order?.date == date);
-            console.log(date);
-
             return {
                 date: date,
                 orderCount: order ? order.total_quantity_sold : 0
@@ -38,7 +36,6 @@ const Data7Day = () => {
 
         setProcessedOrders(processed);
     }, [processedOrders]);
-    console.log(processedOrders);
     const series = [{
         name: "Orders",
         data: processedOrders.map((item: any) => item.orderCount)

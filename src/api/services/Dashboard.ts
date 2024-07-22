@@ -110,4 +110,13 @@ const OrderInDay = async () => {
         return []
     }
 }
-export { getDoanhThuDay, getUserTop, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang, doanhThu7Day, ProInCategory, OrderInDay }
+const GetTotalPaid = async () => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.get(`revenue-paid-by-day`)
+        return response?.data?.data?.data
+    } catch (error) {
+        return []
+    }
+}
+export { getDoanhThuDay, getUserTop, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang, doanhThu7Day, ProInCategory, OrderInDay, GetTotalPaid }

@@ -19,7 +19,7 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
             setcolor("warning")
             setstatus("Chờ xác nhận")
             setcheck("Pending")
-        } else if (data?.status == "confirm") {
+        } else if (data?.status == "Confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
             setcheck("confirm")
@@ -27,10 +27,10 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
             setcolor("brown")
             setstatus("Chờ xác nhận")
             setcheck("Paid")
-        } else if (data?.status == "Shiping") {
+        } else if (data?.status == "Shipping") {
             setcolor("purple")
             setstatus("Đang giao hàng")
-            setcheck("Shiping")
+            setcheck("Shipping")
         } else if (data?.status == "Done") {
             setcolor("green")
             setstatus("Hoàn thành")
@@ -162,7 +162,7 @@ const NameProductInListOrderAdmin = ({ data }: any) => {
                         </> : ""
                     }
                     {
-                        check == "Shiping" ? <>
+                        check == "Shipping" ? <>
                             <button
                                 className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
                                 onClick={() => HandleConfirm(data?.id)}
