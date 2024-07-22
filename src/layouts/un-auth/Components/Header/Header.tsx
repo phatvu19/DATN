@@ -119,7 +119,7 @@ function Header() {
                                             href="https://tokyolife.vn/landing-page/hot-100"
                                             className="text-bold text-sm text-white"
                                         >
-                                            gentleman's 
+                                            gentleman's
                                         </a>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@ function Header() {
                 >
                     <div className="header-content container mx-auto flex h-[63px] max-w-7xl items-center justify-between">
                         <div className="logo">
-                            <a href="/" className="font-bold text-2xl">
+                            <a href="/" className="text-2xl font-bold">
                                 GENTLEMAN'S
                             </a>
                         </div>
@@ -302,30 +302,6 @@ function Header() {
                                         className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600"
                                     >
                                         Giảm giá
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600 "
-                                    >
-                                        Giới thiệu
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600"
-                                    >
-                                        Tin tức
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600"
-                                    >
-                                        Liên hệ
                                     </a>
                                 </li>
                             </ul>

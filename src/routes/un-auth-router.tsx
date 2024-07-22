@@ -1,6 +1,7 @@
 import Cart from "@/pages/Cart/Cart"
 import CheckOut from "@/pages/CheckOut/CheckOut"
 import HomePage from "@/pages/HomePage/HomePage"
+import IntroducePage from "@/pages/HomePage/IntroducePage"
 import ListProduct from "@/pages/ListProduct/ListProduct"
 import ListProductSale from "@/pages/ListProductSale/ListProductSale"
 import LoginPage from "@/pages/LoginPage/LoginPage"

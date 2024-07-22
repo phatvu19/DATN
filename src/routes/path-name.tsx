@@ -8,6 +8,7 @@ export const pathName = {
     PRODUCTS: "/products",
     SALES: "/sales",
     CART: "/cart",
+    INTRODUCE: "/introduce",
     CHECKOUT: "/checkout",
     PRODUCT_DETAIL: "/products/:id",
     ORDERS: "/orders",
@@ -28,5 +29,5 @@ export const pathName = {
     ORDER_DETAIL_MANAGEMENT: "quan-ly-orders/:id",
     ATTR_MANAGEMENT: "quan-ly-attr",
     SALE: "quan-ly-sale",
-    VOUCHER:"voucher"
+    VOUCHER: "voucher",
 } as const
