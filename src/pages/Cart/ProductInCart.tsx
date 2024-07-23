@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import formatNumber from "../../utilities/FormatTotal"
 import { toast } from "react-toastify"
 import { getProductById } from "@/api/services/ProductService"
-import { getAllSale, getAllSaleProduct } from "@/api/services/Sale"
+import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
 import { Skeleton, Spin } from "antd"
 
 const ProductInCart = ({ data, index, quantity, onCart }: any) => {
@@ -81,7 +81,7 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
     const [loading, setLoading] = useState<any>(true)
     useEffect(() => {
         const fetchSale = async () => {
-            const sale: any = await getAllSaleProduct(quantity?.sale_id)
+            const sale: any = await GetSaleId(quantity?.sale_id)
             setsale(sale?.name)
             setLoading(false)
         }

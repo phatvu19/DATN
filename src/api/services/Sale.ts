@@ -20,8 +20,8 @@ const getAllSale = async (): Promise<Product[]> => {
 }
 const getAllSaleProduct = async (id: any): Promise<Product[]> => {
     try {
-        const response: any = await httpRequest.get(`/sale-product/${id}`)
-        return response.data?.data?.sales ?? []
+        const response: any = await httpRequest.get(`get-by-sale/${id}`)
+        return response.data?.data ?? []
     } catch (error) {
         return []
     }
@@ -34,5 +34,20 @@ const updateSale = async (data: any): Promise<Product[]> => {
         return []
     }
 }
-
-export { getAllSale, getAllSaleProduct, updateSale, AddSale }
+const ProductSale = async (): Promise<Product[]> => {
+    try {
+        const response: any = await httpRequest.get(`get-by-sale`)
+        return response.data?.data ?? []
+    } catch (error) {
+        return []
+    }
+}
+const GetSaleId = async (id:any): Promise<Product[]> => {
+    try {
+        const response: any = await httpRequest.get(`sales/${id}`)
+        return response.data?.data ?? []
+    } catch (error) {
+        return []
+    }
+}
+export { getAllSale, getAllSaleProduct, updateSale, AddSale, ProductSale, GetSaleId }

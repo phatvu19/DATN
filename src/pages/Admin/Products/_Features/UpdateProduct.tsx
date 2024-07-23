@@ -13,7 +13,7 @@ import {
     PlusOutlined,
     UploadOutlined,
 } from "@ant-design/icons"
-import { Button, Form, Input, Select, Space, Upload, UploadFile } from "antd"
+import { Button, Form, Image, Input, Select, Space, Upload, UploadFile } from "antd"
 import { useCallback, useEffect, useState } from "react"
 import { Controller, FieldValues, useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
@@ -25,9 +25,9 @@ const UpdateProduct = () => {
     const [variants, setVariants] = useState<Variant[]>([])
     const [fileList, setFileList] = useState<UploadFile[]>([])
     const [attributes, setAttributes] = useState<Attribute[]>([])
-    const [attributeValues, setAttributeValues] = useState({})
+    const [attributeValues, setAttributeValues] = useState<any>({})
     const navigate = useNavigate()
-    const { id }:any = useParams()
+    const { id }: any = useParams()
 
     const {
         control,
@@ -50,11 +50,13 @@ const UpdateProduct = () => {
 
         return attributes
     }
+    const [image, setimage] = useState<any>()
     const fetchProductDetails = useCallback(async () => {
         if (id) {
             try {
-                const product :any= await getProductById(id)
+                const product: any = await getProductById(id)
                 setValue("name", product?.name)
+                setimage(product?.image)
                 setValue("category_id", product?.category_id)
                 setValue("brand", product?.brand)
                 setValue("description", product?.description)
@@ -128,7 +130,7 @@ const UpdateProduct = () => {
     // Fetch all attribute values from API and organize them by attribute_id
     const fetchAttributeValues = async () => {
         const values = await getAllAttributeValue()
-        const organizedValues = values.reduce((acc:any, item:any) => {
+        const organizedValues = values.reduce((acc: any, item: any) => {
             if (!acc[item.attribute_id]) {
                 acc[item.attribute_id] = []
             }
@@ -137,13 +139,27 @@ const UpdateProduct = () => {
         }, {})
         setAttributeValues(organizedValues)
     }
+    const [uploadedImages, setUploadedImages] = useState([]);
+    const props: any = {
+        action: "https://api.cloudinary.com/v1_1/dsul0ahfu/image/upload",
+        onChange({ file }: any) {
+            if (file.status !== "uploading") {
+                // Sử dụng một hàm setState để cập nhật mảng uploadedImages
+                setUploadedImages(file.response.secure_url);
+            }
+        },
+        data: {
+            upload_preset: "dant_phat",
+            folder: "datn",
+        },
+    };
     const onSubmit = async (data: FieldValues) => {
         const formattedData: any = {
             name: data.name,
             category_id: data.category_id,
             brand: data.brand,
             description: data.description,
-            image: data.image[0].originFileObj,
+            image: uploadedImages ? uploadedImages : image,
             variants: variants.map((variant) => ({
                 price: variant.price,
                 price_promotional: variant.price_promotional,
@@ -156,18 +172,18 @@ const UpdateProduct = () => {
         }
         console.log(formattedData)
         try {
-            const jsonData:any = JSON.stringify(formattedData)
+            const jsonData: any = JSON.stringify(formattedData)
             const response = await updateProduct(id, jsonData)
             console.log("Product updated successfully:", response)
             toast.success("Product updated successfully.")
-            navigate("/quan-ly-san-pham")
+            navigate("/admin/quan-ly-san-pham")
         } catch (error) {
             console.error("Failed to updated product:", error)
             toast.error("Failed to updated product. Please try again later.")
         }
     }
     const handleGoBack = () => {
-        navigate("/quan-ly-san-pham")
+        navigate("/admin/quan-ly-san-pham")
     }
 
     const handleAddVariant = () => {
@@ -185,7 +201,7 @@ const UpdateProduct = () => {
         ])
     }
     const handleRemoveVariant = (index: number) => {
-        const newVariants = variants.filter((_, i) => i !== index)
+        const newVariants: any = variants.filter((_, i) => i !== index)
         setVariants(newVariants)
     }
     const handleAttributeChange = (
@@ -193,11 +209,14 @@ const UpdateProduct = () => {
         value: string,
         index: number,
     ) => {
-        const newVariants = [...variants]
+        const newVariants: any = [...variants]
         newVariants[index].attributes[attributeType] = value
         setVariants(newVariants)
     }
-
+    const [check , setcheck ] = useState<any>(false)
+    const HandleExit = ()=>{
+        setcheck(true)
+    }
     return (
         <div className="container mx-auto mt-10 flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
             <h2 className="my-10 text-2xl font-semibold text-gray-700">
@@ -283,29 +302,20 @@ const UpdateProduct = () => {
                             />
                         </Form.Item>
                     </div>
-                    <Form.Item label="Image">
-                        <Controller
-                            name="image"
-                            control={control}
-                            defaultValue={[]}
-                            render={({ field }) => (
-                                <Upload
-                                    listType="picture"
-                                    beforeUpload={() => false}
-                                    onChange={({ fileList }) =>
-                                        field.onChange(fileList)
-                                    }
-                                >
-                                    <Button icon={<UploadOutlined />}>
-                                        Click to upload
-                                    </Button>
-                                </Upload>
-                            )}
-                        />
-                    </Form.Item>
+                    {check ? <Form.Item label="Image">
+                        <Upload.Dragger {...props} multiple accept=".jpg,.png">
+                            <Button icon={<UploadOutlined />}>Upload</Button>
+                        </Upload.Dragger>
+                    </Form.Item> : <Form.Item label="Image" style={{ width: '10%' }} >
+                        <Image src={image} />
+                        <Button onClick={() => HandleExit()} className="mt-2">Bỏ ảnh</Button>
+                    </Form.Item>}
+                    
+                   
+                    
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">Sản phẩm biến thể</h3>
-                {variants.map((variant, index) => (
+                {variants.map((variant: any, index: any) => (
                     <div key={index} className="flex flex-wrap space-x-4">
                         <Form.Item label="Giá gốc">
                             <Input
@@ -354,7 +364,7 @@ const UpdateProduct = () => {
                                     size="large"
                                     style={{ width: 240 }}
                                     placeholder={attribute.name}
-                                    value={variant.attributes[attribute.name] || ""}
+                                    value={variant?.attributes[attribute.name] || ""}
                                     onChange={
                                         (value) =>
                                             handleAttributeChange(
@@ -365,7 +375,7 @@ const UpdateProduct = () => {
                                     }
                                 >
                                     <Option value="">Chọn</Option>
-                                    {attributeValues[attribute.id]?.map((value) => (
+                                    {attributeValues[attribute.id]?.map((value: any) => (
                                         <Option key={value.id} value={value.value}>
                                             {value.value}
                                         </Option>

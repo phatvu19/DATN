@@ -60,8 +60,6 @@ const DataDay = () => {
 
    
 
-    console.log(totalpaid);
-
     const menu = (
         <Menu onClick={(e: any) => {
             if (e?.key === 'Ngày') handleChangeDay();
@@ -142,7 +140,7 @@ const DataDay = () => {
                     </div>
                     <div className="flex items-end justify-between mt-4">
                         <div>
-                            <h4 className="text-2xl font-semibold mb-4">{formatNumber(totalpaid?.total_revenue)} đ</h4>
+                            <h4 className="text-2xl font-semibold mb-4">{totalpaid?.total_revenue ? formatNumber(totalpaid?.total_revenue) : 0} đ</h4>
                        
                         </div>
                         <div className="flex-shrink-0">

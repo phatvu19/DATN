@@ -1,4 +1,4 @@
-import { getAllSale, getAllSaleProduct } from "@/api/services/Sale"
+import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
 import formatNumber from "@/utilities/FormatTotal"
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 import { Skeleton } from "antd"
@@ -6,11 +6,13 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 const ProductNewInHomePage = ({ data }: any) => {
+    console.log(data);
+    
     const [sales, setsale] = useState<any>([])
 
     useEffect(() => {
         const fetchSale = async () => {
-            const allsale: any = await getAllSaleProduct(data?.sale_id)
+            const allsale: any = await GetSaleId(data?.sale_id)
             setsale(allsale?.name)
         }
 
@@ -86,7 +88,11 @@ const ProductNewInHomePage = ({ data }: any) => {
                                         </>
                                     )}
                                 </div>
-                                <p className="text-base">{data?.description}</p>
+                                <p className="text-base">{data?.description?.length > 40 ? (
+                                    <>{data?.description?.slice(0, 40)}...</>
+                                ) : (
+                                    <>{data?.description}</>
+                                )}</p>
                             </div>
                         </div>
                     </Link>

@@ -107,8 +107,8 @@ const Comment = ({ data, name }: any) => {
                         </>
                     )
                 }) : ""}
-
-                <Input placeholder="Nhập nội dung" className="w-1/2" onChange={(e: any) => setvalue(e.target.value)} value={value} /><Button type="primary" className="ml-2" onClick={() => HandleCmt()}>Đăng</Button>
+                {user ? <>  <Input placeholder="Nhập nội dung" className="w-1/2" onChange={(e: any) => setvalue(e.target.value)} value={value} /><Button type="primary" className="ml-2" onClick={() => HandleCmt()}>Đăng</Button></> :""}
+              
 
             </div>
         </>

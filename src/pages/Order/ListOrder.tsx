@@ -8,12 +8,13 @@ import ListOrderConFirm from "./OrderConfirm/ListOrderConfirm"
 import ListOrderSiping from "./OrderShiping/ListOrderShiping"
 import ListOrderDones from "./OrderDone/ListOrderDone"
 import ListOrderCancel from "./OrderCancel/ListOrderCancel"
+import ListOrderPaid from './OrderPaid/ListOrderPaid';
 
 const ListOrder = () => {
     const [bills, setBill] = useState<any>()
     const [loading, setLoading] = useState<boolean>(true)
     const users = JSON.parse(localStorage.getItem("user")!)
-
+    const [check, setcheck] = useState<any>()
     const fetchOrders = async () => {
         try {
             const data: any = await GetBillWithUser(users?.data?.id || "")
@@ -25,8 +26,10 @@ const ListOrder = () => {
     }
     useEffect(() => {
         fetchOrders()
-    }, [bills])
-
+    }, [check])
+    const check1 = (value: any) => {
+        setcheck(value)
+    }
     const items: TabsProps["items"] = [
         {
             key: "1",
@@ -55,7 +58,7 @@ const ListOrder = () => {
                         </>
                     ) : (
                         <>
-                            <AllOrderInListOrder data={bills} />
+                            <AllOrderInListOrder data={bills} onCheck1={check1} />
                         </>
                     )}
                 </>
@@ -96,6 +99,39 @@ const ListOrder = () => {
         },
         {
             key: "3",
+            label: "Chờ lấy hàng",
+            children: (
+                <>
+                    {loading ? (
+                        <>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    height: "100px",
+                                }}
+                            >
+                                <Spin
+                                    indicator={
+                                        <LoadingOutlined
+                                            style={{ fontSize: 48 }}
+                                            spin
+                                        />
+                                    }
+                                />
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <ListOrderPaid />
+                        </>
+                    )}
+                </>
+            ),
+        },
+        {
+            key: "4",
             label: "Đã xác nhận",
             children: (
                 <>
@@ -128,7 +164,7 @@ const ListOrder = () => {
             ),
         },
         {
-            key: "4",
+            key: "5",
             label: "Đang giao",
             children: (
                 <>
@@ -161,7 +197,7 @@ const ListOrder = () => {
             ),
         },
         {
-            key: "5",
+            key: "6",
             label: "Đã giao",
             children: (
                 <>
@@ -194,7 +230,7 @@ const ListOrder = () => {
             ),
         },
         {
-            key: "6",
+            key: "7",
             label: "Đã hủy",
             children: (
                 <>

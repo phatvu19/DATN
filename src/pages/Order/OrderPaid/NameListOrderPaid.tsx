@@ -4,7 +4,7 @@ import { Skeleton, Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-const NameListOrderDone = ({ data }: any) => {
+const NameListOrderPaid = ({ data }: any) => {
     const [billdetail, setBillDetail] = useState<any>()
     const [loading, setloading] = useState<any>(true)
     const fetchBillDetail = async () => {
@@ -24,12 +24,14 @@ const NameListOrderDone = ({ data }: any) => {
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
     useEffect(() => {
-        if (data?.status == "Done") {
-            setcolor("green")
-            setstatus("Hoàn thành")
+        if (data?.status == "Paid") {
+            setcolor("brown")
+            setstatus("Chờ lấy hàng")
         }
     }, [data])
     const total: any = Number(data?.total_amount)
+    console.log(billdetail);
+    
     return (
         <>
             {loading ? (
@@ -52,13 +54,12 @@ const NameListOrderDone = ({ data }: any) => {
                         />
                         <div className=" d-flex flex-column">
                             <span className="text-black">
-                                    {billdetail?.bill_details[0]?.product_name.length > 20 ? (
-                                        <>{billdetail?.bill_details[0]?.product_name?.slice(0, 30)}...</>
-                                    ) : (
-                                        <>{billdetail?.bill_details[0]?.product_name}</>
-                                    )}
+                                {billdetail?.bill_details[0]?.product_name.length > 20 ? (
+                                    <>{billdetail?.bill_details[0]?.product_name?.slice(0, 30)}...</>
+                                ) : (
+                                    <>{billdetail?.bill_details[0]?.product_name}</>
+                                )}
                                 <p>
-                                    {" "}
                                     <Tag color={color}>{status}</Tag>
                                 </p>
                             </span>
@@ -89,4 +90,4 @@ const NameListOrderDone = ({ data }: any) => {
     )
 }
 
-export default NameListOrderDone
+export default NameListOrderPaid

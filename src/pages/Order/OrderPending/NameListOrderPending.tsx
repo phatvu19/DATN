@@ -77,10 +77,11 @@ const NameListOrderPending = ({ data, onCheck }: any) => {
                         />
                         <div className=" d-flex flex-column">
                             <span className="text-black">
-                                {" "}
-                                {billdetail?.bill_details[0]
-                                    ? billdetail?.bill_details[0]?.product_name
-                                    : ""}{" "}
+                                    {billdetail?.bill_details[0]?.product_name.length > 20 ? (
+                                        <>{billdetail?.bill_details[0]?.product_name?.slice(0, 30)}...</>
+                                    ) : (
+                                        <>{billdetail?.bill_details[0]?.product_name}</>
+                                    )}
                                 <p>
                                     {" "}
                                     <Tag color={color}>{status}</Tag>
@@ -99,7 +100,7 @@ const NameListOrderPending = ({ data, onCheck }: any) => {
                                 Thành tiền: {formatNumber(total + 30000)} đ
                             </span>
                         </div>
-                        <div className="mt-4 lg:mb-0 lg:ml-auto lg:mr-0 lg:mt-0 lg:mt-auto">
+                        <div className="mt-4 lg:mb-0 lg:ml-auto lg:mr-0 lg:mt-0 ">
                             <Link to={`/orders/${data?.id}`}>
                                 <button className="rounded border border-gray-200 bg-red-500 p-1 pl-4 pr-4 text-sm font-normal text-black text-white">
                                     Xem chi tiết

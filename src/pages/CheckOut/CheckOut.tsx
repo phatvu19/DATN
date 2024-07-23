@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom"
 import { addBill, addBillDetail, addHistoryBills } from "@/api/services/Bill"
 import { toast } from "react-toastify"
 import { getCartOrder } from "@/api/services/Order"
-import { getAllSale, getAllSaleProduct } from "@/api/services/Sale"
+import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
 import { getAllVoucher } from "@/api/services/Voucher"
 const CheckOut = () => {
     const [form] = Form.useForm()
@@ -310,7 +310,7 @@ const CheckOut = () => {
             )
             const cartSale_id: any = carts[index]?.sale_id
 
-            const allSale: any = await getAllSaleProduct(cartSale_id)
+            const allSale: any = await GetSaleId(cartSale_id)
             const totalSale: any = (product.price * allSale?.name) / 100
             if (cartItem) {
                 const price = cartSale_id ? product.price - totalSale : product.price

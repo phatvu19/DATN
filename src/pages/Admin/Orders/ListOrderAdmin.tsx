@@ -19,7 +19,7 @@ const ListOrderAdmin = () => {
     const [bill, setBill] = useState<any>()
     const [loading, setLoading] = useState<boolean>(true)
     const [filterStatus, setFilterStatus] = useState<string>("")
-
+    const [set, setset] = useState<any>()
     const fetchBills = async () => {
         try {
             const allBills: any = await getAllBill()
@@ -33,7 +33,7 @@ const ListOrderAdmin = () => {
 
     useEffect(() => {
         fetchBills()
-    }, [])
+    }, [set])
 
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 10
@@ -46,6 +46,7 @@ const ListOrderAdmin = () => {
     }
     const [searchBill, setsearchBill] = useState<any>([])
     const [check, setcheck] = useState<any>(false)
+
     const handleSearch = async (value: string) => {
         setcheck(true)
         const response = await SearchBillByPhone(value)
@@ -63,7 +64,9 @@ const ListOrderAdmin = () => {
         console.log("Filter status:", value)
         setFilterStatus(value)
     }
-
+const render=(value:any)=>{
+    setset(value)
+}
     return (
         <>
             <div className="mb-4 flex items-center justify-between">
@@ -122,6 +125,7 @@ const ListOrderAdmin = () => {
                                     <NameProductInListOrderAdmin
                                         key={data.id}
                                         data={data}
+                                        onCheck={render}
                                     />
                                 ))}
                                 {searchBill != undefined ? searchBill?.data?.map((data: any) => (

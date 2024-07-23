@@ -19,7 +19,7 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
     useEffect(() => {
         if (data?.status == "Paid") {
             setcolor("brown")
-            setstatus("Chờ xác nhận")
+            setstatus("Chờ lấy hàng")
         }
     }, [data])
     const HandleCancel = async (id: any) => {
@@ -91,17 +91,17 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
                 <td className="p-2 text-center font-normal">
                     {data?.created_at.substring(0, 19)}
                 </td>
-                <td className="p-2 text-center font-normal">COD</td>
+                <td className="p-2 text-center font-normal">  {data?.pay}</td>
                 <td className="p-2 text-center font-normal">
                     <Tag color={color}>{status}</Tag>
                 </td>
                 <td className="p-2 font-normal" style={{ width: "10%" }}>
-                    <button
+                    {/* <button
                         className="mb-1 w-24 rounded bg-red-500 p-1 text-white"
                         onClick={() => HandleCancel(data?.id)}
                     >
                         Hủy
-                    </button>
+                    </button> */}
                     <button
                         className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
                         onClick={() => HandleConfirm(data?.id)}

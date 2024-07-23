@@ -1,5 +1,5 @@
 import { getProductById } from "@/api/services/ProductService"
-import { getAllSale, getAllSaleProduct } from "@/api/services/Sale"
+import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
 import formatNumber from "@/utilities/FormatTotal"
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 import { Skeleton } from "antd"
@@ -7,22 +7,18 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 const ProductInListProductBuy3 = ({ data }: any) => {
-    const [pro, setpro] = useState<any>()
     const [discount, setdiscount] = useState<any>()
     useEffect(() => {
         const fetchProduct = async () => {
-            const product: any = await getProductById(data?.id)
-            const sale: any = await getAllSaleProduct(product?.sale_id)
+            const sale: any = await GetSaleId(data?.sale_id)
             setdiscount(sale?.name)
-            setpro(product)
         }
         fetchProduct()
     }, [])
-    const totalPrice = (pro?.variants[0]?.price * discount) / 100
-
+    const totalPrice = (data?.variants[0]?.price * discount) / 100
     return (
         <>
-            {pro && discount ? (
+            { discount ? (
                 <>
                     <Link to={`/products/${data?.id}`} key={data?.id}>
                         <div className="group relative rounded border border-gray-500 p-2 pb-5 hover:border-2 hover:border-red-300">
@@ -54,7 +50,7 @@ const ProductInListProductBuy3 = ({ data }: any) => {
                                     {discount ? (
                                         <>
                                             {" "}
-                                            {formatNumber(pro?.variants[0]?.price)} đ
+                                            {formatNumber(data?.variants[0]?.price)} đ
                                         </>
                                     ) : (
                                         <></>
@@ -72,14 +68,14 @@ const ProductInListProductBuy3 = ({ data }: any) => {
                                         <>
                                             {" "}
                                             {formatNumber(
-                                                pro?.variants[0]?.price - totalPrice,
+                                                data?.variants[0]?.price - totalPrice,
                                             )}{" "}
                                             đ
                                         </>
                                     ) : (
                                         <>
                                             {" "}
-                                            {formatNumber(pro?.variants[0]?.price)} đ
+                                            {formatNumber(data?.variants[0]?.price)} đ
                                         </>
                                     )}
                                 </div>

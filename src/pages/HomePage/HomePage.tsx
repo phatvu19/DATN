@@ -11,9 +11,6 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import ProductNewInHomePage from "./ProductNewInHomePage"
 import ListProductBuy3 from "./ListProductBuy3"
-import ListProduct50Persion from "./ListProduct50Persion"
-import ListProductBuy1Free1 from "./ListProductBuy1Free1"
-import ListProductBuyMax from "./ListProductBuyMax"
 
 function HomePage() {
     const [category, setCategory] = useState<Category[]>([])
@@ -102,21 +99,21 @@ function HomePage() {
                     modules={[Pagination, Navigation, Autoplay]}
                 >
                     <SwiperSlide className="">
-                        <img src={banner} alt="Banner" />
+                        <img src='https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg' alt="Banner" className="w-full" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src={banner} alt="Banner" />
+                        <img src='https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg' alt="Banner" className="w-full" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src={banner} alt="Banner" />
+                        <img src='https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg' alt="Banner" className="w-full"  />
                     </SwiperSlide>
                 </Swiper>
             </div>
-            <div className="block-item mx-auto mt-14 max-w-7xl items-center justify-center">
+            <div className="block-item mx-auto mt-14 max-w-6xl items-center justify-center">
                 <div className="block-product-name-inner-home flex justify-center text-3xl font-semibold uppercase text-red-600">
                     Mua gì hôm nay?
                 </div>
-                <main className="flex w-full space-x-4 overflow-x-auto p-5">
+                <main className="flex w-full space-x-4  p-5">
                     {category?.map((data: Category) => (
                         <CategoryInHomePage data={data} key={data.id} />
                     ))}
@@ -169,12 +166,12 @@ function HomePage() {
             <div className="relative mx-auto my-5 max-w-7xl">
                 <div className="relative flex flex-col sm:flex-row">
                     <img
-                        src={storebg}
+                        src='https://png.pngtree.com/background/20210709/original/pngtree-clothing-sales-green-background-minimalism-picture-image_919997.jpg'
                         className="w-full sm:flex"
-                        style={{ height: "600px" }}
+                        style={{ height: "600px", opacity:'0.3' }}
                         alt="Store background"
                     />
-                    <div className="group-text absolute left-0 top-1/2 flex w-1/2 -translate-y-1/2 transform flex-col items-start justify-start gap-3 px-10">
+                    <div className="group-text absolute left-0 top-1/2 flex w-full -translate-y-1/2 transform flex-col items-center  gap-3 px-10 ">
                         <h4>HỆ THỐNG CỬA HÀNG</h4>
                         <h3 className="font-bold">
                             <span className="text-red-600"> GENTLEMAN'S</span> CÓ HỆ

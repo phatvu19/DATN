@@ -29,17 +29,11 @@ const Categories = () => {
         legend: {
             position: 'bottom' // Di chuyển chú giải xuống dưới
         },
-        colors: ['#34c38f', '#f1b44c', '#50a5f1'],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                legend: {
-                    position: 'bottom'
-                }
-            },
-
-        }]
+        colors: ['#34c38f', '#f1b44c', '#50a5f1', '#FFFF66', '#66FFCC','#CD2990'],
+      
     }
+    console.log(series);
+    
     return (
         <>
             <div className="lg:w-1/4 md:w-1/2 ">

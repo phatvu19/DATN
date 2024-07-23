@@ -64,8 +64,6 @@ const getAllBillDetail = async (token: any) => {
             })
         return response.data?.data?.data ?? []
     } catch (error) {
-        console.error("An error occurred while fetching products")
-        toast.error("Failed to fetch orders. Please try again later.")
         return []
     }
 }
@@ -261,6 +259,17 @@ const GetBillCancelWithUser = async (id: any) => {
         return undefined
     }
 }
+const GetBillPaidWithUser = async (id: any) => {
+    try {
+        const response: AxiosResponse<{ data: any }> = await httpRequest.get(
+            `/bills-with-user-paid/${id}`,
+        )
+        const createdProduct = response.data?.data
+        return createdProduct
+    } catch (error) {
+        return undefined
+    }
+}
 const SearchBillByPhone = async (data:any)=>{
     try {
         const response: AxiosResponse<{ data: any }> = await httpRequest.get(
@@ -297,5 +306,6 @@ export {
     GetBillShipingWithUser,
     GetBillDoneWithUser,
     GetBillCancelWithUser,
-    SearchBillByPhone
+    SearchBillByPhone,
+    GetBillPaidWithUser
 }

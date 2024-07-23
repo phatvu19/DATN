@@ -71,14 +71,14 @@ const OrderDetail = () => {
             setcolor("warning")
             setstatus("Chờ xác nhận")
             setcheck(true)
-        } else if (bill?.status == "confirm") {
+        } else if (bill?.status == "Confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         } else if (bill?.status == "Paid") {
             setcolor("brown")
-            setstatus("Chờ xác nhận")
+            setstatus("Chờ lấy hàng")
             setcheck(true)
-        } else if (bill?.status == "Shiping") {
+        } else if (bill?.status == "Shipping") {
             setcolor("purple")
             setstatus("Đang giao hàng")
         } else if (bill?.status == "Done") {

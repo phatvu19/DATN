@@ -40,7 +40,7 @@ const NameProductListOrderCancel = ({ data, data1 }: any) => {
                         <td className="p-2 text-center font-normal">
                             {data?.created_at.substring(0, 19)}
                         </td>
-                        <td className="p-2 text-center font-normal">COD</td>
+                <td className="p-2 text-center font-normal">  {data?.pay}</td>
                         <td className="p-2 text-center font-normal">
                             <Tag color={color}>{status}</Tag>
                         </td>

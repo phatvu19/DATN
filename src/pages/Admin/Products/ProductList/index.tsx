@@ -36,7 +36,7 @@ const ProductManagement = () => {
     }
 
     const handleUpdate = (id: number) => {
-        navigate(`/quan-ly-san-pham/sua/${id}`)
+        navigate(`/admin/quan-ly-san-pham/sua/${id}`)
     }
 
     const handleViewProduct = async (id: number) => {

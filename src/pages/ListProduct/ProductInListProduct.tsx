@@ -2,12 +2,12 @@ import { Link } from "react-router-dom"
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 import formatNumber from "@/utilities/FormatTotal"
 import { useEffect, useState } from "react"
-import { getAllSale, getAllSaleProduct } from "@/api/services/Sale"
+import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
 const ProductInListProduct = ({ data }: any) => {
     const [sales, setsale] = useState<any>([])
     useEffect(() => {
         const fetchSale = async () => {
-            const allsale: any = await getAllSaleProduct(data?.sale_id)
+            const allsale: any = await GetSaleId(data?.sale_id)
             setsale(allsale?.name)
         }
 

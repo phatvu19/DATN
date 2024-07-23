@@ -6,7 +6,7 @@ interface CategoryInListProductProps {
 const CategoryInHomePage: React.FC<CategoryInListProductProps> = ({ data }) => {
     return (
         <>
-            <a href="#" className="flex w-full flex-col  items-center">
+            <a href="#" className="flex flex-col  items-center">
                 <div className="thumbnail my-2 w-full overflow-hidden rounded-full">
                     <img
                         src={thumbnail1}
