@@ -10,6 +10,7 @@ import ListOrderCancel from "./OrderCancel/ListOrderCancel"
 import ListOrderPaid from "./OrderPaid/ListOrderPaid"
 import ListOrderDones from "./OrderDone/ListOrderDone"
 import { SearchBillByPhone, getAllBill } from "@/api/services/Bill" // Adjust the import path as per your project structure
+import { Link } from "react-router-dom"
 
 const { Search } = Input
 const { Option } = Select
@@ -64,106 +65,97 @@ const ListOrderAdmin = () => {
         console.log("Filter status:", value)
         setFilterStatus(value)
     }
-const render=(value:any)=>{
-    setset(value)
-}
+    const render = (value: any) => {
+        setset(value)
+    }
     return (
         <>
             <div className="mb-4 flex items-center justify-between">
+
+                <div className="flex space-x-4">
+                    <Link to="/admin/orders/all"> <Button value="">Tất cả đơn hàng</Button></Link>
+                    <Link to="/admin/orders/paid"> <Button value="paid">Đã thanh toán</Button></Link>
+                    <Link to="/admin/orders/pending"><Button value="pending">Chờ xác nhận</Button></Link>
+                    <Link to="/admin/orders/confirm"> <Button value="confirmed">Đã xác nhận</Button></Link>
+                    <Link to="/admin/orders/shipping"><Button value="shipping">Đang giao</Button></Link>
+                    <Link to="/admin/orders/done"> <Button value="delivered">Đã giao</Button></Link>
+                    <Link to="/admin/orders/cancel">    <Button value="cancelled" danger>Đã hủy</Button></Link>
+                </div>
                 <Search
                     placeholder="Tìm kiếm theo số điện thoại đơn hàng"
                     onSearch={handleSearch}
-                    className="w-1/3"
+                    className="w-1/4"
                 />
-                <div className="flex space-x-4">
-                    <Select
-                        placeholder="Chọn trạng thái"
-                        onChange={handleFilterChange}
-                        className="w-3/3"
-                        value={filterStatus}
-                    >
-                        <Option value="">Tất cả đơn hàng</Option>
-                        <Option value="paid">Đã thanh toán</Option>
-                        <Option value="pending">Chờ xác nhận</Option>
-                        <Option value="confirmed">Đã xác nhận</Option>
-                        <Option value="shipping">Đang giao</Option>
-                        <Option value="delivered">Đã giao</Option>
-                        <Option value="cancelled">Đã hủy</Option>
-                    </Select>
-                    {/* <RangePicker
-                        onChange={(dates: any) => handleFilterChange(dates)}
-                        className="w-72"
-                    /> */}
-                </div>
-            </div>
+            </div >
 
-            {loading ? (
-                <div className="flex h-24 items-center justify-center">
-                    <Spin
-                        indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />}
-                    />
-                </div>
-            ) : (
-                <>
-                    {filterStatus === "" && (
-                        <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black file:">
-                            <thead className="text-center align-middle">
-                                <tr>
-                                    <th className="p-2">ID</th>
-                                    {/* <th className="p-2">Tên sản phẩm</th>
-                                    <th className="p-2">Ảnh</th> */}
-                                    <th className="p-2">Địa chỉ/Sđt</th>
-                                    <th className="p-2">Giá</th>
-                                    <th className="p-2">Ngày</th>
-                                    <th className="p-2">Hình thức</th>
-                                    <th className="p-2">Trạng thái</th>
-                                    <th className="p-2">Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white">
-                                {check ? "" : currentItems?.map((data: any) => (
-                                    <NameProductInListOrderAdmin
-                                        key={data.id}
-                                        data={data}
-                                        onCheck={render}
-                                    />
-                                ))}
-                                {searchBill != undefined ? searchBill?.data?.map((data: any) => (
-                                    <NameProductInListOrderAdmin
-                                        key={data.id}
-                                        data={data}
-                                    />
-                                )) : currentItems?.map((data: any) => (
-                                    <NameProductInListOrderAdmin
-                                        key={data.id}
-                                        data={data}
-                                    />
-                                )) }
-
-
-
-                            </tbody>
-
-                        </table>
-
-                    )}
-                    {filterStatus === "" && <div className="mt-5 flex items-center justify-center">
-                        <Pagination
-                            current={currentPage}
-                            total={bill?.length}
-                            pageSize={itemsPerPage}
-                            onChange={handlePageChange}
+            {
+                loading ? (
+                    <div className="flex h-24 items-center justify-center" >
+                        <Spin
+                            indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />}
                         />
-                    </div>}
+                    </div >
+                ) : (
+                    <>
+                        {filterStatus === "" && (
+                            <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black file:">
+                                <thead className="text-center align-middle">
+                                    <tr>
+                                        <th className="p-2">ID</th>
+                                        {/* <th className="p-2">Tên sản phẩm</th>
+                                    <th className="p-2">Ảnh</th> */}
+                                        <th className="p-2">Địa chỉ/Sđt</th>
+                                        <th className="p-2">Giá</th>
+                                        <th className="p-2">Ngày</th>
+                                        <th className="p-2">Hình thức</th>
+                                        <th className="p-2">Trạng thái</th>
+                                        <th className="p-2">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white">
+                                    {check ? "" : currentItems?.map((data: any) => (
+                                        <NameProductInListOrderAdmin
+                                            key={data.id}
+                                            data={data}
+                                            onCheck={render}
+                                        />
+                                    ))}
+                                    {searchBill != undefined ? searchBill?.data?.map((data: any) => (
+                                        <NameProductInListOrderAdmin
+                                            key={data.id}
+                                            data={data}
+                                        />
+                                    )) : currentItems?.map((data: any) => (
+                                        <NameProductInListOrderAdmin
+                                            key={data.id}
+                                            data={data}
+                                        />
+                                    ))}
 
-                    {filterStatus === "paid" && <ListOrderPaid />}
-                    {filterStatus === "pending" && <ListOrderPending />}
-                    {filterStatus === "confirmed" && <ListOrderConFirm />}
-                    {filterStatus === "shipping" && <ListOrderSiping />}
-                    {filterStatus === "delivered" && <ListOrderDones />}
-                    {filterStatus === "cancelled" && <ListOrderCancel />}
-                </>
-            )}
+
+
+                                </tbody>
+
+                            </table>
+
+                        )}
+                        {filterStatus === "" && <div className="mt-5 flex items-center justify-center">
+                            <Pagination
+                                current={currentPage}
+                                total={bill?.length}
+                                pageSize={itemsPerPage}
+                                onChange={handlePageChange}
+                            />
+                        </div>}
+
+                        {filterStatus === "paid" && <ListOrderPaid />}
+                        {filterStatus === "pending" && <ListOrderPending />}
+                        {filterStatus === "confirmed" && <ListOrderConFirm />}
+                        {filterStatus === "shipping" && <ListOrderSiping />}
+                        {filterStatus === "delivered" && <ListOrderDones />}
+                        {filterStatus === "cancelled" && <ListOrderCancel />}
+                    </>
+                )}
         </>
     )
 }

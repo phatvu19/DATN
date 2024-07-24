@@ -34,14 +34,17 @@ const Comment = ({ data, name }: any) => {
         let hasEligibleBill = false;
         if (!value) {
             toast.error('Vui lòng nhập nội dung!')
+            setvalue("");
             return
         }
         if (!user) {
             toast.error('Vui lòng đăng nhập!')
+            setvalue("");
             return
         }
         if (checkcmt) {
             toast.error('Mỗi người chỉ được đánh giá 1 lần!')
+            setvalue("");
             return
         }
 
@@ -82,7 +85,7 @@ const Comment = ({ data, name }: any) => {
     }
     return (
         <>
-            <div className=" pb-20 pl-40 pr-40">
+            <div className="pb-20 pl-80 pr-80 pt-20">
                 <span className="text-sl font-bold">ĐÁNH GIÁ TỪ NGƯỜI MUA</span>
                 <hr className="my-4  w-full border-t border-dashed border-gray-400" />
                 <div className="flex">
@@ -107,7 +110,13 @@ const Comment = ({ data, name }: any) => {
                         </>
                     )
                 }) : ""}
-                {user ? <>  <Input placeholder="Nhập nội dung" className="w-1/2" onChange={(e: any) => setvalue(e.target.value)} value={value} /><Button type="primary" className="ml-2" onClick={() => HandleCmt()}>Đăng</Button></> :""}
+                
+
+
+                {user ? <div className="flex">
+                    <Input type="text" className="flex-grow py-2 px-4 border border-gray-300 rounded" aria-label="Recipient's username" onChange={(e: any) => setvalue(e.target.value)} value={value} />
+                    <button className="bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white  py-2 px-4 rounded ml-2" type="button" id="button-addon2" onClick={() => HandleCmt()}>Đăng</button>
+                </div> :""}
               
 
             </div>

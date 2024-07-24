@@ -13,6 +13,8 @@ export const pathName = {
     ORDERS: "/orders",
     ORDERS_DETAIL: "/orders/:id",
     ORDERS_DONE: "/order_done/:id",
+    TINTUC:"/tintuc",
+    LIENHE: "/lienhe",
 
     // ADMIN PATH
     DASHBOARD: "thong-ke",
@@ -28,5 +30,13 @@ export const pathName = {
     ORDER_DETAIL_MANAGEMENT: "quan-ly-orders/:id",
     ATTR_MANAGEMENT: "quan-ly-attr",
     SALE: "quan-ly-sale",
-    VOUCHER:"voucher"
+    VOUCHER:"voucher",
+    COMMENT: 'comment' ,
+    AllORDER:'orders/all',
+    ALLORDERPAID:'orders/paid',
+    ALLORDERPENDING: 'orders/pending',
+    ALLORDERCONFIRM: 'orders/confirm',
+    ALLORDERSHIPPING: 'orders/shipping',
+    ALLORDERDONE: 'orders/done',
+    ALLORDERCANCEL: 'orders/cancel',
 } as const

@@ -28,5 +28,27 @@ const AddComment = async (data1: any) => {
         return undefined
     }
 }
-
-export { getAllComment, AddComment }
+const GetAllComment = async () => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.get(`posts`)
+        return response?.data?.data?.categories
+    } catch (error) {
+        return []
+    }
+}
+const DeleteComment = async (id: any, token: any) => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.delete(`posts/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                })
+        return response?.data?.data
+    } catch (error) {
+        return []
+    }
+}
+export { getAllComment, AddComment, GetAllComment, DeleteComment }

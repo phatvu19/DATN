@@ -101,7 +101,8 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                     </td>
                 </tr>
             ) : (
-                <tr ng-repeat="item in cart" className="relative pb-20">
+                <>
+                        <tr ng-repeat="item in cart" className="relative pb-20 border border-gray-3">
                     <td className="pt-5 font-normal">{index + 1}</td>
                     <td className="pt-5 font-normal">
                         <img src={quantity?.image} width="90px" />
@@ -109,12 +110,12 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                     <td className="pl-8 pr-8 pt-0 font-normal">
                         <p
                             style={{
-                                fontWeight: "400",
+                                fontWeight: "500",
                                 paddingBottom: "7px",
                                 fontSize: "16px",
                             }}
                         >
-                            {quantity?.name_product}
+                                {quantity?.name_product.length >= 20 ? <>{quantity?.name_product?.slice(0, 20)}...</> : quantity?.name_product}
                         </p>
                         <p style={{ fontSize: "14px" }}>
                             Kích thước: {data?.atribute[1].value}
@@ -171,6 +172,8 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                         />
                     </td>
                 </tr>
+              
+                </>
             )}
         </>
     )

@@ -117,7 +117,7 @@ const Cart = () => {
                                             <th className="font-bold">Số Lượng</th>
                                             <th className="font-bold">Thành Tiền</th>
                                         </thead>
-                                        <tbody className="pt-20">
+                                        <tbody className="pt-20 00">
                                             {cartt?.data?.map(
                                                 (data: any, index: any) => {
                                                     return (

@@ -253,7 +253,7 @@ function Header() {
                                 </li>
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/tintuc"
                                         className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600"
                                     >
                                         Tin tức
@@ -261,7 +261,7 @@ function Header() {
                                 </li>
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/lienhe"
                                         className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600"
                                     >
                                         Liên hệ
