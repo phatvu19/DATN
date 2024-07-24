@@ -1,8 +1,9 @@
 import { getBillconfirm } from "@/api/services/Bill"
 import { LoadingOutlined } from "@ant-design/icons"
-import { Pagination, Spin } from "antd"
+import { Button, Pagination, Spin } from "antd"
 import { useEffect, useState } from "react"
 import NameProductInListOrderConfirm from "./NameListProductConfirm"
+import { Link } from "react-router-dom"
 
 const ListOrderConFirm = () => {
     const [bill, setbill] = useState<any>()
@@ -39,6 +40,17 @@ const ListOrderConFirm = () => {
     }
     return (
         <>
+            <div className="mb-4 flex items-center justify-between">
+                <div className="flex space-x-4">
+                    <Link to="/admin/orders/all"> <Button value="">Tất cả đơn hàng</Button></Link>
+                    <Link to="/admin/orders/paid"> <Button value="paid">Đã thanh toán</Button></Link>
+                    <Link to="/admin/orders/pending"><Button value="pending">Chờ xác nhận</Button></Link>
+                    <Link to="/admin/orders/confirm"> <Button value="confirmed">Đã xác nhận</Button></Link>
+                    <Link to="/admin/orders/shipping"><Button value="shipping">Đang giao</Button></Link>
+                    <Link to="/admin/orders/done"> <Button value="delivered">Đã giao</Button></Link>
+                    <Link to="/admin/orders/cancel">    <Button value="cancelled" danger>Đã hủy</Button></Link>
+                </div>
+            </div >
             <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black">
                 <thead className="text-center align-middle">
                     <tr>

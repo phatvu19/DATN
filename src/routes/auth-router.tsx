@@ -11,6 +11,13 @@ import UserManagement from "@/pages/Admin/Users"
 import AddUser from "@/pages/Admin/Users/_Features/AddUser"
 import ListVoucher from "@/pages/Admin/Voucher/ListVoucher"
 import { pathName } from "@/routes/path-name"
+import ListComment from '../pages/Admin/Comment/ListComment';
+import ListOrderPaid from "@/pages/Admin/Orders/OrderPaid/ListOrderPaid"
+import ListOrderPending from "@/pages/Admin/Orders/OrderPending/ListOrderPending"
+import ListOrderConFirm from "@/pages/Admin/Orders/OrderConFirm/ListOrderConFirm"
+import ListOrderSiping from "@/pages/Admin/Orders/OrderShiping/ListOrderSiping"
+import ListOrderDones from "@/pages/Admin/Orders/OrderDone/ListOrderDone"
+import ListOrderCancel from "@/pages/Admin/Orders/OrderCancel/ListOrderCancel"
 export const AuthRouter = [
     {
         path: pathName.DASHBOARD,
@@ -60,6 +67,36 @@ export const AuthRouter = [
         path: pathName.VOUCHER,
         element: <ListVoucher />,
     },
-
-
+    {
+        path: pathName.COMMENT,
+        element: <ListComment />,
+    },
+    {
+        path: pathName.AllORDER,
+        element: <ListOrderAdmin />,
+    },
+    {
+        path: pathName.ALLORDERPAID,
+        element: <ListOrderPaid />,
+    },
+    {
+        path: pathName.ALLORDERPENDING,
+        element: <ListOrderPending/>,
+    },
+    {
+        path: pathName.ALLORDERCONFIRM,
+        element: <ListOrderConFirm />,
+    },
+    {
+        path: pathName.ALLORDERSHIPPING,
+        element: <ListOrderSiping />,
+    },
+    {
+        path: pathName.ALLORDERDONE,
+        element: <ListOrderDones />,
+    },
+    {
+        path: pathName.ALLORDERCANCEL,
+        element: <ListOrderCancel />,
+    },
 ]

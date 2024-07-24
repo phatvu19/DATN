@@ -1,11 +1,11 @@
-import ListSaleProduct from "@/pages/Admin/Sale/ListSaleProduct"
+
 import {
     AppstoreOutlined,
     BarChartOutlined,
+    CommentOutlined,
     FallOutlined,
     FormatPainterOutlined,
     OrderedListOutlined,
-    SettingOutlined,
     ShoppingCartOutlined,
     TagsOutlined,
     TeamOutlined,
@@ -64,6 +64,11 @@ const items = [
         key: "10",
         icon: < FormatPainterOutlined /> ,
         label: <Link to="/admin/voucher">Quản lý voucher</Link>,
+    },
+    {
+        key: "11",
+        icon: <CommentOutlined /> ,
+        label: <Link to="/admin/comment">Quản lý comment</Link>,
     }
 ]
 

@@ -15,9 +15,9 @@ console.log(trangthaiday);
         }
         fetch()
     }, [])
-    const trangthaiDone = trangthaiday?.find((data: any) => data?.status == "Done")?.total_bill
+    const trangthaiDone = trangthaiday?.find((data: any) => data?.status == "Shipping")?.total_bill
     const trangthaiPending = trangthaiday?.find((data: any) => data?.status == "Pending")?.total_bill
-    const trangthaiConfirm = trangthaiday?.find((data: any) => data?.status == "confirm")?.total_bill
+    const trangthaiConfirm = trangthaiday?.find((data: any) => data?.status == "Confirm")?.total_bill
   return (
     <>
           <div className="col-span-full xl:col-span-9 order-first xl:order-none">
@@ -37,7 +37,7 @@ console.log(trangthaiday);
                                           <h4 className="mb-0"><span className="counter-value font-bold text-xl">{trangthaiPending ? trangthaiPending : 0}</span></h4>
                                       </div>
                                       <div className="flex-shrink-0 self-end">
-                                          <Link to="/admin/quan-ly-orders" className="bg-success-subtle text-success px-2 py-1 rounded"><i className="ri-arrow-up-s-fill align-middle mr-1"></i>xem</Link>
+                                          <Link to="/admin/orders/pending" className="bg-success-subtle text-success px-2 py-1 rounded"><i className="ri-arrow-up-s-fill align-middle mr-1"></i>xem</Link>
                                       </div>
                                   </div>
                               </div>
@@ -57,7 +57,7 @@ console.log(trangthaiday);
                                           <h4 className="mb-0"><span className="counter-value font-bold text-xl">{trangthaiConfirm ? trangthaiConfirm : 0}</span></h4>
                                       </div>
                                       <div className="flex-shrink-0 self-end">
-                                          <Link to="/admin/quan-ly-orders" className="bg-success-subtle text-success px-2 py-1 rounded"><i className="ri-arrow-up-s-fill align-middle mr-1"></i>xem</Link>
+                                          <Link to="/admin/orders/confirm" className="bg-success-subtle text-success px-2 py-1 rounded"><i className="ri-arrow-up-s-fill align-middle mr-1"></i>xem</Link>
                                       </div>
                                   </div>
                               </div>
@@ -77,7 +77,7 @@ console.log(trangthaiday);
                                           <h4 className="mb-0"><span className="counter-value font-bold text-xl">{trangthaiDone ? trangthaiDone : 0}</span></h4>
                                       </div>
                                       <div className="flex-shrink-0 self-end">
-                                          <Link to="/admin/quan-ly-orders" className="bg-danger-subtle text-danger px-2 py-1 rounded"><i className="ri-arrow-down-s-fill align-middle mr-1"></i>xem</Link>
+                                          <Link to="/admin/orders/shipping" className="bg-danger-subtle text-danger px-2 py-1 rounded"><i className="ri-arrow-down-s-fill align-middle mr-1"></i>xem</Link>
                                       </div>
                                   </div>
                               </div>

@@ -14,13 +14,12 @@ const ProductInTopProduct = ({data}:any) => {
                                 <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17205122836764534.png&w=1920&q=75" alt="" className='' />
                             </div>
                             <div className=' w-2/3 border flex justify-center items-center flex-col'>
-                                <span className='font-bold text-sm'>{data1?.product_name}</span>
+                            <span className='font-bold text-sm'>{data1?.product_name?.length > 30 ? `${data1?.product_name?.slice(0, 30)}` : data1?.product_name}</span>
                             </div>
                             <div className=' w-1/3 border flex justify-center items-center flex-col'>
                                 <span className='font-bold text-sm'>{data1?.sold_count} lượt bán</span>
                             </div>
-                        </div>
-                        
+                        </div> 
                 )
             })}
         </>

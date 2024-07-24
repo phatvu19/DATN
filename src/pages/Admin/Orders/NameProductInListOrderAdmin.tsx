@@ -179,7 +179,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                                 className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
                                 onClick={() => HandleConfirm(data?.id)}
                             >
-                                Giao hàng
+                                Xác nhận
                             </button>
                             <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                                 <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">

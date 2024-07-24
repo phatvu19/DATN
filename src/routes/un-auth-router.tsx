@@ -9,7 +9,9 @@ import OrderDetail from "@/pages/OrderDetail/OrderDetail"
 import OrderDone from "@/pages/OrderDone/OrderDone"
 import ProductDetail from "@/pages/ProductDetail/ProductDetail"
 import RegisterPage from "@/pages/RegisterPage/RegisterPage"
+import ListTinTuc from "@/pages/LieHe/ListTinTuc"
 import { pathName } from "@/routes/path-name"
+import LienHe from "@/pages/LieHe/ListTinTuc"
 
 export const UnAuthRouter = [
     {
@@ -55,5 +57,13 @@ export const UnAuthRouter = [
     {
         path: pathName.ORDERS_DONE,
         element: <OrderDone />,
+    },
+    {
+        path: pathName.TINTUC,
+        element: <ListTinTuc />,
+    },
+    {
+        path: pathName.LIENHE,
+        element: <LienHe />,
     },
 ]

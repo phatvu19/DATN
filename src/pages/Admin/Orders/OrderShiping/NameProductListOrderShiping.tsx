@@ -16,7 +16,7 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
     useEffect(() => {
-        if (data?.status == "Shiping") {
+        if (data?.status == "Shipping") {
             setcolor("purple")
             setstatus("Đang giao hàng")
         }

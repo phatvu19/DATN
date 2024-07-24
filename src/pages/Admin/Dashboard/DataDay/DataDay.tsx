@@ -132,7 +132,7 @@ const DataDay = () => {
                 <div className="bg-white shadow-lg rounded-lg p-6 animate__animated animate__fadeIn">
                     <div className="flex items-center">
                         <div className="flex-grow overflow-hidden">
-                            <p className="text-uppercase font-medium text-gray-500 truncate mb-0">Đã trả tiền (ONLINE)</p>
+                            <p className="text-uppercase font-medium text-gray-500 truncate mb-0">Đã trả tiền (ONLINE trong ngày)</p>
                         </div>
                         <div className="flex-shrink-0">
                             {/* <h5 className="text-gray-500 text-sm mb-0">+0.00 %</h5> */}

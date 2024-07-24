@@ -119,4 +119,5 @@ const GetTotalPaid = async () => {
         return []
     }
 }
+
 export { getDoanhThuDay, getUserTop, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang, doanhThu7Day, ProInCategory, OrderInDay, GetTotalPaid }

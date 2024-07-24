@@ -26,8 +26,8 @@ const ProductOrderDetailInAdmin = ({ data, loading }: any) => {
                             <div className="m-2 flex">
                                 <img src={data?.image} className="w-24" />
                                 <div className="m-2">
-                                    <p className="mb-2 text-sm">
-                                        {data?.product_name}
+                                    <p className="mb-2 text-sm font-bold">
+                                            {data?.product_name.length >= 25 ? <>{data?.product_name?.slice(0, 25)}</> : data?.product_name}
                                     </p>
                                     <span className="text-sm ">
                                         Kích thước:
