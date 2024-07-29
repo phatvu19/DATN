@@ -9,8 +9,6 @@ const getAllProduct = async (): Promise<Product[]> => {
             await httpRequest.get("/products")
         return response.data?.data?.product ?? []
     } catch (error) {
-        console.error("An error occurred while fetching products")
-        toast.error("Failed to fetch products. Please try again later.")
         return []
     }
 }
@@ -35,8 +33,7 @@ const createProduct = async (product: Product) => {
         toast.success("Product created successfully.")
         return response.data
     } catch (error) {
-        console.error("An error occurred while creating product:", error)
-        toast.error("Failed to create product. Please try again later.")
+
         throw error // Throwing error để component gọi hàm này có thể xử lý tiếp
     }
 }
@@ -54,10 +51,6 @@ const updateProduct = async (
         toast.success("Product updated successfully.")
         return updatedProduct
     } catch (error) {
-        console.error(`An error occurred while updating product with ID ${id}`)
-        toast.error(
-            `Failed to update product with ID ${id}. Please try again later.`,
-        )
         throw error
     }
 }
@@ -68,9 +61,6 @@ const deleteProduct = async (id: number): Promise<boolean> => {
         toast.success("Product deleted successfully.")
         return true
     } catch (error) {
-        toast.error(
-            `Failed to delete product with ID ${id}. Please try again later.`,
-        )
         return false
     }
 }

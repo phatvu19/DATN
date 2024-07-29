@@ -6,7 +6,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 export const EditorComponent = () => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
-    const onEditorStateChange = (editorState) => {
+    const onEditorStateChange = (editorState:any) => {
         setEditorState(editorState)
     }
 

@@ -15,6 +15,7 @@ export const pathName = {
     ORDERS_DONE: "/order_done/:id",
     TINTUC:"/tintuc",
     LIENHE: "/lienhe",
+    CHECKOUTNOW: "/checkoutnow",
 
     // ADMIN PATH
     DASHBOARD: "thong-ke",

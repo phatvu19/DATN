@@ -6,7 +6,7 @@ import {
     HeartOutlined,
     ShoppingCartOutlined,
 } from "@ant-design/icons"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getProductById } from "@/api/services/ProductService"
 import CategoryInProductDetail from "./CategoryInProductDetail"
 import PriceInProductDetail from "./PriceInProductDetail"
@@ -16,22 +16,12 @@ import { toast } from "react-toastify"
 import QuantityInProductDetail from "./QuantityInProductDetail"
 import { getAllAttributeValue } from "@/api/services/AttributeService"
 import Comment from "./Comment"
-import TextArea from "antd/es/input/TextArea"
 const ProductDetail = () => {
     const { id }: any = useParams()
-    const images = [
-        "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-014%2Ffeabdc18be4641d6a438dfc8fd8b1389_optimized_original_image.jpg&w=1920&q=75",
-        "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FF9UVC020M-020%2F7b91f75bc4684a578b9eb6b1a3fea98f_optimized_original_image.jpg&w=1920&q=75",
-        "https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17109299569046619.jpg&w=1920&q=75",
-    ]
-    const [selectedImage, setSelectedImage] = useState(images[0])
     const [selectedColor, setSelectedColor] = useState(null)
     const [quantity, setquantity] = useState(1)
     const [attributeValues, setAttributeValues] = useState<any>({})
     const carts = JSON.parse(localStorage.getItem("cart") || "[]")
-    const handleImageClick = (image: string) => {
-        setSelectedImage(image)
-    }
     const [product, setProduct] = useState<any>()
     const [sizevalue, setSizevalue] = useState()
     const [prices, setprices] = useState()
@@ -103,6 +93,9 @@ const ProductDetail = () => {
                 },
             ],
         }
+        if (quantity <= 0) {
+            return toast.error('Hãy chọn số lượng lại!')
+        }
         if (idsize == undefined) {
             toast.error("Bạn cần chọn size!")
         } else if (sizevalue == undefined) {
@@ -121,6 +114,51 @@ const ProductDetail = () => {
             }
             localStorage.setItem("cart", JSON.stringify(carts))
             toast.success("Bạn đã thêm thành công!")
+            // setTimeout(() => {
+            //     window.location.reload()
+            // }, 500)
+        }
+    }
+    const navigate= useNavigate()
+    const HandleAddtoCartNow = async () => {
+        const data = {
+            image: product?.image,
+            variant_id: sizevalue,
+            quantity: quantity,
+            name_product: product?.name,
+            sale_id: product?.sale_id,
+            attributes: [
+                {
+                    attribute_name: 1,
+                    attribute_value: id_attribute_value,
+                },
+                {
+                    attribute_name: 2,
+                    attribute_value: id_attribute_size,
+                },
+            ],
+        }
+        if (quantity <= 0) {
+            return toast.error('Hãy chọn số lượng lại!')
+        }
+        if (idsize == undefined) {
+            toast.error("Bạn cần chọn size!")
+        } else if (sizevalue == undefined) {
+            toast.error("Bạn cần chọn color!")
+        } else {
+            const existingProductIndex = carts?.findIndex(
+                (item: any) =>
+                    item.variant_id == idsize &&
+                    item?.attributes[0].attribute_value == id_attribute_value &&
+                    item?.attributes[1].attribute_value == id_attribute_size,
+            )
+            if (existingProductIndex !== -1) {
+                carts[existingProductIndex].quantity += Number(quantity)
+            } else {
+                await carts.push(data)
+            }
+            localStorage.setItem("cartnow", JSON.stringify(carts))
+            navigate('/checkoutnow')
             // setTimeout(() => {
             //     window.location.reload()
             // }, 500)
@@ -170,7 +208,7 @@ const ProductDetail = () => {
                             variant={idsize}
                         />
                     </div>
-                    
+
 
                     <PriceInProductDetail
                         data={product?.variants}
@@ -243,6 +281,7 @@ const ProductDetail = () => {
                         <button
                             className=" ml-2 w-2/4 rounded bg-red-500 p-2"
                             style={{ color: "white" }}
+                            onClick={() => HandleAddtoCartNow()}
                         >
                             <CarryOutOutlined style={{ color: "white" }} /> Mua ngay
                         </button>
@@ -260,8 +299,8 @@ const ProductDetail = () => {
                 <hr className="my-4  w-full border-t border-dashed border-gray-400" />
                 <p>{product?.description}</p>
             </div>
-            <Comment data={product?.id} name={product?.name}/>
-         
+            <Comment data={product?.id} name={product?.name} />
+
         </>
     )
 }

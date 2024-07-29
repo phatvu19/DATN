@@ -16,12 +16,10 @@ const login = async (
             // toast.success("Đăng nhập thành công!")
             return response.data.data
         } else {
-            toast.error("Đăng nhập thất bại!")
             return null
         }
     } catch (error) {
-        console.error("An error occurred during login:", error)
-        toast.error("Đăng nhập thất bại!")
+
         return null
     }
 }
@@ -47,7 +45,6 @@ const register = async (
             return false
         }
     } catch (error) {
-        console.error("An error occurred during registration:", error)
         toast.error("Đăng ký thất bại!")
         return false
     }

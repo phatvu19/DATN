@@ -131,7 +131,6 @@ const AddProduct = () => {
         action: "https://api.cloudinary.com/v1_1/dsul0ahfu/image/upload",
         onChange({ file }: any) {
             if (file.status !== "uploading") {
-                // Sử dụng một hàm setState để cập nhật mảng uploadedImages
                 setUploadedImages(file.response.secure_url);
             }
         },
@@ -140,13 +139,10 @@ const AddProduct = () => {
             folder: "datn",
         },
     };
-    console.log(uploadedImages);
-
-    // Form rendering
     return (
-        <div className="container mx-auto mt-10 flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
+        <div className="container mx-auto flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
             <h2 className="my-10 text-2xl font-semibold text-gray-700">
-                Cập nhập thông tin sản phẩm
+                Thêm sản phẩm
             </h2>
             <Form
                 layout="vertical"

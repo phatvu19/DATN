@@ -30,7 +30,7 @@ const OrderDone = () => {
             setstatus("Chờ giao hàng")
         } else if (bill?.status == "Paid") {
             setcolor("warning")
-            setstatus("Chờ xác nhận")
+            setstatus("Chờ lấy hàng")
         } else if (bill?.status == "Shiping") {
             setcolor("warning")
             setstatus("Đang giao hàng")
