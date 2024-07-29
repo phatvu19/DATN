@@ -20,7 +20,7 @@ const getUser = async (id: string) => {
         const response = await httpRequest.get(`/users/${id}`)
         return response.data.data.data
     } catch (error) {
-        toast.error("Failed to fetch user details.")
+
         throw error // Re-throw the error to handle it in the component if needed
     }
 }
@@ -30,17 +30,15 @@ const updateUser = async (id: number, data: User) => {
         const response = await httpRequest.put(`/users/${id}`, data)
         return response.data
     } catch (error) {
-        toast.error("Failed to update user details.")
+
         throw error
     }
 }
 const deleteUser = async (id: number) => {
     try {
         const response = await httpRequest.delete(`/users/${id}`)
-        toast.success("User deleted successfully.")
         return response.data
     } catch (error) {
-        toast.error("Failed to delete user.")
         throw error
     }
 }

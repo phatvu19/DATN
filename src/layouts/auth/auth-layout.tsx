@@ -51,7 +51,7 @@ const AuthLayout: React.FC = () => {
                                 <div className="flex items-center">
                                     <img className="rounded-full header-profile-user w-10 h-10 " src={user?.data?.avatar ? user?.data?.avatar : "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg"} alt="Header Avatar" />
                                     <div className="text-start ml-2">
-                                        <span className="hidden xl:inline-block ms-1 font-medium ">{user?.data?.name ? user?.data?.name :""}</span>
+                                        <span className="hidden xl:inline-block ms-1 font-medium ">{user?.data?.name ? user?.data?.name : ""}</span>
                                         <span className="hidden xl:block ms-1  text-xs user-name-sub-text" style={{ marginTop: '-20px' }}>Admin</span>
                                     </div>
                                 </div>
@@ -61,21 +61,11 @@ const AuthLayout: React.FC = () => {
                     </div>
 
                 </Header>
-                <Content
-                    style={{
-                        padding: "0px 50px",
-                        overflowY: "auto",
-                        backgroundColor: "whitesmoke",
-                    }}
-                    className="min-h-screen"
-                >
-                    <Breadcrumb style={{ margin: "16px 0" }}>
-                        {breadcrumbs}
-                    </Breadcrumb>
-                    <div className="site-layout-content ">
-                        <Outlet />
-                    </div>
-                </Content>
+
+                <div className="site-layout-content p-10">
+                    <Outlet />
+                </div>
+
             </Layout>
         </Layout>
     )
