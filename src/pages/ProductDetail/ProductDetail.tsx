@@ -119,8 +119,10 @@ const ProductDetail = () => {
             // }, 500)
         }
     }
-    const navigate= useNavigate()
+    const navigate = useNavigate()
+    const cartsnow = JSON.parse(localStorage.getItem("cartnow") || "[]")
     const HandleAddtoCartNow = async () => {
+        
         const data = {
             image: product?.image,
             variant_id: sizevalue,
@@ -146,18 +148,8 @@ const ProductDetail = () => {
         } else if (sizevalue == undefined) {
             toast.error("Bạn cần chọn color!")
         } else {
-            const existingProductIndex = carts?.findIndex(
-                (item: any) =>
-                    item.variant_id == idsize &&
-                    item?.attributes[0].attribute_value == id_attribute_value &&
-                    item?.attributes[1].attribute_value == id_attribute_size,
-            )
-            if (existingProductIndex !== -1) {
-                carts[existingProductIndex].quantity += Number(quantity)
-            } else {
-                await carts.push(data)
-            }
-            localStorage.setItem("cartnow", JSON.stringify(carts))
+            await cartsnow.push(data)
+            localStorage.setItem("cartnow", JSON.stringify(cartsnow))
             navigate('/checkoutnow')
             // setTimeout(() => {
             //     window.location.reload()

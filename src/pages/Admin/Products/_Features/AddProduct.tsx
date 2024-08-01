@@ -21,6 +21,7 @@ import { toast } from "react-toastify"
 const { Option } = Select
 
 const AddProduct = () => {
+    const [form] = Form.useForm()
     const [categories, setCategories] = useState<Category[]>([])
     const [variants, setVariants] = useState<Variant[]>([])
     const [attributes, setAttributes] = useState<Attribute[]>([])
@@ -147,6 +148,7 @@ const AddProduct = () => {
             <Form
                 layout="vertical"
                 className="space-y-4"
+                form={form}
                 onFinish={handleSubmit(onSubmit)}
             >
                 {/* Form items for product information */}
@@ -156,13 +158,17 @@ const AddProduct = () => {
                             <Controller
                                 name="name"
                                 control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        size="large"
-                                        style={{ height: 50 }}
-                                        {...field}
-                                        placeholder="Tên sản phẩm..."
-                                    />
+                                rules={{ required: "Không được để trống" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Input
+                                            size="large"
+                                            style={{ height: 50 }}
+                                            {...field}
+                                            placeholder="Tên sản phẩm..."
+                                        />
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
@@ -173,20 +179,24 @@ const AddProduct = () => {
                                 name="category_id"
                                 control={control}
                                 defaultValue=""
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        size="large"
-                                        style={{ height: 50 }}
-                                        onChange={(value) => field.onChange(value)}
-                                    >
-                                        <Option value="">Chọn</Option>
-                                        {categories.map((cat) => (
-                                            <Option key={cat.id} value={cat.id}>
-                                                {cat.name}
-                                            </Option>
-                                        ))}
-                                    </Select>
+                                rules={{ required: "Không được để trống" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Select
+                                            {...field}
+                                            size="large"
+                                            style={{ height: 50 }}
+                                            onChange={(value) => field.onChange(value)}
+                                        >
+                                            <Option value="">Chọn</Option>
+                                            {categories.map((cat) => (
+                                                <Option key={cat.id} value={cat.id}>
+                                                    {cat.name}
+                                                </Option>
+                                            ))}
+                                        </Select>
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
@@ -198,15 +208,19 @@ const AddProduct = () => {
                             <Controller
                                 name="brand"
                                 control={control}
+                                rules={{ required: "Không được để trống" }}
                                 defaultValue=""
-                                render={({ field }) => (
-                                    <Input
-                                        {...field}
-                                        size="large"
-                                        className="w-full"
-                                        style={{ height: 50 }}
-                                        placeholder="Thương hiệu"
-                                    />
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Input
+                                            {...field}
+                                            size="large"
+                                            className="w-full"
+                                            style={{ height: 50 }}
+                                            placeholder="Thương hiệu"
+                                        />
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
@@ -214,13 +228,17 @@ const AddProduct = () => {
                             <Controller
                                 name="description"
                                 control={control}
+                                rules={{ required: "Không được để trống" }}
                                 defaultValue=""
-                                render={({ field }) => (
-                                    <Input.TextArea
-                                        {...field}
-                                        autoSize={{ minRows: 3, maxRows: 6 }}
-                                        placeholder="Mô tả"
-                                    />
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Input.TextArea
+                                            {...field}
+                                            autoSize={{ minRows: 3, maxRows: 6 }}
+                                            placeholder="Mô tả"
+                                        />
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
@@ -228,9 +246,11 @@ const AddProduct = () => {
                     <Form.Item
                         name="image"
                         className="col-md-10"
+                        rules={[{required: true, message: "Không được để trống"
+                        }]}
                         validateTrigger={["onChange", "onBlur"]}
                     >
-                        <Upload.Dragger {...props} multiple accept=".jpg,.png">
+                        <Upload.Dragger {...props} multiple accept=".jpg,.png" >
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload.Dragger>
                     </Form.Item>
@@ -239,7 +259,9 @@ const AddProduct = () => {
                 {/* Form items for variants */}
                 {variants.map((variant: any, index: any) => (
                     <div key={index} className="flex flex-wrap space-x-4">
-                        <Form.Item label="Giá gốc">
+                        <Form.Item label="Giá gốc" name='pricegoc' rules={[{
+                            required: true, message: "Không được để trống"
+                        }]}>
                             <Input
                                 size="large"
                                 type="number"
@@ -253,7 +275,9 @@ const AddProduct = () => {
                                 }}
                             />
                         </Form.Item>
-                        <Form.Item label="Giá khuyến mãi">
+                        <Form.Item label="Giá khuyến mãi" name='price' rules={[{
+                            required: true, message: "Không được để trống"
+                        }]}>
                             <Input
                                 size="large"
                                 type="number"
@@ -266,7 +290,9 @@ const AddProduct = () => {
                                 }}
                             />
                         </Form.Item>
-                        <Form.Item label="Số lượng">
+                        <Form.Item label="Số lượng" name="quantity" rules={[{
+                            required: true, message: "Không được để trống"
+                        }]}>
                             <Input
                                 size="large"
                                 type="number"
@@ -282,7 +308,9 @@ const AddProduct = () => {
                         </Form.Item>
                         {/* Select dropdowns for attributes */}
                         {attributes.map((attribute: any) => (
-                            <Form.Item key={attribute.id} label={attribute.name}>
+                            <Form.Item key={attribute.id} label={attribute.name} name="attributename" rules={[{
+                                required: true, message: "Không được để trống"
+                            }]}>
                                 <Select
                                     size="large"
                                     style={{ width: 240 }}

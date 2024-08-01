@@ -1,5 +1,5 @@
 import { getAllDistrict } from "@/api/services/map"
-import { Select } from "antd"
+import { Form, Select } from "antd"
 import { Option } from "antd/es/mentions"
 import { useEffect, useState } from "react"
 
@@ -22,30 +22,38 @@ const DistrictInCheckOutNow = ({ id, onIDDistrict, onNameDistrict }: any) => {
 
     return (
         <>
-            <div className="w-2/6">
+            <div className="w-2/6 ml-1 mr-1">
                 <label htmlFor="name" className="pl-1 text-sm font-bold">
                     Chọn quận / huyện
                     <span className="text-red-500">*</span>
                 </label>
-                <Select
-                    defaultValue="Chọn Huyện"
-                    className=" mt-3 w-5/6"
-                    style={{ height: "42px" }}
-                    onChange={handleDistrict}
-                >
-                    <Option value="">Chọn Huyện</Option>
-                    {district?.map((data: any) => {
-                        return (
-                            <>
-                                <Option
-                                    value={`${data?.district_name}:${data?.district_id}`}
-                                >
-                                    {data?.district_name}
-                                </Option>
-                            </>
-                        )
-                    })}
-                </Select>
+                <Form.Item name="distric" rules={[
+                    {
+                        required: true,
+                        message:
+                            "Không được để trống huyện ",
+                    }
+                ]}>
+                    <Select
+                        defaultValue="Chọn Huyện"
+                        className=" mt-3 w-5/6"
+                        style={{ height: "42px" }}
+                        onChange={handleDistrict}
+                    >
+                        <Option value="">Chọn Huyện</Option>
+                        {district?.map((data: any) => {
+                            return (
+                                <>
+                                    <Option
+                                        value={`${data?.district_name}:${data?.district_id}`}
+                                    >
+                                        {data?.district_name}
+                                    </Option>
+                                </>
+                            )
+                        })}
+                    </Select>
+                </Form.Item>
             </div>
         </>
     )

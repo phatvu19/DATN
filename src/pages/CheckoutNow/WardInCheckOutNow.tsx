@@ -1,5 +1,5 @@
 import { getAllWard } from "@/api/services/map"
-import { Select } from "antd"
+import { Form, Select } from "antd"
 import { Option } from "antd/es/mentions"
 import { useEffect, useState } from "react"
 
@@ -25,25 +25,33 @@ const WardInCheckOutNow = ({ id, onNameWard }: any) => {
                     Chọn phường / xã
                     <span className="text-red-500">*</span>
                 </label>
-                <Select
-                    defaultValue="Chọn Xã"
-                    style={{ height: "42px" }}
-                    className=" mt-3 w-5/6"
-                    onChange={handleWard}
-                >
-                    <Option value="">Chọn Xã</Option>
-                    {ward?.map((data: any) => {
-                        return (
-                            <>
-                                <Option
-                                    value={`${data?.ward_name}:${data?.ward_id}`}
-                                >
-                                    {data?.ward_name}
-                                </Option>
-                            </>
-                        )
-                    })}
-                </Select>
+                <Form.Item name="ward" rules={[
+                    {
+                        required: true,
+                        message:
+                            "Không được để trống xã ",
+                    }
+                ]}>
+                    <Select
+                        defaultValue="Chọn Xã"
+                        style={{ height: "42px" }}
+                        className=" mt-3 w-5/6"
+                        onChange={handleWard}
+                    >
+                        <Option value="">Chọn Xã</Option>
+                        {ward?.map((data: any) => {
+                            return (
+                                <>
+                                    <Option
+                                        value={`${data?.ward_name}:${data?.ward_id}`}
+                                    >
+                                        {data?.ward_name}
+                                    </Option>
+                                </>
+                            )
+                        })}
+                    </Select>
+                </Form.Item>
             </div>
         </>
     )

@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-export const useLogPageLeave = (pageName) => {
+export const useLogPageLeave = (pageName:any) => {
     const location = useLocation();
-    const navigate = useNavigate();
 
     useEffect(() => {
-        const handleBeforeUnload = (event) => {
-            const confirmationMessage = 'Nếu load lại trang thì bạn sẽ phải mua lại!';
-            event.returnValue = confirmationMessage; // Chrome requires returnValue to be set.
-            return confirmationMessage;
+        const handleBeforeUnload = (event:any) => {
+            console.log(`Bạn đã rời khỏi trang ${pageName}`);
+            localStorage.removeItem('cartnow');
         };
 
         const checkLocation = () => {
@@ -19,29 +17,15 @@ export const useLogPageLeave = (pageName) => {
             }
         };
 
-        const handlePopState = () => {
-            if (location.pathname === pageName) {
-                const check = window.confirm('Nếu load lại trang thì bạn sẽ phải mua lại!');
-                if (!check) {
-                    localStorage.removeItem('cartnow');
-                    navigate('/');
-                }
-            } else {
-                checkLocation();
-            }
-        };
-
         window.addEventListener('beforeunload', handleBeforeUnload);
-        window.addEventListener('popstate', handlePopState);
-        window.addEventListener('pushstate', handlePopState); // Optional: In case pushstate is used
+        window.addEventListener('popstate', checkLocation);
 
         // Kiểm tra khi location thay đổi
         checkLocation();
 
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
-            window.removeEventListener('popstate', handlePopState);
-            window.removeEventListener('pushstate', handlePopState);
+            window.removeEventListener('popstate', checkLocation);
         };
-    }, [location, pageName, navigate]);
+    }, [location, pageName]);
 };

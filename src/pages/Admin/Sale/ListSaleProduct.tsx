@@ -2,11 +2,12 @@ import { getAllProduct } from '@/api/services/ProductService'
 import { useEffect, useState } from 'react'
 
 import SaleDetail from './SaleDetail'
-import { Button, Input, Modal, Select, Table } from 'antd'
+import { Button, Form, Input, Modal, Select, Table } from 'antd'
 import { AddSale, getAllSale } from '@/api/services/Sale'
 import { toast } from 'react-toastify'
 
 const ListSaleProduct = () => {
+    const [form] = Form.useForm()
     const [products, setproduct] = useState<any>()
     const [loading, setloading] = useState<any>()
     useEffect(() => {
@@ -22,7 +23,7 @@ const ListSaleProduct = () => {
     const [code, setcode] = useState<any>()
     const [check, setcher] = useState<any>()
 
-    const load=(value:any)=>{
+    const load = (value: any) => {
         setloading(value)
     }
     const showModal = () => {
@@ -103,7 +104,7 @@ const ListSaleProduct = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
-            render: (status:any) => {
+            render: (status: any) => {
                 console.log(status);
                 const check1 = status == 1 ? "Bật" : "Tắt";
                 return (
@@ -123,24 +124,26 @@ const ListSaleProduct = () => {
     return (
         <div>
             <Modal title="Thêm mã sale" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Form form={form}>
 
-                <div className="flex">
                     <label className='w-2/5 font-bold ' >Phần trăm giảm giá</label>
-                    <Input placeholder="Nhập phần trăm giảm giá" className=' w-3/4' onChange={onChange} type='number' />
-                </div>
-                <div className="flex mt-4">
+                    <Form.Item className="" name="phantram" rules={[{ required: true, message: "không được để trống" }]}>
+                        <Input placeholder="Nhập phần trăm giảm giá" className=' w-3/4' onChange={onChange} type='number' />
+                    </Form.Item>
                     <label className='w-2/5 font-bold'>Trạng thái</label>
-                    <Select className='w-3/4'
-                        placeholder="Chọn trạng thái"
-                        onChange={handleChange}
+                    <Form.Item className=" mt-4" name="trangthai" rules={[{ required: true, message: "không được để trống" }]}>
+                      
+                        <Select className='w-3/4'
+                            placeholder="Chọn trạng thái"
+                            onChange={handleChange}
 
-                        options={[
-                            { value: 0, label: "Tắt" },
-                            { value: 1, label: "Bật" }
-                        ]}
-                    />
-                </div>
-
+                            options={[
+                                { value: 0, label: "Tắt" },
+                                { value: 1, label: "Bật" }
+                            ]}
+                        />
+                    </Form.Item>
+                </Form>
             </Modal>
             <Modal title="Thêm mã sale" open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
 
@@ -162,9 +165,9 @@ const ListSaleProduct = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products?.map((data: any,index:any) => {
+                        {products?.map((data: any, index: any) => {
                             return (
-                                <SaleDetail key={index+1} data={data} check={check} onLoad={load}/>
+                                <SaleDetail key={index + 1} data={data} check={check} onLoad={load} />
                             )
                         })}
                     </tbody>
