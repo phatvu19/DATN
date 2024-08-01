@@ -1,5 +1,5 @@
 import { getAllProvince } from "@/api/services/map"
-import { Select } from "antd"
+import { Form, Select } from "antd"
 import { Option } from "antd/es/mentions"
 import { useEffect, useState } from "react"
 
@@ -27,26 +27,33 @@ const ProvinceInCheckOutnow = ({ onIDProvince, onNameProvince }: any) => {
                     Chọn tỉnh / thành phố
                     <span className="text-red-500">*</span>
                 </label>
-                <Select
-                    className=" mt-3 w-5/6"
-                    style={{ height: "42px" }}
-                    defaultValue="Chọn Tỉnh"
-                    onChange={handleProvince}
-                >
-                    <Option value="">Chọn Tỉnh</Option>
-                    {province?.map((data: any) => {
-                        return (
-                            <>
-                                <Option
-                                    value={`${data?.province_name}:${data?.province_id}`}
-                                >
-                                    {" "}
-                                    {data?.province_name}
-                                </Option>
-                            </>
-                        )
-                    })}
-                </Select>
+                <Form.Item name="province" rules={[
+                    {
+                        required: true,
+                        message:
+                            "Không được để trống tỉnh ",
+                    }
+                ]}>
+                    <Select
+                        className=" mt-3 w-5/6"
+                        style={{ height: "42px" }}
+                        defaultValue="Chọn Tỉnh"
+                        onChange={handleProvince}
+                    >
+                        <Option value="">Chọn Tỉnh</Option>
+                        {province?.map((data: any) => {
+                            return (
+                                <>
+                                    <Option
+                                        value={`${data?.province_name}:${data?.province_id}`}
+                                    >
+                                        {data?.province_name}
+                                    </Option>
+                                </>
+                            )
+                        })}
+                    </Select>
+                </Form.Item>
             </div>
         </>
     )

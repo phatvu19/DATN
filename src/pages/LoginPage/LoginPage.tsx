@@ -4,29 +4,23 @@ import { Button, Form, Input, Typography } from "antd"
 import { Controller, useForm } from "react-hook-form"
 import { login } from "@/api/services/AuthService"
 import { toast } from "react-toastify"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
 const { Text, Link } = Typography
 
 const LoginPage = () => {
     const navigate = useNavigate()
-    const {
-        handleSubmit,
-        control,
-        formState: { errors },
-    }: any = useForm()
-    const onSubmit = async (data: { email: string; password: string }) => {
-        const { email, password } = data
-
+    const [form] = Form.useForm()
+    const [username , setusername] = useState<any>()
+    const [password, setpassword] = useState<any>()
+    const onSubmit = async () => {
         try {
-            const response: any = await login(email, password)
-            console.log(response)
-
+            const response: any = await login(username, password)
             if (response) {
                 localStorage.setItem("accessToken", response.accessToken)
                 localStorage.setItem("user", JSON.stringify(response))
                 if (response?.data?.role_id == 1) {
-                    navigate("/")
+                    window.location.href="/"
                 } else if (response?.data?.role_id == 0) {
                     toast.success("Hello admin!")
                     window.location.href = "/admin"
@@ -48,24 +42,27 @@ const LoginPage = () => {
     return (
         <div className="mx-auto my-10 max-w-md">
             <h3 className="mb-3 text-center font-medium">Đăng Nhập</h3>
-            <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
-                <Form.Item label="Username">
-                    <Controller
-                        name="email"
-                        control={control}
-                        defaultValue=""
-                        render={({ field }) => <Input size="large" {...field} />}
-                    />
+            <Form form={form} onFinish={onSubmit} layout="vertical">
+                <Form.Item label="Username" name="Username" rules={[
+                    {
+                        required: true,
+                        message:
+                            "Không được để trống Username ",
+                    }
+                ]}>
+                    <Input onChange={(e:any) => setusername(e.target.value)}/>
                 </Form.Item>
-                <Form.Item label="Password">
-                    <Controller
-                        name="password"
-                        control={control}
-                        defaultValue=""
-                        render={({ field }) => (
-                            <Input.Password size="large" {...field} />
-                        )}
-                    />
+                <Form.Item label="Password" name="Password" rules={[
+                    {
+                        required: true,
+                        message:
+                            "Không được để trống mật khẩu ",
+                    }
+                ]}>
+
+                    <Input.Password size="large" onChange={(e: any) => setpassword(e.target.value)} />
+
+
                 </Form.Item>
                 <Form.Item>
                     <Button
@@ -79,9 +76,7 @@ const LoginPage = () => {
                 </Form.Item>
                 <Text className="mb-2 flex items-center gap-2">
                     Bạn chưa có tài khoản?{" "}
-                    <Link style={{ color: "red" }} href="#!register">
-                        Đăng Ký Ngay
-                    </Link>
+                    <Link href="/dang-ki">Đăng kí</Link>
                 </Text>
                 <Text>
                     <Link style={{ color: "red" }} href="#!password/forgot">

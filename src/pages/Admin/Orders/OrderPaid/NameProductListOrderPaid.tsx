@@ -4,6 +4,7 @@ import {
     getBillsDetail,
     updateCancel,
     updateConfirm,
+    updateShiping,
 } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { LoadingOutlined } from "@ant-design/icons"
@@ -50,16 +51,16 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
         }
     }
     const HandleConfirm = async (id: any) => {
-        const check = confirm("Bạn chắc chắn muốn xác nhận đơn hàng này?")
+        const check = confirm("Bạn chắc chắn muốn giao đơn hàng này?")
         if (check == true) {
             const data1 = {
                 bill_id: data?.id,
                 user_id: data?.user_id,
-                description: `Admin xác nhận đơn hàng`,
+                description: `Admin xác nhận đơn hàng đang giao`,
             }
-            await updateConfirm(id).then(async () => {
+            await updateShiping(id).then(async () => {
                 await addHistoryBills(data1).then(() => {
-                    toast.success("Bạn đã xác nhận đơn hàng")
+                    toast.success("Bạn đã chuyển sang đang giao hàng!")
                     setcolor("processing")
                     setstatus("Chờ giao hàng")
                     onCheck(status)
@@ -106,7 +107,7 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
                         className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
                         onClick={() => HandleConfirm(data?.id)}
                     >
-                        Xác nhận
+                        Giao hàng
                     </button>
                     <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                         <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">

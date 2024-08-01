@@ -25,7 +25,7 @@ const getUser = async (id: string) => {
     }
 }
 
-const updateUser = async (id: number, data: User) => {
+const updateUser = async (id: number, data: any) => {
     try {
         const response = await httpRequest.put(`/users/${id}`, data)
         return response.data

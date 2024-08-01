@@ -21,6 +21,7 @@ import { toast } from "react-toastify"
 const { Option } = Select
 
 const UpdateProduct = () => {
+    const [form] = Form.useForm()
     const [categories, setCategories] = useState<Category[]>([])
     const [variants, setVariants] = useState<Variant[]>([])
     const [fileList, setFileList] = useState<UploadFile[]>([])
@@ -213,8 +214,8 @@ const UpdateProduct = () => {
         newVariants[index].attributes[attributeType] = value
         setVariants(newVariants)
     }
-    const [check , setcheck ] = useState<any>(false)
-    const HandleExit = ()=>{
+    const [check, setcheck] = useState<any>(false)
+    const HandleExit = () => {
         setcheck(true)
     }
     return (
@@ -225,6 +226,7 @@ const UpdateProduct = () => {
             <Form
                 layout="vertical"
                 className="space-y-4"
+                form={form}
                 onFinish={handleSubmit(onSubmit)}
             >
                 <div className="mb-5 flex space-x-4">
@@ -233,13 +235,17 @@ const UpdateProduct = () => {
                             <Controller
                                 name="name"
                                 control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        size="large"
-                                        style={{ height: 50 }}
-                                        {...field}
-                                        placeholder="Tên sản phẩm..."
-                                    />
+                                rules={{ required: "Không được để trống" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Input
+                                            size="large"
+                                            style={{ height: 50 }}
+                                            {...field}
+                                            placeholder="Tên sản phẩm..."
+                                        />
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
@@ -250,20 +256,24 @@ const UpdateProduct = () => {
                                 name="category_id"
                                 control={control}
                                 defaultValue=""
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        size="large"
-                                        style={{ height: 50 }}
-                                        onChange={(value) => field.onChange(value)}
-                                    >
-                                        <Option value="">Chọn</Option>
-                                        {categories.map((cat) => (
-                                            <Option key={cat.id} value={cat.id}>
-                                                {cat.name}
-                                            </Option>
-                                        ))}
-                                    </Select>
+                                rules={{ required: "Không được để trống" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Select
+                                            {...field}
+                                            size="large"
+                                            style={{ height: 50 }}
+                                            onChange={(value) => field.onChange(value)}
+                                        >
+                                            <Option value="">Chọn</Option>
+                                            {categories.map((cat) => (
+                                                <Option key={cat.id} value={cat.id}>
+                                                    {cat.name}
+                                                </Option>
+                                            ))}
+                                        </Select>
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
@@ -276,14 +286,18 @@ const UpdateProduct = () => {
                                 name="brand"
                                 control={control}
                                 defaultValue=""
-                                render={({ field }) => (
-                                    <Input
-                                        {...field}
-                                        size="large"
-                                        className="w-full"
-                                        style={{ height: 50 }}
-                                        placeholder="Thương hiệu"
-                                    />
+                                rules={{ required: "Không được để trống" }}
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Input
+                                            {...field}
+                                            size="large"
+                                            className="w-full"
+                                            style={{ height: 50 }}
+                                            placeholder="Thương hiệu"
+                                        />
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
@@ -291,18 +305,22 @@ const UpdateProduct = () => {
                             <Controller
                                 name="description"
                                 control={control}
+                                rules={{ required: "Không được để trống" }}
                                 defaultValue=""
-                                render={({ field }) => (
-                                    <Input.TextArea
-                                        {...field}
-                                        autoSize={{ minRows: 3, maxRows: 6 }}
-                                        placeholder="Mô tả"
-                                    />
+                                render={({ field, fieldState: { error } }) => (
+                                    <>
+                                        <Input.TextArea
+                                            {...field}
+                                            autoSize={{ minRows: 3, maxRows: 6 }}
+                                            placeholder="Mô tả"
+                                        />
+                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                    </>
                                 )}
                             />
                         </Form.Item>
                     </div>
-                    {check ? <Form.Item label="Image">
+                    {check ? <Form.Item label="Image" name="image" rules={[{ required: true, message: "Không được để trống" }]}>
                         <Upload.Dragger {...props} multiple accept=".jpg,.png">
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload.Dragger>
@@ -310,14 +328,16 @@ const UpdateProduct = () => {
                         <Image src={image} />
                         <Button onClick={() => HandleExit()} className="mt-2">Bỏ ảnh</Button>
                     </Form.Item>}
-                    
-                   
-                    
+
+
+
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">Sản phẩm biến thể</h3>
                 {variants.map((variant: any, index: any) => (
                     <div key={index} className="flex flex-wrap space-x-4">
-                        <Form.Item label="Giá gốc">
+                        <Form.Item label="Giá gốc" rules={[{
+                            required: true, message: "Không được để trống"
+                        }]}>
                             <Input
                                 size="large"
                                 type="number"

@@ -73,13 +73,13 @@ const ListOrderAdmin = () => {
             <div className="mb-4 flex items-center justify-between">
 
                 <div className="flex space-x-4">
-                    <Link to="/admin/orders/all"> <Button value="">Tất cả đơn hàng</Button></Link>
+                    <Link to="/admin/orders/all"> <Button value="" className="bg-blue-600 text-white">Tất cả đơn hàng</Button></Link>
                     <Link to="/admin/orders/paid"> <Button value="paid">Đã thanh toán</Button></Link>
                     <Link to="/admin/orders/pending"><Button value="pending">Chờ xác nhận</Button></Link>
                     <Link to="/admin/orders/confirm"> <Button value="confirmed">Đã xác nhận</Button></Link>
                     <Link to="/admin/orders/shipping"><Button value="shipping">Đang giao</Button></Link>
                     <Link to="/admin/orders/done"> <Button value="delivered">Đã giao</Button></Link>
-                    <Link to="/admin/orders/cancel">    <Button value="cancelled" danger>Đã hủy</Button></Link>
+                    <Link to="/admin/orders/cancel">    <Button value="cancelled" >Đã hủy</Button></Link>
                 </div>
                 <Search
                     placeholder="Tìm kiếm theo số điện thoại đơn hàng"

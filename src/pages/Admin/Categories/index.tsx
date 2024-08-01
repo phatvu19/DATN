@@ -131,12 +131,9 @@ const CategoryManagement = () => {
                     <Form.Item
                         label="Tên Danh Mục"
                         name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Please input the category name!",
-                            },
-                        ]}
+                        rules={[{
+                            required: true, message: "Không được để trống"
+                        }]}
                     >
                         <Input />
                     </Form.Item>
@@ -158,12 +155,9 @@ const CategoryManagement = () => {
                     <Form.Item
                         label="Tên Danh Mục"
                         name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Please input the category name!",
-                            },
-                        ]}
+                        rules={[{
+                            required: true, message: "Không được để trống"
+                        }]}
                     >
                         <Input />
                     </Form.Item>

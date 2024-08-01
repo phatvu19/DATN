@@ -44,8 +44,8 @@ const ListOrderDones = () => {
                     <Link to="/admin/orders/pending"><Button value="pending">Chờ xác nhận</Button></Link>
                     <Link to="/admin/orders/confirm"> <Button value="confirmed">Đã xác nhận</Button></Link>
                     <Link to="/admin/orders/shipping"><Button value="shipping">Đang giao</Button></Link>
-                    <Link to="/admin/orders/done"> <Button value="delivered">Đã giao</Button></Link>
-                    <Link to="/admin/orders/cancel">    <Button value="cancelled" danger>Đã hủy</Button></Link>
+                    <Link to="/admin/orders/done"> <Button value="delivered" className="bg-blue-600 text-white">Đã giao</Button></Link>
+                    <Link to="/admin/orders/cancel">    <Button value="cancelled" >Đã hủy</Button></Link>
                 </div>
             </div >
             <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black">

@@ -13,6 +13,7 @@ import ListTinTuc from "@/pages/LieHe/ListTinTuc"
 import { pathName } from "@/routes/path-name"
 import LienHe from "@/pages/LieHe/ListTinTuc"
 import CheckOutNow from "@/pages/CheckoutNow/CheckOutNow"
+import Profile from "@/pages/Profile/Profile"
 
 export const UnAuthRouter = [
     {
@@ -70,5 +71,9 @@ export const UnAuthRouter = [
     {
         path: pathName.CHECKOUTNOW,
         element: <CheckOutNow />,
+    },
+    {
+        path: pathName.PROFILE,
+        element: <Profile />,
     },
 ]

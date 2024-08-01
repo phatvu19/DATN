@@ -16,6 +16,7 @@ export const pathName = {
     TINTUC:"/tintuc",
     LIENHE: "/lienhe",
     CHECKOUTNOW: "/checkoutnow",
+    PROFILE: "/profile",
 
     // ADMIN PATH
     DASHBOARD: "thong-ke",

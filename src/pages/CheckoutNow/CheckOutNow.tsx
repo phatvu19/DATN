@@ -12,7 +12,7 @@ import { Button, Form, Input, Modal, Radio, Select, Spin } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import { useEffect, useState } from "react"
 import formatNumber from "@/utilities/FormatTotal"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { addBill, addBillDetail, addHistoryBills } from "@/api/services/Bill"
 import { toast } from "react-toastify"
 import { getCartOrder } from "@/api/services/Order"
@@ -22,11 +22,23 @@ import ProvinceInCheckOutnow from "./ProvinceInCheckOutNow"
 import DistrictInCheckOutNow from "./DistricInCheckOutNow"
 import WardInCheckOutNow from "./WardInCheckOutNow"
 import CartInCheckOutNow from "./CartCheckOutNow"
+import { useLogPageLeave } from "@/utilities/ReRender"
+import { getUser } from "@/api/services/UserService"
 const CheckOutNow = () => {
+    useLogPageLeave('/checkoutnow')
     const [form] = Form.useForm()
     const user = JSON.parse(localStorage.getItem("user") || "null")
+    const [users, setusers] = useState<any>()
     useEffect(() => {
-        form.setFieldsValue(user?.data)
+        const fetchUser = async () => {
+            const response = await getUser(user?.data?.id)
+            setusers(response)
+            form.setFieldsValue(response)
+        }
+        fetchUser()
+    }, [users])
+    useEffect(() => {
+        form.setFieldsValue(users)
     }, [])
     const [provinceId, setprovinceId] = useState<any>()
     const [provinceName, setprovinceName] = useState<any>()
@@ -51,8 +63,8 @@ const CheckOutNow = () => {
             setloadings(true)
             const data = {
                 user_id: user?.data?.id,
-                recipient_address: `${name ? name : form.getFieldValue("name")}; ${descbill};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`,
-                recipient_phone: phone,
+                recipient_address: wardName && districtName && provinceName ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}` : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
+                recipient_phone: phone ? phone : form.getFieldValue("number"),
                 total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
                 status: "Paid",
                 pay: "ONLINE",
@@ -68,7 +80,7 @@ const CheckOutNow = () => {
     const adddetailAndsendemail = async () => {
         setloadings(true)
         const storedCarts = JSON.parse(localStorage.getItem("cartnow")!) || []
-        
+
         const response = JSON.parse(localStorage.getItem("response") || "null")
         const data = { data: storedCarts }
         const allCart: any = await getCartOrder(data)
@@ -217,8 +229,8 @@ const CheckOutNow = () => {
         setloadings(true)
         const data = {
             user_id: user?.data?.id,
-            recipient_address: `${name ? name : form.getFieldValue("name")}; ${descbill};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`,
-            recipient_phone: phone,
+            recipient_address: wardName && districtName && provinceName ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}` : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
+            recipient_phone: phone ? phone : form.getFieldValue("number"),
             total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
             status: "Pending",
             pay: paymentMethod,
@@ -361,6 +373,32 @@ const CheckOutNow = () => {
             toast.error("Bạn đã nhập sai voucher của shop!")
         }
     }
+    const validatePhone = (
+        rule: any,
+        value: string,
+        callback: (arg0: string | undefined) => void
+    ) => {
+        const phonePattern = /^[0-9]{10}$/; // Regular expression for 10-digit Vietnamese phone number
+
+        if (value && !phonePattern.test(value)) {
+            callback("Số điện thoại không hợp lệ");
+        } else {
+            callback(undefined);
+        }
+    };
+    const validateEmail = (
+        rule: any,
+        value: string,
+        callback: (arg0: string | undefined) => void
+    ) => {
+        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/; // Basic email pattern
+
+        if (value && !emailPattern.test(value)) {
+            callback("Email không hợp lệ");
+        } else {
+            callback(undefined);
+        }
+    };
 
     return (
         <>
@@ -397,38 +435,36 @@ const CheckOutNow = () => {
 
                 <div className="checkout-main container mt-5">
                     <div className="row flex ">
-                        <form
-                            ng-submit="completeOrder()"
-                            className="w-3/4 bg-white bg-white p-5"
+                        <Form
+                            className="row p-0 pt-8 flex"
+                            form={form}
+                            onFinish={handleOrder}
                         >
-                            <div className="flex">
+                            <div className="w-3/4">
                                 <div className="flex">
-                                    <EnvironmentOutlined />
-                                    <h4 className="ml-2 text-xl font-bold">
-                                        Địa Chỉ Giao Hàng
-                                    </h4>
+                                    <div className="flex">
+                                        <EnvironmentOutlined />
+                                        <h4 className="ml-2 text-xl font-bold">
+                                            Địa Chỉ Giao Hàng
+                                        </h4>
+                                    </div>
+                                    {user != null ? (
+                                        ""
+                                    ) : (
+                                        <a
+                                            className="text-danger fw-bold mb-0 ml-auto text-sm text-red-500"
+                                            ng-show="!isLogin"
+                                            href="#!login"
+                                        >
+                                            <UserOutlined />
+                                            <span className="text-danger ml-2 ">
+                                                Đăng Nhập
+                                            </span>
+                                        </a>
+                                    )}
                                 </div>
-                                {user != null ? (
-                                    ""
-                                ) : (
-                                    <a
-                                        className="text-danger fw-bold mb-0 ml-auto text-sm text-red-500"
-                                        ng-show="!isLogin"
-                                        href="#!login"
-                                    >
-                                        <UserOutlined />
-                                        <span className="text-danger ml-2 ">
-                                            Đăng Nhập
-                                        </span>
-                                    </a>
-                                )}
-                            </div>
 
-                            <Form
-                                className="row p-0 pt-8"
-                                form={form}
-                                onFinish={handleOrder}
-                            >
+
                                 <div className="flex">
                                     <div className="w-2/4">
                                         <label
@@ -473,6 +509,9 @@ const CheckOutNow = () => {
                                                     message:
                                                         "Không được để trống email ",
                                                 },
+                                                {
+                                                    validator: validateEmail,
+                                                },
                                             ]}
                                         >
                                             <Input
@@ -499,6 +538,9 @@ const CheckOutNow = () => {
                                                     message:
                                                         "Không được để trống số điện thoại ",
                                                 },
+                                                {
+                                                    validator: validatePhone,
+                                                },
                                             ]}
                                         >
                                             <Input
@@ -513,7 +555,18 @@ const CheckOutNow = () => {
                                     </div>
                                     <div className="ml-10 w-2/4"></div>
                                 </div>
-                                <div className="mt-5 flex">
+                                {users?.address ? <div className="mt-5">
+                                    <label htmlFor="" className="font-bold">Địa chỉ</label>
+                                    <div className="flex w-full mt-5">
+                                        <Form.Item name="address" className="w-full mr-2">
+                                            <Input type="text" disabled />
+                                        </Form.Item>
+                                        <Link to='/profile'>
+                                        <Button className="ml-auto" type="primary" >
+                                            Cập nhập địa chỉ mới
+                                            </Button></Link>
+                                    </div>
+                                </div> : <div className="mt-5 flex">
                                     <ProvinceInCheckOutnow
                                         onIDProvince={idprovince}
                                         onNameProvince={nameprovince}
@@ -529,7 +582,9 @@ const CheckOutNow = () => {
                                         id={districtId}
                                         onNameWard={nameWard}
                                     />
-                                </div>
+                                </div>}
+                               
+                               
 
                                 <div className="mt-5">
                                     <label
@@ -539,11 +594,23 @@ const CheckOutNow = () => {
                                         Địa chỉ cụ thể
                                         <span className="text-red-500">*</span>
                                     </label>
-                                    <Input
-                                        placeholder="Nhập địa chỉ cụ thể của bạn"
-                                        className="mt-3 p-2"
-                                        onChange={(e: any) => handleAdress(e)}
-                                    />
+                                    <Form.Item
+                                        name="addresdetail"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    "Không được để trống địa chỉ cụ thể ",
+                                            }
+
+                                        ]}
+                                    >
+                                        <Input
+                                            placeholder="Nhập địa chỉ cụ thể của bạn"
+                                            className="mt-3 p-2"
+                                            onChange={(e: any) => handleAdress(e)}
+                                        />
+                                    </Form.Item>
                                 </div>
 
                                 <div className="col-12 mb-4 mt-5">
@@ -552,7 +619,7 @@ const CheckOutNow = () => {
                                         className="pl-1 text-sm font-bold"
                                     >
                                         Ghi chú đơn hàng
-                                        <span className="text-red-500">*</span>
+                                       
                                     </label>
                                     <TextArea
                                         className="mt-3"
@@ -561,176 +628,177 @@ const CheckOutNow = () => {
                                         onChange={(e) => setdescbill(e.target.value)}
                                     />
                                 </div>
-                            </Form>
 
-                            <div className="row mt-10">
-                                <div className="col-12 col-md-6">
-                                    <h5 className="flex items-center pr-2">
-                                        <CreditCardOutlined />
-                                        <span className="ml-2 text-xl font-bold">
-                                            Phương Thức Thanh Toán
-                                        </span>
-                                    </h5>
-                                </div>
 
-                                <div className="w-full">
-                                    <Radio.Group className="mt-3 w-full">
-                                        <h5 className="w-full">
-                                            <Input
-                                                type="radio"
-                                                style={{
-                                                    width: "4%",
-                                                    height: "16px",
-                                                }}
-                                                id="paypal"
-                                                name="a"
-                                                value="COD"
-                                                onChange={handlePaymentChange}
-                                            />
-                                            <span className="w-full text-sm">
-                                                {" "}
-                                                Thanh toán khi nhận hàng (COD)
+                                <div className="row mt-10">
+                                    <div className="col-12 col-md-6">
+                                        <h5 className="flex items-center pr-2">
+                                            <CreditCardOutlined />
+                                            <span className="ml-2 text-xl font-bold">
+                                                Phương Thức Thanh Toán
                                             </span>
                                         </h5>
-                                    </Radio.Group>
-                                    <Radio.Group className="mt-3 w-full">
-                                        <h5 className="w-full">
-                                            <Input
-                                                className="text-xl"
-                                                type="radio"
-                                                style={{
-                                                    width: "4%",
-                                                    height: "16px",
-                                                    fontSize: "20px",
-                                                }}
-                                                id="paypal"
-                                                name="a"
-                                                value="ONLINE"
-                                                onChange={handlePaymentChange}
-                                            />
-                                            <span className="w-full text-sm">
-                                                {" "}
-                                                Thanh toán online (VNPAY)
-                                            </span>
-                                        </h5>
-                                    </Radio.Group>
-                                </div>
-                            </div>
-                        </form>
+                                    </div>
 
-                        <div className=" ml-4 w-1/4 bg-white p-4">
-                            <div className="">
-                                <h5 className="text-xl font-bold">ĐƠN HÀNG</h5>
-
-                                <div className="mt-5">
-                                    <label
-                                        htmlFor="name"
-                                        className="pl-1 text-xs font-bold"
-                                    >
-                                        MÃ PHIẾU GIẢM GIÁ
-                                    </label>
-                                    <div className="flex">
-                                        <Input
-                                            className="custom-search  mt-2"
-                                            placeholder="Nhập mã giảm giá"
-                                            onChange={(e) =>
-                                                setDiscountCode(e.target.value)
-                                            }
-                                        ></Input>
-                                        <Button
-                                            className="custom-search  mt-2"
-                                            style={buttonStyle}
-                                            onClick={HandleVoucher}
-                                        >
-                                            Áp Dụng
-                                        </Button>
-                                    </div>
-                                </div>
-                                <img
-                                    src="https://pm2ec.s3.ap-southeast-1.amazonaws.com/cms/17172282689428000.jpg"
-                                    className="mt-2"
-                                />
-                                <hr className="my-4 w-full border-t border-dashed border-gray-500" />
-                                <div className="custom-dash d-flex flex-column gap-2 pb-3">
-                                    <div className="mt-5 flex">
-                                        <p className="text-sm">Tạm Tính</p>
-                                        <p className="fw-bold mb-0 ml-auto text-sm font-bold">
-                                            {formatNumber(totalprice)} đ
-                                        </p>
-                                    </div>
-                                    <div className="mt-3 flex">
-                                        <p className="mr-1 text-sm">Giảm Giá </p>
-                                        <QuestionCircleOutlined
-                                            onClick={showModal}
-                                        />
-                                        <Modal
-                                            title="Giảm giá"
-                                            open={isModalOpen}
-                                            onOk={handleOks}
-                                            onCancel={handleCancels}
-                                        >
-                                            <p>
-                                                Để có được giảm giá bạn cần mua các
-                                                sản phẩm có ưu đãi của chúng tôi!
-                                            </p>
-                                            <p>
-                                                Đồng thời bạn không thể nhập voucher
-                                                áp dùng nữa!
-                                            </p>
-                                        </Modal>
-                                        <p className="fw-bold mb-0 ml-auto text-sm font-bold">
-                                            -{" "}
-                                            {priceDiscount
-                                                ? formatNumber(priceDiscount)
-                                                : 0}{" "}
-                                            đ
-                                        </p>
-                                    </div>
-                                    <div className="mt-3 flex">
-                                        <p className="text-sm">Phí Vận Chuyển</p>
-                                        <p className="fw-bold mb-0 ml-auto text-sm font-bold">
-                                            30.000 đ
-                                        </p>
-                                    </div>
-                                </div>
-                                <hr className="my-4 w-full border-t border-dashed border-gray-500" />
-                                <div className="custom-dash d-flex flex-column gap-2 pb-3">
-                                    <div className="flex">
-                                        <h5 className="">Tổng Tiền</h5>
-                                        <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
-                                            {priceDiscount
-                                                ? formatNumber(
-                                                    totalprice +
-                                                    30000 -
-                                                    priceDiscount,
-                                                )
-                                                : formatNumber(totalprice + 30000)}
-                                            đ
-                                        </h5>
-                                    </div>
-                                </div>
-                                <hr className="w-full border-t border-dashed border-gray-500 " />
-                                {loading ? (
-                                    <Button className="align-center mt-5 w-full rounded bg-red-600 p-2 text-white">
-                                        <Spin
-                                            indicator={
-                                                <LoadingOutlined
-                                                    style={{ fontSize: 16 }}
-                                                    spin
+                                    <div className="w-full">
+                                        <Radio.Group className="mt-3 w-full">
+                                            <h5 className="w-full">
+                                                <Input
+                                                    type="radio"
+                                                    style={{
+                                                        width: "4%",
+                                                        height: "16px",
+                                                    }}
+                                                    id="paypal"
+                                                    name="a"
+                                                    value="COD"
+                                                    onChange={handlePaymentChange}
                                                 />
-                                            }
-                                        />
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        onClick={() => handleOrder()}
-                                        className="align-center mt-5 w-full rounded bg-red-600 p-2 text-white"
-                                    >
-                                        Đặt Hàng
-                                    </Button>
-                                )}
+                                                <span className="w-full text-sm">
+                                                    {" "}
+                                                    Thanh toán khi nhận hàng (COD)
+                                                </span>
+                                            </h5>
+                                        </Radio.Group>
+                                        <Radio.Group className="mt-3 w-full">
+                                            <h5 className="w-full">
+                                                <Input
+                                                    className="text-xl"
+                                                    type="radio"
+                                                    style={{
+                                                        width: "4%",
+                                                        height: "16px",
+                                                        fontSize: "20px",
+                                                    }}
+                                                    id="paypal"
+                                                    name="a"
+                                                    value="ONLINE"
+                                                    onChange={handlePaymentChange}
+                                                />
+                                                <span className="w-full text-sm">
+                                                    {" "}
+                                                    Thanh toán online (VNPAY)
+                                                </span>
+                                            </h5>
+                                        </Radio.Group>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                            <div className=" ml-4 w-1/4 bg-white p-4">
+                                <div className="">
+                                    <h5 className="text-xl font-bold">ĐƠN HÀNG</h5>
+
+                                    <div className="mt-5">
+                                        <label
+                                            htmlFor="name"
+                                            className="pl-1 text-xs font-bold"
+                                        >
+                                            MÃ PHIẾU GIẢM GIÁ
+                                        </label>
+                                        <div className="flex">
+                                            <Input
+                                                className="custom-search  mt-2"
+                                                placeholder="Nhập mã giảm giá"
+                                                onChange={(e) =>
+                                                    setDiscountCode(e.target.value)
+                                                }
+                                            ></Input>
+                                            <Button
+                                                className="custom-search  mt-2"
+                                                style={buttonStyle}
+                                                onClick={HandleVoucher}
+                                            >
+                                                Áp Dụng
+                                            </Button>
+                                        </div>
+                                    </div>
+                                    <img
+                                        src="https://pm2ec.s3.ap-southeast-1.amazonaws.com/cms/17172282689428000.jpg"
+                                        className="mt-2"
+                                    />
+                                    <hr className="my-4 w-full border-t border-dashed border-gray-500" />
+                                    <div className="custom-dash d-flex flex-column gap-2 pb-3">
+                                        <div className="mt-5 flex">
+                                            <p className="text-sm">Tạm Tính</p>
+                                            <p className="fw-bold mb-0 ml-auto text-sm font-bold">
+                                                {formatNumber(totalprice)} đ
+                                            </p>
+                                        </div>
+                                        <div className="mt-3 flex">
+                                            <p className="mr-1 text-sm">Giảm Giá </p>
+                                            <QuestionCircleOutlined
+                                                onClick={showModal}
+                                            />
+                                            <Modal
+                                                title="Giảm giá"
+                                                open={isModalOpen}
+                                                onOk={handleOks}
+                                                onCancel={handleCancels}
+                                            >
+                                                <p>
+                                                    Để có được giảm giá bạn cần mua các
+                                                    sản phẩm có ưu đãi của chúng tôi!
+                                                </p>
+                                                <p>
+                                                    Đồng thời bạn không thể nhập voucher
+                                                    áp dùng nữa!
+                                                </p>
+                                            </Modal>
+                                            <p className="fw-bold mb-0 ml-auto text-sm font-bold">
+                                                -{" "}
+                                                {priceDiscount
+                                                    ? formatNumber(priceDiscount)
+                                                    : 0}{" "}
+                                                đ
+                                            </p>
+                                        </div>
+                                        <div className="mt-3 flex">
+                                            <p className="text-sm">Phí Vận Chuyển</p>
+                                            <p className="fw-bold mb-0 ml-auto text-sm font-bold">
+                                                30.000 đ
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr className="my-4 w-full border-t border-dashed border-gray-500" />
+                                    <div className="custom-dash d-flex flex-column gap-2 pb-3">
+                                        <div className="flex">
+                                            <h5 className="">Tổng Tiền</h5>
+                                            <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
+                                                {priceDiscount
+                                                    ? formatNumber(
+                                                        totalprice +
+                                                        30000 -
+                                                        priceDiscount,
+                                                    )
+                                                    : formatNumber(totalprice + 30000)}
+                                                đ
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <hr className="w-full border-t border-dashed border-gray-500 " />
+                                    {loading ? (
+                                        <Button className="align-center mt-5 w-full rounded bg-red-600 p-2 text-white">
+                                            <Spin
+                                                indicator={
+                                                    <LoadingOutlined
+                                                        style={{ fontSize: 16 }}
+                                                        spin
+                                                    />
+                                                }
+                                            />
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            htmlType="submit"
+                                            className="align-center mt-5 w-full rounded bg-red-600 p-2 text-white"
+                                        >
+                                            Đặt Hàng
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                        </Form>
                     </div>
                 </div>
 

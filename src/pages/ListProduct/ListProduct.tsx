@@ -213,35 +213,6 @@ const ListProduct = () => {
                         <div className="pt-4"></div>
                         <hr className=" border-dashed border-gray-300 " />
 
-                        <div className="flex pt-4">
-                            <span className="">Sắp Xếp Theo</span>
-                            <div className="pl-20">
-                                <select
-                                    className="w-30 p rounded border border-gray-500 p-1"
-                                    name="sort"
-                                    id="sort"
-                                    style={{ width: "200px" }}
-                                    ng-model="selectedSortType"
-                                    ng-change="applyFiltersAndSort()"
-                                >
-                                    <option value="newest" className=" text-sm">
-                                        Mặc định
-                                    </option>
-                                    <option value="nameAsc" className=" text-sm">
-                                        Tên A - Z
-                                    </option>
-                                    <option value="nameDesc" className=" text-sm">
-                                        Tên Z - A
-                                    </option>
-                                    <option value="priceDesc" className=" text-sm">
-                                        Cao - Thấp
-                                    </option>
-                                    <option value="priceAsc" className=" text-sm">
-                                        Thấp - Cao
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
                         <div className="row row-gap-4 mt-3">
                             <div className="grid  grid-cols-5 ">
                                 {filter ? (

@@ -66,9 +66,11 @@ function Header() {
     }, [])
     const userMenu = (
         <Menu onClick={handleMenuClick}>
+            <a href={"/profile"}>
             <Menu.Item key="profile" icon={<UserOutlined />}>
                 Thông tin cá nhân
             </Menu.Item>
+            </a>
             <a href={"/orders"}>
                 <Menu.Item key="orders" icon={<SettingOutlined />}>
                     Đơn hàng
