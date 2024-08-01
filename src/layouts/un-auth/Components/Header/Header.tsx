@@ -245,22 +245,7 @@ function Header() {
                                         Giảm giá
                                     </a>
                                 </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600 "
-                                    >
-                                        Giới thiệu
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/tintuc"
-                                        className="block rounded py-2 text-gray-900 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-red-600"
-                                    >
-                                        Tin tức
-                                    </a>
-                                </li>
+                              
                                 <li>
                                     <a
                                         href="/lienhe"
