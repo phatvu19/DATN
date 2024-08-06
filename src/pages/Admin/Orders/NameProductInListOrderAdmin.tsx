@@ -62,7 +62,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                         setcolor("error")
                         setstatus("Hủy hàng")
                         setcheck(false)
-                        onCheck(status)
+                        onCheck(data?.id)
                     })
                 })
                 return
@@ -85,7 +85,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                     setcolor("processing")
                     setstatus("Chờ giao hàng")
                     setcheck(false)
-                    onCheck(status)
+                    onCheck(data?.id)
                 })
             })
         }
@@ -109,7 +109,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                     setcolor("purple")
                     setstatus("Đang giao hàng")
                     setcheck(false)
-                    onCheck(status)
+                    onCheck(data?.id)
                 })
             })
         }
@@ -128,7 +128,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                     setcolor("green")
                     setstatus("Hoàn thành")
                     setcheck(false)
-                    onCheck(status)
+                    onCheck(data?.id)
                 })
             })
         }

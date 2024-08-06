@@ -34,7 +34,7 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
                     toast.success("Đơn hàng đã hoàn thành")
                     setcolor("green")
                     setstatus("Hoàn thành")
-                    onCheck(status)
+                    onCheck(data?.id)
                 })
             })
         }

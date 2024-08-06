@@ -39,7 +39,7 @@ const NameProductListOrderPending = ({ data, onCheck }: any) => {
                         toast.success("Bạn đã hủy đơn hàng")
                         setcolor("error")
                         setstatus("Hủy hàng")
-                        onCheck(status)
+                        onCheck(data?.id)
                     })
                 })
                 return
@@ -61,7 +61,7 @@ const NameProductListOrderPending = ({ data, onCheck }: any) => {
                     toast.success("Bạn đã xác nhận đơn hàng")
                     setcolor("processing")
                     setstatus("Chờ giao hàng")
-                    onCheck(status)
+                    onCheck(data?.id)
                 })
             })
         }
