@@ -183,9 +183,10 @@ const OrderDetail = () => {
                                     <CarOutlined />
                                     Giao hàng tại nhà
                                 </p>
-                                <span className="">
+                                {descbill ? <span className="">
                                     Ghi chú đơn hàng: {descbill}
-                                </span>
+                                </span> : ""}
+                              
                             </div>
                         </div>
                         <div className="mr-2 w-1/3 ">

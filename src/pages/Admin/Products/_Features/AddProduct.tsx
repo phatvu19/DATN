@@ -259,9 +259,7 @@ const AddProduct = () => {
                 {/* Form items for variants */}
                 {variants.map((variant: any, index: any) => (
                     <div key={index} className="flex flex-wrap space-x-4">
-                        <Form.Item label="Giá gốc" name='pricegoc' rules={[{
-                            required: true, message: "Không được để trống"
-                        }]}>
+                        <Form.Item label="Giá gốc" >
                             <Input
                                 size="large"
                                 type="number"
@@ -275,9 +273,7 @@ const AddProduct = () => {
                                 }}
                             />
                         </Form.Item>
-                        <Form.Item label="Giá khuyến mãi" name='price' rules={[{
-                            required: true, message: "Không được để trống"
-                        }]}>
+                        <Form.Item label="Giá khuyến mãi">
                             <Input
                                 size="large"
                                 type="number"
@@ -290,9 +286,7 @@ const AddProduct = () => {
                                 }}
                             />
                         </Form.Item>
-                        <Form.Item label="Số lượng" name="quantity" rules={[{
-                            required: true, message: "Không được để trống"
-                        }]}>
+                        <Form.Item label="Số lượng" >
                             <Input
                                 size="large"
                                 type="number"
@@ -308,9 +302,7 @@ const AddProduct = () => {
                         </Form.Item>
                         {/* Select dropdowns for attributes */}
                         {attributes.map((attribute: any) => (
-                            <Form.Item key={attribute.id} label={attribute.name} name="attributename" rules={[{
-                                required: true, message: "Không được để trống"
-                            }]}>
+                            <Form.Item key={attribute.id} label={attribute.name} >
                                 <Select
                                     size="large"
                                     style={{ width: 240 }}

@@ -1,3 +1,4 @@
+import { getAllProduct } from "@/api/services/ProductService"
 import logo from "@/assets/images/logo/logo.webp"
 import {
     DashboardOutlined,
@@ -11,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import localStorage from "redux-persist/es/storage"
 
-function Header() {
+function Header({ onSearch }:any) {
     const [isScrolled, setIsScrolled] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
@@ -51,7 +52,7 @@ function Header() {
     }
 
     const [role, setrole] = useState<any>()
-    
+
     useEffect(() => {
         const fetchStoredCarts = async () => {
             try {
@@ -67,9 +68,9 @@ function Header() {
     const userMenu = (
         <Menu onClick={handleMenuClick}>
             <a href={"/profile"}>
-            <Menu.Item key="profile" icon={<UserOutlined />}>
-                Thông tin cá nhân
-            </Menu.Item>
+                <Menu.Item key="profile" icon={<UserOutlined />}>
+                    Thông tin cá nhân
+                </Menu.Item>
             </a>
             <a href={"/orders"}>
                 <Menu.Item key="orders" icon={<SettingOutlined />}>
@@ -91,6 +92,28 @@ function Header() {
             </Menu.Item>
         </Menu>
     )
+    const [product, setProduct] = useState<any>()
+    useEffect(() => {
+        const fetchpro = async () => {
+            const response = await getAllProduct()
+            setProduct(response)
+        }
+        fetchpro()
+    }, [])
+    const HandleSearch = (e: any) => {
+        e.preventDefault();
+        const searchValue = e.target.value.toLowerCase();
+
+        if (searchValue === "") {
+            onSearch([]);
+        } else {
+            const filter = product?.filter((data: any) =>
+                data?.name.toLowerCase().includes(searchValue)
+            );
+            onSearch(filter);
+        }
+    };
+
     return (
         <>
             <header className="header">
@@ -131,6 +154,7 @@ function Header() {
                                     placeholder="Tìm kiếm..."
                                     autoComplete="off"
                                     aria-invalid="false"
+                                    onChange={(e: any) => HandleSearch(e)}
                                     className="w-full rounded-l border border-r-0 p-2 outline-none"
                                 />
                                 <button className="rounded-r border border-l-0 bg-red-500 p-2 text-white hover:bg-red-600">
@@ -245,7 +269,7 @@ function Header() {
                                         Giảm giá
                                     </a>
                                 </li>
-                              
+
                                 <li>
                                     <a
                                         href="/lienhe"
