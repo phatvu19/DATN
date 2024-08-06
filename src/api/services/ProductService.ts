@@ -30,7 +30,6 @@ const createProduct = async (product: Product) => {
                 "Content-Type": "multipart/form-data",
             },
         })
-        toast.success("Product created successfully.")
         return response.data
     } catch (error) {
 

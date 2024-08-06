@@ -163,7 +163,7 @@ const ProductDetail = () => {
     return (
         <>
             <div className="flex pl-40 pr-40 pt-5 ">
-                <div className="flex w-full">
+                <div className="flex w-2/3">
                     <div className="thumbnails ml-10 mr-10">
                         <Image
                             className=""
@@ -171,7 +171,7 @@ const ProductDetail = () => {
                             alt="Selected"
                             style={{
                                 width: "100%",
-                                maxWidth: "750px",
+                                maxWidth: "700px",
                                 maxHeight: "966px",
                             }}
                         />
