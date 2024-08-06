@@ -48,27 +48,27 @@ const items = [
     {
         key: "7",
         icon: <TeamOutlined />,
-        label: <Link to="/admin/quan-ly-nguoi-dung">Users</Link>,
+        label: <Link to="/admin/quan-ly-nguoi-dung">Quản lý người dùng</Link>,
     },
     {
         key: "8",
         icon: <OrderedListOutlined />,
-        label: <Link to="/admin/quan-ly-orders">Orders</Link>,
+        label: <Link to="/admin/quan-ly-orders">Quản lý đơn hàng</Link>,
     },
     {
         key: "9",
         icon: <FallOutlined />,
-        label: <Link to="/admin/quan-ly-sale">Quản lý sale</Link>,
+        label: <Link to="/admin/quan-ly-sale">Quản lý sản phẩm giảm giá</Link>,
     },
     {
         key: "10",
         icon: < FormatPainterOutlined /> ,
-        label: <Link to="/admin/voucher">Quản lý voucher</Link>,
+        label: <Link to="/admin/voucher">Quản lý mã giảm giá</Link>,
     },
     {
         key: "11",
         icon: <CommentOutlined /> ,
-        label: <Link to="/admin/comment">Quản lý comment</Link>,
+        label: <Link to="/admin/comment">Quản lý đánh giá</Link>,
     }
 ]
 

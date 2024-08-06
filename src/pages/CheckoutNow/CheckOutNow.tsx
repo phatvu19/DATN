@@ -36,7 +36,7 @@ const CheckOutNow = () => {
             form.setFieldsValue(response)
         }
         fetchUser()
-    }, [users])
+    }, [])
     useEffect(() => {
         form.setFieldsValue(users)
     }, [])

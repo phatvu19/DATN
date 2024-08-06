@@ -18,7 +18,7 @@ const ProductInSearch = ({data}:any) => {
     const totalPrice = (data?.variants[0]?.price * sales) / 100
   return (
     <>
-          <Link to={`/products/${data?.id}`}>
+          <a href={`/products/${data?.id}`}>
               <div className="card group relative m-1 rounded border border-gray-300 p-2 hover:border-red-300">
                   <div className="absolute right-3 top-8 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                       <Link to={`/products/${data?.id}`}>
@@ -91,7 +91,7 @@ const ProductInSearch = ({data}:any) => {
                       )}
                   </span>
               </div>
-          </Link>
+          </a>
     </>
   )
 }

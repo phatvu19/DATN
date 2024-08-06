@@ -67,6 +67,28 @@ const getAllBillDetail = async (token: any) => {
         return []
     }
 }
+const getDetailBillDetail = async (data: any) => {
+    try {
+        const response =
+            await httpRequest.get(`/admin/bill-details/${data?.id}`, {
+                headers: {
+                    Authorization: `Bearer ${data?.token}`,
+                },
+            })
+        return response.data?.data?.data ?? []
+    } catch (error) {
+        return []
+    }
+}
+const getDetailBillDetail1 = async (id: any) => {
+    try {
+        const response =
+            await httpRequest.get(`/billdetails/by-bill-id/${id}`)
+        return response.data?.data?.data ?? []
+    } catch (error) {
+        return []
+    }
+}
 const getBillconfirm = async () => {
     try {
         const response: AxiosResponse<{ data: { data: any } }> =
@@ -307,5 +329,7 @@ export {
     GetBillDoneWithUser,
     GetBillCancelWithUser,
     SearchBillByPhone,
-    GetBillPaidWithUser
+    GetBillPaidWithUser,
+    getDetailBillDetail,
+    getDetailBillDetail1
 }

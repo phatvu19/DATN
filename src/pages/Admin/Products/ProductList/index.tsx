@@ -5,7 +5,7 @@ import {
     getProductById,
 } from "@/api/services/ProductService"
 import { ArrowRightOutlined } from "@ant-design/icons"
-import { Button, Descriptions, Modal, Space, Table } from "antd"
+import { Button, Descriptions, Input, Modal, Space, Table } from "antd"
 
 import { ColumnGroupType, ColumnType } from "antd/es/table"
 import { useEffect, useState } from "react"
@@ -44,6 +44,7 @@ const ProductManagement = () => {
         setSelectedProduct(product)
         setIsModalVisible(true)
     }
+    const  [filter , setfilter]  = useState<any>()
     const columns: (ColumnGroupType<Product> | ColumnType<Product>)[] = [
         {
             title: "STT",
@@ -87,20 +88,20 @@ const ProductManagement = () => {
                         danger
                         onClick={() => handleRemoveProduct(record)}
                     >
-                        Remove
+                        Xóa
                     </Button>
                     <Button
                         type="primary"
                         onClick={() => handleUpdate(record.id)}
                         icon={<ArrowRightOutlined />}
                     >
-                        Update
+                        Sửa
                     </Button>
                     <Button
                         type="default"
                         onClick={() => handleViewProduct(record.id)}
                     >
-                        View
+                        Chi tiết
                     </Button>
                 </Space>
             ),
@@ -136,12 +137,33 @@ const ProductManagement = () => {
                 )),
         },
     ]
+    
+    const { Search } = Input
+    const handleSearch=(e:any)=>{
+        const searchValue = e.toLowerCase();
 
+        if (searchValue === "") {
+            setfilter([]);
+        } else {
+            const filter = products?.filter((data: any) =>
+                data?.name.toLowerCase().includes(searchValue)
+            );
+            setfilter(filter);
+        }
+        
+    }
+    console.log(filter);
+    
     return (
         <>
+            <Search
+                placeholder="Tìm kiếm theo tên sản phẩm"
+                onSearch={handleSearch}
+                className="w-1/4 flex ml-auto m-2"
+            />
             <Table
                 columns={columns}
-                dataSource={products}
+                dataSource={filter.length > 0 ? filter : products}
                 rowKey="id"
                 pagination={{ pageSize: 10 }}
             />

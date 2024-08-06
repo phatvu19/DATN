@@ -41,7 +41,7 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
                         toast.success("Bạn đã hủy đơn hàng")
                         setcolor("error")
                         setstatus("Hủy hàng")
-                        onCheck(status)
+                        onCheck(data?.id)
                     })
                 })
                 return
@@ -63,7 +63,7 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
                     toast.success("Bạn đã chuyển sang đang giao hàng!")
                     setcolor("processing")
                     setstatus("Chờ giao hàng")
-                    onCheck(status)
+                    onCheck(data?.id)
                 })
             })
         }
