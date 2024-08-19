@@ -11,7 +11,7 @@ const getDoanhThuDay = async () => {
         return []
     }
 }
-const gettrangthaiDay= async () => {
+const gettrangthaiDay = async () => {
     try {
         const response: AxiosResponse<{ data: any }> =
             await httpRequest.get("status-by-day")
@@ -56,7 +56,7 @@ const getDoanhThuYear = async () => {
         return []
     }
 }
-const getProductTop = async (top:any) => {
+const getProductTop = async (top: any) => {
     try {
         const response: AxiosResponse<{ data: any }> =
             await httpRequest.get(`top-product/${top}`)
@@ -68,7 +68,7 @@ const getProductTop = async (top:any) => {
 const getDoanhthuThang = async (data: any) => {
     try {
         const response: AxiosResponse<{ data: any }> =
-            await httpRequest.post(`revenue-by-month`,data)
+            await httpRequest.post(`revenue-by-month`, data)
         return response?.data?.data?.data
     } catch (error) {
         return []
@@ -86,7 +86,7 @@ const getUserTop = async (top: any) => {
 const doanhThu7Day = async (data: any) => {
     try {
         const response: AxiosResponse<{ data: any }> =
-            await httpRequest.post(`revenue-by-between-date`,data)
+            await httpRequest.post(`revenue-by-between-date`, data)
         return response?.data?.data?.data
     } catch (error) {
         return []
@@ -119,5 +119,32 @@ const GetTotalPaid = async () => {
         return []
     }
 }
+const FillterToday = async () => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.get(`revenue-today`)
+        return response?.data?.data
+    } catch (error) {
+        return []
+    }
+}
+const FillterWeek = async () => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.get(`revenue-week`)
+        return response?.data?.data
+    } catch (error) {
+        return []
+    }
+}
+const FillterMonth = async () => {
+    try {
+        const response: AxiosResponse<{ data: any }> =
+            await httpRequest.get(`revenue-month`)
+        return response?.data?.data
+    } catch (error) {
+        return []
+    }
+}
 
-export { getDoanhThuDay, getUserTop, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang, doanhThu7Day, ProInCategory, OrderInDay, GetTotalPaid }
+export { getDoanhThuDay, getUserTop, gettrangthaiDay, getPayDay, getDoanhThuWeek, getDoanhThuMonth, getDoanhThuYear, getProductTop, getDoanhthuThang, doanhThu7Day, ProInCategory, OrderInDay, GetTotalPaid, FillterToday, FillterWeek, FillterMonth }
