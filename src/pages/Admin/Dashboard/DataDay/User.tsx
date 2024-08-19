@@ -1,18 +1,8 @@
-import { getAllUser } from "@/api/services/UserService"
-import { useEffect, useState } from "react"
+
 import { Link } from "react-router-dom"
 
 
-const User = () => {
-    const [user,setuser] = useState<any>()
-    useEffect(() => {
-        const fetchUser = async () => {
-            const response = await getAllUser()
-            setuser(response?.data);
-            
-        }
-        fetchUser()
-    }, [])
+const User = ({data}:any) => {
     return (
         <>
             <div className="bg-white shadow-lg rounded-lg p-6 animate__animated animate__fadeIn">
@@ -27,7 +17,7 @@ const User = () => {
                 </div>
                 <div className="flex items-end justify-between mt-4">
                     <div>
-                        <h4 className="text-2xl font-semibold mb-4">{user ? user?.length : 0} User</h4>
+                        <h4 className="text-2xl font-semibold mb-4">{data} User</h4>
                         <Link to="/admin/quan-ly-nguoi-dung" className="text-blue-500 underline">See details</Link>
                     </div>
                     <div className="flex-shrink-0">
