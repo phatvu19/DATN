@@ -13,7 +13,9 @@ const Pay = () => {
         }
         fetch()
     }, [])
-    const series = payday ? payday?.map((data: any) => (data?.total_pay)) : [44, 55, 13]
+    console.log(payday);
+    
+    const series = payday ? payday?.map((data: any) => (data?.total_pay)) : ''
     const options: any = {
         chart: {
             type: 'pie',

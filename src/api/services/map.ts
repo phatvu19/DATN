@@ -14,7 +14,6 @@ const httpRequest = axios.create(requestConfig)
 const getAllProvince = async () => {
     try {
         const response: any = await httpRequest.get("/")
-        console.log(response)
         return response?.data?.results
     } catch (error) {
         toast.error("Lấy tỉnh thất bại.")
