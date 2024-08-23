@@ -13,6 +13,7 @@ const Comment = ({ data, name }: any) => {
     const [value, setvalue] = useState<any>()
     const [check, setchek] = useState<any>()
     const [billdetail, setbilldetail] = useState<any>()
+    const [arr, setArr] = useState<any>();
     useEffect(() => {
         const FetchCmt = async () => {
             const response = await getAllComment()
@@ -29,35 +30,39 @@ const Comment = ({ data, name }: any) => {
             setbilldetail(response)
         }
         FetchCmt()
-    }, [])
-    const [arr, setArr] = useState<any>();
+    }, [user?.data?.id])
 
-    useEffect(() => {
-        const fetchBillDetails = async () => {
-            if (billdetail?.data) {
-                const billDetailsPromises = billdetail?.data.map(async (data: any) => {
-                    const data1 = {
-                        id: data?.id,
-                        token: user?.token,
-                    };
-                    const response = await getBillDetail(data1);
-                    return response;
-                });
+    console.log(billdetail);
+    // useEffect(() => {
+    //     const fetchBillDetails = async () => {
+    //         if (billdetail?.data) {
+    //             const billDetailsPromises = billdetail?.data.map(async (data: any) => {
+    //                 const data1 = {
+    //                     id: data?.id,
+    //                     token: user?.token,
+    //                 };
+    //                 const response = await getBillDetail(data1);
+                 
+                    
+    //                 return response;
+    //             });
 
-                const billDetails: any = await Promise.all(billDetailsPromises);
-                const response = billDetails?.map(async (data: any) => {
+    //             const billDetails: any = await Promise.all(billDetailsPromises);
 
-                    const response1 = await getDetailBillDetail1(data.id);
-                    return response1;
-                })
-                const billDetails1: any = await Promise.all(response);
-                const response1 = billDetails1?.find(async (data: any) => data?.original[0]?.product_name == name)
-                setArr(response1);
-            }
-        };
+    //             const response = billDetails?.map(async (data: any) => {
 
-        fetchBillDetails();
-    }, [data]);
+    //                 const response1 = await getDetailBillDetail1(data.id);
+    //                 return response1;
+    //             })
+    //             const billDetails1: any = await Promise.all(response);
+    //             const response1 = billDetails1?.find(async (data: any) => data?.original[0]?.product_name == name)
+    //             setArr(response1);
+    //         }
+    //     };
+
+    //     fetchBillDetails();
+    // }, [user?.data?.id]);
+
 
     const [star, setstar] = useState<any>()
     const HandekeVote = (data: any) => {
@@ -75,13 +80,35 @@ const Comment = ({ data, name }: any) => {
             setvalue("");
             return
         }
+        if (billdetail?.data) {
+            const billDetailsPromises = billdetail?.data.map(async (data: any) => {
+                const data1 = {
+                    id: data?.id,
+                    token: user?.token,
+                };
+                const response = await getBillDetail(data1);
 
-        if (arr) {
+
+                return response;
+            });
+
+            const billDetails: any = await Promise.all(billDetailsPromises);
+
+            const responsea = billDetails?.map(async (data: any) => {
+
+                const response1 = await getDetailBillDetail1(data.id);
+                return response1;
+            })
+            const billDetails1: any = await Promise.all(responsea);
+            const response1 = billDetails1?.find(async (data: any) => data?.original[0]?.product_name == name)
+
             const data1 = {
-                id: arr?.original[0]?.bill_id,
+                id: response1?.original[0]?.bill_id,
                 token: user?.token
             }
             const response = await getBillDetail(data1);
+            console.log(response);
+            
             if (response?.user_id === user?.data?.id) {
                 if (response?.status == "Done") {
                     if(!star){

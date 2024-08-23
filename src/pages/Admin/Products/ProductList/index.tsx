@@ -163,7 +163,7 @@ const ProductManagement = () => {
             />
             <Table
                 columns={columns}
-                dataSource={filter.length > 0 ? filter : products}
+                dataSource={filter?.length > 0 ? filter : products}
                 rowKey="id"
                 pagination={{ pageSize: 10 }}
             />

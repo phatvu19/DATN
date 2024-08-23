@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getCartOrder } from "@/api/services/Order"
 import ProductInCartCheckOutNow from "./ProductInCartCheckOutNow"
 
-const CartInCheckOutNow = () => {
+const CartInCheckOutNow = ({ data }:any) => {
     const [carts, setCarts] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [cartt, setcart] = useState<any>()
@@ -54,7 +54,7 @@ const CartInCheckOutNow = () => {
 
                     <tbody>
                         <hr className="my-1 w-full border-t border-dashed border-white " />
-                        {cartt?.data?.map((data: any, index: any) => {
+                        {data?.data?.map((data: any, index: any) => {
                             return (
                                 <>
                                     <ProductInCartCheckOutNow

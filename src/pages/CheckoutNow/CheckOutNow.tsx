@@ -176,27 +176,31 @@ const CheckOutNow = () => {
     }
     const [totalPrice, setTotalPrice] = useState<number>(0)
     const [cartt, setcart] = useState<any>()
+    useEffect(()=>{
+        const fetch = async()=>{
+            const storedCarts = JSON.parse(localStorage.getItem("cartnow")!) || []
+            const data = { data: storedCarts }
+            const allCart: any = await getCartOrder(data)
+            setcart(allCart)
+        }
+        fetch()
+    },[])
     const handleCartUpdate = async () => {
-        const storedCarts = JSON.parse(localStorage.getItem("cartnow")!) || []
-        setcart(storedCarts)
-        const data = { data: storedCarts }
-        const allCart: any = await getCartOrder(data)
-        setcart(allCart)
         if (
-            allCart?.data?.every((item: any) => item.sale_id === 1) &&
-            allCart?.data?.reduce(
+            cartt?.data?.every((item: any) => item.sale_id === 1) &&
+            cartt?.data?.reduce(
                 (sum: number, item: any) => sum + item.quantity,
                 0,
             ) === 3
         ) {
-            const total = allCart?.data?.reduce(
+            const total = cartt?.data?.reduce(
                 (sum: number, item: any) => sum + item.price * item.quantity,
                 0,
             )
             const discountedTotal = total * 0.9 // Apply 10% discount
             setTotalPrice(discountedTotal)
         } else {
-            const total = allCart?.data?.reduce(
+            const total = cartt?.data?.reduce(
                 (sum: number, item: any) => sum + item.price * item.quantity,
                 0,
             )
@@ -224,7 +228,34 @@ const CheckOutNow = () => {
     const handleAdress = (e: any) => {
         setadressdetail(e.target.value)
     }
+    const calculateTotalClick = async () => {
+        let total = 0
 
+        const promises = cartt?.data?.map(async (product: any, index: any) => {
+            const cartItem: any = carts.find(
+                (item: any) => item?.variant_id === product?.variant_id,
+            )
+            const cartSale_id: any = carts[index]?.sale_id
+
+            const allSale: any = await GetSaleId(cartSale_id)
+            const totalSale: any = (product.price * allSale?.name) / 100
+            if (cartItem) {
+                const price = cartSale_id ? product.price - totalSale : product.price
+                const quantity = parseInt(cartItem.quantity, 10)
+                if (!isNaN(price) && !isNaN(quantity)) {
+                    total += price * quantity
+                }
+            }
+            setloading(false)
+        })
+        await Promise.all(promises)
+        setTotalprice(total)
+    }
+    useEffect(() => {
+        if (cartt) {
+            calculateTotalClick()
+        }
+    }, [cartt])
     const handleOrder = async () => {
         setloadings(true)
         const data = {
@@ -314,34 +345,7 @@ const CheckOutNow = () => {
         setIsModalOpen(false)
     }
 
-    const calculateTotalClick = async () => {
-        let total = 0
-
-        const promises = cartt?.data?.map(async (product: any, index: any) => {
-            const cartItem: any = carts.find(
-                (item: any) => item.variant_id === product.variant_id,
-            )
-            const cartSale_id: any = carts[index]?.sale_id
-
-            const allSale: any = await GetSaleId(cartSale_id)
-            const totalSale: any = (product.price * allSale?.name) / 100
-            if (cartItem) {
-                const price = cartSale_id ? product.price - totalSale : product.price
-                const quantity = parseInt(cartItem.quantity, 10)
-                if (!isNaN(price) && !isNaN(quantity)) {
-                    total += price * quantity
-                }
-            }
-            setloading(false)
-        })
-        await Promise.all(promises)
-        setTotalprice(total)
-    }
-    useEffect(() => {
-        if (cartt) {
-            calculateTotalClick()
-        }
-    }, [cartt])
+  
     const [checkvoucher, setcheckvoucher] = useState<any>(false)
     const HandleVoucher = async () => {
         const voucher: any = await getAllVoucher()
@@ -802,7 +806,7 @@ const CheckOutNow = () => {
                     </div>
                 </div>
 
-                <CartInCheckOutNow />
+                <CartInCheckOutNow data={cartt}/>
             </main>
         </>
     )
