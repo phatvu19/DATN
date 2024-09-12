@@ -158,12 +158,12 @@ const AttributeManagement = () => {
             render: (_text: string, _record: Attribute, index: number) => index + 1,
         },
         {
-            title: "Attribute Name",
+            title: "Thuộc tính",
             dataIndex: "name",
             key: "name",
         },
         {
-            title: "Action",
+            title: "Hoạt động",
             key: "action",
             render: (record: Attribute) => (
                 <Space size="middle">
@@ -187,12 +187,12 @@ const AttributeManagement = () => {
                             setIsValueModalVisible(true)
                         }}
                     >
-                        Add Value
+                        Thêm giá trị cho thuộc tính
                     </Button>
                     <Button
                         onClick={() => showModal(record?.id)}
                     >
-                        View
+                        Chi tiết
                     </Button>
                 </Space>
             ),
@@ -262,7 +262,7 @@ const AttributeManagement = () => {
                 onClick={() => setIsAddModalVisible(true)}
                 style={{ marginBottom: "16px" }}
             >
-                Add New Attribute
+                Thêm Thuộc tính
             </Button>
 
             <Table
@@ -272,14 +272,14 @@ const AttributeManagement = () => {
             />
 
             <Modal
-                title="Add New Attribute"
+                title="Thêm thuộc tính"
                 open={isAddModalVisible}
                 onCancel={() => setIsAddModalVisible(false)}
                 footer={null}
             >
                 <Form form={form} onFinish={handleAddAttribute}>
                     <Form.Item
-                        label="Attribute Name"
+                        label="Tên thuộc tính"
                         name="name"
                         rules={[
                             {
@@ -292,7 +292,7 @@ const AttributeManagement = () => {
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
-                            Add Attribute
+                            Thêm
                         </Button>
                     </Form.Item>
                 </Form>
@@ -304,14 +304,14 @@ const AttributeManagement = () => {
 
 
             <Modal
-                title="Edit Attribute"
+                title="Sửa thuộc tính"
                 open={isEditModalVisible}
                 onCancel={() => setIsEditModalVisible(false)}
                 footer={null}
             >
                 <Form form={form} onFinish={handleEditAttribute}>
                     <Form.Item
-                        label="Attribute Name"
+                        label="Tên thuộc tính"
                         name="name"
                         rules={[
                             {
@@ -324,7 +324,7 @@ const AttributeManagement = () => {
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
-                            Save Changes
+                            Sửa
                         </Button>
                     </Form.Item>
                 </Form>

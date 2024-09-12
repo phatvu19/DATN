@@ -96,12 +96,12 @@ const ListSaleProduct = () => {
             key: 'id',
         },
         {
-            title: 'Name',
+            title: 'Tên',
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: 'Status',
+            title: 'Trạng thái',
             dataIndex: 'status',
             key: 'status',
             render: (status: any) => {
@@ -113,7 +113,7 @@ const ListSaleProduct = () => {
             }
         },
         {
-            title: 'Action',
+            title: 'Hoạt động',
             dataIndex: 'action',
             key: 'action',
             render: () => (
@@ -132,7 +132,7 @@ const ListSaleProduct = () => {
                     </Form.Item>
                     <label className='w-2/5 font-bold'>Trạng thái</label>
                     <Form.Item className=" mt-4" name="trangthai" rules={[{ required: true, message: "không được để trống" }]}>
-                      
+
                         <Select className='w-3/4'
                             placeholder="Chọn trạng thái"
                             onChange={handleChange}
@@ -158,10 +158,10 @@ const ListSaleProduct = () => {
                     <thead className="border-b font-medium dark:border-neutral-500">
                         <tr>
                             <th scope="col" className="px-6 py-4">#</th>
-                            <th scope="col" className="px-6 py-4">Name</th>
-                            <th scope="col" className="px-6 py-4">Price</th>
-                            <th scope="col" className="px-6 py-4">Sale</th>
-                            <th scope="col" className="px-6 py-4">Action</th>
+                            <th scope="col" className="px-6 py-4">Tên sản phẩm</th>
+                            <th scope="col" className="px-6 py-4">Giá</th>
+                            <th scope="col" className="px-6 py-4">Khuyến mãi</th>
+                            <th scope="col" className="px-6 py-4">Hoạt động</th>
                         </tr>
                     </thead>
                     <tbody>

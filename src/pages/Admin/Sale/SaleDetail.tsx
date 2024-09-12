@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 import formatNumber from '@/utilities/FormatTotal';
 
 
-const SaleDetail = ({ data, onValue, check, onLoad}: any) => {
+const SaleDetail = ({ data, onValue, check, onLoad }: any) => {
     const [currentSaleId, setCurrentSaleId] = useState(false);
     const [sales, setsale] = useState<any>()
     const [idSale, setIdsale] = useState<any>()
@@ -65,8 +65,8 @@ const SaleDetail = ({ data, onValue, check, onLoad}: any) => {
                     onChange={(e) => setIdsale(e.target.value)}
                 >
                     <option value="0">Chọn sale</option>
-                    {sales?.map((data: any , index:any) => (
-                        <option value={data?.id} key={index+1}>Mã sale {data?.name}%</option>
+                    {sales?.map((data: any, index: any) => (
+                        <option value={data?.id} key={index + 1}>Mã sale {data?.name}%</option>
                     ))}
                 </select> : <select
                     id="largeSelect"
@@ -79,13 +79,13 @@ const SaleDetail = ({ data, onValue, check, onLoad}: any) => {
                     onChange={(e) => setIdsale(e.target.value)}
                 >
                     <option value="0">Chọn sale</option>
-                    {sales?.map((data: any,index:any) => (
-                        <option value={data?.id} key={index+1}>Mã sale {data?.name}%</option>
+                    {sales?.map((data: any, index: any) => (
+                        <option value={data?.id} key={index + 1}>Mã sale {data?.name}%</option>
                     ))}
                 </select>}
             </td>
             <td className="whitespace-nowrap px-6 py-4"> <Button size="middle" onClick={() => HandleUpdate(data?.id)}>
-                Update
+                Cập nhật
             </Button></td>
         </tr>
     )
