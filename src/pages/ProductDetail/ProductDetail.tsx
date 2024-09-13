@@ -148,9 +148,7 @@ const ProductDetail = () => {
             toast.error("Bạn cần chọn color!")
         } else {
             // await cartsnow.push(data)
-            const data1 = [
-                data
-            ]
+            const data1 = [data]
             localStorage.setItem("cartnow", JSON.stringify(data1))
             navigate("/checkoutnow")
             // setTimeout(() => {
@@ -173,12 +171,12 @@ const ProductDetail = () => {
         setquantity2(quantity)
     }
     const handleIncrement = () => {
-        setquantity((prevQuantity) => Math.min(prevQuantity + 1, quantity2));
-    };
+        setquantity((prevQuantity) => Math.min(prevQuantity + 1, quantity2))
+    }
 
     const handleDecrement = () => {
-        setquantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
-    };
+        setquantity((prevQuantity) => Math.max(prevQuantity - 1, 1))
+    }
     return (
         <>
             <div className="flex pl-40 pr-40 pt-5 ">
@@ -270,34 +268,39 @@ const ProductDetail = () => {
                             )
                         })}
                     </div>
-                    {sizevalue && idsize ?  <div className="mb-5 mt-6 flex ">
-                        <span className="text-sm font-bold ">CHỌN SỐ LƯỢNG</span>
-                        <div className="flex items-center ml-auto">
-                            <button
-                                onClick={handleDecrement}
-                                className="w-8 h-8 flex items-center justify-center bg-gray-200 border rounded-l cursor-pointer"
-                            >
-                                -
-                            </button>
-                            <input
-                                readOnly
-                                type="number"
-                                className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
-                                min="1"
-                                max={quantity2}
-                                value={quantity}    
-                                onChange={(e: any) => setquantity(e.target.value)}
-                              
-                            />
-                            <button
-                                onClick={handleIncrement}
-                                className="w-8 h-8 flex items-center justify-center bg-gray-200 border rounded-r cursor-pointer"
-                            >
-                                +
-                            </button>
+                    {sizevalue && idsize ? (
+                        <div className="mb-5 mt-6 flex ">
+                            <span className="text-sm font-bold ">CHỌN SỐ LƯỢNG</span>
+                            <div className="ml-auto flex items-center">
+                                <button
+                                    onClick={handleDecrement}
+                                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l border bg-gray-200"
+                                >
+                                    -
+                                </button>
+                                <input
+                                    readOnly
+                                    type="number"
+                                    className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
+                                    min="1"
+                                    max={quantity2}
+                                    value={quantity}
+                                    onChange={(e: any) =>
+                                        setquantity(e.target.value)
+                                    }
+                                />
+                                <button
+                                    onClick={handleIncrement}
+                                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r border bg-gray-200"
+                                >
+                                    +
+                                </button>
+                            </div>
                         </div>
-                    </div> :""}
-                   
+                    ) : (
+                        ""
+                    )}
+
                     <div className="mt-10 flex">
                         <button
                             className="w-2/4 rounded border  border-red-400 p-2"

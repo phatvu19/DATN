@@ -77,9 +77,9 @@ const AddProduct = () => {
             brand: data.brand,
             description: data.description,
             image: uploadedImages,
-            variants: variants.map((variant:any) => {
+            variants: variants.map((variant: any) => {
                 // Lấy các key từ variant.attributes
-                const attributeKeys = Object.keys(variant.attributes);
+                const attributeKeys = Object.keys(variant.attributes)
                 return {
                     price: variant.price,
                     price_promotional: variant.price_promotional,
@@ -88,7 +88,7 @@ const AddProduct = () => {
                         name: key,
                         value: variant.attributes[key],
                     })),
-                };
+                }
             }),
         }
         try {
@@ -129,19 +129,19 @@ const AddProduct = () => {
         newVariants[index].attributes[attributeName] = value
         setVariants(newVariants)
     }
-    const [uploadedImages, setUploadedImages] = useState([]);
+    const [uploadedImages, setUploadedImages] = useState([])
     const props: any = {
         action: "https://api.cloudinary.com/v1_1/dsul0ahfu/image/upload",
         onChange({ file }: any) {
             if (file.status !== "uploading") {
-                setUploadedImages(file.response.secure_url);
+                setUploadedImages(file.response.secure_url)
             }
         },
         data: {
             upload_preset: "dant_phat",
             folder: "datn",
         },
-    };
+    }
     return (
         <div className="container mx-auto flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
             <h2 className="my-10 text-2xl font-semibold text-gray-700">
@@ -169,7 +169,11 @@ const AddProduct = () => {
                                             {...field}
                                             placeholder="Tên sản phẩm..."
                                         />
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
@@ -188,7 +192,9 @@ const AddProduct = () => {
                                             {...field}
                                             size="large"
                                             style={{ height: 50 }}
-                                            onChange={(value) => field.onChange(value)}
+                                            onChange={(value) =>
+                                                field.onChange(value)
+                                            }
                                         >
                                             <Option value="">Chọn</Option>
                                             {categories.map((cat) => (
@@ -197,7 +203,11 @@ const AddProduct = () => {
                                                 </Option>
                                             ))}
                                         </Select>
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
@@ -221,7 +231,11 @@ const AddProduct = () => {
                                             style={{ height: 50 }}
                                             placeholder="Thương hiệu"
                                         />
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
@@ -239,7 +253,11 @@ const AddProduct = () => {
                                             autoSize={{ minRows: 3, maxRows: 6 }}
                                             placeholder="Mô tả"
                                         />
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
@@ -248,11 +266,10 @@ const AddProduct = () => {
                     <Form.Item
                         name="image"
                         className="col-md-10"
-                        rules={[{required: true, message: "Không được để trống"
-                        }]}
+                        rules={[{ required: true, message: "Không được để trống" }]}
                         validateTrigger={["onChange", "onBlur"]}
                     >
-                        <Upload.Dragger {...props} multiple accept=".jpg,.png" >
+                        <Upload.Dragger {...props} multiple accept=".jpg,.png">
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload.Dragger>
                     </Form.Item>
@@ -261,7 +278,7 @@ const AddProduct = () => {
                 {/* Form items for variants */}
                 {variants.map((variant: any, index: any) => (
                     <div key={index} className="flex flex-wrap space-x-4">
-                        <Form.Item label="Giá gốc" >
+                        <Form.Item label="Giá gốc">
                             <Input
                                 size="large"
                                 type="number"
@@ -288,7 +305,7 @@ const AddProduct = () => {
                                 }}
                             />
                         </Form.Item>
-                        <Form.Item label="Số lượng" >
+                        <Form.Item label="Số lượng">
                             <Input
                                 size="large"
                                 type="number"
@@ -304,7 +321,7 @@ const AddProduct = () => {
                         </Form.Item>
                         {/* Select dropdowns for attributes */}
                         {attributes.map((attribute: any) => (
-                            <Form.Item key={attribute.id} label={attribute.name} >
+                            <Form.Item key={attribute.id} label={attribute.name}>
                                 <Select
                                     size="large"
                                     style={{ width: 240 }}

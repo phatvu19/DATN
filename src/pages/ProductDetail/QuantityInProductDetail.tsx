@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-const QuantityInProductDetail = ({ product, variant ,onQuantity}: any) => {
+const QuantityInProductDetail = ({ product, variant, onQuantity }: any) => {
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
@@ -10,19 +10,21 @@ const QuantityInProductDetail = ({ product, variant ,onQuantity}: any) => {
             quantity = item.quantity
         }
     })
-    useEffect(()=>{
+    useEffect(() => {
         onQuantity(quantity)
-    },[variant])
+    }, [variant])
 
     return (
         <>
             {!variant ? (
                 <>
-                    Còn<p className="ml-2 font-bold mr-2"> {product[0]?.quantity} </p>  sản phẩm
+                    Còn
+                    <p className="ml-2 mr-2 font-bold"> {product[0]?.quantity} </p>{" "}
+                    sản phẩm
                 </>
             ) : (
                 <>
-                        Còn <p className="ml-2 font-bold mr-2"> {quantity} </p>  sản phẩm
+                    Còn <p className="ml-2 mr-2 font-bold"> {quantity} </p> sản phẩm
                 </>
             )}
         </>

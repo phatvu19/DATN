@@ -56,14 +56,21 @@ const CheckOut = () => {
     const [res, setres] = useState<any>()
 
     const HandleVnpay = async () => {
-        const check = confirm('Nếu chọn thanh toán ONLINE thì bạn sẽ không thể hủy đơn khi thanh toán thành công!')
+        const check = confirm(
+            "Nếu chọn thanh toán ONLINE thì bạn sẽ không thể hủy đơn khi thanh toán thành công!",
+        )
         if (check) {
             setloadings(true)
             const data = {
                 user_id: user?.data?.id,
-                recipient_address: wardName && districtName && provinceName ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}` : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
+                recipient_address:
+                    wardName && districtName && provinceName
+                        ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`
+                        : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
                 recipient_phone: phone ? phone : form.getFieldValue("number"),
-                total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
+                total_amount: priceDiscount
+                    ? totalprice - priceDiscount
+                    : totalprice,
                 status: "Paid",
                 pay: "ONLINE",
                 voucher: "sed",
@@ -82,8 +89,12 @@ const CheckOut = () => {
         const data = { data: storedCarts }
         const allCart: any = await getCartOrder(data)
         if (response) {
-            const data2: any = { data: [], bill_id: response?.data?.id, token: `${user?.token}` }
-            console.log(data2);
+            const data2: any = {
+                data: [],
+                bill_id: response?.data?.id,
+                token: `${user?.token}`,
+            }
+            console.log(data2)
 
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
@@ -102,7 +113,7 @@ const CheckOut = () => {
                         quantity: element?.quantity,
                         sale: priceDiscount ? `${priceDiscount}` : 0,
                         image: element?.image,
-                        price_origin: 1
+                        price_origin: 1,
                     }
                     data2.data.push(data1)
                 }),
@@ -117,12 +128,12 @@ const CheckOut = () => {
                     setTimeout(() => {
                         window.location.href = `/order_done/${response?.data?.id} `
                     }, 300)
-                } else {     
+                } else {
                     toast.error("Đặt hàng thất bại")
                     setTimeout(() => {
                         setloadings(false)
-                        navigate('/')
-                    }, 500);
+                        navigate("/")
+                    }, 500)
                 }
             })
         }
@@ -230,7 +241,10 @@ const CheckOut = () => {
         setloadings(true)
         const data = {
             user_id: user?.data?.id,
-            recipient_address: wardName && districtName && provinceName ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}` : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
+            recipient_address:
+                wardName && districtName && provinceName
+                    ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`
+                    : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
             recipient_phone: phone ? phone : form.getFieldValue("number"),
             total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
             status: "Pending",
@@ -240,7 +254,11 @@ const CheckOut = () => {
         }
         const response: any = await addBill(data)
         if (response) {
-            const data2: any = { data: [], bill_id: response?.data?.id, token: `${user?.token}` }
+            const data2: any = {
+                data: [],
+                bill_id: response?.data?.id,
+                token: `${user?.token}`,
+            }
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
                     const sales = await getAllSale()
@@ -258,7 +276,7 @@ const CheckOut = () => {
                         quantity: element?.quantity,
                         sale: 0,
                         image: element?.image,
-                        price_origin: 1
+                        price_origin: 1,
                     }
                     data2.data.push(data1)
                 }),
@@ -349,10 +367,10 @@ const CheckOut = () => {
         console.log(discountCode)
         const check: any = voucher
             ? voucher?.data?.find(
-                (data1: any) => data1?.voucher_code == discountCode,
-            )?.discount_amount
+                  (data1: any) => data1?.voucher_code == discountCode,
+              )?.discount_amount
             : ""
-        const voucherTotal = ((totalprice * check) / 100)
+        const voucherTotal = (totalprice * check) / 100
         if (discountCode.toLowerCase() == "xinchao") {
             if (checkvoucher == false) {
                 if (totalprice >= 499000 && totalprice < 670000) {
@@ -377,29 +395,29 @@ const CheckOut = () => {
     const validatePhone = (
         rule: any,
         value: string,
-        callback: (arg0: string | undefined) => void
+        callback: (arg0: string | undefined) => void,
     ) => {
-        const phonePattern = /^[0-9]{10}$/; // Regular expression for 10-digit Vietnamese phone number
+        const phonePattern = /^[0-9]{10}$/ // Regular expression for 10-digit Vietnamese phone number
 
         if (value && !phonePattern.test(value)) {
-            callback("Số điện thoại không hợp lệ");
+            callback("Số điện thoại không hợp lệ")
         } else {
-            callback(undefined);
+            callback(undefined)
         }
-    };
+    }
     const validateEmail = (
         rule: any,
         value: string,
-        callback: (arg0: string | undefined) => void
+        callback: (arg0: string | undefined) => void,
     ) => {
-        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/; // Basic email pattern
+        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/ // Basic email pattern
 
         if (value && !emailPattern.test(value)) {
-            callback("Email không hợp lệ");
+            callback("Email không hợp lệ")
         } else {
-            callback(undefined);
+            callback(undefined)
         }
-    };
+    }
     return (
         <>
             {loadings && (
@@ -436,7 +454,7 @@ const CheckOut = () => {
                 <div className="checkout-main container mt-5">
                     <div className="row flex ">
                         <Form
-                            className="row p-0 pt-8 flex"
+                            className="row flex p-0 pt-8"
                             form={form}
                             onFinish={handleOrder}
                         >
@@ -463,7 +481,6 @@ const CheckOut = () => {
                                         </a>
                                     )}
                                 </div>
-
 
                                 <div className="flex">
                                     <div className="w-2/4">
@@ -555,34 +572,47 @@ const CheckOut = () => {
                                     </div>
                                     <div className="ml-10 w-2/4"></div>
                                 </div>
-                                {users?.address ? <div className="mt-5">
-                                    <label htmlFor="" className="font-bold">Địa chỉ</label>
-                                    <div className="flex w-full mt-5">
-                                        <Form.Item name="address" className="w-full mr-2">
-                                            <Input type="text" disabled />
-                                        </Form.Item>
-                                        <Link to='/profile'>
-                                            <Button className="ml-auto" type="primary" >
-                                                Cập nhập địa chỉ mới
-                                            </Button></Link>
+                                {users?.address ? (
+                                    <div className="mt-5">
+                                        <label htmlFor="" className="font-bold">
+                                            Địa chỉ
+                                        </label>
+                                        <div className="mt-5 flex w-full">
+                                            <Form.Item
+                                                name="address"
+                                                className="mr-2 w-full"
+                                            >
+                                                <Input type="text" disabled />
+                                            </Form.Item>
+                                            <Link to="/profile">
+                                                <Button
+                                                    className="ml-auto"
+                                                    type="primary"
+                                                >
+                                                    Cập nhập địa chỉ mới
+                                                </Button>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div> : <div className="mt-5 flex w-full">
-                                    <ProvinceInCheckOut
-                                        onIDProvince={idprovince}
-                                        onNameProvince={nameprovince}
-                                    />
+                                ) : (
+                                    <div className="mt-5 flex w-full">
+                                        <ProvinceInCheckOut
+                                            onIDProvince={idprovince}
+                                            onNameProvince={nameprovince}
+                                        />
 
-                                    <DistrictInCheckOut
-                                        id={provinceId}
-                                        onIDDistrict={iddistrict}
-                                        onNameDistrict={namedistrict}
-                                    />
+                                        <DistrictInCheckOut
+                                            id={provinceId}
+                                            onIDDistrict={iddistrict}
+                                            onNameDistrict={namedistrict}
+                                        />
 
-                                    <WardInCheckOut
-                                        id={districtId}
-                                        onNameWard={nameWard}
-                                    />
-                                </div>}
+                                        <WardInCheckOut
+                                            id={districtId}
+                                            onNameWard={nameWard}
+                                        />
+                                    </div>
+                                )}
 
                                 <div className="mt-5">
                                     <label
@@ -592,20 +622,22 @@ const CheckOut = () => {
                                         Địa chỉ cụ thể
                                         <span className="text-red-500">*</span>
                                     </label>
-                                    <Form.Item name='desc' rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Không được để trống địa chỉ cụ thể ",
-                                        }
-                                    ]}>
+                                    <Form.Item
+                                        name="desc"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    "Không được để trống địa chỉ cụ thể ",
+                                            },
+                                        ]}
+                                    >
                                         <Input
                                             placeholder="Nhập địa chỉ cụ thể của bạn"
                                             className="mt-3 p-2"
                                             onChange={(e: any) => handleAdress(e)}
                                         />
                                     </Form.Item>
-
                                 </div>
 
                                 <div className="col-12 mb-4 mt-5">
@@ -614,7 +646,6 @@ const CheckOut = () => {
                                         className="pl-1 text-sm font-bold"
                                     >
                                         Ghi chú đơn hàng
-
                                     </label>
                                     <TextArea
                                         className="mt-3"
@@ -623,7 +654,6 @@ const CheckOut = () => {
                                         onChange={(e) => setdescbill(e.target.value)}
                                     />
                                 </div>
-
 
                                 <div className="row mt-10">
                                     <div className="col-12 col-md-6">
@@ -676,7 +706,6 @@ const CheckOut = () => {
                                         </Radio.Group>
                                     </div>
                                 </div>
-
                             </div>
                             <div className=" ml-4 w-1/4 bg-white p-4 ">
                                 <div className="">
@@ -730,12 +759,13 @@ const CheckOut = () => {
                                                 onCancel={handleCancels}
                                             >
                                                 <p>
-                                                    Để có được giảm giá bạn cần mua các
-                                                    sản phẩm có ưu đãi của chúng tôi!
+                                                    Để có được giảm giá bạn cần mua
+                                                    các sản phẩm có ưu đãi của chúng
+                                                    tôi!
                                                 </p>
                                                 <p>
-                                                    Đồng thời bạn không thể nhập voucher
-                                                    áp dùng nữa!
+                                                    Đồng thời bạn không thể nhập
+                                                    voucher áp dùng nữa!
                                                 </p>
                                             </Modal>
                                             <p className="fw-bold mb-0 ml-auto text-sm font-bold">
@@ -760,11 +790,13 @@ const CheckOut = () => {
                                             <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
                                                 {priceDiscount
                                                     ? formatNumber(
-                                                        totalprice +
-                                                        30000 -
-                                                        priceDiscount,
-                                                    )
-                                                    : formatNumber(totalprice + 30000)}
+                                                          totalprice +
+                                                              30000 -
+                                                              priceDiscount,
+                                                      )
+                                                    : formatNumber(
+                                                          totalprice + 30000,
+                                                      )}
                                                 đ
                                             </h5>
                                         </div>
