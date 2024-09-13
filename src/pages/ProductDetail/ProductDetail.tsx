@@ -94,7 +94,7 @@ const ProductDetail = () => {
             ],
         }
         if (quantity <= 0) {
-            return toast.error('Hãy chọn số lượng lại!')
+            return toast.error("Hãy chọn số lượng lại!")
         }
         if (idsize == undefined) {
             toast.error("Bạn cần chọn size!")
@@ -122,7 +122,6 @@ const ProductDetail = () => {
     const navigate = useNavigate()
     const cartsnow = JSON.parse(localStorage.getItem("cartnow") || "[]")
     const HandleAddtoCartNow = async () => {
-        
         const data = {
             image: product?.image,
             variant_id: sizevalue,
@@ -141,7 +140,7 @@ const ProductDetail = () => {
             ],
         }
         if (quantity <= 0) {
-            return toast.error('Hãy chọn số lượng lại!')
+            return toast.error("Hãy chọn số lượng lại!")
         }
         if (idsize == undefined) {
             toast.error("Bạn cần chọn size!")
@@ -150,7 +149,7 @@ const ProductDetail = () => {
         } else {
             await cartsnow.push(data)
             localStorage.setItem("cartnow", JSON.stringify(cartsnow))
-            navigate('/checkoutnow')
+            navigate("/checkoutnow")
             // setTimeout(() => {
             //     window.location.reload()
             // }, 500)
@@ -159,6 +158,10 @@ const ProductDetail = () => {
     const [actives, setavtive] = useState()
     const active = (value: any) => {
         setavtive(value)
+    }
+    const [idSize, setIdSize] = useState()
+    const quantity1 = (value: any) => {
+        setIdSize(value)
     }
     return (
         <>
@@ -198,9 +201,9 @@ const ProductDetail = () => {
                         <QuantityInProductDetail
                             product={product?.variants}
                             variant={idsize}
+                            idsize={idSize}
                         />
                     </div>
-
 
                     <PriceInProductDetail
                         data={product?.variants}
@@ -243,6 +246,7 @@ const ProductDetail = () => {
                                         color={attributeValues[1][index]}
                                         onActive={active}
                                         active={actives}
+                                        onQuantity={quantity1}
                                     />
                                 </>
                             )
@@ -292,7 +296,6 @@ const ProductDetail = () => {
                 <p>{product?.description}</p>
             </div>
             <Comment data={product?.id} name={product?.name} />
-
         </>
     )
 }

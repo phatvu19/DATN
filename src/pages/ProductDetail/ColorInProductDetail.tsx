@@ -7,6 +7,9 @@ const ColorInProductDetail = ({
     onSize,
     selectedColor,
 }: any) => {
+    console.log(product)
+    console.log(data)
+
     const [click, setclick] = useState(null)
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
@@ -16,12 +19,14 @@ const ColorInProductDetail = ({
     let idvarians: any = undefined
     let id_attribute_value: any = undefined
     const idAttributeValues: any = []
-    product?.forEach((item) => {
+    product?.forEach((item: any) => {
         const foundObj = item.attribute_values[0]
+        if (foundObj?.id == data?.id) {
+            // console.log(foundObj.id , data?.id);
 
-        if (foundObj?.value == data?.value) {
             foundValue = foundObj.value
-            idvarians = item.id
+            idvarians = item?.id
+            // console.log(idvarians);
             id_attribute_value = foundObj.id
             idAttributeValues.push({
                 color: foundObj.value,
@@ -30,6 +35,7 @@ const ColorInProductDetail = ({
             })
         }
     })
+    // console.log(idvarians);
 
     const HandleClick = (id: any) => {
         if (click == data?.id) {
@@ -46,7 +52,7 @@ const ColorInProductDetail = ({
             {foundValue ? (
                 <>
                     <button
-                        className={` m-1 mx-1 h-8 w-8 rounded-full   ${selectedColor == idvarians ? "border-4 border-gray-200" : "boder border-gray-200"}   `}
+                        className={` m-1 mx-1 h-8 w-8 rounded-full   ${selectedColor == idvarians ? "border-4 border-gray-200" : " border-gray-200"}   `}
                         onClick={() => HandleClick(data?.id)}
                         disabled={foundValue ? false : true}
                         key={data?.id}
