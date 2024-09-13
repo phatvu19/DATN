@@ -25,7 +25,7 @@ import CartInCheckOutNow from "./CartCheckOutNow"
 import { useLogPageLeave } from "@/utilities/ReRender"
 import { getUser } from "@/api/services/UserService"
 const CheckOutNow = () => {
-    useLogPageLeave('/checkoutnow')
+    useLogPageLeave("/checkoutnow")
     const [form] = Form.useForm()
     const user = JSON.parse(localStorage.getItem("user") || "null")
     const [users, setusers] = useState<any>()
@@ -58,14 +58,21 @@ const CheckOutNow = () => {
     const [res, setres] = useState<any>()
 
     const HandleVnpay = async () => {
-        const check = confirm('Nếu chọn thanh toán ONLINE thì bạn sẽ không thể hủy đơn khi thanh toán thành công!')
+        const check = confirm(
+            "Nếu chọn thanh toán ONLINE thì bạn sẽ không thể hủy đơn khi thanh toán thành công!",
+        )
         if (check) {
             setloadings(true)
             const data = {
                 user_id: user?.data?.id,
-                recipient_address: wardName && districtName && provinceName ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}` : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
+                recipient_address:
+                    wardName && districtName && provinceName
+                        ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`
+                        : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
                 recipient_phone: phone ? phone : form.getFieldValue("number"),
-                total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
+                total_amount: priceDiscount
+                    ? totalprice - priceDiscount
+                    : totalprice,
                 status: "Paid",
                 pay: "ONLINE",
                 voucher: "sed",
@@ -85,8 +92,12 @@ const CheckOutNow = () => {
         const data = { data: storedCarts }
         const allCart: any = await getCartOrder(data)
         if (response) {
-            const data2: any = { data: [], bill_id: response?.data?.id, token: `${user?.token}` }
-            console.log(data2);
+            const data2: any = {
+                data: [],
+                bill_id: response?.data?.id,
+                token: `${user?.token}`,
+            }
+            console.log(data2)
 
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
@@ -105,7 +116,7 @@ const CheckOutNow = () => {
                         quantity: element?.quantity,
                         sale: priceDiscount ? `${priceDiscount}` : 0,
                         image: element?.image,
-                        price_origin: 1
+                        price_origin: 1,
                     }
                     data2.data.push(data1)
                 }),
@@ -134,7 +145,7 @@ const CheckOutNow = () => {
                 adddetailAndsendemail()
             } else {
                 confirm("Thanh toán thất bại!")
-                window.location.href=('http://localhost:5173/products')
+                window.location.href = "http://localhost:5173/products"
             }
         }
     }, [location.search])
@@ -176,15 +187,15 @@ const CheckOutNow = () => {
     }
     const [totalPrice, setTotalPrice] = useState<number>(0)
     const [cartt, setcart] = useState<any>()
-    useEffect(()=>{
-        const fetch = async()=>{
+    useEffect(() => {
+        const fetch = async () => {
             const storedCarts = JSON.parse(localStorage.getItem("cartnow")!) || []
             const data = { data: storedCarts }
             const allCart: any = await getCartOrder(data)
             setcart(allCart)
         }
         fetch()
-    },[])
+    }, [])
     const handleCartUpdate = async () => {
         if (
             cartt?.data?.every((item: any) => item.sale_id === 1) &&
@@ -260,7 +271,10 @@ const CheckOutNow = () => {
         setloadings(true)
         const data = {
             user_id: user?.data?.id,
-            recipient_address: wardName && districtName && provinceName ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}` : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
+            recipient_address:
+                wardName && districtName && provinceName
+                    ? `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${adressdetail}, ${wardName}, ${districtName}, ${provinceName}`
+                    : `${name ? name : form.getFieldValue("name")}; ${descbill ? descbill : ""};${form.getFieldValue("address")}`,
             recipient_phone: phone ? phone : form.getFieldValue("number"),
             total_amount: priceDiscount ? totalprice - priceDiscount : totalprice,
             status: "Pending",
@@ -270,7 +284,11 @@ const CheckOutNow = () => {
         }
         const response: any = await addBill(data)
         if (response) {
-            const data2: any = { data: [], bill_id: response?.data?.id, token: `${user?.token}` }
+            const data2: any = {
+                data: [],
+                bill_id: response?.data?.id,
+                token: `${user?.token}`,
+            }
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
                     const sales = await getAllSale()
@@ -288,7 +306,7 @@ const CheckOutNow = () => {
                         quantity: element?.quantity,
                         sale: 0,
                         image: element?.image,
-                        price_origin: 1
+                        price_origin: 1,
                     }
                     data2.data.push(data1)
                 }),
@@ -345,17 +363,16 @@ const CheckOutNow = () => {
         setIsModalOpen(false)
     }
 
-  
     const [checkvoucher, setcheckvoucher] = useState<any>(false)
     const HandleVoucher = async () => {
         const voucher: any = await getAllVoucher()
         console.log(discountCode)
         const check: any = voucher
             ? voucher?.data?.find(
-                (data1: any) => data1?.voucher_code == discountCode,
-            )?.discount_amount
+                  (data1: any) => data1?.voucher_code == discountCode,
+              )?.discount_amount
             : ""
-        const voucherTotal = ((totalprice * check) / 100)
+        const voucherTotal = (totalprice * check) / 100
         if (discountCode.toLowerCase() == "xinchao") {
             if (checkvoucher == false) {
                 if (totalprice >= 499000 && totalprice < 670000) {
@@ -380,29 +397,29 @@ const CheckOutNow = () => {
     const validatePhone = (
         rule: any,
         value: string,
-        callback: (arg0: string | undefined) => void
+        callback: (arg0: string | undefined) => void,
     ) => {
-        const phonePattern = /^[0-9]{10}$/; // Regular expression for 10-digit Vietnamese phone number
+        const phonePattern = /^[0-9]{10}$/ // Regular expression for 10-digit Vietnamese phone number
 
         if (value && !phonePattern.test(value)) {
-            callback("Số điện thoại không hợp lệ");
+            callback("Số điện thoại không hợp lệ")
         } else {
-            callback(undefined);
+            callback(undefined)
         }
-    };
+    }
     const validateEmail = (
         rule: any,
         value: string,
-        callback: (arg0: string | undefined) => void
+        callback: (arg0: string | undefined) => void,
     ) => {
-        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/; // Basic email pattern
+        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/ // Basic email pattern
 
         if (value && !emailPattern.test(value)) {
-            callback("Email không hợp lệ");
+            callback("Email không hợp lệ")
         } else {
-            callback(undefined);
+            callback(undefined)
         }
-    };
+    }
 
     return (
         <>
@@ -440,7 +457,7 @@ const CheckOutNow = () => {
                 <div className="checkout-main container mt-5">
                     <div className="row flex ">
                         <Form
-                            className="row p-0 pt-8 flex"
+                            className="row flex p-0 pt-8"
                             form={form}
                             onFinish={handleOrder}
                         >
@@ -467,7 +484,6 @@ const CheckOutNow = () => {
                                         </a>
                                     )}
                                 </div>
-
 
                                 <div className="flex">
                                     <div className="w-2/4">
@@ -559,36 +575,47 @@ const CheckOutNow = () => {
                                     </div>
                                     <div className="ml-10 w-2/4"></div>
                                 </div>
-                                {users?.address ? <div className="mt-5">
-                                    <label htmlFor="" className="font-bold">Địa chỉ</label>
-                                    <div className="flex w-full mt-5">
-                                        <Form.Item name="address" className="w-full mr-2">
-                                            <Input type="text" disabled />
-                                        </Form.Item>
-                                        <Link to='/profile'>
-                                        <Button className="ml-auto" type="primary" >
-                                            Cập nhập địa chỉ mới
-                                            </Button></Link>
+                                {users?.address ? (
+                                    <div className="mt-5">
+                                        <label htmlFor="" className="font-bold">
+                                            Địa chỉ
+                                        </label>
+                                        <div className="mt-5 flex w-full">
+                                            <Form.Item
+                                                name="address"
+                                                className="mr-2 w-full"
+                                            >
+                                                <Input type="text" disabled />
+                                            </Form.Item>
+                                            <Link to="/profile">
+                                                <Button
+                                                    className="ml-auto"
+                                                    type="primary"
+                                                >
+                                                    Cập nhập địa chỉ mới
+                                                </Button>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div> : <div className="mt-5 flex">
-                                    <ProvinceInCheckOutnow
-                                        onIDProvince={idprovince}
-                                        onNameProvince={nameprovince}
-                                    />
+                                ) : (
+                                    <div className="mt-5 flex">
+                                        <ProvinceInCheckOutnow
+                                            onIDProvince={idprovince}
+                                            onNameProvince={nameprovince}
+                                        />
 
-                                    <DistrictInCheckOutNow
-                                        id={provinceId}
-                                        onIDDistrict={iddistrict}
-                                        onNameDistrict={namedistrict}
-                                    />
+                                        <DistrictInCheckOutNow
+                                            id={provinceId}
+                                            onIDDistrict={iddistrict}
+                                            onNameDistrict={namedistrict}
+                                        />
 
-                                    <WardInCheckOutNow
-                                        id={districtId}
-                                        onNameWard={nameWard}
-                                    />
-                                </div>}
-                               
-                               
+                                        <WardInCheckOutNow
+                                            id={districtId}
+                                            onNameWard={nameWard}
+                                        />
+                                    </div>
+                                )}
 
                                 <div className="mt-5">
                                     <label
@@ -605,8 +632,7 @@ const CheckOutNow = () => {
                                                 required: true,
                                                 message:
                                                     "Không được để trống địa chỉ cụ thể ",
-                                            }
-
+                                            },
                                         ]}
                                     >
                                         <Input
@@ -623,7 +649,6 @@ const CheckOutNow = () => {
                                         className="pl-1 text-sm font-bold"
                                     >
                                         Ghi chú đơn hàng
-                                       
                                     </label>
                                     <TextArea
                                         className="mt-3"
@@ -632,7 +657,6 @@ const CheckOutNow = () => {
                                         onChange={(e) => setdescbill(e.target.value)}
                                     />
                                 </div>
-
 
                                 <div className="row mt-10">
                                     <div className="col-12 col-md-6">
@@ -741,12 +765,13 @@ const CheckOutNow = () => {
                                                 onCancel={handleCancels}
                                             >
                                                 <p>
-                                                    Để có được giảm giá bạn cần mua các
-                                                    sản phẩm có ưu đãi của chúng tôi!
+                                                    Để có được giảm giá bạn cần mua
+                                                    các sản phẩm có ưu đãi của chúng
+                                                    tôi!
                                                 </p>
                                                 <p>
-                                                    Đồng thời bạn không thể nhập voucher
-                                                    áp dùng nữa!
+                                                    Đồng thời bạn không thể nhập
+                                                    voucher áp dùng nữa!
                                                 </p>
                                             </Modal>
                                             <p className="fw-bold mb-0 ml-auto text-sm font-bold">
@@ -771,11 +796,13 @@ const CheckOutNow = () => {
                                             <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
                                                 {priceDiscount
                                                     ? formatNumber(
-                                                        totalprice +
-                                                        30000 -
-                                                        priceDiscount,
-                                                    )
-                                                    : formatNumber(totalprice + 30000)}
+                                                          totalprice +
+                                                              30000 -
+                                                              priceDiscount,
+                                                      )
+                                                    : formatNumber(
+                                                          totalprice + 30000,
+                                                      )}
                                                 đ
                                             </h5>
                                         </div>
@@ -806,7 +833,7 @@ const CheckOutNow = () => {
                     </div>
                 </div>
 
-                <CartInCheckOutNow data={cartt}/>
+                <CartInCheckOutNow data={cartt} />
             </main>
         </>
     )
