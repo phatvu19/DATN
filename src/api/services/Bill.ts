@@ -16,7 +16,7 @@ const addBill = async (data: any) => {
 const addBillDetail = async (data1: any) => {
     try {
         const response: AxiosResponse<{ data: any }> = await httpRequest.post(
-            `/admin/bill-details`,
+            `/user/bill-details`,
             data1,
             {
                 headers: {
@@ -57,7 +57,7 @@ const getBillDetail = async (data1: any) => {
 const getAllBillDetail = async (token: any) => {
     try {
         const response: AxiosResponse<{ data: { data: any } }> =
-            await httpRequest.get(`/admin/bill-details`, {
+            await httpRequest.get(`/user/bill-details`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -69,12 +69,11 @@ const getAllBillDetail = async (token: any) => {
 }
 const getDetailBillDetail = async (data: any) => {
     try {
-        const response =
-            await httpRequest.get(`/admin/bill-details/${data?.id}`, {
-                headers: {
-                    Authorization: `Bearer ${data?.token}`,
-                },
-            })
+        const response = await httpRequest.get(`/user/bill-details/${data?.id}`, {
+            headers: {
+                Authorization: `Bearer ${data?.token}`,
+            },
+        })
         return response.data?.data?.data ?? []
     } catch (error) {
         return []
@@ -82,8 +81,7 @@ const getDetailBillDetail = async (data: any) => {
 }
 const getDetailBillDetail1 = async (id: any) => {
     try {
-        const response =
-            await httpRequest.get(`/billdetails/by-bill-id/${id}`)
+        const response = await httpRequest.get(`/billdetails/by-bill-id/${id}`)
         return response.data?.data?.data ?? []
     } catch (error) {
         return []
@@ -292,7 +290,7 @@ const GetBillPaidWithUser = async (id: any) => {
         return undefined
     }
 }
-const SearchBillByPhone = async (data:any)=>{
+const SearchBillByPhone = async (data: any) => {
     try {
         const response: AxiosResponse<{ data: any }> = await httpRequest.get(
             `bills-with-phone/${data}`,
@@ -331,5 +329,5 @@ export {
     SearchBillByPhone,
     GetBillPaidWithUser,
     getDetailBillDetail,
-    getDetailBillDetail1
+    getDetailBillDetail1,
 }
