@@ -16,7 +16,7 @@ const addBill = async (data: any) => {
 const addBillDetail = async (data1: any) => {
     try {
         const response: AxiosResponse<{ data: any }> = await httpRequest.post(
-            `/admin/bill-details`,
+            `/user/bill-details`,
             data1,
             {
                 headers: {
@@ -57,7 +57,7 @@ const getBillDetail = async (data1: any) => {
 const getAllBillDetail = async (token: any) => {
     try {
         const response: AxiosResponse<{ data: { data: any } }> =
-            await httpRequest.get(`/admin/bill-details`, {
+            await httpRequest.get(`/user/bill-details`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -70,7 +70,7 @@ const getAllBillDetail = async (token: any) => {
 const getDetailBillDetail = async (data: any) => {
     try {
         const response =
-            await httpRequest.get(`/admin/bill-details/${data?.id}`, {
+            await httpRequest.get(`/user/bill-details/${data?.id}`, {
                 headers: {
                     Authorization: `Bearer ${data?.token}`,
                 },

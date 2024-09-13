@@ -7,13 +7,13 @@ export const useLogPageLeave = (pageName: any) => {
     useEffect(() => {
         const handleBeforeUnload = (event: any) => {
             console.log(`Bạn đã rời khỏi trang ${pageName}`);
-            //localStorage.removeItem('cartnow');
+            localStorage.removeItem('cartnow');
         };
 
         const checkLocation = () => {
             if (location.pathname !== pageName) {
                 console.log(`Bạn đã rời khỏi trang ${pageName}`);
-                //localStorage.removeItem('cartnow');
+                localStorage.removeItem('cartnow');
             }
         };
 
