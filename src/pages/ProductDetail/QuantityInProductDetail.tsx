@@ -19,7 +19,10 @@ const QuantityInProductDetail = ({ product, variant, onQuantity }: any) => {
             {!variant ? (
                 <>
                     Còn
-                    <p className="ml-2 mr-2 font-bold"> {product[0]?.quantity} </p>{" "}
+                    <p className="ml-2 mr-2 font-bold">
+                        {" "}
+                        {product[0]?.quantity}{" "}
+                    </p>{" "}
                     sản phẩm
                 </>
             ) : (
