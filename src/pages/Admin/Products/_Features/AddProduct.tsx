@@ -65,32 +65,34 @@ const AddProduct = () => {
         }, {})
         setAttributeValues(organizedValues)
     }
-
     const onSubmit = async (data: FieldValues) => {
         if (!uploadedImages) {
             toast.error("Please upload an image.")
             return // Exit early if image is not provided
         }
+
         const formattedData: any = {
             name: data.name,
             category_id: data.category_id,
             brand: data.brand,
             description: data.description,
             image: uploadedImages,
-            variants: variants.map((variant) => ({
-                price: variant.price,
-                price_promotional: variant.price_promotional,
-                quantity: variant.quantity,
-                attributes: [
-                    { name: "color", value: variant.attributes.color },
-                    { name: "size", value: variant.attributes.size },
-                ],
-            })),
+            variants: variants.map((variant:any) => {
+                // Lấy các key từ variant.attributes
+                const attributeKeys = Object.keys(variant.attributes);
+                return {
+                    price: variant.price,
+                    price_promotional: variant.price_promotional,
+                    quantity: variant.quantity,
+                    attributes: attributeKeys.map((key) => ({
+                        name: key,
+                        value: variant.attributes[key],
+                    })),
+                };
+            }),
         }
-        console.log(formattedData.image)
         try {
             const response = await createProduct(formattedData)
-            console.log("Product created successfully:", response)
             toast.success("Product created successfully.")
             navigate("/admin/quan-ly-san-pham")
         } catch (error) {

@@ -10,7 +10,7 @@ const CartInCheckOutNow = ({ data }:any) => {
     const handleCartUpdate = async () => {
         const storedCarts = JSON.parse(localStorage.getItem("cartnow")!) || []
         setCarts(storedCarts)
-        const data = { data: storedCarts }
+        const data = { data: storedCarts}
         const allCart: any = await getCartOrder(data)
         setcart(allCart)
         let total = 0

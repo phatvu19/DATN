@@ -1,4 +1,6 @@
-const QuantityInProductDetail = ({ product, variant }: any) => {
+import { useEffect } from "react"
+
+const QuantityInProductDetail = ({ product, variant ,onQuantity}: any) => {
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
@@ -8,6 +10,9 @@ const QuantityInProductDetail = ({ product, variant }: any) => {
             quantity = item.quantity
         }
     })
+    useEffect(()=>{
+        onQuantity(quantity)
+    },[variant])
 
     return (
         <>

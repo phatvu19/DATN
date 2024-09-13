@@ -328,6 +328,10 @@ const CheckOutNow = () => {
                     }, 500)
                 } else {
                     toast.error("Đặt hàng thất bại")
+                    setTimeout(() => {
+                        setloadings(false)
+                        navigate('/')
+                    }, 500);
                 }
             })
         }
@@ -369,8 +373,8 @@ const CheckOutNow = () => {
         console.log(discountCode)
         const check: any = voucher
             ? voucher?.data?.find(
-                  (data1: any) => data1?.voucher_code == discountCode,
-              )?.discount_amount
+                (data1: any) => data1?.voucher_code == discountCode,
+            )?.discount_amount
             : ""
         const voucherTotal = (totalprice * check) / 100
         if (discountCode.toLowerCase() == "xinchao") {
@@ -399,7 +403,7 @@ const CheckOutNow = () => {
         value: string,
         callback: (arg0: string | undefined) => void,
     ) => {
-        const phonePattern = /^[0-9]{10}$/ // Regular expression for 10-digit Vietnamese phone number
+        const phonePattern = /^(0)(3|5|7|8|9)([0-9]{8})$/
 
         if (value && !phonePattern.test(value)) {
             callback("Số điện thoại không hợp lệ")
@@ -796,13 +800,13 @@ const CheckOutNow = () => {
                                             <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
                                                 {priceDiscount
                                                     ? formatNumber(
-                                                          totalprice +
-                                                              30000 -
-                                                              priceDiscount,
-                                                      )
+                                                        totalprice +
+                                                        30000 -
+                                                        priceDiscount,
+                                                    )
                                                     : formatNumber(
-                                                          totalprice + 30000,
-                                                      )}
+                                                        totalprice + 30000,
+                                                    )}
                                                 đ
                                             </h5>
                                         </div>

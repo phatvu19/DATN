@@ -256,14 +256,14 @@ const AttributeManagement = () => {
     return (
 
         <div className="content">
-            <Button
+            {/* <Button
                 type="primary"
                 icon={<PlusOutlined />}
                 onClick={() => setIsAddModalVisible(true)}
                 style={{ marginBottom: "16px" }}
             >
                 Thêm Thuộc tính
-            </Button>
+            </Button> */}
 
             <Table
                 columns={attributeColumns}

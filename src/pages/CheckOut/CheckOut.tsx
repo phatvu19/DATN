@@ -117,8 +117,12 @@ const CheckOut = () => {
                     setTimeout(() => {
                         window.location.href = `/order_done/${response?.data?.id} `
                     }, 300)
-                } else {
+                } else {     
                     toast.error("Đặt hàng thất bại")
+                    setTimeout(() => {
+                        setloadings(false)
+                        navigate('/')
+                    }, 500);
                 }
             })
         }
