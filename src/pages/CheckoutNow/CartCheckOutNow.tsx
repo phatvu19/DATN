@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getCartOrder } from "@/api/services/Order"
 import ProductInCartCheckOutNow from "./ProductInCartCheckOutNow"
 
-const CartInCheckOutNow = ({ data }:any) => {
+const CartInCheckOutNow = ({ data }: any) => {
     const [carts, setCarts] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [cartt, setcart] = useState<any>()

@@ -328,6 +328,10 @@ const CheckOutNow = () => {
                     }, 500)
                 } else {
                     toast.error("Đặt hàng thất bại")
+                    setTimeout(() => {
+                        setloadings(false)
+                        navigate("/")
+                    }, 500)
                 }
             })
         }
@@ -399,7 +403,7 @@ const CheckOutNow = () => {
         value: string,
         callback: (arg0: string | undefined) => void,
     ) => {
-        const phonePattern = /^[0-9]{10}$/ // Regular expression for 10-digit Vietnamese phone number
+        const phonePattern = /^(0)(3|5|7|8|9)([0-9]{8})$/
 
         if (value && !phonePattern.test(value)) {
             callback("Số điện thoại không hợp lệ")

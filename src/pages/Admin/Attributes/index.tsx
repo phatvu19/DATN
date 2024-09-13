@@ -19,11 +19,10 @@ const AttributeManagement = () => {
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
     const [isValueModalVisible, setIsValueModalVisible] = useState(false)
     const [currentAttribute, setCurrentAttribute] = useState<any>(null)
-    const [currentAttributeValue, setCurrentAttributeValue] =
-        useState<any>(null)
+    const [currentAttributeValue, setCurrentAttributeValue] = useState<any>(null)
     const [attributesid, setAttributesid] = useState<any>([])
     const [form] = Form.useForm()
-    console.log(attributesid);
+    console.log(attributesid)
 
     useEffect(() => {
         fetchAttributes()
@@ -47,12 +46,11 @@ const AttributeManagement = () => {
         }
     }
 
-
     const handleAddAttribute = async (values: Attribute) => {
         try {
             const data: any = {
                 value: values,
-                attribute_id: currentAttribute?.id
+                attribute_id: currentAttribute?.id,
             }
             await createAttribute(values)
             fetchAttributes()
@@ -88,7 +86,7 @@ const AttributeManagement = () => {
             if (currentAttribute) {
                 const data: any = {
                     value: values?.value,
-                    attribute_id: currentAttribute?.id
+                    attribute_id: currentAttribute?.id,
                 }
                 await createAttributeValue(data)
                 fetchAttributes()
@@ -189,31 +187,27 @@ const AttributeManagement = () => {
                     >
                         Thêm giá trị cho thuộc tính
                     </Button>
-                    <Button
-                        onClick={() => showModal(record?.id)}
-                    >
-                        Chi tiết
-                    </Button>
+                    <Button onClick={() => showModal(record?.id)}>Chi tiết</Button>
                 </Space>
             ),
         },
     ]
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const showModal = (id: any) => {
-        console.log(id);
+        console.log(id)
         fetchAttributesId(id)
-        setIsModalOpen(true);
-    };
+        setIsModalOpen(true)
+    }
 
     const handleOk = () => {
-        setIsModalOpen(false);
-    };
+        setIsModalOpen(false)
+    }
 
     const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+        setIsModalOpen(false)
+    }
     const valueColumns = [
         {
             title: "ID",
@@ -254,16 +248,15 @@ const AttributeManagement = () => {
         // },
     ]
     return (
-
         <div className="content">
-            <Button
+            {/* <Button
                 type="primary"
                 icon={<PlusOutlined />}
                 onClick={() => setIsAddModalVisible(true)}
                 style={{ marginBottom: "16px" }}
             >
                 Thêm Thuộc tính
-            </Button>
+            </Button> */}
 
             <Table
                 columns={attributeColumns}
@@ -298,10 +291,18 @@ const AttributeManagement = () => {
                 </Form>
             </Modal>
             {/* modal con */}
-            <Modal title="Attribute_value" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <Table columns={valueColumns} dataSource={attributesid} pagination={false} />
+            <Modal
+                title="Attribute_value"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <Table
+                    columns={valueColumns}
+                    dataSource={attributesid}
+                    pagination={false}
+                />
             </Modal>
-
 
             <Modal
                 title="Sửa thuộc tính"

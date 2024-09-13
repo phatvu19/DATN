@@ -9,12 +9,32 @@ const SizeInProductDetail = ({
     onActive,
     onQuantity,
     active,
+    onSize1,
 }: any) => {
+    console.log(data)
+    console.log(product)
+
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
+    let foundValue = undefined
+    let idvarians: any = undefined
+    const id_attribute_value: any = undefined
+
+    product?.forEach((item: any) => {
+        const foundObj = item.attribute_values[1]
+        if (foundObj?.id == data?.id) {
+            // console.log(foundObj.id , data?.id);
+
+            foundValue = foundObj.value
+            idvarians = item?.id
+        }
+    })
+    console.log(idvarians)
     const variant = value?.find((data1: any) => data1?.size == data?.value)?.variant
     const HandleClick = (values: any) => {
+        onSize1(idvarians)
+
         onActive(values)
         onSize(variant, values, values)
         onQuantity(values)
@@ -24,6 +44,7 @@ const SizeInProductDetail = ({
               .filter((data1: any) => data1?.color === data1?.color)
               .map((data2: any) => data2?.size)
         : []
+
     return (
         <>
             {filteredSizes.includes(data?.value) ? (

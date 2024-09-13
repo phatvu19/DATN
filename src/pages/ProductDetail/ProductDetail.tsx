@@ -25,6 +25,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState<any>()
     const [sizevalue, setSizevalue] = useState()
     const [prices, setprices] = useState()
+    const [quantity2, setquantity2] = useState<any>()
     const fetchProducts = async () => {
         const data: any = await getProductById(id)
         setProduct(data)
@@ -46,7 +47,6 @@ const ProductDetail = () => {
     useEffect(() => {
         fetchAttributeValues()
     }, [])
-
     const [idColor, setIdcolor] = useState()
     const HandlePrice = (value: any) => {
         setIdcolor(value)
@@ -120,7 +120,7 @@ const ProductDetail = () => {
         }
     }
     const navigate = useNavigate()
-    const cartsnow = JSON.parse(localStorage.getItem("cartnow") || "[]")
+
     const HandleAddtoCartNow = async () => {
         const data = {
             image: product?.image,
@@ -147,8 +147,9 @@ const ProductDetail = () => {
         } else if (sizevalue == undefined) {
             toast.error("Bạn cần chọn color!")
         } else {
-            await cartsnow.push(data)
-            localStorage.setItem("cartnow", JSON.stringify(cartsnow))
+            // await cartsnow.push(data)
+            const data1 = [data]
+            localStorage.setItem("cartnow", JSON.stringify(data1))
             navigate("/checkoutnow")
             // setTimeout(() => {
             //     window.location.reload()
@@ -162,6 +163,19 @@ const ProductDetail = () => {
     const [idSize, setIdSize] = useState()
     const quantity1 = (value: any) => {
         setIdSize(value)
+    }
+    const variants = (id: any) => {
+        setIdsize(id)
+    }
+    const HandleQuantity = (quantity: any) => {
+        setquantity2(quantity)
+    }
+    const handleIncrement = () => {
+        setquantity((prevQuantity) => Math.min(prevQuantity + 1, quantity2))
+    }
+
+    const handleDecrement = () => {
+        setquantity((prevQuantity) => Math.max(prevQuantity - 1, 1))
     }
     return (
         <>
@@ -202,6 +216,7 @@ const ProductDetail = () => {
                             product={product?.variants}
                             variant={idsize}
                             idsize={idSize}
+                            onQuantity={HandleQuantity}
                         />
                     </div>
 
@@ -247,25 +262,46 @@ const ProductDetail = () => {
                                         onActive={active}
                                         active={actives}
                                         onQuantity={quantity1}
+                                        onSize1={variants}
                                     />
                                 </>
                             )
                         })}
                     </div>
-                    <div className="mb-5 mt-6 flex">
-                        <span className="text-sm font-bold ">CHỌN SỐ LƯỢNG</span>
-                        <div className="ml-auto flex items-center">
-                            <input
-                                type="number"
-                                className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
-                                min="1"
-                                max="9"
-                                defaultValue="1"
-                                onChange={(e: any) => setquantity(e.target.value)}
-                            />
+                    {sizevalue && idsize ? (
+                        <div className="mb-5 mt-6 flex ">
+                            <span className="text-sm font-bold ">CHỌN SỐ LƯỢNG</span>
+                            <div className="ml-auto flex items-center">
+                                <button
+                                    onClick={handleDecrement}
+                                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l border bg-gray-200"
+                                >
+                                    -
+                                </button>
+                                <input
+                                    readOnly
+                                    type="number"
+                                    className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
+                                    min="1"
+                                    max={quantity2}
+                                    value={quantity}
+                                    onChange={(e: any) =>
+                                        setquantity(e.target.value)
+                                    }
+                                />
+                                <button
+                                    onClick={handleIncrement}
+                                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r border bg-gray-200"
+                                >
+                                    +
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div className=" flex">
+                    ) : (
+                        ""
+                    )}
+
+                    <div className="mt-10 flex">
                         <button
                             className="w-2/4 rounded border  border-red-400 p-2"
                             style={{ color: "red" }}
