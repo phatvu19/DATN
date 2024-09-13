@@ -7,24 +7,23 @@ const ColorInProductDetail = ({
     onSize,
     selectedColor,
 }: any) => {
-    console.log(product);
-    console.log(data);
-    
-    
+    console.log(product)
+    console.log(data)
+
     const [click, setclick] = useState(null)
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
 
     let foundValue = undefined
-    let idvarians:any = undefined
+    let idvarians: any = undefined
     let id_attribute_value: any = undefined
     const idAttributeValues: any = []
-    product?.forEach((item:any) => {
+    product?.forEach((item: any) => {
         const foundObj = item.attribute_values[0]
         if (foundObj?.id == data?.id) {
             // console.log(foundObj.id , data?.id);
-            
+
             foundValue = foundObj.value
             idvarians = item?.id
             // console.log(idvarians);
@@ -36,7 +35,7 @@ const ColorInProductDetail = ({
             })
         }
     })
-// console.log(idvarians);
+    // console.log(idvarians);
 
     const HandleClick = (id: any) => {
         if (click == data?.id) {

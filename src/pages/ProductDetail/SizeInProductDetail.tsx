@@ -13,7 +13,7 @@ const SizeInProductDetail = ({
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
-    const variant = value?.find((data1:any)=> data1?.size == data?.value)?.variant
+    const variant = value?.find((data1: any) => data1?.size == data?.value)?.variant
     const HandleClick = (values: any) => {
         onActive(values)
         onSize(variant, values, values)

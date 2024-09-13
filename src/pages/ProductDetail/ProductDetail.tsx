@@ -94,7 +94,7 @@ const ProductDetail = () => {
             ],
         }
         if (quantity <= 0) {
-            return toast.error('Hãy chọn số lượng lại!')
+            return toast.error("Hãy chọn số lượng lại!")
         }
         if (idsize == undefined) {
             toast.error("Bạn cần chọn size!")
@@ -122,7 +122,6 @@ const ProductDetail = () => {
     const navigate = useNavigate()
     const cartsnow = JSON.parse(localStorage.getItem("cartnow") || "[]")
     const HandleAddtoCartNow = async () => {
-
         const data = {
             image: product?.image,
             variant_id: sizevalue,
@@ -141,7 +140,7 @@ const ProductDetail = () => {
             ],
         }
         if (quantity <= 0) {
-            return toast.error('Hãy chọn số lượng lại!')
+            return toast.error("Hãy chọn số lượng lại!")
         }
         if (idsize == undefined) {
             toast.error("Bạn cần chọn size!")
@@ -150,7 +149,7 @@ const ProductDetail = () => {
         } else {
             await cartsnow.push(data)
             localStorage.setItem("cartnow", JSON.stringify(cartsnow))
-            navigate('/checkoutnow')
+            navigate("/checkoutnow")
             // setTimeout(() => {
             //     window.location.reload()
             // }, 500)
@@ -205,7 +204,6 @@ const ProductDetail = () => {
                             idsize={idSize}
                         />
                     </div>
-
 
                     <PriceInProductDetail
                         data={product?.variants}
@@ -298,7 +296,6 @@ const ProductDetail = () => {
                 <p>{product?.description}</p>
             </div>
             <Comment data={product?.id} name={product?.name} />
-
         </>
     )
 }
