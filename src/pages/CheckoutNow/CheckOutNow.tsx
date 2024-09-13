@@ -134,7 +134,7 @@ const CheckOutNow = () => {
                 adddetailAndsendemail()
             } else {
                 confirm("Thanh toán thất bại!")
-                window.location.reload()
+                window.location.href=('http://localhost:5173/products')
             }
         }
     }, [location.search])
