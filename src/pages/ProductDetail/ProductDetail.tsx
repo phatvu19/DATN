@@ -122,7 +122,7 @@ const ProductDetail = () => {
     const navigate = useNavigate()
     const cartsnow = JSON.parse(localStorage.getItem("cartnow") || "[]")
     const HandleAddtoCartNow = async () => {
-        
+
         const data = {
             image: product?.image,
             variant_id: sizevalue,
@@ -159,6 +159,10 @@ const ProductDetail = () => {
     const [actives, setavtive] = useState()
     const active = (value: any) => {
         setavtive(value)
+    }
+    const [idSize, setIdSize] = useState()
+    const quantity1 = (value: any) => {
+        setIdSize(value)
     }
     return (
         <>
@@ -198,6 +202,7 @@ const ProductDetail = () => {
                         <QuantityInProductDetail
                             product={product?.variants}
                             variant={idsize}
+                            idsize={idSize}
                         />
                     </div>
 
@@ -243,6 +248,7 @@ const ProductDetail = () => {
                                         color={attributeValues[1][index]}
                                         onActive={active}
                                         active={actives}
+                                        onQuantity={quantity1}
                                     />
                                 </>
                             )

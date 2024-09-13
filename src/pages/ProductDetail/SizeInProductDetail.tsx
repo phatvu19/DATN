@@ -7,6 +7,7 @@ const SizeInProductDetail = ({
     index,
     color,
     onActive,
+    onQuantity,
     active,
 }: any) => {
     if (!Array.isArray(product) || product.length === 0) {
@@ -16,6 +17,7 @@ const SizeInProductDetail = ({
     const HandleClick = (values: any) => {
         onActive(values)
         onSize(variant, values, values)
+        onQuantity(values)
     }
     const filteredSizes = value
         ? value
