@@ -13,16 +13,15 @@ const QuantityInProductDetail = ({ product, variant, onQuantity }: any) => {
     useEffect(() => {
         onQuantity(quantity)
     }, [variant])
-
+    const quantitypro = product.find((item: any) => item.quantity >0).quantity
     return (
         <>
             {!variant ? (
                 <>
                     Còn
                     <p className="ml-2 mr-2 font-bold">
-                        {" "}
-                        {product[0]?.quantity}{" "}
-                    </p>{" "}
+                        {quantitypro}
+                    </p>
                     sản phẩm
                 </>
             ) : (

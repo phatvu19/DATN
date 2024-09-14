@@ -133,6 +133,10 @@ const CheckOutNow = () => {
                     }, 300)
                 } else {
                     toast.error("Đặt hàng thất bại")
+                    setloadings(false)
+                    setTimeout(() => {
+                        window.location.href = `/ `
+                    }, 300)
                 }
             })
         }
@@ -145,7 +149,7 @@ const CheckOutNow = () => {
                 adddetailAndsendemail()
             } else {
                 confirm("Thanh toán thất bại!")
-                window.location.href = "http://localhost:5173/products"
+                navigate('/')
             }
         }
     }, [location.search])

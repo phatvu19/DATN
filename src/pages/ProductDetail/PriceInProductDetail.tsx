@@ -1,9 +1,10 @@
-import { CheckCircleOutlined } from "@ant-design/icons"
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons"
 import formatNumber from "../../utilities/FormatTotal"
 import { useEffect, useState } from "react"
 import { getAllSale } from "@/api/services/Sale"
+import Icon from "@ant-design/icons/lib/components/Icon"
 
-const PriceInProductDetail = ({ data, idcolor, onPrice, sale_id }: any) => {
+const PriceInProductDetail = ({ data, idcolor, onPrice, sale_id,quantity }: any) => {
     if (!Array.isArray(data) || data.length === 0) {
         return <div></div>
     }
@@ -62,14 +63,20 @@ const PriceInProductDetail = ({ data, idcolor, onPrice, sale_id }: any) => {
                 ) : (
                     <></>
                 )}
-
-                <p className="ml-auto mt-1 font-bold">
+                {quantity ==0 ? <p className="ml-auto mt-1 font-bold">
+                    Hết Hàng
+                    <CloseCircleOutlined
+                        className="text-white-500 bg-red-500 "
+                        style={{ color: "white ", borderRadius: "50%" }}
+                    />
+                </p> : <p className="ml-auto mt-1 font-bold">
                     Còn Hàng
                     <CheckCircleOutlined
                         className="text-white-500 bg-green-600 "
                         style={{ color: "white ", borderRadius: "50%" }}
                     />
-                </p>
+                </p>}
+                
             </div>
             {/* <span className="text-sm text-red-600">Giảm 53%</span> */}
         </>
