@@ -94,7 +94,6 @@ const CheckOut = () => {
                 bill_id: response?.data?.id,
                 token: `${user?.token}`,
             }
-            console.log(data2)
 
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
@@ -119,23 +118,34 @@ const CheckOut = () => {
                 }),
             )
 
-            await addBillDetail(data2).then(async (data) => {
-                if (data?.data?.status == true) {
-                    localStorage.removeItem("cart")
-                    localStorage.removeItem("response")
-                    toast.success("Đặt hàng thành công")
-                    setloadings(false)
-                    setTimeout(() => {
-                        window.location.href = `/order_done/${response?.data?.id} `
-                    }, 300)
-                } else {
+            await addBillDetail(data2)
+                .then(async (data) => {
+                    console.log(data)
+
+                    if (data?.data?.status == true) {
+                        localStorage.removeItem("cart")
+                        localStorage.removeItem("response")
+                        toast.success("Đặt hàng thành công")
+                        setloadings(false)
+                        setTimeout(() => {
+                            window.location.href = `/order_done/${response?.data?.id} `
+                        }, 300)
+                    } else {
+                        toast.error("Đặt hàng thất bại")
+                        setTimeout(() => {
+                            setloadings(false)
+                            navigate("/")
+                        }, 500)
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
                     toast.error("Đặt hàng thất bại")
                     setTimeout(() => {
                         setloadings(false)
                         navigate("/")
                     }, 500)
-                }
-            })
+                })
         }
     }
     useEffect(() => {
@@ -146,7 +156,7 @@ const CheckOut = () => {
                 adddetailAndsendemail()
             } else {
                 confirm("Thanh toán thất bại!")
-                window.location.reload()
+                navigate("/")
             }
         }
     }, [location.search])
@@ -298,6 +308,10 @@ const CheckOut = () => {
                     }, 500)
                 } else {
                     toast.error("Đặt hàng thất bại")
+                    setloadings(false)
+                    setTimeout(() => {
+                        window.location.href = `/ `
+                    }, 500)
                 }
             })
         }

@@ -225,6 +225,7 @@ const ProductDetail = () => {
                         idcolor={idColor}
                         onPrice={price}
                         sale_id={product?.sale_id}
+                        quantity={quantity2}
                     />
                     <hr className="my-4  w-full border-t border-dashed border-gray-400" />
                     <span className="text-sm font-bold">MÀU SẮC </span>
@@ -268,52 +269,62 @@ const ProductDetail = () => {
                             )
                         })}
                     </div>
-                    {sizevalue && idsize ? (
-                        <div className="mb-5 mt-6 flex ">
-                            <span className="text-sm font-bold ">CHỌN SỐ LƯỢNG</span>
-                            <div className="ml-auto flex items-center">
-                                <button
-                                    onClick={handleDecrement}
-                                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l border bg-gray-200"
-                                >
-                                    -
-                                </button>
-                                <input
-                                    readOnly
-                                    type="number"
-                                    className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
-                                    min="1"
-                                    max={quantity2}
-                                    value={quantity}
-                                    onChange={(e: any) =>
-                                        setquantity(e.target.value)
-                                    }
-                                />
-                                <button
-                                    onClick={handleIncrement}
-                                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r border bg-gray-200"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-                    ) : (
+                    {quantity2 == 0 ? (
                         ""
+                    ) : (
+                        <>
+                            {sizevalue && idsize ? (
+                                <div className="mb-5 mt-6 flex ">
+                                    <span className="text-sm font-bold ">
+                                        CHỌN SỐ LƯỢNG
+                                    </span>
+                                    <div className="ml-auto flex items-center">
+                                        <button
+                                            onClick={handleDecrement}
+                                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l border bg-gray-200"
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            readOnly
+                                            type="number"
+                                            className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
+                                            min="1"
+                                            max={quantity2}
+                                            value={quantity}
+                                            onChange={(e: any) =>
+                                                setquantity(e.target.value)
+                                            }
+                                        />
+                                        <button
+                                            onClick={handleIncrement}
+                                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r border bg-gray-200"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                ""
+                            )}{" "}
+                        </>
                     )}
 
                     <div className="mt-10 flex">
                         <button
-                            className="w-2/4 rounded border  border-red-400 p-2"
-                            style={{ color: "red" }}
+                            className={`w-2/4 rounded border   p-2 ${quantity2 == 0 ? "bg-gray-200" : "border-red-400 bg-red-500"}`}
+                            disabled={quantity2 == 0 ? true : false}
+                            style={{ color: "white" }}
                             onClick={() => HandleAddtoCart()}
                         >
-                            <ShoppingCartOutlined style={{ color: "red" }} /> Thêm
+                            <ShoppingCartOutlined style={{ color: "white" }} /> Thêm
                             giỏ hàng
                         </button>
                         <button
-                            className=" ml-2 w-2/4 rounded bg-red-500 p-2"
+                            className={`ml-2 w-2/4 rounded  p-2 ${quantity2 == 0 ? "bg-gray-200" : "bg-red-500"}`}
                             style={{ color: "white" }}
                             onClick={() => HandleAddtoCartNow()}
+                            disabled={quantity2 == 0 ? true : false}
                         >
                             <CarryOutOutlined style={{ color: "white" }} /> Mua ngay
                         </button>
