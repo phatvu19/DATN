@@ -120,7 +120,7 @@ const CheckOut = () => {
 
             await addBillDetail(data2)
                 .then(async (data) => {
-                    console.log(data);
+                    console.log(data)
 
                     if (data?.data?.status == true) {
                         localStorage.removeItem("cart")
@@ -138,14 +138,13 @@ const CheckOut = () => {
                         }, 500)
                     }
                 })
-                .catch(error =>{
-                    console.log(error);
+                .catch((error) => {
+                    console.log(error)
                     toast.error("Đặt hàng thất bại")
-                        setTimeout(() => {
-                            setloadings(false)
-                            navigate("/")
-                        }, 500)
-                    
+                    setTimeout(() => {
+                        setloadings(false)
+                        navigate("/")
+                    }, 500)
                 })
         }
     }
@@ -382,8 +381,8 @@ const CheckOut = () => {
         console.log(discountCode)
         const check: any = voucher
             ? voucher?.data?.find(
-                (data1: any) => data1?.voucher_code == discountCode,
-            )?.discount_amount
+                  (data1: any) => data1?.voucher_code == discountCode,
+              )?.discount_amount
             : ""
         const voucherTotal = (totalprice * check) / 100
         if (discountCode.toLowerCase() == "xinchao") {
@@ -805,13 +804,13 @@ const CheckOut = () => {
                                             <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
                                                 {priceDiscount
                                                     ? formatNumber(
-                                                        totalprice +
-                                                        30000 -
-                                                        priceDiscount,
-                                                    )
+                                                          totalprice +
+                                                              30000 -
+                                                              priceDiscount,
+                                                      )
                                                     : formatNumber(
-                                                        totalprice + 30000,
-                                                    )}
+                                                          totalprice + 30000,
+                                                      )}
                                                 đ
                                             </h5>
                                         </div>

@@ -149,7 +149,7 @@ const CheckOutNow = () => {
                 adddetailAndsendemail()
             } else {
                 confirm("Thanh toán thất bại!")
-                navigate('/')
+                navigate("/")
             }
         }
     }, [location.search])

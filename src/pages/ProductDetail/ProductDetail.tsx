@@ -269,44 +269,50 @@ const ProductDetail = () => {
                             )
                         })}
                     </div>
-                    {quantity2 == 0 ? "" : <>
-                        {sizevalue && idsize ? (
-                            <div className="mb-5 mt-6 flex ">
-                                <span className="text-sm font-bold ">CHỌN SỐ LƯỢNG</span>
-                                <div className="ml-auto flex items-center">
-                                    <button
-                                        onClick={handleDecrement}
-                                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l border bg-gray-200"
-                                    >
-                                        -
-                                    </button>
-                                    <input
-                                        readOnly
-                                        type="number"
-                                        className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
-                                        min="1"
-                                        max={quantity2}
-                                        value={quantity}
-                                        onChange={(e: any) =>
-                                            setquantity(e.target.value)
-                                        }
-                                    />
-                                    <button
-                                        onClick={handleIncrement}
-                                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r border bg-gray-200"
-                                    >
-                                        +
-                                    </button>
+                    {quantity2 == 0 ? (
+                        ""
+                    ) : (
+                        <>
+                            {sizevalue && idsize ? (
+                                <div className="mb-5 mt-6 flex ">
+                                    <span className="text-sm font-bold ">
+                                        CHỌN SỐ LƯỢNG
+                                    </span>
+                                    <div className="ml-auto flex items-center">
+                                        <button
+                                            onClick={handleDecrement}
+                                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-l border bg-gray-200"
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            readOnly
+                                            type="number"
+                                            className="w-15 h-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none "
+                                            min="1"
+                                            max={quantity2}
+                                            value={quantity}
+                                            onChange={(e: any) =>
+                                                setquantity(e.target.value)
+                                            }
+                                        />
+                                        <button
+                                            onClick={handleIncrement}
+                                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-r border bg-gray-200"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        ) : (
-                            ""
-                        )} </>}
-
+                            ) : (
+                                ""
+                            )}{" "}
+                        </>
+                    )}
 
                     <div className="mt-10 flex">
                         <button
-                            className={`w-2/4 rounded border   p-2 ${quantity2 == 0 ? 'bg-gray-200' : 'border-red-400 bg-red-500'}`}
+                            className={`w-2/4 rounded border   p-2 ${quantity2 == 0 ? "bg-gray-200" : "border-red-400 bg-red-500"}`}
                             disabled={quantity2 == 0 ? true : false}
                             style={{ color: "white" }}
                             onClick={() => HandleAddtoCart()}
@@ -315,7 +321,7 @@ const ProductDetail = () => {
                             giỏ hàng
                         </button>
                         <button
-                            className={`ml-2 w-2/4 rounded  p-2 ${quantity2 == 0 ? 'bg-gray-200' : 'bg-red-500'}`}
+                            className={`ml-2 w-2/4 rounded  p-2 ${quantity2 == 0 ? "bg-gray-200" : "bg-red-500"}`}
                             style={{ color: "white" }}
                             onClick={() => HandleAddtoCartNow()}
                             disabled={quantity2 == 0 ? true : false}
