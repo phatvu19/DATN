@@ -118,34 +118,25 @@ const CheckOut = () => {
                 }),
             )
 
-            await addBillDetail(data2)
-                .then(async (data) => {
-                    console.log(data)
+            await addBillDetail(data2).then(async (data) => {
+                console.log(data)
 
-                    if (data?.data?.status == true) {
-                        localStorage.removeItem("cart")
-                        localStorage.removeItem("response")
-                        toast.success("Đặt hàng thành công")
-                        setloadings(false)
-                        setTimeout(() => {
-                            window.location.href = `/order_done/${response?.data?.id} `
-                        }, 300)
-                    } else {
-                        toast.error("Đặt hàng thất bại")
-                        setTimeout(() => {
-                            setloadings(false)
-                            navigate("/")
-                        }, 500)
-                    }
-                })
-                .catch((error) => {
-                    console.log(error)
-                    toast.error("Đặt hàng thất bại")
+                if (data?.data?.status == true) {
+                    localStorage.removeItem("cart")
+                    localStorage.removeItem("response")
+                    toast.success("Đặt hàng thành công")
+                    setloadings(false)
+                    setTimeout(() => {
+                        window.location.href = `/order_done/${response?.data?.id} `
+                    }, 300)
+                } else {
+                    toast.error(data?.data?.status)
                     setTimeout(() => {
                         setloadings(false)
                         navigate("/")
                     }, 500)
-                })
+                }
+            })
         }
     }
     useEffect(() => {
@@ -307,7 +298,7 @@ const CheckOut = () => {
                         window.location.href = `/order_done/${response?.data?.id} `
                     }, 500)
                 } else {
-                    toast.error("Đặt hàng thất bại")
+                    toast.error(data?.data?.status)
                     setloadings(false)
                     setTimeout(() => {
                         window.location.href = `/ `
