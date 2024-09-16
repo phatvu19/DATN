@@ -27,6 +27,7 @@ const AddProduct = () => {
     const [attributes, setAttributes] = useState<Attribute[]>([])
     const [attributeValues, setAttributeValues] = useState<any>({})
     const navigate = useNavigate()
+    console.log(variants);
 
     const { control, handleSubmit } = useForm()
 
@@ -292,19 +293,7 @@ const AddProduct = () => {
                                 }}
                             />
                         </Form.Item>
-                        <Form.Item label="Giá khuyến mãi">
-                            <Input
-                                size="large"
-                                type="number"
-                                value={variant.price_promotional}
-                                onChange={(e) => {
-                                    const newVariants = [...variants]
-                                    newVariants[index].price_promotional =
-                                        parseFloat(e.target.value)
-                                    setVariants(newVariants)
-                                }}
-                            />
-                        </Form.Item>
+                     
                         <Form.Item label="Số lượng">
                             <Input
                                 size="large"
@@ -338,14 +327,20 @@ const AddProduct = () => {
                                 >
                                     <Option value="">Chọn</Option>
                                     {attributeValues[attribute.id]?.map(
-                                        (value: any) => (
-                                            <Option
-                                                key={value.id}
-                                                value={value.value}
-                                            >
-                                                {value.value}
-                                            </Option>
-                                        ),
+                                        (value: any) => {
+                                            const isColorSelected = variants.some((variant: any) => variant.attributes.color === value.value);
+                                            console.log(isColorSelected);
+                                            
+                                            return (
+                                                <Option
+                                                    key={value.id}
+                                                    value={value.value}
+                                                    disabled={isColorSelected ? true : false}
+                                                >
+                                                    {value.value}
+                                                </Option>
+                                            )
+                                        },
                                     )}
                                 </Select>
                             </Form.Item>

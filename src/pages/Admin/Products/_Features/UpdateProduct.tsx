@@ -140,7 +140,7 @@ const UpdateProduct = () => {
         }, {})
         setAttributeValues(organizedValues)
     }
-    const [uploadedImages, setUploadedImages] = useState([]);
+    const [uploadedImages, setUploadedImages] = useState<any>();
     const props: any = {
         action: "https://api.cloudinary.com/v1_1/dsul0ahfu/image/upload",
         onChange({ file }: any) {
@@ -347,19 +347,6 @@ const UpdateProduct = () => {
                                     newVariants[index].price = parseFloat(
                                         e.target.value,
                                     )
-                                    setVariants(newVariants)
-                                }}
-                            />
-                        </Form.Item>
-                        <Form.Item label="Giá khuyến mãi">
-                            <Input
-                                size="large"
-                                type="number"
-                                value={variant.price_promotional}
-                                onChange={(e) => {
-                                    const newVariants = [...variants]
-                                    newVariants[index].price_promotional =
-                                        parseFloat(e.target.value)
                                     setVariants(newVariants)
                                 }}
                             />

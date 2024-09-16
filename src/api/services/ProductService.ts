@@ -47,7 +47,7 @@ const updateProduct = async (
             product,
         )
         const updatedProduct = response.data?.data
-        toast.success("Product updated successfully.")
+        // toast.success("Product updated successfully.")
         return updatedProduct
     } catch (error) {
         throw error
