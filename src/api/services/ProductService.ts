@@ -23,7 +23,6 @@ const getProductById = async (id: number): Promise<Product | undefined> => {
 }
 
 const createProduct = async (product: Product) => {
-
     try {
         const response = await httpRequest.post("/products", product, {
             headers: {
@@ -32,7 +31,7 @@ const createProduct = async (product: Product) => {
         })
         return response.data
     } catch (error) {
-
+        console.error("An error occurred:", error)
         throw error // Throwing error để component gọi hàm này có thể xử lý tiếp
     }
 }
@@ -42,14 +41,16 @@ const updateProduct = async (
     product: Product,
 ): Promise<Product | undefined> => {
     try {
-        const response: AxiosResponse<{ data: Product }> = await httpRequest.put (
+        const response: AxiosResponse<{ data: Product }> = await httpRequest.put(
             `/products/${id}`,
             product,
         )
         const updatedProduct = response.data?.data
+        console.error("Product updated successfully.")
         // toast.success("Product updated successfully.")
         return updatedProduct
     } catch (error) {
+        console.error("An error occurred:", error)
         throw error
     }
 }

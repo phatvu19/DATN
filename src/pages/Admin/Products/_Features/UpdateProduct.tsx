@@ -140,20 +140,20 @@ const UpdateProduct = () => {
         }, {})
         setAttributeValues(organizedValues)
     }
-    const [uploadedImages, setUploadedImages] = useState<any>();
+    const [uploadedImages, setUploadedImages] = useState<any>()
     const props: any = {
         action: "https://api.cloudinary.com/v1_1/dsul0ahfu/image/upload",
         onChange({ file }: any) {
             if (file.status !== "uploading") {
                 // Sử dụng một hàm setState để cập nhật mảng uploadedImages
-                setUploadedImages(file.response.secure_url);
+                setUploadedImages(file.response.secure_url)
             }
         },
         data: {
             upload_preset: "dant_phat",
             folder: "datn",
         },
-    };
+    }
     const onSubmit = async (data: FieldValues) => {
         const formattedData: any = {
             name: data.name,
@@ -244,7 +244,11 @@ const UpdateProduct = () => {
                                             {...field}
                                             placeholder="Tên sản phẩm..."
                                         />
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
@@ -263,7 +267,9 @@ const UpdateProduct = () => {
                                             {...field}
                                             size="large"
                                             style={{ height: 50 }}
-                                            onChange={(value) => field.onChange(value)}
+                                            onChange={(value) =>
+                                                field.onChange(value)
+                                            }
                                         >
                                             <Option value="">Chọn</Option>
                                             {categories.map((cat) => (
@@ -272,7 +278,11 @@ const UpdateProduct = () => {
                                                 </Option>
                                             ))}
                                         </Select>
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
@@ -296,7 +306,11 @@ const UpdateProduct = () => {
                                             style={{ height: 50 }}
                                             placeholder="Thương hiệu"
                                         />
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
@@ -314,30 +328,49 @@ const UpdateProduct = () => {
                                             autoSize={{ minRows: 3, maxRows: 6 }}
                                             placeholder="Mô tả"
                                         />
-                                        {error && <span style={{ color: 'red' }}>{error.message}</span>}
+                                        {error && (
+                                            <span style={{ color: "red" }}>
+                                                {error.message}
+                                            </span>
+                                        )}
                                     </>
                                 )}
                             />
                         </Form.Item>
                     </div>
-                    {check ? <Form.Item label="Image" name="image" rules={[{ required: true, message: "Không được để trống" }]}>
-                        <Upload.Dragger {...props} multiple accept=".jpg,.png">
-                            <Button icon={<UploadOutlined />}>Upload</Button>
-                        </Upload.Dragger>
-                    </Form.Item> : <Form.Item label="Image" style={{ width: '10%' }} >
-                        <Image src={image} />
-                        <Button onClick={() => HandleExit()} className="mt-2">Bỏ ảnh</Button>
-                    </Form.Item>}
-
-
-
+                    {check ? (
+                        <Form.Item
+                            label="Image"
+                            name="image"
+                            rules={[
+                                { required: true, message: "Không được để trống" },
+                            ]}
+                        >
+                            <Upload.Dragger {...props} multiple accept=".jpg,.png">
+                                <Button icon={<UploadOutlined />}>Upload</Button>
+                            </Upload.Dragger>
+                        </Form.Item>
+                    ) : (
+                        <Form.Item label="Image" style={{ width: "10%" }}>
+                            <Image src={image} />
+                            <Button onClick={() => HandleExit()} className="mt-2">
+                                Bỏ ảnh
+                            </Button>
+                        </Form.Item>
+                    )}
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">Sản phẩm biến thể</h3>
                 {variants.map((variant: any, index: any) => (
                     <div key={index} className="flex flex-wrap space-x-4">
-                        <Form.Item label="Giá gốc" rules={[{
-                            required: true, message: "Không được để trống"
-                        }]}>
+                        <Form.Item
+                            label="Giá gốc"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Không được để trống",
+                                },
+                            ]}
+                        >
                             <Input
                                 size="large"
                                 type="number"
@@ -382,11 +415,16 @@ const UpdateProduct = () => {
                                     }
                                 >
                                     <Option value="">Chọn</Option>
-                                    {attributeValues[attribute.id]?.map((value: any) => (
-                                        <Option key={value.id} value={value.value}>
-                                            {value.value}
-                                        </Option>
-                                    ))}
+                                    {attributeValues[attribute.id]?.map(
+                                        (value: any) => (
+                                            <Option
+                                                key={value.id}
+                                                value={value.value}
+                                            >
+                                                {value.value}
+                                            </Option>
+                                        ),
+                                    )}
                                 </Select>
                             </Form.Item>
                         ))}

@@ -118,26 +118,25 @@ const CheckOut = () => {
                 }),
             )
 
-            await addBillDetail(data2)
-                .then(async (data) => {
-                    console.log(data)
+            await addBillDetail(data2).then(async (data) => {
+                console.log(data)
 
-                    if (data?.data?.status == true) {
-                        localStorage.removeItem("cart")
-                        localStorage.removeItem("response")
-                        toast.success("Đặt hàng thành công")
+                if (data?.data?.status == true) {
+                    localStorage.removeItem("cart")
+                    localStorage.removeItem("response")
+                    toast.success("Đặt hàng thành công")
+                    setloadings(false)
+                    setTimeout(() => {
+                        window.location.href = `/order_done/${response?.data?.id} `
+                    }, 300)
+                } else {
+                    toast.error(data?.data?.status)
+                    setTimeout(() => {
                         setloadings(false)
-                        setTimeout(() => {
-                            window.location.href = `/order_done/${response?.data?.id} `
-                        }, 300)
-                    } else {
-                        toast.error(data?.data?.status)
-                        setTimeout(() => {
-                            setloadings(false)
-                            navigate("/")
-                        }, 500)
-                    }
-                })
+                        navigate("/")
+                    }, 500)
+                }
+            })
         }
     }
     useEffect(() => {
