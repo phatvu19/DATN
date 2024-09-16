@@ -416,14 +416,26 @@ const UpdateProduct = () => {
                                 >
                                     <Option value="">Chọn</Option>
                                     {attributeValues[attribute.id]?.map(
-                                        (value: any) => (
-                                            <Option
-                                                key={value.id}
-                                                value={value.value}
-                                            >
-                                                {value.value}
-                                            </Option>
-                                        ),
+                                        (value: any) => {
+                                            const isColorSelected = variants.some(
+                                                (variant: any) =>
+                                                    variant.attributes.color ===
+                                                    value.value,
+                                            )
+                                            return (
+                                                <Option
+                                                    key={value.id}
+                                                    value={value.value}
+                                                    disabled={
+                                                        isColorSelected
+                                                            ? true
+                                                            : false
+                                                    }
+                                                >
+                                                    {value.value}
+                                                </Option>
+                                            )
+                                        },
                                     )}
                                 </Select>
                             </Form.Item>
