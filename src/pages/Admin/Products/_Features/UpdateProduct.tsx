@@ -422,15 +422,20 @@ const UpdateProduct = () => {
                                                     variant.attributes.color ===
                                                     value.value,
                                             )
-                                            return(
-                                            <Option
-                                                key={value.id}
-                                                value={value.value}
-                                                disabled={isColorSelected ? true : false}
-                                            >
-                                                {value.value}
-                                            </Option>
-                                        )}
+                                            return (
+                                                <Option
+                                                    key={value.id}
+                                                    value={value.value}
+                                                    disabled={
+                                                        isColorSelected
+                                                            ? true
+                                                            : false
+                                                    }
+                                                >
+                                                    {value.value}
+                                                </Option>
+                                            )
+                                        },
                                     )}
                                 </Select>
                             </Form.Item>
