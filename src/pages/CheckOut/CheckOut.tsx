@@ -130,7 +130,7 @@ const CheckOut = () => {
                         window.location.href = `/order_done/${response?.data?.id} `
                     }, 300)
                 } else {
-                    toast.error('Đặt hàng thất bại!')
+                    toast.error("Đặt hàng thất bại!")
                     setTimeout(() => {
                         setloadings(false)
                         navigate("/")
@@ -298,8 +298,7 @@ const CheckOut = () => {
                         window.location.href = `/order_done/${response?.data?.id} `
                     }, 500)
                 } else {
-
-                    toast.error('Đặt hàng thất bại!')
+                    toast.error("Đặt hàng thất bại!")
 
                     setloadings(false)
                     setTimeout(() => {

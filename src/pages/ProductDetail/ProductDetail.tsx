@@ -80,7 +80,7 @@ const ProductDetail = () => {
             image: product?.image,
             variant_id: sizevalue,
             quantity: quantity,
-            quantitymax:quantity2,
+            quantitymax: quantity2,
             name_product: product?.name,
             sale_id: product?.sale_id,
             attributes: [
@@ -94,53 +94,53 @@ const ProductDetail = () => {
                 },
             ],
         }
-    
+
         // Input validation
         if (quantity <= 0) {
-            return toast.error("Hãy chọn số lượng lại!");
+            return toast.error("Hãy chọn số lượng lại!")
         }
-    
+
         if (idsize === undefined) {
-            return toast.error("Bạn cần chọn size!");
+            return toast.error("Bạn cần chọn size!")
         } else if (sizevalue === undefined) {
-            return toast.error("Bạn cần chọn color!");
+            return toast.error("Bạn cần chọn color!")
         }
-    
+
         // Find existing product in the cart
         const existingProductIndex = carts.findIndex(
             (item: any) =>
                 item.variant_id === sizevalue &&
                 item.attributes[0].attribute_value === id_attribute_value &&
-                item.attributes[1].attribute_value === id_attribute_size
-        );
-    
+                item.attributes[1].attribute_value === id_attribute_size,
+        )
+
         if (existingProductIndex !== -1) {
             // Product already exists in the cart
-            const currentQuantity = carts[existingProductIndex].quantity;
-            const updatedQuantity = currentQuantity + quantity;
-    
+            const currentQuantity = carts[existingProductIndex].quantity
+            const updatedQuantity = currentQuantity + quantity
+
             if (updatedQuantity > quantity2) {
                 // Quantity exceeds the maximum allowed
-                return toast.error("Không đủ số lượng, hãy kiểm tra giỏ hàng!");
+                return toast.error("Không đủ số lượng, hãy kiểm tra giỏ hàng!")
             } else {
                 // Update the quantity of the existing product
-                carts[existingProductIndex].quantity = updatedQuantity;
+                carts[existingProductIndex].quantity = updatedQuantity
             }
         } else {
             // Product does not exist in the cart, add it
-            carts.push(data);
+            carts.push(data)
         }
-    
+
         // Save the updated cart to localStorage
-        localStorage.setItem("cart", JSON.stringify(carts));
-        toast.success("Bạn đã thêm thành công!");
-    
+        localStorage.setItem("cart", JSON.stringify(carts))
+        toast.success("Bạn đã thêm thành công!")
+
         // Optional: Reload the page after a short delay
         // setTimeout(() => {
         //     window.location.reload();
         // }, 500);
-    };
-    
+    }
+
     const navigate = useNavigate()
 
     const HandleAddtoCartNow = async () => {

@@ -46,33 +46,33 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
     }
 
     const handleIncrease = (id: any) => {
-        const updatedCarts: any = [...carts];
-        const index = updatedCarts.findIndex((item: any) => item.variant_id === id);
-    
+        const updatedCarts: any = [...carts]
+        const index = updatedCarts.findIndex((item: any) => item.variant_id === id)
+
         if (index !== -1) {
             // Check if incrementing would exceed the maximum quantity
             if (updatedCarts[index].quantity + 1 > quantity?.quantitymax) {
-                toast.error("Vượt quá số lượng!");
-                return;
+                toast.error("Vượt quá số lượng!")
+                return
             }
-    
+
             // If not, increment the quantity and update the cart
-            updatedCarts[index].quantity++;
-            setDisplayQuantity(updatedCarts[index].quantity);
-            localStorage.setItem("cart", JSON.stringify(updatedCarts));
-            setcheck(true);
-            onCart(id);
-    
+            updatedCarts[index].quantity++
+            setDisplayQuantity(updatedCarts[index].quantity)
+            localStorage.setItem("cart", JSON.stringify(updatedCarts))
+            setcheck(true)
+            onCart(id)
+
             // Reload the page after a short delay
             setTimeout(() => {
-                window.location.reload();
-            }, 100);
+                window.location.reload()
+            }, 100)
         } else {
             // Handle the case where the item is not found in the cart
-            return;
+            return
         }
-    };
-    
+    }
+
     const HandleRemove = (productToRemove: any) => {
         console.log(productToRemove)
         const check = confirm("Bạn có muốn xóa?")
@@ -114,7 +114,10 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                 </tr>
             ) : (
                 <>
-                    <tr ng-repeat="item in cart" className="relative pb-20 border border-gray-3">
+                    <tr
+                        ng-repeat="item in cart"
+                        className="border-gray-3 relative border pb-20"
+                    >
                         <td className="pt-5 font-normal">{index + 1}</td>
                         <td className="pt-5 font-normal">
                             <img src={quantity?.image} width="90px" />
@@ -127,7 +130,11 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                                     fontSize: "16px",
                                 }}
                             >
-                                {quantity?.name_product?.length >= 20 ? <>{quantity?.name_product?.slice(0, 20)}...</> : quantity?.name_product}
+                                {quantity?.name_product?.length >= 20 ? (
+                                    <>{quantity?.name_product?.slice(0, 20)}...</>
+                                ) : (
+                                    quantity?.name_product
+                                )}
                             </p>
                             <p style={{ fontSize: "14px" }}>
                                 Kích thước: {data?.atribute[1].value}
@@ -155,7 +162,9 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                             <div className="flex items-center">
                                 <button
                                     className="h-8 w-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none"
-                                    onClick={() => handleDecrease(quantity?.variant_id)}
+                                    onClick={() =>
+                                        handleDecrease(quantity?.variant_id)
+                                    }
                                 >
                                     -
                                 </button>
@@ -168,7 +177,9 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                                 />
                                 <button
                                     className="h-8 w-8 cursor-pointer select-none rounded border px-2 py-1 text-center text-gray-700 hover:bg-gray-200 focus:outline-none"
-                                    onClick={() => handleIncrease(quantity?.variant_id)}
+                                    onClick={() =>
+                                        handleIncrease(quantity?.variant_id)
+                                    }
                                 >
                                     +
                                 </button>
@@ -184,7 +195,6 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
                             />
                         </td>
                     </tr>
-
                 </>
             )}
         </>

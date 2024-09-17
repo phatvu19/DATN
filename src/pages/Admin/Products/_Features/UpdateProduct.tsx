@@ -162,7 +162,7 @@ const UpdateProduct = () => {
             description: data.description,
             image: uploadedImages ? uploadedImages : image,
             variants: variants.map((variant) => ({
-                variant_id : variant.id,
+                variant_id: variant.id,
                 price: variant.price,
                 price_promotional: variant.price_promotional,
                 quantity: variant.quantity,
@@ -188,7 +188,6 @@ const UpdateProduct = () => {
         navigate("/admin/quan-ly-san-pham")
     }
 
-
     const handleAddVariant = () => {
         setVariants([
             ...variants,
@@ -203,7 +202,7 @@ const UpdateProduct = () => {
             },
         ])
     }
-    console.log(variants);
+    console.log(variants)
     const handleRemoveVariant = (index: number) => {
         const newVariants: any = variants.filter((_, i) => i !== index)
         setVariants(newVariants)

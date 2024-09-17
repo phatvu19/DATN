@@ -25,8 +25,8 @@ const Cart = () => {
     const carttt = (cart: any) => {
         setcheck(cart)
     }
-    console.log(cartt);
-    
+    console.log(cartt)
+
     const [loading, setloading] = useState(true)
     const calculateTotalClick = async () => {
         let total = 0
@@ -119,7 +119,7 @@ const Cart = () => {
                                             <th className="font-bold">Số Lượng</th>
                                             <th className="font-bold">Thành Tiền</th>
                                         </thead>
-                                        <tbody className="pt-20 00">
+                                        <tbody className="00 pt-20">
                                             {cartt?.data?.map(
                                                 (data: any, index: any) => {
                                                     return (
