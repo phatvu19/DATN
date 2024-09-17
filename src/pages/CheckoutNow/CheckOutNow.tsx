@@ -583,47 +583,24 @@ const CheckOutNow = () => {
                                     </div>
                                     <div className="ml-10 w-2/4"></div>
                                 </div>
-                                {users?.address ? (
-                                    <div className="mt-5">
-                                        <label htmlFor="" className="font-bold">
-                                            Địa chỉ
-                                        </label>
-                                        <div className="mt-5 flex w-full">
-                                            <Form.Item
-                                                name="address"
-                                                className="mr-2 w-full"
-                                            >
-                                                <Input type="text" disabled />
-                                            </Form.Item>
-                                            <Link to="/profile">
-                                                <Button
-                                                    className="ml-auto"
-                                                    type="primary"
-                                                >
-                                                    Cập nhập địa chỉ mới
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="mt-5 flex">
-                                        <ProvinceInCheckOutnow
-                                            onIDProvince={idprovince}
-                                            onNameProvince={nameprovince}
-                                        />
 
-                                        <DistrictInCheckOutNow
-                                            id={provinceId}
-                                            onIDDistrict={iddistrict}
-                                            onNameDistrict={namedistrict}
-                                        />
+                                <div className="mt-5 flex">
+                                    <ProvinceInCheckOutnow
+                                        onIDProvince={idprovince}
+                                        onNameProvince={nameprovince}
+                                    />
 
-                                        <WardInCheckOutNow
-                                            id={districtId}
-                                            onNameWard={nameWard}
-                                        />
-                                    </div>
-                                )}
+                                    <DistrictInCheckOutNow
+                                        id={provinceId}
+                                        onIDDistrict={iddistrict}
+                                        onNameDistrict={namedistrict}
+                                    />
+
+                                    <WardInCheckOutNow
+                                        id={districtId}
+                                        onNameWard={nameWard}
+                                    />
+                                </div>
 
                                 <div className="mt-5">
                                     <label
