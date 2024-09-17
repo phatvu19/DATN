@@ -87,7 +87,7 @@ const UpdateProduct = () => {
                         },
                         [],
                     )
-                    
+
                     const formattedVariants = product.variants.map(
                         (variant: any) => {
                             const attributes = formatVariantAttributes(
@@ -432,16 +432,17 @@ const UpdateProduct = () => {
                                                     variant.attributes.size ==
                                                     value.value,
                                             )
-                                            console.log(isColorSelected,isSizeSelected);
-                                            
+                                            console.log(
+                                                isColorSelected,
+                                                isSizeSelected,
+                                            )
+
                                             return (
                                                 <Option
                                                     key={value.id}
                                                     value={value.value}
                                                     disabled={
-                                                        isSizeSelected
-                                                            ? true
-                                                            : false
+                                                        isSizeSelected ? true : false
                                                     }
                                                 >
                                                     {value.value}
