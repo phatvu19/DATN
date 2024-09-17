@@ -162,6 +162,7 @@ const UpdateProduct = () => {
             description: data.description,
             image: uploadedImages ? uploadedImages : image,
             variants: variants.map((variant) => ({
+                variant_id: variant.id,
                 price: variant.price,
                 price_promotional: variant.price_promotional,
                 quantity: variant.quantity,
@@ -201,6 +202,7 @@ const UpdateProduct = () => {
             },
         ])
     }
+    console.log(variants)
     const handleRemoveVariant = (index: number) => {
         const newVariants: any = variants.filter((_, i) => i !== index)
         setVariants(newVariants)
@@ -419,18 +421,18 @@ const UpdateProduct = () => {
                                         (value: any) => {
                                             const isColorSelected = variants.some(
                                                 (variant: any) =>
-                                                    variant.attributes.color ===
+                                                    variant.attributes.size ==
                                                     value.value,
                                             )
                                             return (
                                                 <Option
                                                     key={value.id}
                                                     value={value.value}
-                                                    disabled={
-                                                        isColorSelected
-                                                            ? true
-                                                            : false
-                                                    }
+                                                    // disabled={
+                                                    //     isColorSelected
+                                                    //         ? true
+                                                    //         : false
+                                                    // }
                                                 >
                                                     {value.value}
                                                 </Option>

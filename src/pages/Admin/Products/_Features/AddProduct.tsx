@@ -339,11 +339,11 @@ const AddProduct = () => {
                                                 <Option
                                                     key={value.id}
                                                     value={value.value}
-                                                    disabled={
-                                                        isColorSelected
-                                                            ? true
-                                                            : false
-                                                    }
+                                                    // disabled={
+                                                    //     isColorSelected
+                                                    //         ? true
+                                                    //         : false
+                                                    // }
                                                 >
                                                     {value.value}
                                                 </Option>
