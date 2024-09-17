@@ -421,7 +421,6 @@ const UpdateProduct = () => {
                                                 <Option
                                                     key={value.id}
                                                     value={value.value}
-                                              
                                                 >
                                                     {value.value}
                                                 </Option>
