@@ -52,8 +52,7 @@ const UpdateProduct = () => {
         return attributes
     }
     const [image, setimage] = useState<any>()
-    
-    
+
     const fetchProductDetails = useCallback(async () => {
         if (id) {
             try {
@@ -88,7 +87,7 @@ const UpdateProduct = () => {
                         },
                         [],
                     )
-                    console.log(product);
+                    console.log(product)
                     const formattedVariants = product.variants.map(
                         (variant: any) => {
                             const attributes = formatVariantAttributes(

@@ -583,25 +583,24 @@ const CheckOutNow = () => {
                                     </div>
                                     <div className="ml-10 w-2/4"></div>
                                 </div>
-                                
-                                    <div className="mt-5 flex">
-                                        <ProvinceInCheckOutnow
-                                            onIDProvince={idprovince}
-                                            onNameProvince={nameprovince}
-                                        />
 
-                                        <DistrictInCheckOutNow
-                                            id={provinceId}
-                                            onIDDistrict={iddistrict}
-                                            onNameDistrict={namedistrict}
-                                        />
+                                <div className="mt-5 flex">
+                                    <ProvinceInCheckOutnow
+                                        onIDProvince={idprovince}
+                                        onNameProvince={nameprovince}
+                                    />
 
-                                        <WardInCheckOutNow
-                                            id={districtId}
-                                            onNameWard={nameWard}
-                                        />
-                                    </div>
-                            
+                                    <DistrictInCheckOutNow
+                                        id={provinceId}
+                                        onIDDistrict={iddistrict}
+                                        onNameDistrict={namedistrict}
+                                    />
+
+                                    <WardInCheckOutNow
+                                        id={districtId}
+                                        onNameWard={nameWard}
+                                    />
+                                </div>
 
                                 <div className="mt-5">
                                     <label
