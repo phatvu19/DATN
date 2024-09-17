@@ -30,6 +30,7 @@ const UpdateProduct = () => {
     const navigate = useNavigate()
     const { id }: any = useParams()
 
+
     const {
         control,
         handleSubmit,
@@ -76,9 +77,12 @@ const UpdateProduct = () => {
                     ])
                 }
                 if (product.variants.length > 0) {
+                    let arr :any = []
                     const attributeNames = product.variants.reduce(
                         (acc: string[], variant: any) => {
                             variant.attribute_values.forEach((attrValue: any) => {
+                                console.log(attrValue);
+                                arr.push(attrValue?.pivot?.attribute_value_id)
                                 const attributeName =
                                     attrValue.attribute.name.toLowerCase()
                                 if (!acc.includes(attributeName)) {
@@ -89,6 +93,7 @@ const UpdateProduct = () => {
                         },
                         [],
                     )
+                    console.log(arr);
 
                     const formattedVariants = product.variants.map(
                         (variant: any) => {
@@ -167,7 +172,7 @@ const UpdateProduct = () => {
             variants: variants.map((variant: any) => {
                 // Lấy các key từ variant.attributes
                 const attributeKeys = Object.keys(variant.attributes)
-                // console.log(variant,attributeKeys);
+                console.log(variant);
 
                 return {
                     variant_id: variant.id,
@@ -176,6 +181,7 @@ const UpdateProduct = () => {
                     quantity: variant.quantity,
                     attributes: attributeKeys.map((key, index) => ({
                         atribute_value_id: variant?.attribute_values[index]?.id,
+                        atribute_value_id_old:variant?.attribute_values[index]?.pivot?.attribute_value_id,
                         name: key,
                         value: variant.attributes[key],
                     })),
@@ -225,6 +231,8 @@ const UpdateProduct = () => {
         newVariants[index].attributes[attributeType] = value
         setVariants(newVariants)
     }
+    console.log(variants);
+
     const [check, setcheck] = useState<any>(false)
     const HandleExit = () => {
         setcheck(true)
