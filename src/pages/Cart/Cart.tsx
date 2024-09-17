@@ -25,6 +25,8 @@ const Cart = () => {
     const carttt = (cart: any) => {
         setcheck(cart)
     }
+    console.log(cartt);
+    
     const [loading, setloading] = useState(true)
     const calculateTotalClick = async () => {
         let total = 0

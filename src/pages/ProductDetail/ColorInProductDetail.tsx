@@ -22,7 +22,7 @@ const ColorInProductDetail = ({
     product?.forEach((item: any) => {
         const foundObj = item.attribute_values[0]
         if (foundObj?.id == data?.id) {
-            // console.log(foundObj.id , data?.id);
+            console.log(foundObj.id , data?.id);
 
             foundValue = foundObj.value
             idvarians = item?.id
