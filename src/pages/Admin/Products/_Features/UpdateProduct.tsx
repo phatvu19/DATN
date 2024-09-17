@@ -87,7 +87,7 @@ const UpdateProduct = () => {
                         },
                         [],
                     )
-                    console.log(product)
+                    
                     const formattedVariants = product.variants.map(
                         (variant: any) => {
                             const attributes = formatVariantAttributes(
@@ -166,6 +166,7 @@ const UpdateProduct = () => {
                 // Lấy các key từ variant.attributes
                 const attributeKeys = Object.keys(variant.attributes)
                 return {
+                    variant_id: variant.id,
                     price: variant.price,
                     price_promotional: variant.price_promotional,
                     quantity: variant.quantity,
@@ -176,7 +177,6 @@ const UpdateProduct = () => {
                 }
             }),
         }
-        console.log(formattedData)
         try {
             const jsonData: any = JSON.stringify(formattedData)
             const response = await updateProduct(id, jsonData)
@@ -206,7 +206,6 @@ const UpdateProduct = () => {
             },
         ])
     }
-    console.log(variants)
     const handleRemoveVariant = (index: number) => {
         const newVariants: any = variants.filter((_, i) => i !== index)
         setVariants(newVariants)
@@ -425,18 +424,25 @@ const UpdateProduct = () => {
                                         (value: any) => {
                                             const isColorSelected = variants.some(
                                                 (variant: any) =>
+                                                    variant.attributes.color ==
+                                                    value.value,
+                                            )
+                                            const isSizeSelected = variants.some(
+                                                (variant: any) =>
                                                     variant.attributes.size ==
                                                     value.value,
                                             )
+                                            console.log(isColorSelected,isSizeSelected);
+                                            
                                             return (
                                                 <Option
                                                     key={value.id}
                                                     value={value.value}
-                                                    // disabled={
-                                                    //     isColorSelected
-                                                    //         ? true
-                                                    //         : false
-                                                    // }
+                                                    disabled={
+                                                        isSizeSelected
+                                                            ? true
+                                                            : false
+                                                    }
                                                 >
                                                     {value.value}
                                                 </Option>
