@@ -52,13 +52,10 @@ const UpdateProduct = () => {
         return attributes
     }
     const [image, setimage] = useState<any>()
-
     const fetchProductDetails = useCallback(async () => {
         if (id) {
             try {
                 const product: any = await getProductById(id)
-                console.log(product)
-
                 setValue("name", product?.name)
                 setimage(product?.image)
                 setValue("category_id", product?.category_id)
@@ -76,12 +73,9 @@ const UpdateProduct = () => {
                     ])
                 }
                 if (product.variants.length > 0) {
-                    const arr: any = []
                     const attributeNames = product.variants.reduce(
                         (acc: string[], variant: any) => {
                             variant.attribute_values.forEach((attrValue: any) => {
-                                console.log(attrValue)
-                                arr.push(attrValue?.pivot?.attribute_value_id)
                                 const attributeName =
                                     attrValue.attribute.name.toLowerCase()
                                 if (!acc.includes(attributeName)) {
@@ -92,7 +86,6 @@ const UpdateProduct = () => {
                         },
                         [],
                     )
-                    console.log(arr)
 
                     const formattedVariants = product.variants.map(
                         (variant: any) => {
@@ -109,9 +102,6 @@ const UpdateProduct = () => {
 
                     setVariants(formattedVariants)
                 } else {
-                    console.log(
-                        "Product has no variants or variants data is missing",
-                    )
                 }
             } catch (error) {
                 console.error("Failed to fetch product details:", error)
@@ -168,32 +158,19 @@ const UpdateProduct = () => {
             brand: data.brand,
             description: data.description,
             image: uploadedImages ? uploadedImages : image,
-            variants: variants.map((variant: any) => {
-                // Lấy các key từ variant.attributes
-                const attributeKeys = Object.keys(variant.attributes)
-                console.log(variant)
-
-                return {
-                    variant_id: variant.id,
-                    price: variant.price,
-                    price_promotional: variant.price_promotional,
-                    quantity: variant.quantity,
-                    attributes: attributeKeys.map((key, index) => ({
-                        atribute_value_id: variant?.attribute_values[index]?.id,
-                        atribute_value_id_old:
-                            variant?.attribute_values[index]?.pivot
-                                ?.attribute_value_id,
-                        name: key,
-                        value: variant.attributes[key],
-                    })),
-                }
-            }),
+            variants: variants.map((variant) => ({
+                price: variant.price,
+                price_promotional: variant.price_promotional,
+                quantity: variant.quantity,
+                attributes: [
+                    { name: "color", value: variant.attributes.color },
+                    { name: "size", value: variant.attributes.size },
+                ],
+            })),
         }
-
         try {
             const jsonData: any = JSON.stringify(formattedData)
             const response = await updateProduct(id, jsonData)
-            console.log("Product updated successfully:", response)
             toast.success("Product updated successfully.")
             navigate("/admin/quan-ly-san-pham")
         } catch (error) {
@@ -232,8 +209,6 @@ const UpdateProduct = () => {
         newVariants[index].attributes[attributeType] = value
         setVariants(newVariants)
     }
-    console.log(variants)
-
     const [check, setcheck] = useState<any>(false)
     const HandleExit = () => {
         setcheck(true)
@@ -437,29 +412,15 @@ const UpdateProduct = () => {
                                     <Option value="">Chọn</Option>
                                     {attributeValues[attribute.id]?.map(
                                         (value: any) => {
-                                            const isColorSelected =
-                                                attributeValues[1].some(
-                                                    (variant: any) =>
-                                                        variant.value == value.value,
-                                                )
-                                            const isSizeSelected = variants.some(
+                                            const isColorSelected = variants.some(
                                                 (variant: any) =>
-                                                    variant.attributes.size ==
+                                                    variant.attributes.color ===
                                                     value.value,
                                             )
-                                            // console.log(
-                                            //     attributeValues,
-                                            //     isSizeSelected,
-                                            //     value
-                                            // )
-
                                             return (
                                                 <Option
                                                     key={value.id}
                                                     value={value.value}
-                                                    disabled={
-                                                        isSizeSelected ? true : false
-                                                    }
                                                 >
                                                     {value.value}
                                                 </Option>

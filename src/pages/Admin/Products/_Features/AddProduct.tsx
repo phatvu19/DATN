@@ -27,7 +27,6 @@ const AddProduct = () => {
     const [attributes, setAttributes] = useState<Attribute[]>([])
     const [attributeValues, setAttributeValues] = useState<any>({})
     const navigate = useNavigate()
-    console.log(variants)
 
     const { control, handleSubmit } = useForm()
 
@@ -117,7 +116,6 @@ const AddProduct = () => {
             },
         ])
     }
-    console.log(variants)
 
     // Remove a variant from the list
     const handleRemoveVariant = (index: number) => {
@@ -334,7 +332,6 @@ const AddProduct = () => {
                                                     variant.attributes.color ===
                                                     value.value,
                                             )
-                                            console.log(isColorSelected)
 
                                             return (
                                                 <Option

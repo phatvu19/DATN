@@ -173,11 +173,11 @@ const AttributeManagement = () => {
                             setIsEditModalVisible(true)
                         }}
                     />
-                    <Button
+                    {/* <Button
                         icon={<DeleteOutlined />}
                         onClick={() => showDeleteConfirm(record)}
                         danger
-                    />
+                    /> */}
                     <Button
                         icon={<PlusOutlined />}
                         onClick={() => {
@@ -196,7 +196,6 @@ const AttributeManagement = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const showModal = (id: any) => {
-        console.log(id)
         fetchAttributesId(id)
         setIsModalOpen(true)
     }
