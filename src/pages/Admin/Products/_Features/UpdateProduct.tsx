@@ -52,6 +52,8 @@ const UpdateProduct = () => {
         return attributes
     }
     const [image, setimage] = useState<any>()
+    
+    
     const fetchProductDetails = useCallback(async () => {
         if (id) {
             try {
@@ -86,7 +88,7 @@ const UpdateProduct = () => {
                         },
                         [],
                     )
-
+                    console.log(product);
                     const formattedVariants = product.variants.map(
                         (variant: any) => {
                             const attributes = formatVariantAttributes(
@@ -161,16 +163,19 @@ const UpdateProduct = () => {
             brand: data.brand,
             description: data.description,
             image: uploadedImages ? uploadedImages : image,
-            variants: variants.map((variant) => ({
-                variant_id: variant.id,
-                price: variant.price,
-                price_promotional: variant.price_promotional,
-                quantity: variant.quantity,
-                attributes: [
-                    { name: "color", value: variant.attributes.color },
-                    { name: "size", value: variant.attributes.size },
-                ],
-            })),
+            variants: variants.map((variant: any) => {
+                // Lấy các key từ variant.attributes
+                const attributeKeys = Object.keys(variant.attributes)
+                return {
+                    price: variant.price,
+                    price_promotional: variant.price_promotional,
+                    quantity: variant.quantity,
+                    attributes: attributeKeys.map((key) => ({
+                        name: key,
+                        value: variant.attributes[key],
+                    })),
+                }
+            }),
         }
         console.log(formattedData)
         try {

@@ -117,6 +117,7 @@ const AddProduct = () => {
             },
         ])
     }
+console.log(variants);
 
     // Remove a variant from the list
     const handleRemoveVariant = (index: number) => {
