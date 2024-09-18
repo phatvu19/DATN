@@ -127,7 +127,7 @@ const Profile = () => {
                                                 >
                                                     Email
                                                 </label>
-                                                <Form.Item name="number">
+                                                <Form.Item name="email">
                                                     <Input type="email" disabled />
                                                 </Form.Item>
                                             </div>
