@@ -216,7 +216,7 @@ function Footer() {
                     </div>
                     <div className="b flex w-3/12 flex-col">
                         <h2 className="mb-5 text-sm font-bold">
-                            ĐĂNG KÝ NHẬN TIN TỪ  GENTLEMAN'S
+                            ĐĂNG KÝ NHẬN TIN TỪ GENTLEMAN'S
                         </h2>
                         <div className="mt-2 flex space-x-2">
                             <input

@@ -56,8 +56,8 @@ const OrderDetailInListOrderAdmin = () => {
         fetchOrder()
         fetchOrderHistory()
     }, [])
-    console.log(billHistory);
-    
+    console.log(billHistory)
+
     const ProductInbill = bill?.bill_details?.filter(
         (data: any) => data?.bill_id == id,
     )

@@ -15,8 +15,8 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
     const [check, setcheck] = useState<any>()
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
-    const user = JSON.parse(localStorage.getItem('user')!)
-    
+    const user = JSON.parse(localStorage.getItem("user")!)
+
     useEffect(() => {
         if (data?.status == "Pending") {
             setcolor("warning")
@@ -137,20 +137,14 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
     return (
         <>
             <tr
-                className="items-center justify-center h-36 border border-gray-300"
+                className="h-36 items-center justify-center border border-gray-300"
                 key={data?.id}
             >
-                <td className=" text-center font-normal">
-                    {data?.id}
-                </td>
-                <td
-                    className="p-2 text-center font-normal"
-                    style={{ width: "20%" }}
-                >
+                <td className=" text-center font-normal">{data?.id}</td>
+                <td className="p-2 text-center font-normal" style={{ width: "20%" }}>
                     <span className="font-bold">Đ/c</span>: {address}
                     <br />
-                    <span className="font-bold">Sđt</span>:{" "}
-                    {data?.Recipient_phone}
+                    <span className="font-bold">Sđt</span>: {data?.Recipient_phone}
                 </td>
                 <td
                     className="p-2 text-center font-normal "
@@ -161,9 +155,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                 <td className="p-2 text-center font-normal">
                     {data?.created_at.substring(0, 19)}
                 </td>
-                <td className="p-2 text-center font-normal">
-                    {data?.pay}
-                </td>
+                <td className="p-2 text-center font-normal">{data?.pay}</td>
                 <td className="p-2 text-center font-normal">
                     <Tag color={color}>{status}</Tag>
                 </td>
@@ -188,7 +180,9 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                                 </button>
                             </Link>
                         </>
-                    ) : ""}
+                    ) : (
+                        ""
+                    )}
                     {check == "Paid" ? (
                         <>
                             {/* <button
@@ -209,9 +203,11 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                                 </button>
                             </Link>
                         </>
-                    ) : ""}
-                    {
-                        check == "Confirm" ? <>
+                    ) : (
+                        ""
+                    )}
+                    {check == "Confirm" ? (
+                        <>
                             <button
                                 className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
                                 onClick={() => HandleShiping(data?.id)}
@@ -223,10 +219,12 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                                     Chi tiết
                                 </button>
                             </Link>
-                        </> : ""
-                    }
-                    {
-                        check == "Shipping" ? <>
+                        </>
+                    ) : (
+                        ""
+                    )}
+                    {check == "Shipping" ? (
+                        <>
                             <button
                                 className="mb-1 w-24 rounded bg-blue-500 p-1 text-white"
                                 onClick={() => HandleDone(data?.id)}
@@ -238,28 +236,32 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
                                     Chi tiết
                                 </button>
                             </Link>
-                        </> : ""
-                    }
-                    {
-                        check == "Done" ? <>
-
+                        </>
+                    ) : (
+                        ""
+                    )}
+                    {check == "Done" ? (
+                        <>
                             <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                                 <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
                                     Chi tiết
                                 </button>
                             </Link>
-                        </> : ""
-                    }
-                    {
-                        check == "Cancel" ? <>
-
+                        </>
+                    ) : (
+                        ""
+                    )}
+                    {check == "Cancel" ? (
+                        <>
                             <Link to={`/admin/quan-ly-orders/${data?.id}`}>
                                 <button className="w-24 rounded border border-gray-300 bg-white p-1 text-black ">
                                     Chi tiết
                                 </button>
                             </Link>
-                        </> : ""
-                    }
+                        </>
+                    ) : (
+                        ""
+                    )}
                 </td>
             </tr>
         </>

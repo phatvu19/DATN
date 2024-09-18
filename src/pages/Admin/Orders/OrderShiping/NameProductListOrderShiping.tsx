@@ -11,7 +11,6 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const NameProductListOrderShiping = ({ data, onCheck }: any) => {
-
     // const billsProduct = billdetail?.find((item: any) => item?.bill_id == data?.id)
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
@@ -21,7 +20,7 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
             setstatus("Đang giao hàng")
         }
     }, [data])
-    const user = JSON.parse(localStorage.getItem('user')!)
+    const user = JSON.parse(localStorage.getItem("user")!)
     const HandleDone = async (id: any) => {
         const check = confirm("Bạn có chắc chắn đơn hàng này khách hàng đã nhận?")
         if (check == true) {
@@ -43,19 +42,16 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
     const total: any = Number(data?.total_amount)
     return (
         <>
-
-            <tr className="items-center justify-center p-2 h-36 border border-gray-300" key={data?.id}>
+            <tr
+                className="h-36 items-center justify-center border border-gray-300 p-2"
+                key={data?.id}
+            >
                 <td className="p-2 text-center font-normal">{data?.id}</td>
 
-                <td
-                    className="p-2 text-center font-normal"
-                    style={{ width: "20%" }}
-                >
-                    <span className="font-bold">Đ/c</span>:{" "}
-                    {data?.Recipient_address}
+                <td className="p-2 text-center font-normal" style={{ width: "20%" }}>
+                    <span className="font-bold">Đ/c</span>: {data?.Recipient_address}
                     <br />
-                    <span className="font-bold">Sđt</span>:{" "}
-                    {data?.Recipient_phone}
+                    <span className="font-bold">Sđt</span>: {data?.Recipient_phone}
                 </td>
                 <td
                     className="p-2 text-center font-normal "
@@ -66,7 +62,7 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
                 <td className="p-2 text-center font-normal">
                     {data?.created_at.substring(0, 19)}
                 </td>
-                <td className="p-2 text-center font-normal">  {data?.pay}</td>
+                <td className="p-2 text-center font-normal"> {data?.pay}</td>
                 <td className="p-2 text-center font-normal">
                     <Tag color={color}>{status}</Tag>
                 </td>
@@ -87,7 +83,6 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
                     </Link>
                 </td>
             </tr>
-
         </>
     )
 }
