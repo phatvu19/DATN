@@ -52,10 +52,13 @@ const UpdateProduct = () => {
         return attributes
     }
     const [image, setimage] = useState<any>()
+
     const fetchProductDetails = useCallback(async () => {
         if (id) {
             try {
                 const product: any = await getProductById(id)
+                console.log(product)
+
                 setValue("name", product?.name)
                 setimage(product?.image)
                 setValue("category_id", product?.category_id)
@@ -73,9 +76,12 @@ const UpdateProduct = () => {
                     ])
                 }
                 if (product.variants.length > 0) {
-                    const attributeNames = product.variants.reduce(
+                    const arr: any = []
+const attributeNames = product.variants.reduce(
                         (acc: string[], variant: any) => {
                             variant.attribute_values.forEach((attrValue: any) => {
+                                console.log(attrValue)
+                                arr.push(attrValue?.pivot?.attribute_value_id)
                                 const attributeName =
                                     attrValue.attribute.name.toLowerCase()
                                 if (!acc.includes(attributeName)) {
@@ -86,6 +92,7 @@ const UpdateProduct = () => {
                         },
                         [],
                     )
+                    console.log(arr)
 
                     const formattedVariants = product.variants.map(
                         (variant: any) => {
@@ -102,6 +109,9 @@ const UpdateProduct = () => {
 
                     setVariants(formattedVariants)
                 } else {
+                    console.log(
+                        "Product has no variants or variants data is missing",
+                    )
                 }
             } catch (error) {
                 console.error("Failed to fetch product details:", error)
@@ -143,7 +153,7 @@ const UpdateProduct = () => {
         onChange({ file }: any) {
             if (file.status !== "uploading") {
                 // Sử dụng một hàm setState để cập nhật mảng uploadedImages
-                setUploadedImages(file.response.secure_url)
+setUploadedImages(file.response.secure_url)
             }
         },
         data: {
@@ -158,19 +168,33 @@ const UpdateProduct = () => {
             brand: data.brand,
             description: data.description,
             image: uploadedImages ? uploadedImages : image,
-            variants: variants.map((variant) => ({
-                price: variant.price,
-                price_promotional: variant.price_promotional,
-                quantity: variant.quantity,
-                attributes: [
-                    { name: "color", value: variant.attributes.color },
-                    { name: "size", value: variant.attributes.size },
-                ],
-            })),
+            variants: variants.map((variant: any) => {
+                // Lấy các key từ variant.attributes
+                const attributeKeys = Object.keys(variant.attributes)
+                console.log(variant)
+
+                return {
+                    variant_id: variant?.id ?? null,
+                    price: variant.price,
+                    price_promotional: variant.price_promotional,
+                    quantity: variant.quantity,
+                    attributes: attributeKeys.map((key, index) => ({
+                        atribute_value_id:
+                            variant?.attribute_values?.[index]?.id ?? null,
+                        atribute_value_id_old:
+                            variant?.attribute_values?.[index]?.pivot
+                                ?.attribute_value_id ?? null,
+                        name: key,
+                        value: variant?.attributes?.[key] ?? null,
+                    })),
+                }
+            }),
         }
+
         try {
             const jsonData: any = JSON.stringify(formattedData)
             const response = await updateProduct(id, jsonData)
+            console.log("Product updated successfully:", response)
             toast.success("Product updated successfully.")
             navigate("/admin/quan-ly-san-pham")
         } catch (error) {
@@ -209,12 +233,14 @@ const UpdateProduct = () => {
         newVariants[index].attributes[attributeType] = value
         setVariants(newVariants)
     }
+    console.log(variants)
+
     const [check, setcheck] = useState<any>(false)
     const HandleExit = () => {
         setcheck(true)
     }
     return (
-        <div className="container mx-auto mt-10 flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
+<div className="container mx-auto mt-10 flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
             <h2 className="my-10 text-2xl font-semibold text-gray-700">
                 Cập nhật thông tin sản phẩm
             </h2>
@@ -270,7 +296,7 @@ const UpdateProduct = () => {
                                             {categories.map((cat) => (
                                                 <Option key={cat.id} value={cat.id}>
                                                     {cat.name}
-                                                </Option>
+</Option>
                                             ))}
                                         </Select>
                                         {error && (
@@ -327,7 +353,7 @@ const UpdateProduct = () => {
                                             <span style={{ color: "red" }}>
                                                 {error.message}
                                             </span>
-                                        )}
+)}
                                     </>
                                 )}
                             />
@@ -390,7 +416,7 @@ const UpdateProduct = () => {
                                         e.target.value,
                                     )
                                     setVariants(newVariants)
-                                }}
+}}
                             />
                         </Form.Item>
                         {attributes.map((attribute) => (
@@ -400,23 +426,119 @@ const UpdateProduct = () => {
                                     style={{ width: 240 }}
                                     placeholder={attribute.name}
                                     value={variant?.attributes[attribute.name] || ""}
-                                    onChange={
-                                        (value) =>
-                                            handleAttributeChange(
-                                                attribute.name,
-                                                value,
-                                                index,
-                                            ) // Pass index here
+                                    onChange={(value) =>
+                                        handleAttributeChange(
+                                            attribute.name,
+                                            value,
+                                            index,
+                                        )
                                     }
                                 >
                                     <Option value="">Chọn</Option>
                                     {attributeValues[attribute.id]?.map(
                                         (value: any) => {
-                                            const isColorSelected = variants.some(
-                                                (variant: any) =>
-                                                    variant.attributes.color ===
-                                                    value.value,
-                                            )
+                                            const selectedColor =
+                                                variant.attributes.color
+                                            const selectedSize =
+                                                variant.attributes.size
+
+                                            if (
+                                                attribute.name.toLowerCase() ===
+                                                "size"
+                                            ) {
+                                                // Nếu đã chọn màu
+                                                if (selectedColor) {
+                                                    // Kiểm tra các biến thể khác xem có cặp "color" và "size" nào đã được chọn chưa
+                                                    const isSizeDisabled =
+                                                        variants.some(
+                                                            (
+                                                                otherVariant: any,
+                                                                otherIndex: number,
+                                                            ) =>
+                                                                otherIndex !==
+                                                                    index && // Loại trừ biến thể hiện tại
+                                                                otherVariant
+                                                                    .attributes
+                                                                    .color ===
+                                                                    selectedColor && // Trùng color
+                                                                otherVariant
+.attributes
+                                                                    .size ===
+                                                                    value.value, // Trùng size
+                                                        )
+
+                                                    return (
+                                                        <Option
+                                                            key={value.id}
+                                                            value={value.value}
+                                                            disabled={isSizeDisabled} // Disable nếu size đã được chọn với cùng color
+                                                        >
+                                                            {value.value}
+                                                        </Option>
+                                                    )
+                                                }
+
+                                                // Nếu chưa chọn màu, không disable bất kỳ kích thước nào
+                                                return (
+                                                    <Option
+                                                        key={value.id}
+                                                        value={value.value}
+                                                    >
+                                                        {value.value}
+                                                    </Option>
+                                                )
+                                            }
+
+                                            if (
+                                                attribute.name.toLowerCase() ===
+                                                "color"
+                                            ) {
+                                                // Nếu đã chọn kích thước
+                                                if (selectedSize) {
+                                                    // Kiểm tra các biến thể khác xem có cặp "color" và "size" nào đã được chọn chưa
+                                                    const isColorDisabled =
+                                                        variants.some(
+                                                            (
+                                                                otherVariant: any,
+                                                                otherIndex: number,
+                                                            ) =>
+                                                                otherIndex !==
+                                                                    index && // Loại trừ biến thể hiện tại
+                                                                otherVariant
+                                                                    .attributes
+.size ===
+                                                                    selectedSize && // Trùng size
+                                                                otherVariant
+                                                                    .attributes
+                                                                    .color ===
+                                                                    value.value, // Trùng color
+                                                        )
+
+                                                    return (
+                                                        <Option
+                                                            key={value.id}
+                                                            value={value.value}
+                                                            disabled={
+                                                                isColorDisabled
+                                                            } // Disable nếu color đã được chọn với cùng size
+                                                        >
+                                                            {value.value}
+                                                        </Option>
+                                                    )
+                                                }
+
+                                                // Nếu chưa chọn kích thước, không disable bất kỳ màu nào
+                                                return (
+                                                    <Option
+                                                        key={value.id}
+                                                        value={value.value}
+                                                    >
+                                                        {value.value}
+                                                    </Option>
+                                                )
+                                            }
+
+                                            // Trả về các tùy chọn khác không bị ảnh hưởng bởi logic lọc
                                             return (
                                                 <Option
                                                     key={value.id}
@@ -430,11 +552,12 @@ const UpdateProduct = () => {
                                 </Select>
                             </Form.Item>
                         ))}
+
                         <Form.Item className="flex items-end">
                             <Button
                                 size="large"
                                 type="dashed"
-                                danger
+danger
                                 icon={<DeleteOutlined />}
                                 onClick={() => handleRemoveVariant(index)}
                             />
