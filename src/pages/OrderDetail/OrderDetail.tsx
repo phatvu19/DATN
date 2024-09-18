@@ -276,7 +276,7 @@ const OrderDetail = () => {
                         Hủy đơn hàng{" "}
                     </button>
                 )}
-                {bill?.status == "Shiping" ? (
+                {bill?.status == "Shipping" ? (
                     <button
                         className="ml-5 rounded bg-green-500 p-2 pl-5 pr-5 text-white"
                         onClick={() => HandleConfirm(bill?.id)}
