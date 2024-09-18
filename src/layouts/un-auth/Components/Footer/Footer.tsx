@@ -216,7 +216,7 @@ function Footer() {
                     </div>
                     <div className="b flex w-3/12 flex-col">
                         <h2 className="mb-5 text-sm font-bold">
-                            ĐĂNG KÝ NHẬN TIN TỪ  GENTLEMAN'S
+                            ĐĂNG KÝ NHẬN TIN TỪ GENTLEMAN'S
                         </h2>
                         <div className="mt-2 flex space-x-2">
                             <input
@@ -280,9 +280,9 @@ function Footer() {
                 </div>
             </div>
             <div className="copyright flex h-[64px] w-full items-center justify-center space-x-4 bg-black text-white">
-                <div className="logo">
+                {/* <div className="logo">
                     <img src={logo} alt="logo" />
-                </div>
+                </div> */}
                 <div className="copyright">
                     Copyright © 2014-2024 Gentleman's.vn All Rights Reserved.
                 </div>

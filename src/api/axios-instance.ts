@@ -2,7 +2,7 @@ import { StorageFunc } from "@/utilities/local-storage/storage-func"
 import axios, { AxiosRequestConfig } from "axios"
 
 const requestConfig: AxiosRequestConfig = {
-    baseURL: import.meta.env.VITE_ENDPOINT_URL || "http://localhost:8000/api/",
+    baseURL: import.meta.env.VITE_ENDPOINT_URL || "https://gentlemenbe.io.vn/api/",
     headers: {
         "Content-Type": "application/json",
     },
