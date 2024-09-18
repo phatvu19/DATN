@@ -1,7 +1,7 @@
 import { Product } from "@/@types/product"
 import { ProductSale } from "@/api/services/Sale"
 import { useEffect, useState } from "react"
-import ProductInListProductSale from './ProductInListProductSale'
+import ProductInListProductSale from "./ProductInListProductSale"
 
 const ListProductSale = () => {
     const [products, setProducts] = useState<Product[]>([])
@@ -28,7 +28,6 @@ const ListProductSale = () => {
                     <a className="font-bold"> Danh sách sản phẩm sale</a>
                 </div>
                 <div className="flex">
-
                     <div className=" px-8">
                         <div className="">
                             <div className="">
@@ -40,21 +39,18 @@ const ListProductSale = () => {
                         <div className="pt-4"></div>
                         <hr className=" border-dashed border-gray-300 " />
 
-                     
                         <div className="row row-gap-4 mt-3">
                             <div className="grid  grid-cols-5 ">
-                                {
-                                    displayedProducts?.map((data: Product) => {
-                                        return (
-                                            <>
-                                                <ProductInListProductSale
-                                                    data={data}
-                                                    key={data?.id}
-                                                />
-                                            </>
-                                        )
-                                    })
-                                }
+                                {displayedProducts?.map((data: Product) => {
+                                    return (
+                                        <>
+                                            <ProductInListProductSale
+                                                data={data}
+                                                key={data?.id}
+                                            />
+                                        </>
+                                    )
+                                })}
                             </div>
                             <div className="mb-20 mt-10 flex justify-center">
                                 {visibleCount < products?.length && (

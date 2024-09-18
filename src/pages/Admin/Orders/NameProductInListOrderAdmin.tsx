@@ -94,7 +94,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
     const parts = data?.Recipient_address
         ? data?.Recipient_address?.split(";").map((part: any) => part.trim())
         : ""
-    const [ address] = parts
+    const [address] = parts
     const total: any = Number(data?.total_amount)
     const HandleShiping = async (id: any) => {
         const check = confirm("Bạn có chắc chắn shiper đã lấy hàng?")

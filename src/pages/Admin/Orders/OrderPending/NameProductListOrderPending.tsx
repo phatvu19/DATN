@@ -1,8 +1,4 @@
-import {
-    addHistoryBills,
-    updateCancel,
-    updateConfirm
-} from "@/api/services/Bill"
+import { addHistoryBills, updateCancel, updateConfirm } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { Tag } from "antd"
 import { useEffect, useState } from "react"

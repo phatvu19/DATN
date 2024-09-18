@@ -19,8 +19,7 @@ const CartInCheckOutNow = ({ data }: any) => {
                 hasSaleId1 = true
             }
         })
-        console.log(hasSaleId1);
-        
+        console.log(hasSaleId1)
 
         storedCarts.forEach((item: any, index: any) => {
             total += allCart?.data[index]?.price * item.quantity

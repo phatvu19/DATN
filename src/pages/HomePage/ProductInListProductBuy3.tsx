@@ -17,19 +17,15 @@ const ProductInListProductBuy3 = ({ data }: any) => {
     const totalPrice = (data?.variants[0]?.price * discount) / 100
     return (
         <>
-            { discount ? (
+            {discount ? (
                 <>
                     <Link to={`/products/${data?.id}`} key={data?.id}>
                         <div className="group relative rounded border border-gray-500 p-2 pb-5 hover:border-2 hover:border-red-300">
                             <div className="h-100 relative overflow-hidden bg-cover bg-no-repeat p-2">
                                 <img src={data?.image} alt="" />
-
-
                                 <button className="absolute top-5  flex flex-col gap-2 bg-red-500 p-1 pl-3 pr-3 text-sm text-white opacity-0 opacity-100 transition-opacity duration-300">
                                     -{discount}%
                                 </button>{" "}
-
-
                                 <div className="absolute right-3 top-8 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     <Link to={`/products/${data?.id}`}>
                                         <ShoppingCartOutlined className="text-2xl" />
@@ -49,7 +45,10 @@ const ProductInListProductBuy3 = ({ data }: any) => {
                                     {discount ? (
                                         <>
                                             {" "}
-                                            {formatNumber(data?.variants[0]?.price)} đ
+                                            {formatNumber(
+                                                data?.variants[0]?.price,
+                                            )}{" "}
+                                            đ
                                         </>
                                     ) : (
                                         <></>
@@ -67,14 +66,18 @@ const ProductInListProductBuy3 = ({ data }: any) => {
                                         <>
                                             {" "}
                                             {formatNumber(
-                                                data?.variants[0]?.price - totalPrice,
+                                                data?.variants[0]?.price -
+                                                    totalPrice,
                                             )}{" "}
                                             đ
                                         </>
                                     ) : (
                                         <>
                                             {" "}
-                                            {formatNumber(data?.variants[0]?.price)} đ
+                                            {formatNumber(
+                                                data?.variants[0]?.price,
+                                            )}{" "}
+                                            đ
                                         </>
                                     )}
                                 </div>

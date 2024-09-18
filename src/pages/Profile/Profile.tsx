@@ -38,8 +38,8 @@ const Profile = () => {
             avatar: url,
         }
         const response = await updateUser(id, data)
-        console.log(response);
-        
+        console.log(response)
+
         window.location.reload()
     }
     return (

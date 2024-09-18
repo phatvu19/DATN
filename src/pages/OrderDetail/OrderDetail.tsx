@@ -3,7 +3,7 @@ import {
     getAllBillDetail,
     getBillDetail,
     updateCancel,
-    updateDone
+    updateDone,
 } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { CarOutlined, LeftOutlined } from "@ant-design/icons"

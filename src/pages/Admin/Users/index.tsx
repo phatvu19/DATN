@@ -1,4 +1,3 @@
-
 import { getAllUser } from "@/api/services/UserService"
 import { Button, Table } from "antd"
 import { useEffect, useState } from "react"
@@ -45,7 +44,7 @@ const UserManagement = () => {
             dataIndex: "role_id",
             key: "role",
             render: (role_id: number) => (role_id === 1 ? "Customer" : "Admin"),
-        }
+        },
     ]
 
     return (

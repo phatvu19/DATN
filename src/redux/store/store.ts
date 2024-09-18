@@ -11,7 +11,7 @@ import {
     REHYDRATE,
 } from "redux-persist"
 
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import storage from "redux-persist/lib/storage" // defaults to localStorage for web
 
 import { allReducer } from "./all-reducers"
 

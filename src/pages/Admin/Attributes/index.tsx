@@ -111,7 +111,7 @@ const AttributeManagement = () => {
     // ) => {
     //     try {
     //         console.log(attributeValueId);
-            
+
     //         await deleteAttributeValue(attributeId)
     //         fetchAttributes()
     //     } catch (error) {
@@ -216,8 +216,8 @@ const AttributeManagement = () => {
             dataIndex: "value",
             key: "value",
             render: (text: string, record: AttributeValue) => {
-                console.log(text);
-                
+                console.log(text)
+
                 return record.value
             },
         },

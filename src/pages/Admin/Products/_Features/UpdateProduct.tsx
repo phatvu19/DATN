@@ -446,15 +446,15 @@ const UpdateProduct = () => {
                                                                 otherIndex: number,
                                                             ) =>
                                                                 otherIndex !==
-                                                                index && // Loại trừ biến thể hiện tại
+                                                                    index && // Loại trừ biến thể hiện tại
                                                                 otherVariant
                                                                     .attributes
                                                                     .color ===
-                                                                selectedColor && // Trùng color
+                                                                    selectedColor && // Trùng color
                                                                 otherVariant
                                                                     .attributes
                                                                     .size ===
-                                                                value.value, // Trùng size
+                                                                    value.value, // Trùng size
                                                         )
 
                                                     return (
@@ -493,15 +493,15 @@ const UpdateProduct = () => {
                                                                 otherIndex: number,
                                                             ) =>
                                                                 otherIndex !==
-                                                                index && // Loại trừ biến thể hiện tại
+                                                                    index && // Loại trừ biến thể hiện tại
                                                                 otherVariant
                                                                     .attributes
                                                                     .size ===
-                                                                selectedSize && // Trùng size
+                                                                    selectedSize && // Trùng size
                                                                 otherVariant
                                                                     .attributes
                                                                     .color ===
-                                                                value.value, // Trùng color
+                                                                    value.value, // Trùng color
                                                         )
 
                                                     return (

@@ -5,7 +5,7 @@ import ProductInTopProduct from "./ProductInTopProduct"
 
 const TopProduct = () => {
     const [top, settop] = useState<any>(3)
-    const [product, setproduct]= useState<any>()
+    const [product, setproduct] = useState<any>()
     useEffect(() => {
         const fetch = async () => {
             const data = await getProductTop(top)
@@ -13,12 +13,12 @@ const TopProduct = () => {
         }
         fetch()
     }, [top])
-    console.log(product);
-    
+    console.log(product)
+
     return (
         <>
             <div>
-                <div className="bg-gray-200 p-4 flex ">
+                <div className="flex bg-gray-200 p-4 ">
                     <span className="font-bold">Sản Phẩm Bán Chạy</span>
                     <Select
                         className="ml-auto"
@@ -26,19 +26,18 @@ const TopProduct = () => {
                         style={{ width: 120 }}
                         onChange={(e: any) => settop(e)}
                         options={[
-                            { value: '3', label: '3 sản phẩm ' },
-                            { value: '4', label: '4 sản phẩm ' },
-                            { value: '5', label: '5 sản phẩm ' },
-                            { value: '6', label: '6 sản phẩm ' },
-                            { value: '7', label: '7 sản phẩm ' },
-                            { value: '8', label: '8 sản phẩm ' },
-                            { value: '9', label: '9 sản phẩm ' },
-                            { value: '10', label: '10 sản phẩm ' },
-
+                            { value: "3", label: "3 sản phẩm " },
+                            { value: "4", label: "4 sản phẩm " },
+                            { value: "5", label: "5 sản phẩm " },
+                            { value: "6", label: "6 sản phẩm " },
+                            { value: "7", label: "7 sản phẩm " },
+                            { value: "8", label: "8 sản phẩm " },
+                            { value: "9", label: "9 sản phẩm " },
+                            { value: "10", label: "10 sản phẩm " },
                         ]}
                     />
                 </div>
-                <ProductInTopProduct data={product}/>
+                <ProductInTopProduct data={product} />
             </div>
         </>
     )

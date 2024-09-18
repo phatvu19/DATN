@@ -17,7 +17,7 @@ import UserManagement from "@/pages/Admin/Users"
 import AddUser from "@/pages/Admin/Users/_Features/AddUser"
 import ListVoucher from "@/pages/Admin/Voucher/ListVoucher"
 import { pathName } from "@/routes/path-name"
-import ListComment from '../pages/Admin/Comment/ListComment'
+import ListComment from "../pages/Admin/Comment/ListComment"
 export const AuthRouter = [
     {
         path: pathName.DASHBOARD,
@@ -81,7 +81,7 @@ export const AuthRouter = [
     },
     {
         path: pathName.ALLORDERPENDING,
-        element: <ListOrderPending/>,
+        element: <ListOrderPending />,
     },
     {
         path: pathName.ALLORDERCONFIRM,

@@ -6,7 +6,7 @@ import AllOrderInListOrder from "./AllOrderInListOrder"
 import ListOrderCancel from "./OrderCancel/ListOrderCancel"
 import ListOrderConFirm from "./OrderConfirm/ListOrderConfirm"
 import ListOrderDones from "./OrderDone/ListOrderDone"
-import ListOrderPaid from './OrderPaid/ListOrderPaid'
+import ListOrderPaid from "./OrderPaid/ListOrderPaid"
 import ListOrderPending from "./OrderPending/ListOrderPending"
 import ListOrderSiping from "./OrderShiping/ListOrderShiping"
 

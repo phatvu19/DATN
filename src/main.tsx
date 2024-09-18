@@ -13,7 +13,7 @@ import "swiper/css/scrollbar"
 
 const routes: RouteObject[] = [...RootUnAuthRouter, ...RootAuthRouter]
 const router = createBrowserRouter(routes, {})
-console.log(router);
+console.log(router)
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     // <StrictMode>

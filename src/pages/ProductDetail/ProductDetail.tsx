@@ -3,7 +3,7 @@ import { getProductById } from "@/api/services/ProductService"
 import {
     CarryOutOutlined,
     HddOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
 } from "@ant-design/icons"
 import { Image } from "antd"
 import { useEffect, useState } from "react"
@@ -66,11 +66,10 @@ const ProductDetail = () => {
     const sizes = (idvarian: any, idattributevalue: any, sizeValue: any) => {
         setSizevalue(idvarian)
         setid_attribute_size(idattributevalue)
-        console.log(sizeValue);
+        console.log(sizeValue)
     }
     const price = (value: any) => {
-        console.log(value);
-        
+        console.log(value)
     }
 
     const HandleAddtoCart = async () => {

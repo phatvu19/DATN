@@ -1,7 +1,4 @@
-import {
-    addHistoryBills,
-    updateShiping
-} from "@/api/services/Bill"
+import { addHistoryBills, updateShiping } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { Tag } from "antd"
 import { useEffect, useState } from "react"
@@ -18,7 +15,7 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
             setstatus("Chờ lấy hàng")
         }
     }, [data])
-   
+
     const HandleConfirm = async (id: any) => {
         const check = confirm("Bạn chắc chắn muốn giao đơn hàng này?")
         if (check == true) {

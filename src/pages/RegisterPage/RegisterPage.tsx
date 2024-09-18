@@ -15,7 +15,12 @@ const RegisterPage = () => {
     const [confirmPassword, setconfirmpassword] = useState<any>()
     const onSubmit = async () => {
         try {
-            const response = await register(username, email, password, confirmPassword)
+            const response = await register(
+                username,
+                email,
+                password,
+                confirmPassword,
+            )
             if (response) {
                 navigate("/dang-nhap")
             }
@@ -27,18 +32,18 @@ const RegisterPage = () => {
     const validateEmail = (
         rule: any,
         value: string,
-        callback: (arg0: string | undefined) => void
+        callback: (arg0: string | undefined) => void,
     ) => {
-        console.log(rule);
-        
-        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/; // Basic email pattern
+        console.log(rule)
+
+        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/ // Basic email pattern
 
         if (value && !emailPattern.test(value)) {
-            callback("Email không hợp lệ");
+            callback("Email không hợp lệ")
         } else {
-            callback(undefined);
+            callback(undefined)
         }
-    };
+    }
     return (
         <div className="mx-auto my-10 max-w-md">
             <h3 className="mb-3 text-center font-medium">Đăng Ký</h3>
@@ -49,58 +54,66 @@ const RegisterPage = () => {
                 layout="vertical"
                 form={form}
             >
-                <Form.Item className="mb-3" label="Họ Và Tên" name="name" rules={[{ required: true, message: "Họ và tên là bắt buộc" }]} >
+                <Form.Item
+                    className="mb-3"
+                    label="Họ Và Tên"
+                    name="name"
+                    rules={[{ required: true, message: "Họ và tên là bắt buộc" }]}
+                >
                     <Input
-                        className="input input-bordered w-full" onChange={(e: any) => setusername(e.target.value)}
+                        className="input input-bordered w-full"
+                        onChange={(e: any) => setusername(e.target.value)}
                     />
                 </Form.Item>
 
-                <Form.Item className="mb-3" label="Email" name={'email'} rules={[{ required: true, message: "Email là bắt buộc" }, { validator: validateEmail }]}>
-
+                <Form.Item
+                    className="mb-3"
+                    label="Email"
+                    name={"email"}
+                    rules={[
+                        { required: true, message: "Email là bắt buộc" },
+                        { validator: validateEmail },
+                    ]}
+                >
                     <Input
                         onChange={(e: any) => setemail(e.target.value)}
                         type="email"
                         className="input input-bordered w-full"
                     />
-
-
                 </Form.Item>
 
-                <Form.Item className="relative mb-3" label="Mật Khẩu" name={'password'} rules={[{ required: true, message: "Password là bắt buộc" }]}>
-
+                <Form.Item
+                    className="relative mb-3"
+                    label="Mật Khẩu"
+                    name={"password"}
+                    rules={[{ required: true, message: "Password là bắt buộc" }]}
+                >
                     <Input.Password
                         onChange={(e: any) => setpassword(e.target.value)}
                         type={"password"}
                         iconRender={(visible) =>
-                            visible ? (
-                                <EyeOutlined />
-                            ) : (
-                                <EyeInvisibleOutlined />
-                            )
+                            visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
                         }
                         className="input input-bordered w-full"
                     />
-
-
                 </Form.Item>
 
-                <Form.Item className="relative mb-3" label="Nhập Lại Mật Khẩu" name={'confirmpassword'} rules={[{ required: true, message: "ConfirmPassword là bắt buộc" }]}>
-
+                <Form.Item
+                    className="relative mb-3"
+                    label="Nhập Lại Mật Khẩu"
+                    name={"confirmpassword"}
+                    rules={[
+                        { required: true, message: "ConfirmPassword là bắt buộc" },
+                    ]}
+                >
                     <Input.Password
                         onChange={(e: any) => setconfirmpassword(e.target.value)}
                         type={"password"}
                         iconRender={(visible) =>
-                            visible ? (
-                                <EyeOutlined />
-                            ) : (
-                                <EyeInvisibleOutlined />
-                            )
+                            visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
                         }
                         className="input input-bordered w-full"
                     />
-
-
-
                 </Form.Item>
 
                 <Form.Item className="mb-3">

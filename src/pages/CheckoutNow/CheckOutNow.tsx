@@ -392,8 +392,8 @@ const CheckOutNow = () => {
         value: string,
         callback: (arg0: string | undefined) => void,
     ) => {
-        console.log(rule);
-        
+        console.log(rule)
+
         const phonePattern = /^(0)(3|5|7|8|9)([0-9]{8})$/
 
         if (value && !phonePattern.test(value)) {
@@ -407,7 +407,7 @@ const CheckOutNow = () => {
         value: string,
         callback: (arg0: string | undefined) => void,
     ) => {
-        console.log(rule);
+        console.log(rule)
         const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/ // Basic email pattern
 
         if (value && !emailPattern.test(value)) {

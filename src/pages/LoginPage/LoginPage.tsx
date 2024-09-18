@@ -3,14 +3,14 @@ import iconFb from "@/assets/images/icons/icon-fb.svg"
 import iconGg from "@/assets/images/icons/icon-gg.svg"
 import { Button, Form, Input, Typography } from "antd"
 import { useEffect, useState } from "react"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 const { Text, Link } = Typography
 
 const LoginPage = () => {
     const navigate = useNavigate()
     const [form] = Form.useForm()
-    const [username , setusername] = useState<any>()
+    const [username, setusername] = useState<any>()
     const [password, setpassword] = useState<any>()
     const onSubmit = async () => {
         try {
@@ -19,7 +19,7 @@ const LoginPage = () => {
                 localStorage.setItem("accessToken", response.accessToken)
                 localStorage.setItem("user", JSON.stringify(response))
                 if (response?.data?.role_id == 1) {
-                    window.location.href="/"
+                    window.location.href = "/"
                 } else if (response?.data?.role_id == 0) {
                     toast.success("Hello admin!")
                     window.location.href = "/admin"
@@ -42,26 +42,32 @@ const LoginPage = () => {
         <div className="mx-auto my-10 max-w-md">
             <h3 className="mb-3 text-center font-medium">Đăng Nhập</h3>
             <Form form={form} onFinish={onSubmit} layout="vertical">
-                <Form.Item label="Username" name="Username" rules={[
-                    {
-                        required: true,
-                        message:
-                            "Không được để trống Username ",
-                    }
-                ]}>
-                    <Input onChange={(e:any) => setusername(e.target.value)}/>
+                <Form.Item
+                    label="Username"
+                    name="Username"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Không được để trống Username ",
+                        },
+                    ]}
+                >
+                    <Input onChange={(e: any) => setusername(e.target.value)} />
                 </Form.Item>
-                <Form.Item label="Password" name="Password" rules={[
-                    {
-                        required: true,
-                        message:
-                            "Không được để trống mật khẩu ",
-                    }
-                ]}>
-
-                    <Input.Password size="large" onChange={(e: any) => setpassword(e.target.value)} />
-
-
+                <Form.Item
+                    label="Password"
+                    name="Password"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Không được để trống mật khẩu ",
+                        },
+                    ]}
+                >
+                    <Input.Password
+                        size="large"
+                        onChange={(e: any) => setpassword(e.target.value)}
+                    />
                 </Form.Item>
                 <Form.Item>
                     <Button
@@ -74,8 +80,7 @@ const LoginPage = () => {
                     </Button>
                 </Form.Item>
                 <Text className="mb-2 flex items-center gap-2">
-                    Bạn chưa có tài khoản?{" "}
-                    <Link href="/dang-ki">Đăng kí</Link>
+                    Bạn chưa có tài khoản? <Link href="/dang-ki">Đăng kí</Link>
                 </Text>
                 <Text>
                     <Link style={{ color: "red" }} href="#!password/forgot">

@@ -19,7 +19,7 @@ const SizeInProductDetail = ({
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
-    let foundValue:any = undefined
+    let foundValue: any = undefined
     let idvarians: any = undefined
     product?.forEach((item: any) => {
         const foundObj = item.attribute_values[1]
@@ -42,8 +42,8 @@ const SizeInProductDetail = ({
     }
     const filteredSizes = value
         ? value
-            .filter((data1: any) => data1?.color === data1?.color)
-            .map((data2: any) => data2?.size)
+              .filter((data1: any) => data1?.color === data1?.color)
+              .map((data2: any) => data2?.size)
         : []
 
     return (
