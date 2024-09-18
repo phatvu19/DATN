@@ -22,10 +22,9 @@ import ProvinceInCheckOutnow from "./ProvinceInCheckOutNow"
 import DistrictInCheckOutNow from "./DistricInCheckOutNow"
 import WardInCheckOutNow from "./WardInCheckOutNow"
 import CartInCheckOutNow from "./CartCheckOutNow"
-import { useLogPageLeave } from "@/utilities/ReRender"
+
 import { getUser } from "@/api/services/UserService"
 const CheckOutNow = () => {
-    useLogPageLeave("/checkoutnow")
     const [form] = Form.useForm()
     const user = JSON.parse(localStorage.getItem("user") || "null")
     const [users, setusers] = useState<any>()
@@ -97,7 +96,6 @@ const CheckOutNow = () => {
                 bill_id: response?.data?.id,
                 token: `${user?.token}`,
             }
-            console.log(data2)
 
             await Promise.all(
                 carts.map(async (element: any, index: any) => {

@@ -44,8 +44,8 @@ const OrderDetail = () => {
     useEffect(() => {
         fetchBillDetail()
     }, [])
-    console.log(billdetail);
-    
+    console.log(billdetail)
+
     const ProductInbill = billdetail?.filter((data: any) => data?.bill_id == id)
     useEffect(() => {
         const totalPrice: any = calculateTotalClick()
@@ -97,13 +97,23 @@ const OrderDetail = () => {
                 user_id: bill?.user_id,
                 description: "Khách hàng xác nhận hủy đơn hàng",
             }
-            await updateCancel(id).then(async () => {
-                await addHistoryBills(data).then(() => {
-                    toast.success("Bạn đã hủy đơn hàng")
-                    setcolor("error")
-                    setstatus("Hủy hàng")
+            await updateCancel(id)
+                .then(async (data: any) => {
+                    console.log(data)
+                    if (data) {
+                        await addHistoryBills(data).then(() => {
+                            toast.success("Bạn đã hủy đơn hàng")
+                            setcolor("error")
+                            setstatus("Hủy hàng")
+                        })
+                    } else {
+                        toast.error("Không thể hủy!")
+                    }
+                    return
                 })
-            })
+                .catch((e: any) => {
+                    console.log(e)
+                })
         }
     }
     const HandleConfirm = async (id: any) => {
@@ -128,7 +138,7 @@ const OrderDetail = () => {
         ? bill?.Recipient_address?.split(";").map((part: any) => part.trim())
         : ""
     const [name, descbill, address] = parts
-    console.log(ProductInbill);
+    console.log(ProductInbill)
 
     return (
         <>
@@ -183,10 +193,13 @@ const OrderDetail = () => {
                                     <CarOutlined />
                                     Giao hàng tại nhà
                                 </p>
-                                {descbill ? <span className="">
-                                    Ghi chú đơn hàng: {descbill}
-                                </span> : ""}
-                              
+                                {descbill ? (
+                                    <span className="">
+                                        Ghi chú đơn hàng: {descbill}
+                                    </span>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                         <div className="mr-2 w-1/3 ">
