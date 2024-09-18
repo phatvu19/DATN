@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
-import { Button, Form, Input, Select, Space, Upload, notification } from "antd"
-import { ArrowLeftOutlined, UploadOutlined } from "@ant-design/icons"
-import { useNavigate } from "react-router-dom"
-import { createUser } from "@/api/services/UserService"
-import { Controller, useForm } from "react-hook-form"
 import { getAllDistrict, getAllProvince, getAllWard } from "@/api/services/map"
+import { createUser } from "@/api/services/UserService"
+import { ArrowLeftOutlined, UploadOutlined } from "@ant-design/icons"
+import { Button, Form, Input, Select, Space, Upload, notification } from "antd"
+import React, { useEffect, useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 const { Option } = Select
 

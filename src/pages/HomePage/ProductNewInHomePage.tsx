@@ -1,4 +1,4 @@
-import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
+import { GetSaleId } from "@/api/services/Sale"
 import formatNumber from "@/utilities/FormatTotal"
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 import { Skeleton } from "antd"

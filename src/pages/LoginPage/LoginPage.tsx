@@ -1,11 +1,10 @@
+import { login } from "@/api/services/AuthService"
 import iconFb from "@/assets/images/icons/icon-fb.svg"
 import iconGg from "@/assets/images/icons/icon-gg.svg"
 import { Button, Form, Input, Typography } from "antd"
-import { Controller, useForm } from "react-hook-form"
-import { login } from "@/api/services/AuthService"
-import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+import { toast } from "react-toastify"
 const { Text, Link } = Typography
 
 const LoginPage = () => {

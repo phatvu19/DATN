@@ -1,16 +1,15 @@
 
 import MenuSidebar from "@/layouts/auth/Components/Menu/Menu"
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"
-import { Breadcrumb, Button, Layout } from "antd"
-import React, { useEffect, useState } from "react"
-import { NavLink, Outlet, useLocation } from "react-router-dom"
+import { Button, Layout } from "antd"
+import React, { useState } from "react"
+import { Outlet } from "react-router-dom"
 
-const { Header, Sider, Content } = Layout
+const { Header, Sider,  } = Layout
 
 const AuthLayout: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false)
-    const location = useLocation()
-    const [breadcrumbs, setBreadcrumbs] = useState<React.ReactNode[]>([])
+
     const user = JSON.parse(localStorage.getItem('user')!)
     console.log(user);
 

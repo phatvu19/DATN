@@ -1,11 +1,9 @@
 import {
     addHistoryBills,
-    getAllBillDetail,
-    getBillsDetail,
-    updateDone,
+    updateDone
 } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
-import { Skeleton, Tag } from "antd"
+import { Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"

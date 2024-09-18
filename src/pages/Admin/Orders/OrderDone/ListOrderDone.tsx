@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
-import NameProductListOrderDone from "./NameProductListOrderDone"
-import { Button, Pagination, Spin } from "antd"
 import { getBillDone } from "@/api/services/Bill"
 import { LoadingOutlined } from "@ant-design/icons"
+import { Button, Pagination, Spin } from "antd"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import NameProductListOrderDone from "./NameProductListOrderDone"
 
 const ListOrderDones = () => {
     const [bill, setbill] = useState<any>()
@@ -32,9 +32,7 @@ const ListOrderDones = () => {
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
     }
-    const onChange = (key: string) => {
-        console.log(key)
-    }
+
     return (
         <>
             <div className="mb-4 flex items-center justify-between">

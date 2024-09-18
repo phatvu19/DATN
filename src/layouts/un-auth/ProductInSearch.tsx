@@ -1,7 +1,7 @@
 import { GetSaleId } from '@/api/services/Sale'
 import formatNumber from '@/utilities/FormatTotal'
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 

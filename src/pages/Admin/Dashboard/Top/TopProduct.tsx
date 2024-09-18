@@ -1,7 +1,7 @@
-import { Select } from "antd"
-import ProductInTopProduct from "./ProductInTopProduct"
-import { useEffect, useState } from "react"
 import { getProductTop } from "@/api/services/Dashboard"
+import { Select } from "antd"
+import { useEffect, useState } from "react"
+import ProductInTopProduct from "./ProductInTopProduct"
 
 const TopProduct = () => {
     const [top, settop] = useState<any>(3)

@@ -1,8 +1,8 @@
 import { getAllDistrict, getAllProvince, getAllWard } from '@/api/services/map';
-import { Button, Form, Input, Modal, Select } from 'antd';
-import { useEffect, useState } from 'react';
-import { Option } from "antd/es/mentions"
 import { getUser, updateUser } from '@/api/services/UserService';
+import { Button, Form, Input, Modal, Select } from 'antd';
+import { Option } from "antd/es/mentions";
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
     const [form] = Form.useForm()
@@ -92,21 +92,6 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
         }
 
     }
-    const HandleUpdateUser1 = async () => {
-        const id = users?.id
-        const data = {
-            name: name,
-            email: email,
-            number: number
-        }
-        const response = await updateUser(id, data)
-        if (response) {
-            toast.success('Thành công!')
-            onOpen(false)
-            window.location.reload()
-        }
-
-    }
     const [check, setcheck] = useState<any>()
     const handleAddress = () => {
         setcheck(true)
@@ -116,6 +101,8 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
         value: string,
         callback: (arg0: string | undefined) => void
     ) => {
+        console.log(rule);
+        
         const phonePattern = /^[0-9]{10}$/; // Regular expression for 10-digit Vietnamese phone number
 
         if (value && !phonePattern.test(value)) {
@@ -129,6 +116,8 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
         value: string,
         callback: (arg0: string | undefined) => void
     ) => {
+        console.log(rule);
+        
         const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/; // Basic email pattern
 
         if (value && !emailPattern.test(value)) {

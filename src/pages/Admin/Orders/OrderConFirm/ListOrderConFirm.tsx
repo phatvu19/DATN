@@ -2,8 +2,8 @@ import { getBillconfirm } from "@/api/services/Bill"
 import { LoadingOutlined } from "@ant-design/icons"
 import { Button, Pagination, Spin } from "antd"
 import { useEffect, useState } from "react"
-import NameProductInListOrderConfirm from "./NameListProductConfirm"
 import { Link } from "react-router-dom"
+import NameProductInListOrderConfirm from "./NameListProductConfirm"
 
 const ListOrderConFirm = () => {
     const [bill, setbill] = useState<any>()
@@ -31,9 +31,6 @@ const ListOrderConFirm = () => {
 
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
-    }
-    const onChange = (key: string) => {
-        console.log(key)
     }
     const check = (key: any) => {
         setcheck(key)

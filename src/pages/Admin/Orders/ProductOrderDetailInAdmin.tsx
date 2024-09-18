@@ -1,6 +1,5 @@
 import formatNumber from "@/utilities/FormatTotal"
-import { LoadingOutlined } from "@ant-design/icons"
-import { Skeleton, Spin } from "antd"
+import { Skeleton } from "antd"
 
 const ProductOrderDetailInAdmin = ({ data, loading }: any) => {
     const parts = data?.attribute

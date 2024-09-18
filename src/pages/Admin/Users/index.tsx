@@ -1,13 +1,11 @@
-import { User } from "@/@types/user"
-import { deleteUser, getAllUser } from "@/api/services/UserService"
+
+import { getAllUser } from "@/api/services/UserService"
 import { Button, Table } from "antd"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const UserManagement = () => {
     const [users, setUsers] = useState<any>([])
-    const [isViewModalVisible, setIsViewModalVisible] = useState(false)
-    const [viewingUser, setViewingUser] = useState<User>()
 
     const navigate = useNavigate()
 

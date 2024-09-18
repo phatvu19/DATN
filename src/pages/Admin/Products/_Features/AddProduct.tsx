@@ -93,6 +93,8 @@ const AddProduct = () => {
         }
         try {
             const response = await createProduct(formattedData)
+            console.log(response);
+            
             toast.success("Product created successfully.")
             navigate("/admin/quan-ly-san-pham")
         } catch (error) {
@@ -332,7 +334,8 @@ const AddProduct = () => {
                                                     variant.attributes.color ===
                                                     value.value,
                                             )
-
+                                            console.log(isColorSelected);
+                                            
                                             return (
                                                 <Option
                                                     key={value.id}

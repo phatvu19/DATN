@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom"
 
 
-const User = ({data}:any) => {
+const User = ({ data }: any) => {
     return (
         <>
             <div className="bg-white shadow-lg rounded-lg p-6 animate__animated animate__fadeIn">

@@ -2,15 +2,13 @@ import { Category } from "@/@types/category"
 import { Product } from "@/@types/product"
 import { getAllCategory } from "@/api/services/CategoryService"
 import { getAllProduct } from "@/api/services/ProductService"
-import banner from "@/assets/images/banner/banner.webp"
-import storebg from "@/assets/images/store-bg.jpg"
 import CategoryInHomePage from "@/pages/HomePage/CategoryInHomePage"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Autoplay, Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
-import ProductNewInHomePage from "./ProductNewInHomePage"
 import ListProductBuy3 from "./ListProductBuy3"
+import ProductNewInHomePage from "./ProductNewInHomePage"
 
 function HomePage() {
     const [category, setCategory] = useState<Category[]>([])
@@ -36,7 +34,6 @@ function HomePage() {
         fetchProducts()
     }, [])
 
-    const [activeTab, setActiveTab] = useState(1)
 
     // const tabs = [
     //     {

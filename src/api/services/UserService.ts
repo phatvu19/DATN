@@ -1,6 +1,5 @@
 import { User } from "@/@types/user"
 import httpRequest from "@/api/axios-instance"
-import { toast } from "react-toastify"
 
 const getAllUser = async () => {
     try {
@@ -42,4 +41,4 @@ const deleteUser = async (id: number) => {
         throw error
     }
 }
-export { getAllUser, createUser, getUser, updateUser, deleteUser }
+export { createUser, deleteUser, getAllUser, getUser, updateUser }

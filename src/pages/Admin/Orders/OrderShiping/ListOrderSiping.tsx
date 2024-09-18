@@ -1,9 +1,9 @@
-import { Button, Pagination, Spin } from "antd"
-import React, { useEffect, useState } from "react"
-import NameProductListOrderShiping from "./NameProductListOrderShiping"
-import { LoadingOutlined } from "@ant-design/icons"
 import { getBillShiping } from "@/api/services/Bill"
+import { LoadingOutlined } from "@ant-design/icons"
+import { Button, Pagination, Spin } from "antd"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import NameProductListOrderShiping from "./NameProductListOrderShiping"
 
 const ListOrderSiping = () => {
     const [bill, setbill] = useState<any>()
@@ -30,9 +30,6 @@ const ListOrderSiping = () => {
 
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
-    }
-    const onChange = (key: string) => {
-        console.log(key)
     }
     const check = (key: any) => {
         setcheck(key)

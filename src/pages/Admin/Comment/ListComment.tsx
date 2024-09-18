@@ -1,5 +1,5 @@
-import { GetAllComment } from "@/api/services/Comment"
-import { useEffect, useState } from "react"
+import { GetAllComment } from "@/api/services/Comment";
+import { useEffect, useState } from "react";
 import CommentDetail from './CommentDetail';
 
 const ListComment = () => {

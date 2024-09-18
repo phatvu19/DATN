@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react"
-import NameProductListOrderPaid from "./NameProductListOrderPaid"
-import { Button, Pagination, Spin } from "antd"
-import { LoadingOutlined } from "@ant-design/icons"
 import { getBillPaid } from "@/api/services/Bill"
+import { LoadingOutlined } from "@ant-design/icons"
+import { Button, Pagination, Spin } from "antd"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import Search from "antd/es/transfer/search"
+import NameProductListOrderPaid from "./NameProductListOrderPaid"
 
 const ListOrderPaid = () => {
     const [bill, setbill] = useState<any>()
@@ -29,9 +28,6 @@ const ListOrderPaid = () => {
     const currentItems = bill?.slice(indexOfFirstItem, indexOfLastItem)
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
-    }
-    const onChange = (key: string) => {
-        console.log(key)
     }
     const check = (key: any) => {
         setcheck(key)

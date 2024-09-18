@@ -1,19 +1,17 @@
 import { getBillsDetail } from "@/api/services/Bill"
+import { getOrderHistory } from "@/api/services/Order"
+import { getUser } from "@/api/services/UserService"
+import formatNumber from "@/utilities/FormatTotal"
 import {
     CarOutlined,
     LeftOutlined,
-    LoadingOutlined,
-    RightOutlined,
+    LoadingOutlined
 } from "@ant-design/icons"
 import { Spin, Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import moment from "moment"
-import formatNumber from "@/utilities/FormatTotal"
-import ProductOrderDetailInAdmin from "./ProductOrderDetailInAdmin"
-import { getOrderHistory } from "@/api/services/Order"
-import { getUser } from "@/api/services/UserService"
 import HistoryOrder from "./HistoryOrder"
+import ProductOrderDetailInAdmin from "./ProductOrderDetailInAdmin"
 
 const OrderDetailInListOrderAdmin = () => {
     const { id }: any = useParams()
@@ -81,19 +79,18 @@ const OrderDetailInListOrderAdmin = () => {
     }
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
-    const [check, setcheck] = useState<any>(false)
+
     useEffect(() => {
         if (bill?.status == "Pending") {
             setcolor("warning")
             setstatus("Chờ xác nhận")
-            setcheck(true)
+
         } else if (bill?.status == "Confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         } else if (bill?.status == "Paid") {
             setcolor("brown")
             setstatus("Chờ xác nhận")
-            setcheck(true)
         } else if (bill?.status == "Shipping") {
             setcolor("purple")
             setstatus("Đang giao hàng")

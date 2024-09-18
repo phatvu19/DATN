@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react"
-import formatNumber from "@/utilities/FormatTotal"
-import { Skeleton, Tag } from "antd"
-import { Link } from "react-router-dom"
 import {
     addHistoryBills,
-    getAllBillDetail,
-    getBillsDetail,
     updateCancel,
-    updateConfirm,
+    updateConfirm
 } from "@/api/services/Bill"
+import formatNumber from "@/utilities/FormatTotal"
+import { Tag } from "antd"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const NameProductListOrderPending = ({ data, onCheck }: any) => {

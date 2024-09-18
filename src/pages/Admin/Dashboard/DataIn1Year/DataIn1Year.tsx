@@ -1,11 +1,10 @@
 import { doanhThu7Day, getDoanhThuYear, getDoanhthuThang } from "@/api/services/Dashboard";
+import formatNumber from "@/utilities/FormatTotal";
+import { DatePicker, Dropdown, Menu, Modal, Tooltip } from "antd";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import Chart from 'react-apexcharts';
-import formatNumber from "@/utilities/FormatTotal";
-import { CalendarOutlined } from "@ant-design/icons";
-import { DatePicker, Dropdown, Menu, Modal, Tooltip } from "antd";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
-import moment from "moment";
 const DataIn1Year = () => {
     const [doanhsoyear, setdoanhsodatyy] = useState<any>()
     useEffect(() => {
@@ -68,6 +67,8 @@ const DataIn1Year = () => {
     };
     const [khoangday, setkhoangday] = useState<any>()
     const onChange1 = async (dates: any, dateStrings: any) => {
+        console.log(dates);
+        
         const data = {
             start_date: dateStrings[0],
             end_date: dateStrings[1]
@@ -97,6 +98,7 @@ const DataIn1Year = () => {
     const [totalm, settotalm] = useState<any>()
     const [total, settotal] = useState<any>()
     const onChange: any = async (date: any, dateString: any) => {
+console.log(date);
 
         const month = dateString.split('-')[1];
         setmonths(month);

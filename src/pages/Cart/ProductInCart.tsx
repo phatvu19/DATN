@@ -1,17 +1,15 @@
-import { ClearOutlined, LoadingOutlined } from "@ant-design/icons"
+import { GetSaleId } from "@/api/services/Sale"
+import { ClearOutlined } from "@ant-design/icons"
+import { Skeleton } from "antd"
 import { useEffect, useState } from "react"
-import formatNumber from "../../utilities/FormatTotal"
 import { toast } from "react-toastify"
-import { getProductById } from "@/api/services/ProductService"
-import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
-import { Skeleton, Spin } from "antd"
+import formatNumber from "../../utilities/FormatTotal"
 
 const ProductInCart = ({ data, index, quantity, onCart }: any) => {
     console.log(quantity)
 
     const [carts, setCarts] = useState([])
     const [displayQuantity, setDisplayQuantity] = useState(quantity.quantity)
-    const [check, setcheck] = useState(false)
 
     useEffect(() => {
         const storedCarts = JSON.parse(localStorage.getItem("cart")!) || []
@@ -35,7 +33,6 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
             }
             setDisplayQuantity(updatedCarts[index].quantity)
             localStorage.setItem("cart", JSON.stringify(updatedCarts))
-            setcheck(true)
             onCart(id)
             setTimeout(() => {
                 window.location.reload()
@@ -60,7 +57,6 @@ const ProductInCart = ({ data, index, quantity, onCart }: any) => {
             updatedCarts[index].quantity++
             setDisplayQuantity(updatedCarts[index].quantity)
             localStorage.setItem("cart", JSON.stringify(updatedCarts))
-            setcheck(true)
             onCart(id)
 
             // Reload the page after a short delay

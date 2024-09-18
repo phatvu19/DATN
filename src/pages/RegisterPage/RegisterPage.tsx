@@ -3,14 +3,12 @@ import iconFb from "@/assets/images/icons/icon-fb.svg"
 import iconGg from "@/assets/images/icons/icon-gg.svg"
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons"
 import { Button, Form, Input } from "antd"
-import React, { useState } from "react"
-import { Controller, useForm } from "react-hook-form"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 const RegisterPage = () => {
     const navigate = useNavigate()
     const [form] = Form.useForm()
-    const [showPassword, setShowPassword] = React.useState(false)
     const [username, setusername] = useState<any>()
     const [password, setpassword] = useState<any>()
     const [email, setemail] = useState<any>()
@@ -31,6 +29,8 @@ const RegisterPage = () => {
         value: string,
         callback: (arg0: string | undefined) => void
     ) => {
+        console.log(rule);
+        
         const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/; // Basic email pattern
 
         if (value && !emailPattern.test(value)) {
@@ -70,7 +70,7 @@ const RegisterPage = () => {
 
                     <Input.Password
                         onChange={(e: any) => setpassword(e.target.value)}
-                        type={showPassword ? "text" : "password"}
+                        type={"password"}
                         iconRender={(visible) =>
                             visible ? (
                                 <EyeOutlined />
@@ -88,7 +88,7 @@ const RegisterPage = () => {
 
                     <Input.Password
                         onChange={(e: any) => setconfirmpassword(e.target.value)}
-                        type={showPassword ? "text" : "password"}
+                        type={"password"}
                         iconRender={(visible) =>
                             visible ? (
                                 <EyeOutlined />

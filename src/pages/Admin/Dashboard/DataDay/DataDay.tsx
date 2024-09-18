@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react'
-import { FillterMonth, FillterToday, FillterWeek, GetTotalPaid, doanhThu7Day, getDoanhThuDay, getDoanhThuMonth, getDoanhThuWeek } from '@/api/services/Dashboard'
+import { FillterMonth, FillterToday, FillterWeek } from '@/api/services/Dashboard';
 import formatNumber from '@/utilities/FormatTotal';
-import { DatePicker, Dropdown, Menu, Modal, Tooltip } from 'antd';
-import User from './User';
-import Order from './Order';
 import { FileSearchOutlined } from '@ant-design/icons';
+import { Dropdown, Menu } from 'antd';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Order from './Order';
+import User from './User';
 
 const DataDay = () => {
     const [doanhsoday, setdoanhsodatyy] = useState<any>()
-    const [doanhsoweek, setdoanhsoweek] = useState<any>()
     const [doanhsomonth, setdoanhsomonth] = useState<any>()
     const [totalweek, settotalweek] = useState<any>()
     const [day, setday] = useState<any>(false)
     const [week, setweek] = useState<any>(false)
     const [month, setmonth] = useState<any>(false)
     const [khoangngay, setkhoangngay] = useState<any>(false)
+    console.log(khoangngay);
+    
     useEffect(() => {
         const fetch = async () => {
             const data = await FillterToday()
@@ -58,37 +59,9 @@ const DataDay = () => {
         setmonth(true);
         setkhoangngay(false)
     };
-    const handleBetwenday = () => {
-        setIsModalOpen1(true);
-        setday(false);
-        setweek(false);
-        setmonth(false);
-        setkhoangngay(true)
-    };
 
-    const { RangePicker } = DatePicker;
-    const [khoangday, setkhoangday] = useState<any>()
-    const onChange1 = async (dates: any, dateStrings: any) => {
-        const data = {
-            start_date: dateStrings[0],
-            end_date: dateStrings[1]
-        };
-        const response = await doanhThu7Day(data)
-        setkhoangday(response);
-    };
-    const [isModalOpen1, setIsModalOpen1] = useState(false);
+    
 
-    const showModal1 = () => {
-        setIsModalOpen1(true);
-    };
-
-    const handleOk1 = () => {
-        setIsModalOpen1(false);
-    };
-
-    const handleCancel1 = () => {
-        setIsModalOpen1(false);
-    };
     const menu = (
         <Menu onClick={(e: any) => {
             if (e?.key === 'Ngày') handleChangeDay();

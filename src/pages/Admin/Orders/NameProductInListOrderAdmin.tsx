@@ -5,9 +5,9 @@ import {
     updateDone,
     updateShiping,
 } from "@/api/services/Bill"
-import { useEffect, useState } from "react"
 import formatNumber from "@/utilities/FormatTotal"
 import { Tag } from "antd"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
@@ -94,7 +94,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
     const parts = data?.Recipient_address
         ? data?.Recipient_address?.split(";").map((part: any) => part.trim())
         : ""
-    const [name, descbill, address] = parts
+    const [ address] = parts
     const total: any = Number(data?.total_amount)
     const HandleShiping = async (id: any) => {
         const check = confirm("Bạn có chắc chắn shiper đã lấy hàng?")

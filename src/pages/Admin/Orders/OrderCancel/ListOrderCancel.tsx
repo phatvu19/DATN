@@ -1,9 +1,9 @@
+import { getBillCancel } from "@/api/services/Bill"
+import { LoadingOutlined } from "@ant-design/icons"
 import { Button, Pagination, Spin } from "antd"
 import { useEffect, useState } from "react"
-import NameProductListOrderCancel from "./NameProductListOrderCancel"
-import { LoadingOutlined } from "@ant-design/icons"
-import { getBillCancel } from "@/api/services/Bill"
 import { Link } from "react-router-dom"
+import NameProductListOrderCancel from "./NameProductListOrderCancel"
 
 const ListOrderCancel = ({ data }: any) => {
     const [bill, setbill] = useState<any>()
@@ -32,9 +32,7 @@ const ListOrderCancel = ({ data }: any) => {
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
     }
-    const onChange = (key: string) => {
-        console.log(key)
-    }
+
     return (
         <>
             <div className="mb-4 flex items-center justify-between">

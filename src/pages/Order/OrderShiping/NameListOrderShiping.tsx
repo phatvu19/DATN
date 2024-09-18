@@ -1,8 +1,7 @@
 import {
     addHistoryBills,
-    getAllBillDetail,
     getBillsDetail,
-    updateDone,
+    updateDone
 } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { Skeleton, Tag } from "antd"

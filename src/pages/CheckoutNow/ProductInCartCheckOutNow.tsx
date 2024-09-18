@@ -1,6 +1,6 @@
+import { GetSaleId } from "@/api/services/Sale"
 import { useEffect, useState } from "react"
 import formatNumber from "../../utilities/FormatTotal"
-import { GetSaleId, getAllSaleProduct } from "@/api/services/Sale"
 
 const ProductInCartCheckOutNow = ({ data, index, quantity }: any) => {
     const [sales, setsale] = useState<any>([])

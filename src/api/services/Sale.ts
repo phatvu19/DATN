@@ -1,6 +1,5 @@
 import { Product } from "@/@types/product"
 import httpRequest from "@/api/axios-instance"
-import { toast } from "react-toastify"
 
 const AddSale = async (data: any): Promise<Product[]> => {
     try {

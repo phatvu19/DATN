@@ -4,7 +4,7 @@ import { Skeleton, Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-const NameListOrderConfirm = ({ data, onCheck }: any) => {
+const NameListOrderConfirm = ({ data }: any) => {
     const [billdetail, setBillDetail] = useState<any>()
     const [loading, setloading] = useState<any>(true)
     const fetchBillDetail = async () => {

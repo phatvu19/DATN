@@ -1,4 +1,3 @@
-import httpRequest from "@/api/axios-instance"
 import axios, { AxiosResponse } from "axios"
 
 const Vnpay = async (data: any) => {

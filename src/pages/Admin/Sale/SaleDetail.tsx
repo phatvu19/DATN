@@ -1,11 +1,11 @@
-import { getAllSale, updateSale } from "@/api/services/Sale"
-import { Button, Select } from "antd"
-import { useEffect, useState } from "react"
-import { toast } from "react-toastify"
+import { getAllSale, updateSale } from "@/api/services/Sale";
 import formatNumber from '@/utilities/FormatTotal';
+import { Button } from "antd";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 
-const SaleDetail = ({ data, onValue, check, onLoad }: any) => {
+const SaleDetail = ({ data, check, onLoad }: any) => {
     const [currentSaleId, setCurrentSaleId] = useState(false);
     const [sales, setsale] = useState<any>()
     const [idSale, setIdsale] = useState<any>()
@@ -23,9 +23,6 @@ const SaleDetail = ({ data, onValue, check, onLoad }: any) => {
         fetchPro()
     }, [check, load])
 
-    const handleChange = (value: any) => {
-        onValue(value)
-    }
     const HandleUpdate = async (id: any) => {
         setCurrentSaleId(true)
         const data = {

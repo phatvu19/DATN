@@ -1,9 +1,9 @@
-import { AddComment, getAllComment } from "@/api/services/Comment"
-import { Button, Flex, Input, Rate } from "antd"
-import { useEffect, useState } from "react"
-import UserInComment from "./UserInComment"
-import { toast } from "react-toastify"
 import { GetBillWithUser, getBillDetail, getDetailBillDetail1 } from "@/api/services/Bill"
+import { AddComment, getAllComment } from "@/api/services/Comment"
+import { Flex, Input, Rate } from "antd"
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
+import UserInComment from "./UserInComment"
 
 
 const Comment = ({ data, name }: any) => {
@@ -13,7 +13,6 @@ const Comment = ({ data, name }: any) => {
     const [value, setvalue] = useState<any>()
     const [check, setchek] = useState<any>()
     const [billdetail, setbilldetail] = useState<any>()
-    const [arr, setArr] = useState<any>();
     useEffect(() => {
         const FetchCmt = async () => {
             const response = await getAllComment()
@@ -23,7 +22,6 @@ const Comment = ({ data, name }: any) => {
     }, [check])
     const user = JSON.parse(localStorage.getItem('user')!)
     const comment = cmt?.categories?.filter((c: any) => c?.product_id == data)
-    const checkcmt = cmt?.categories?.find((c: any) => c?.user_id == user?.data?.id && c?.product_id == data)
     useEffect(() => {
         const FetchCmt = async () => {
             const response = await GetBillWithUser(user?.data?.id)

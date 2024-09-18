@@ -1,6 +1,5 @@
 import { getPayDay } from '@/api/services/Dashboard';
 import { useEffect, useState } from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import Chart from 'react-apexcharts';
 
 

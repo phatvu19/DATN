@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
 import { gettrangthaiDay } from '@/api/services/Dashboard'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-type Props = {}
 
 const OrderDay = () => {
     const [trangthaiday, setdoanhsodatyy] = useState<any>()

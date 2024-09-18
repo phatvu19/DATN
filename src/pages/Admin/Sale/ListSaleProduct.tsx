@@ -1,10 +1,10 @@
 import { getAllProduct } from '@/api/services/ProductService'
 import { useEffect, useState } from 'react'
 
-import SaleDetail from './SaleDetail'
-import { Button, Form, Input, Modal, Select, Table } from 'antd'
 import { AddSale, getAllSale } from '@/api/services/Sale'
+import { Button, Form, Input, Modal, Select, Table } from 'antd'
 import { toast } from 'react-toastify'
+import SaleDetail from './SaleDetail'
 
 const ListSaleProduct = () => {
     const [form] = Form.useForm()
@@ -75,20 +75,7 @@ const ListSaleProduct = () => {
         }
         fetchPro()
     }, [check])
-    const dataSource = [
-        {
-            key: '1',
-            name: 'Mike',
-            age: 32,
-            address: '10 Downing Street',
-        },
-        {
-            key: '2',
-            name: 'John',
-            age: 42,
-            address: '10 Downing Street',
-        },
-    ];
+
     const columns = [
         {
             title: 'ID',

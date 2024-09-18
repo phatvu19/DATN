@@ -1,4 +1,4 @@
-import { getAllBillDetail, getBillsDetail } from "@/api/services/Bill"
+import { getBillsDetail } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { Skeleton, Tag } from "antd"
 import { useEffect, useState } from "react"

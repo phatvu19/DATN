@@ -1,25 +1,18 @@
-import { useState, useEffect } from "react"
-import "moment/locale/vi" // Import the Vietnamese locale
-import { Spin, Input, Select, DatePicker, Button, Pagination } from "antd"
+import { SearchBillByPhone, getAllBill } from "@/api/services/Bill"; // Adjust the import path as per your project structure
 import { LoadingOutlined } from "@ant-design/icons"
-import NameProductInListOrderAdmin from "./NameProductInListOrderAdmin"
-import ListOrderConFirm from "./OrderConFirm/ListOrderConFirm"
-import ListOrderPending from "./OrderPending/ListOrderPending"
-import ListOrderSiping from "./OrderShiping/ListOrderSiping"
-import ListOrderCancel from "./OrderCancel/ListOrderCancel"
-import ListOrderPaid from "./OrderPaid/ListOrderPaid"
-import ListOrderDones from "./OrderDone/ListOrderDone"
-import { SearchBillByPhone, getAllBill } from "@/api/services/Bill" // Adjust the import path as per your project structure
+import { Button, Input, Pagination, Spin } from "antd"
+import "moment/locale/vi"; // Import the Vietnamese locale
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import NameProductInListOrderAdmin from "./NameProductInListOrderAdmin"
+
 
 const { Search } = Input
-const { Option } = Select
-const { RangePicker } = DatePicker
 
 const ListOrderAdmin = () => {
     const [bill, setBill] = useState<any>()
     const [loading, setLoading] = useState<boolean>(true)
-    const [filterStatus, setFilterStatus] = useState<string>("")
+    const [filterStatus] = useState<string>("")
     const [set, setset] = useState<any>()
     const fetchBills = async () => {
         try {
@@ -59,11 +52,6 @@ const ListOrderAdmin = () => {
             alert('Không tìm thấy đơn hàng')
         }
 
-    }
-    const handleFilterChange = (value: string) => {
-        // Implement filter change logic here
-        console.log("Filter status:", value)
-        setFilterStatus(value)
     }
     const render = (value: any) => {
         setset(value)
@@ -148,12 +136,12 @@ const ListOrderAdmin = () => {
                             />
                         </div>}
 
-                        {filterStatus === "paid" && <ListOrderPaid />}
+                        {/* {filterStatus === "paid" && <ListOrderPaid />}
                         {filterStatus === "pending" && <ListOrderPending />}
                         {filterStatus === "confirmed" && <ListOrderConFirm />}
                         {filterStatus === "shipping" && <ListOrderSiping />}
                         {filterStatus === "delivered" && <ListOrderDones />}
-                        {filterStatus === "cancelled" && <ListOrderCancel />}
+                        {filterStatus === "cancelled" && <ListOrderCancel />} */}
                     </>
                 )}
         </>

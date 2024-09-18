@@ -29,4 +29,4 @@ const RemoveVoucher = async (data: any): Promise<Variant[]> => {
         return []
     }
 }
-export { getAllVoucher, addVoucher, RemoveVoucher }
+export { addVoucher, getAllVoucher, RemoveVoucher }

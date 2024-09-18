@@ -1,17 +1,16 @@
-import { GetUserDetailResponseType, LoginResponseType } from "@/@types/auth"
-import { IUser } from "@/@types/user"
+
 import { load, remove, save } from "@/utilities/local-storage"
 import { storageKeys } from "./storage-key"
 
-const saveDataAfterLoginGoogle = (data: LoginResponseType) => {
+const saveDataAfterLoginGoogle = (data: any) => {
     save(storageKeys.USER, data)
 }
 
-const saveDataAfterLogin = (data: LoginResponseType) => {
+const saveDataAfterLogin = (data: any) => {
     save(storageKeys.ACCESS_TOKEN, data.access_token)
     save(storageKeys.REFRESH_TOKEN, data.refresh_token)
 }
-const saveUserDetailData = (data: GetUserDetailResponseType) => {
+const saveUserDetailData = (data: any) => {
     save(storageKeys.USER, data.user)
     save(storageKeys.USER_ID, data.user.id)
 }
@@ -21,25 +20,25 @@ const saveAccessToken = (accessToken: string) => {
 }
 
 const setActivityUser = (activityUser: string) => {
-    const oldData = load<IUser>(storageKeys.USER)
+    const oldData = load<any>(storageKeys.USER)
     save(storageKeys.USER, { ...oldData, activity_user: activityUser })
 }
 
 const setAvatarUser = (avatar: string) => {
-    const oldData = load<IUser>(storageKeys.USER)
+    const oldData = load<any>(storageKeys.USER)
     save(storageKeys.USER, { ...oldData, avatar: avatar })
 }
 
 const getUser = () => {
-    return load<IUser>(storageKeys.USER)
+    return load<any>(storageKeys.USER)
 }
 
 const getUserId = () => {
-    return load<IUser["id"]>(storageKeys.USER_ID)
+    return load<any["id"]>(storageKeys.USER_ID)
 }
 
 const getFullName = () => {
-    const userInfo = load<IUser>(storageKeys.USER)
+    const userInfo = load<any>(storageKeys.USER)
 
     return userInfo?.first_name + " " + userInfo?.last_name || "NO NAME"
 }

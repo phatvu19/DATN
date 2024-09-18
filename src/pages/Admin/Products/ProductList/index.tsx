@@ -63,7 +63,7 @@ const ProductManagement = () => {
             dataIndex: "image",
             key: "image",
             render: (text, record) => (
-                <img src={record.image} style={{ width: "50px", height: "auto" }} />
+                <img src={record.image} style={{ width: "50px", height: "auto" }} alt={text}/>
             ),
         },
         {

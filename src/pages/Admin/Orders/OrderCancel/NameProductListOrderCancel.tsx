@@ -1,10 +1,9 @@
-import { getAllBillDetail, getBillsDetail } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
-import { Skeleton, Tag } from "antd"
+import { Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-const NameProductListOrderCancel = ({ data, data1 }: any) => {
+const NameProductListOrderCancel = ({ data }: any) => {
    
     // const billsProduct = billdetail?.find((item: any) => item?.bill_id == data?.id)
     const [color, setcolor] = useState<any>()

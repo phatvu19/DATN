@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
-import NameProductListOrderPending from "./NameProductListOrderPending"
 import { getBillPending } from "@/api/services/Bill"
-import { Button, Pagination, Spin } from "antd"
 import { LoadingOutlined } from "@ant-design/icons"
+import { Button, Pagination, Spin } from "antd"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import NameProductListOrderPending from "./NameProductListOrderPending"
 
 const ListOrderPending = () => {
     const [bill, setbill] = useState<any>()

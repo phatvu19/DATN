@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"
-import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
+import { GetSaleId } from "@/api/services/Sale"
 import formatNumber from "@/utilities/FormatTotal"
+import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
-import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
+import { Link } from "react-router-dom"
 const ProductInListProductSale = ({ data }: any) => {
     const [sales, setsale] = useState<any>([])
     useEffect(() => {

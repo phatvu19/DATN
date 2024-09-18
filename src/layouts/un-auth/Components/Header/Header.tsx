@@ -1,14 +1,12 @@
 import { getAllProduct } from "@/api/services/ProductService"
-import logo from "@/assets/images/logo/logo.webp"
 import {
-    DashboardOutlined,
     LogoutOutlined,
     SettingOutlined,
-    UserOutlined,
+    UserOutlined
 } from "@ant-design/icons"
 import { Button, Dropdown, Menu } from "antd"
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import localStorage from "redux-persist/es/storage"
 

@@ -1,18 +1,13 @@
 import {
-    addHistoryBills,
     getBillsDetail,
-    updateCancel,
-    updateConfirm,
 } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { Skeleton, Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { toast } from "react-toastify"
 
-const NameListOrderPending = ({ data, onCheck }: any) => {
+const NameListOrderPending = ({ data }: any) => {
     const [billdetail, setBillDetail] = useState<any>()
-    const [check, setCheck] = useState<any>()
     const [loading, setloading] = useState<any>(true)
     const fetchBillDetail = async () => {
         try {
@@ -36,24 +31,24 @@ const NameListOrderPending = ({ data, onCheck }: any) => {
             setstatus("Chờ xác nhận")
         }
     }, [data])
-    const HandleCancel = async (id: any) => {
-        const check = confirm("Bạn có chắc chắn hủy đơn hàng?")
-        if (check == true) {
-            const data = {
-                bill_id: billdetail?.id,
-                user_id: billdetail?.user_id,
-                description: "Khách hàng xác nhận hủy đơn hàng",
-            }
-            await updateCancel(id).then(async () => {
-                await addHistoryBills(data).then(() => {
-                    toast.success("Bạn đã hủy đơn hàng")
-                    setcolor("error")
-                    setstatus("Hủy hàng")
-                    onCheck(status)
-                })
-            })
-        }
-    }
+    // const HandleCancel = async (id: any) => {
+    //     const check = confirm("Bạn có chắc chắn hủy đơn hàng?")
+    //     if (check == true) {
+    //         const data = {
+    //             bill_id: billdetail?.id,
+    //             user_id: billdetail?.user_id,
+    //             description: "Khách hàng xác nhận hủy đơn hàng",
+    //         }
+    //         await updateCancel(id).then(async () => {
+    //             await addHistoryBills(data).then(() => {
+    //                 toast.success("Bạn đã hủy đơn hàng")
+    //                 setcolor("error")
+    //                 setstatus("Hủy hàng")
+    //                 onCheck(status)
+    //             })
+    //         })
+    //     }
+    // }
     const total: any = Number(data?.total_amount)
     return (
         <>

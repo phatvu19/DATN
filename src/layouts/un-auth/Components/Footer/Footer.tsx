@@ -1,6 +1,5 @@
 import appstore from "@/assets/images/logo/app_store.svg"
 import cod from "@/assets/images/logo/cod.svg"
-import logo from "@/assets/images/logo/footer-logo.webp"
 import googleplay from "@/assets/images/logo/google_play.svg"
 import qrcode from "@/assets/images/logo/qrcode2.svg"
 import vnpay from "@/assets/images/logo/vnpay.svg"

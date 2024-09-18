@@ -1,13 +1,11 @@
-import { Pagination, Spin } from "antd"
+import { GetBillPendingWithUser } from "@/api/services/Bill"
+import { Pagination } from "antd"
 import { useEffect, useState } from "react"
 import NameListOrderPending from "./NameListOrderPending"
-import { LoadingOutlined } from "@ant-design/icons"
-import { GetBillPendingWithUser, getBillPending } from "@/api/services/Bill"
 
 const ListOrderPending = () => {
     const [bill, setbill] = useState<any>()
-    const [loading, setLoading] = useState<boolean>(true)
-    const [check1, setcheck] = useState<boolean>()
+    const [check1, setcheck] = useState<any>()
     const user: any = localStorage.getItem("user")
     const users = JSON.parse(user) || []
     const fetchBills = async () => {
@@ -16,7 +14,6 @@ const ListOrderPending = () => {
             setbill(allBills)
         } catch {
         } finally {
-            setLoading(false)
         }
     }
     console.log(bill)

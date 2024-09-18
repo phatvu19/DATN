@@ -1,7 +1,7 @@
-import { Select } from 'antd'
-import React, { useEffect, useState } from 'react'
-import UserIntopUser from './UserIntopUser'
 import { getUserTop } from '@/api/services/Dashboard'
+import { Select } from 'antd'
+import { useEffect, useState } from 'react'
+import UserIntopUser from './UserIntopUser'
 
 
 const TopUser = () => {

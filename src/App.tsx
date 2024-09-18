@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import { RootAuthRouter, RootUnAuthRouter } from "./routes"
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
 function App() {
     const [user, setuser] = useState<any>()
     useEffect(() => {
