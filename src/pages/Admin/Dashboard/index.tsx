@@ -20,9 +20,9 @@ function Dashboard() {
                 <div className="mt-4">
                     <DataIn1Year />
                 </div>
-                <div className="mt-4">
+                {/* <div className="mt-4">
                     <Top />
-                </div>
+                </div> */}
             </main>
         </>
     )
