@@ -16,7 +16,7 @@ const Profile = () => {
             form.setFieldsValue(response)
         }
         fetchUser()
-    }, [users])
+    }, [])
     const open = (value: any) => {
 
         setopenmodel(value)

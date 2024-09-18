@@ -97,12 +97,24 @@ const OrderDetail = () => {
                 user_id: bill?.user_id,
                 description: "Khách hàng xác nhận hủy đơn hàng",
             }
-            await updateCancel(id).then(async () => {
-                await addHistoryBills(data).then(() => {
-                    toast.success("Bạn đã hủy đơn hàng")
-                    setcolor("error")
-                    setstatus("Hủy hàng")
-                })
+            await updateCancel(id)
+            .then(async (data:any) => {
+                console.log(data);
+                if(data){
+                    await addHistoryBills(data).then(() => {
+                        toast.success("Bạn đã hủy đơn hàng")
+                        setcolor("error")
+                        setstatus("Hủy hàng")
+                    })
+                }else{
+                    toast.error("Không thể hủy!")
+                }
+                return
+                
+            })
+            .catch((e:any)=>{
+                console.log(e);
+                
             })
         }
     }

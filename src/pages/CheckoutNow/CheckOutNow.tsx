@@ -22,10 +22,9 @@ import ProvinceInCheckOutnow from "./ProvinceInCheckOutNow"
 import DistrictInCheckOutNow from "./DistricInCheckOutNow"
 import WardInCheckOutNow from "./WardInCheckOutNow"
 import CartInCheckOutNow from "./CartCheckOutNow"
-import { useLogPageLeave } from "@/utilities/ReRender"
+
 import { getUser } from "@/api/services/UserService"
 const CheckOutNow = () => {
-    useLogPageLeave("/checkoutnow")
     const [form] = Form.useForm()
     const user = JSON.parse(localStorage.getItem("user") || "null")
     const [users, setusers] = useState<any>()
@@ -97,7 +96,6 @@ const CheckOutNow = () => {
                 bill_id: response?.data?.id,
                 token: `${user?.token}`,
             }
-            console.log(data2)
 
             await Promise.all(
                 carts.map(async (element: any, index: any) => {
@@ -377,8 +375,8 @@ const CheckOutNow = () => {
         console.log(discountCode)
         const check: any = voucher
             ? voucher?.data?.find(
-                  (data1: any) => data1?.voucher_code == discountCode,
-              )?.discount_amount
+                (data1: any) => data1?.voucher_code == discountCode,
+            )?.discount_amount
             : ""
         const voucherTotal = (totalprice * check) / 100
         if (discountCode.toLowerCase() == "xinchao") {
@@ -781,13 +779,13 @@ const CheckOutNow = () => {
                                             <h5 className="fw-bold mb-0 ml-auto font-bold text-red-500 ">
                                                 {priceDiscount
                                                     ? formatNumber(
-                                                          totalprice +
-                                                              30000 -
-                                                              priceDiscount,
-                                                      )
+                                                        totalprice +
+                                                        30000 -
+                                                        priceDiscount,
+                                                    )
                                                     : formatNumber(
-                                                          totalprice + 30000,
-                                                      )}
+                                                        totalprice + 30000,
+                                                    )}
                                                 đ
                                             </h5>
                                         </div>

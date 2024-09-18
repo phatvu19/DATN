@@ -10,8 +10,8 @@ const ProductInTopProduct = ({data}:any) => {
                             <div className='w-16 border '>
                                 <span>{index+1 }</span>
                             </div>
-                            <div className='w-16 border '>
-                                <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F17205122836764534.png&w=1920&q=75" alt="" className='' />
+                            <div className='w-24 border h-24 '>
+                                <img src={data1?.image} alt="" style={{textAlign:'center', alignItems:'center', width:'100%' , height:'100%'}} />
                             </div>
                             <div className=' w-2/3 border flex justify-center items-center flex-col'>
                             <span className='font-bold text-sm'>{data1?.product_name?.length > 30 ? `${data1?.product_name?.slice(0, 30)}` : data1?.product_name}</span>

@@ -119,17 +119,7 @@ const OrderDetailInListOrderAdmin = () => {
                                 <LeftOutlined /> Quay lại
                             </button>
                         </Link>
-                        {check ? (
-                            ""
-                        ) : (
-                            <>
-                                <Link to="/bill/1" className="ml-auto mt-1">
-                                    <button>
-                                        Xem hóa đơn <RightOutlined />
-                                    </button>
-                                </Link>
-                            </>
-                        )}
+                     
                     </div>
                     {loading ? (
                         <>
