@@ -56,6 +56,8 @@ const OrderDetailInListOrderAdmin = () => {
         fetchOrder()
         fetchOrderHistory()
     }, [])
+    console.log(billHistory);
+    
     const ProductInbill = bill?.bill_details?.filter(
         (data: any) => data?.bill_id == id,
     )
@@ -111,7 +113,7 @@ const OrderDetailInListOrderAdmin = () => {
 
     return (
         <>
-            <div className="w-full bg-white p-5 pl-10 pr-10">
+            <div className="w-full bg-gray-200 p-5 pl-10 pr-10">
                 <div className="w-full">
                     <div className="flex">
                         <Link to="/admin/quan-ly-orders">
@@ -297,7 +299,7 @@ const OrderDetailInListOrderAdmin = () => {
                                 <table className="mb-10 w-full bg-gray-200">
                                     <thead>
                                         <tr>
-                                            <th className="p-2">Người hành động</th>
+                                            {/* <th className="p-2">Người hành động</th> */}
                                             <th className="p-2">
                                                 Nội dung hành động
                                             </th>

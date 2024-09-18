@@ -299,7 +299,6 @@ const CheckOut = () => {
                     }, 500)
                 } else {
                     toast.error("Đặt hàng thất bại!")
-
                     setloadings(false)
                     setTimeout(() => {
                         window.location.href = `/ `

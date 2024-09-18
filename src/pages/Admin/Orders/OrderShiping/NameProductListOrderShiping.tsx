@@ -21,12 +21,13 @@ const NameProductListOrderShiping = ({ data, onCheck }: any) => {
             setstatus("Đang giao hàng")
         }
     }, [data])
+    const user = JSON.parse(localStorage.getItem('user')!)
     const HandleDone = async (id: any) => {
         const check = confirm("Bạn có chắc chắn đơn hàng này khách hàng đã nhận?")
         if (check == true) {
             const data1 = {
                 bill_id: data?.id,
-                user_id: data?.user_id,
+                user_id: user?.data?.id,
                 description: `Admin xác nhận khách hàng đã nhận được đơn hàng`,
             }
             await updateDone(id).then(async () => {

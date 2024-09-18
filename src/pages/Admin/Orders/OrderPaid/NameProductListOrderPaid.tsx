@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const NameProductListOrderPaid = ({ data, onCheck }: any) => {
+    const user = JSON.parse(localStorage.getItem('user')!)
     // const billsProduct = billdetail?.find((item: any) => item?.bill_id == data?.id)
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
@@ -33,7 +34,7 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
             if (input.trim() !== "") {
                 const data1 = {
                     bill_id: data?.id,
-                    user_id: data?.user_id,
+                    user_id: user?.data?.id,
                     description: `Admin xác nhận hủy đơn hàng; Lý do: ${input}`,
                 }
                 await updateCancel(id).then(async () => {

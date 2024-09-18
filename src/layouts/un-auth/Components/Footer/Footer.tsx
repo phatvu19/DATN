@@ -280,9 +280,9 @@ function Footer() {
                 </div>
             </div>
             <div className="copyright flex h-[64px] w-full items-center justify-center space-x-4 bg-black text-white">
-                <div className="logo">
+                {/* <div className="logo">
                     <img src={logo} alt="logo" />
-                </div>
+                </div> */}
                 <div className="copyright">
                     Copyright © 2014-2024 Gentleman's.vn All Rights Reserved.
                 </div>

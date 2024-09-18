@@ -15,7 +15,8 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
     const [check, setcheck] = useState<any>()
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
-
+    const user = JSON.parse(localStorage.getItem('user')!)
+    
     useEffect(() => {
         if (data?.status == "Pending") {
             setcolor("warning")
@@ -53,7 +54,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
             if (input.trim() !== "") {
                 const data1 = {
                     bill_id: data?.id,
-                    user_id: data?.user_id,
+                    user_id: user?.data?.id,
                     description: `Admin xác nhận hủy đơn hàng; Lý do: ${input}`,
                 }
                 await updateCancel(id).then(async () => {
@@ -76,7 +77,7 @@ const NameProductInListOrderAdmin = ({ data, onCheck }: any) => {
         if (check == true) {
             const data1 = {
                 bill_id: data?.id,
-                user_id: data?.user_id,
+                user_id: user?.data?.id,
                 description: `Admin xác nhận đơn hàng`,
             }
             await updateConfirm(id).then(async () => {
