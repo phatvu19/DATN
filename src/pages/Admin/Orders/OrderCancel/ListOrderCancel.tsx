@@ -1,9 +1,9 @@
+import { getBillCancel } from "@/api/services/Bill"
+import { LoadingOutlined } from "@ant-design/icons"
 import { Button, Pagination, Spin } from "antd"
 import { useEffect, useState } from "react"
-import NameProductListOrderCancel from "./NameProductListOrderCancel"
-import { LoadingOutlined } from "@ant-design/icons"
-import { getBillCancel } from "@/api/services/Bill"
 import { Link } from "react-router-dom"
+import NameProductListOrderCancel from "./NameProductListOrderCancel"
 
 const ListOrderCancel = ({ data }: any) => {
     const [bill, setbill] = useState<any>()
@@ -32,27 +32,46 @@ const ListOrderCancel = ({ data }: any) => {
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
     }
-    const onChange = (key: string) => {
-        console.log(key)
-    }
+
     return (
         <>
             <div className="mb-4 flex items-center justify-between">
                 <div className="flex space-x-4">
-                    <Link to="/admin/orders/all"> <Button value="">Tất cả đơn hàng</Button></Link>
-                    <Link to="/admin/orders/paid"> <Button value="paid">Đã thanh toán</Button></Link>
-                    <Link to="/admin/orders/pending"><Button value="pending">Chờ xác nhận</Button></Link>
-                    <Link to="/admin/orders/confirm"> <Button value="confirmed">Đã xác nhận</Button></Link>
-                    <Link to="/admin/orders/shipping"><Button value="shipping">Đang giao</Button></Link>
-                    <Link to="/admin/orders/done"> <Button value="delivered">Đã giao</Button></Link>
-                    <Link to="/admin/orders/cancel">    <Button value="cancelled" className="bg-red-600 text-white">Đã hủy</Button></Link>
+                    <Link to="/admin/orders/all">
+                        {" "}
+                        <Button value="">Tất cả đơn hàng</Button>
+                    </Link>
+                    <Link to="/admin/orders/paid">
+                        {" "}
+                        <Button value="paid">Đã thanh toán</Button>
+                    </Link>
+                    <Link to="/admin/orders/pending">
+                        <Button value="pending">Chờ xác nhận</Button>
+                    </Link>
+                    <Link to="/admin/orders/confirm">
+                        {" "}
+                        <Button value="confirmed">Đã xác nhận</Button>
+                    </Link>
+                    <Link to="/admin/orders/shipping">
+                        <Button value="shipping">Đang giao</Button>
+                    </Link>
+                    <Link to="/admin/orders/done">
+                        {" "}
+                        <Button value="delivered">Đã giao</Button>
+                    </Link>
+                    <Link to="/admin/orders/cancel">
+                        {" "}
+                        <Button value="cancelled" className="bg-red-600 text-white">
+                            Đã hủy
+                        </Button>
+                    </Link>
                 </div>
-            </div >
+            </div>
             <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black">
                 <thead className="text-center align-middle">
                     <tr>
                         <th className="p-2">ID</th>
-                       
+
                         <th className="p-2">Địa chỉ/Sđt</th>
                         <th className="p-2">Giá</th>
                         <th className="p-2">Ngày</th>

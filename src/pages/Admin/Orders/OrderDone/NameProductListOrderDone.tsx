@@ -1,6 +1,5 @@
-import { getAllBillDetail, getBillsDetail } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
-import { Skeleton, Tag } from "antd"
+import { Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
@@ -18,7 +17,10 @@ const NameProductListOrderDone = ({ data }: any) => {
 
     return (
         <>
-            <tr className="items-center justify-center p-2 h-36 border border-gray-300" key={data?.id}>
+            <tr
+                className="h-36 items-center justify-center border border-gray-300 p-2"
+                key={data?.id}
+            >
                 <td className="p-2 text-center font-normal">{data?.id}</td>
                 <td className="p-2 text-center font-normal" style={{ width: "20%" }}>
                     <span className="font-bold">Đ/c</span>: {data?.Recipient_address}
@@ -34,7 +36,7 @@ const NameProductListOrderDone = ({ data }: any) => {
                 <td className="p-2 text-center font-normal">
                     {data?.created_at.substring(0, 19)}
                 </td>
-                <td className="p-2 text-center font-normal">  {data?.pay}</td>
+                <td className="p-2 text-center font-normal"> {data?.pay}</td>
                 <td className="p-2 text-center font-normal">
                     <Tag color={color}>{status}</Tag>
                 </td>
@@ -46,7 +48,6 @@ const NameProductListOrderDone = ({ data }: any) => {
                     </Link>
                 </td>
             </tr>
-           
         </>
     )
 }

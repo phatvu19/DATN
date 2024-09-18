@@ -1,6 +1,8 @@
-import cart from "../../assets/images/icons/icon-cart-3.svg"
-import cart1 from "../../assets/images/icons/icon-bag-4.svg"
-import cart2 from "../../assets/images/icons/icon-bag-3.svg"
+import { addBill, addBillDetail, addHistoryBills } from "@/api/services/Bill"
+import { getCartOrder } from "@/api/services/Order"
+import { GetSaleId, getAllSale } from "@/api/services/Sale"
+import { getAllVoucher } from "@/api/services/Voucher"
+import formatNumber from "@/utilities/FormatTotal"
 import {
     CreditCardOutlined,
     EnvironmentOutlined,
@@ -8,20 +10,18 @@ import {
     QuestionCircleOutlined,
     UserOutlined,
 } from "@ant-design/icons"
-import { Button, Form, Input, Modal, Radio, Select, Spin } from "antd"
+import { Button, Form, Input, Modal, Radio, Spin } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import { useEffect, useState } from "react"
-import formatNumber from "@/utilities/FormatTotal"
-import { Link, useNavigate } from "react-router-dom"
-import { addBill, addBillDetail, addHistoryBills } from "@/api/services/Bill"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { getCartOrder } from "@/api/services/Order"
-import { GetSaleId, getAllSale, getAllSaleProduct } from "@/api/services/Sale"
-import { getAllVoucher } from "@/api/services/Voucher"
-import ProvinceInCheckOutnow from "./ProvinceInCheckOutNow"
-import DistrictInCheckOutNow from "./DistricInCheckOutNow"
-import WardInCheckOutNow from "./WardInCheckOutNow"
+import cart2 from "../../assets/images/icons/icon-bag-3.svg"
+import cart1 from "../../assets/images/icons/icon-bag-4.svg"
+import cart from "../../assets/images/icons/icon-cart-3.svg"
 import CartInCheckOutNow from "./CartCheckOutNow"
+import DistrictInCheckOutNow from "./DistricInCheckOutNow"
+import ProvinceInCheckOutnow from "./ProvinceInCheckOutNow"
+import WardInCheckOutNow from "./WardInCheckOutNow"
 
 import { getUser } from "@/api/services/UserService"
 const CheckOutNow = () => {
@@ -54,7 +54,6 @@ const CheckOutNow = () => {
     const [discountCode, setDiscountCode] = useState("")
     const [priceDiscount, setPriceDiscount] = useState<any>(0)
     const [loadings, setloadings] = useState<any>()
-    const [res, setres] = useState<any>()
 
     const HandleVnpay = async () => {
         const check = confirm(
@@ -77,9 +76,8 @@ const CheckOutNow = () => {
                 voucher: "sed",
             }
             const response: any = await addBill(data)
-            setres(response)
             localStorage.setItem("response", JSON.stringify(response))
-            window.location.href = `http://localhost:8000/api/paynow/${response?.data?.id}/${data?.total_amount}/VNPAY`
+            window.location.href = `https://gentlemenbe.io.vn/api/paynow/${response?.data?.id}/${data?.total_amount}/VNPAY`
         }
     }
 
@@ -161,17 +159,12 @@ const CheckOutNow = () => {
             HandleVnpay()
         }
     }
-    const { Search } = Input
     const buttonStyle = {
         backgroundColor: "red",
         borderColor: "red",
         color: "white",
     }
-    const buttonStyles = {
-        backgroundColor: "gray",
-        borderColor: "gray",
-        color: "white",
-    }
+
     const nameprovince = (name: any) => {
         setprovinceName(name)
     }
@@ -187,7 +180,6 @@ const CheckOutNow = () => {
     const nameWard = (name: any) => {
         setWardName(name)
     }
-    const [totalPrice, setTotalPrice] = useState<number>(0)
     const [cartt, setcart] = useState<any>()
     useEffect(() => {
         const fetch = async () => {
@@ -211,13 +203,13 @@ const CheckOutNow = () => {
                 0,
             )
             const discountedTotal = total * 0.9 // Apply 10% discount
-            setTotalPrice(discountedTotal)
+            console.log(discountedTotal)
         } else {
             const total = cartt?.data?.reduce(
                 (sum: number, item: any) => sum + item.price * item.quantity,
                 0,
             )
-            setTotalPrice(total)
+            console.log(total)
         }
     }
     useEffect(() => {
@@ -225,11 +217,6 @@ const CheckOutNow = () => {
     }, [])
 
     const carts = JSON.parse(localStorage.getItem("cartnow") || "[]")
-    const totalCartPrice = cartt?.data?.reduce(
-        (total: any, item: any, index: any) =>
-            total + item.price * carts[index]?.quantity,
-        0,
-    )
 
     const navigate = useNavigate()
     const handleOk = () => {
@@ -405,6 +392,8 @@ const CheckOutNow = () => {
         value: string,
         callback: (arg0: string | undefined) => void,
     ) => {
+        console.log(rule)
+
         const phonePattern = /^(0)(3|5|7|8|9)([0-9]{8})$/
 
         if (value && !phonePattern.test(value)) {
@@ -418,6 +407,7 @@ const CheckOutNow = () => {
         value: string,
         callback: (arg0: string | undefined) => void,
     ) => {
+        console.log(rule)
         const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/ // Basic email pattern
 
         if (value && !emailPattern.test(value)) {

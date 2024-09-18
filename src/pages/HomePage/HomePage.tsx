@@ -2,15 +2,13 @@ import { Category } from "@/@types/category"
 import { Product } from "@/@types/product"
 import { getAllCategory } from "@/api/services/CategoryService"
 import { getAllProduct } from "@/api/services/ProductService"
-import banner from "@/assets/images/banner/banner.webp"
-import storebg from "@/assets/images/store-bg.jpg"
 import CategoryInHomePage from "@/pages/HomePage/CategoryInHomePage"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Autoplay, Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
-import ProductNewInHomePage from "./ProductNewInHomePage"
 import ListProductBuy3 from "./ListProductBuy3"
+import ProductNewInHomePage from "./ProductNewInHomePage"
 
 function HomePage() {
     const [category, setCategory] = useState<Category[]>([])
@@ -35,8 +33,6 @@ function HomePage() {
 
         fetchProducts()
     }, [])
-
-    const [activeTab, setActiveTab] = useState(1)
 
     // const tabs = [
     //     {
@@ -99,13 +95,25 @@ function HomePage() {
                     modules={[Pagination, Navigation, Autoplay]}
                 >
                     <SwiperSlide className="">
-                        <img src='https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg' alt="Banner" className="w-full" />
+                        <img
+                            src="https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg"
+                            alt="Banner"
+                            className="w-full"
+                        />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src='https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg' alt="Banner" className="w-full" />
+                        <img
+                            src="https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg"
+                            alt="Banner"
+                            className="w-full"
+                        />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src='https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg' alt="Banner" className="w-full"  />
+                        <img
+                            src="https://intphcm.com/data/upload/dung-luong-banner-thoi-trang.jpg"
+                            alt="Banner"
+                            className="w-full"
+                        />
                     </SwiperSlide>
                 </Swiper>
             </div>
@@ -166,9 +174,9 @@ function HomePage() {
             <div className="relative mx-auto my-5 max-w-7xl">
                 <div className="relative flex flex-col sm:flex-row">
                     <img
-                        src='https://png.pngtree.com/background/20210709/original/pngtree-clothing-sales-green-background-minimalism-picture-image_919997.jpg'
+                        src="https://png.pngtree.com/background/20210709/original/pngtree-clothing-sales-green-background-minimalism-picture-image_919997.jpg"
                         className="w-full sm:flex"
-                        style={{ height: "600px", opacity:'0.3' }}
+                        style={{ height: "600px", opacity: "0.3" }}
                         alt="Store background"
                     />
                     <div className="group-text absolute left-0 top-1/2 flex w-full -translate-y-1/2 transform flex-col items-center  gap-3 px-10 ">
@@ -178,8 +186,8 @@ function HomePage() {
                             THỐNG CỬA HÀNG <br /> TRÊN TOÀN VIỆT NAM
                         </h3>
                         <p>
-                            Trải dài trên khắp Việt Nam,  GENTLEMAN'S mang đến cuộc sống
-                            hiện đại,
+                            Trải dài trên khắp Việt Nam, GENTLEMAN'S mang đến cuộc
+                            sống hiện đại,
                             <br /> thông minh và chất lượng hơn tới hàng triệu người
                             tiêu dùng Việt.
                         </p>
@@ -193,24 +201,22 @@ function HomePage() {
                 <h1 className="mb-4 text-3xl font-bold"> GENTLEMAN'S</h1>
                 <p className="mb-4 text-center italic">
                     <span className="text-lg font-semibold">
-                         GENTLEMAN'S trân trọng cảm ơn Quý Khách đã ủng hộ và góp phần
+                        GENTLEMAN'S trân trọng cảm ơn Quý Khách đã ủng hộ và góp phần
                         tạo thêm cơ hội việc làm cho 142 người khuyết tật.
                     </span>
                 </p>
                 <p className="max-w-4xl text-center leading-relaxed">
-                     GENTLEMAN'S là cửa hàng bán lẻ đồ gia dụng, hóa mỹ phẩm, phụ kiện
-                    chính hãng các thương hiệu Nhật Bản: Inomata, Ebisu,
-                    Momotani, Naturie, Rohto (Hada Labo, Melano CC...), Kose (Dòng
-                    Softymo), Shiseido (Dòng Senka, Anessa, Tsubaki, Uno, D.Program),
-                    KAO (Biore, Laurier), Rosette, Unicharm, Rocket, Naris, Meishoku,
+                    GENTLEMAN'S là cửa hàng bán lẻ đồ gia dụng, hóa mỹ phẩm, phụ kiện
+                    chính hãng các thương hiệu Nhật Bản: Inomata, Ebisu, Momotani,
+                    Naturie, Rohto (Hada Labo, Melano CC...), Kose (Dòng Softymo),
+                    Shiseido (Dòng Senka, Anessa, Tsubaki, Uno, D.Program), KAO
+                    (Biore, Laurier), Rosette, Unicharm, Rocket, Naris, Meishoku,
                     Chuchu Baby, Deonatulle, Kumano, Taiyo Brush, Okamura, Dentultra,
-                    KAI, Pelican... Nước hoa  GENTLEMAN'S sản xuất tại Pháp. Hóa phẩm
-                    lành tính  GENTLEMAN'S sản xuất tại Nhật Bản. Mỹ phẩm  GENTLEMAN'S sản
-                    xuất tại Nhật Bản, Hàn Quốc. Sản phẩm Thời trang và Phụ kiện
-                    hiệu:  GENTLEMAN'S.
-                    Sản phẩm tiêu dùng hiệu:  GENTLEMAN'S và
-                    nhiều thương hiệu khác sản xuất tại Việt Nam, Trung Quốc, Thái
-                    Lan...
+                    KAI, Pelican... Nước hoa GENTLEMAN'S sản xuất tại Pháp. Hóa phẩm
+                    lành tính GENTLEMAN'S sản xuất tại Nhật Bản. Mỹ phẩm GENTLEMAN'S
+                    sản xuất tại Nhật Bản, Hàn Quốc. Sản phẩm Thời trang và Phụ kiện
+                    hiệu: GENTLEMAN'S. Sản phẩm tiêu dùng hiệu: GENTLEMAN'S và nhiều
+                    thương hiệu khác sản xuất tại Việt Nam, Trung Quốc, Thái Lan...
                 </p>
             </div>
         </>

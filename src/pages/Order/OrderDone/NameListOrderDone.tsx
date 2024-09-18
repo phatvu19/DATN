@@ -1,4 +1,4 @@
-import { getAllBillDetail, getBillsDetail } from "@/api/services/Bill"
+import { getBillsDetail } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { Skeleton, Tag } from "antd"
 import { useEffect, useState } from "react"
@@ -52,11 +52,18 @@ const NameListOrderDone = ({ data }: any) => {
                         />
                         <div className=" d-flex flex-column">
                             <span className="text-black">
-                                    {billdetail?.bill_details[0]?.product_name.length > 20 ? (
-                                        <>{billdetail?.bill_details[0]?.product_name?.slice(0, 30)}...</>
-                                    ) : (
-                                        <>{billdetail?.bill_details[0]?.product_name}</>
-                                    )}
+                                {billdetail?.bill_details[0]?.product_name.length >
+                                20 ? (
+                                    <>
+                                        {billdetail?.bill_details[0]?.product_name?.slice(
+                                            0,
+                                            30,
+                                        )}
+                                        ...
+                                    </>
+                                ) : (
+                                    <>{billdetail?.bill_details[0]?.product_name}</>
+                                )}
                                 <p>
                                     {" "}
                                     <Tag color={color}>{status}</Tag>

@@ -1,9 +1,4 @@
-import {
-    addHistoryBills,
-    getAllBillDetail,
-    getBillsDetail,
-    updateDone,
-} from "@/api/services/Bill"
+import { addHistoryBills, getBillsDetail, updateDone } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
 import { Skeleton, Tag } from "antd"
 import { useEffect, useState } from "react"
@@ -76,8 +71,15 @@ const NameListOrderShiping = ({ data, onCheck }: any) => {
                         />
                         <div className=" d-flex flex-column">
                             <span className="text-black">
-                                {billdetail?.bill_details[0]?.product_name.length > 20 ? (
-                                    <>{billdetail?.bill_details[0]?.product_name?.slice(0, 30)}...</>
+                                {billdetail?.bill_details[0]?.product_name.length >
+                                20 ? (
+                                    <>
+                                        {billdetail?.bill_details[0]?.product_name?.slice(
+                                            0,
+                                            30,
+                                        )}
+                                        ...
+                                    </>
                                 ) : (
                                     <>{billdetail?.bill_details[0]?.product_name}</>
                                 )}
@@ -99,16 +101,18 @@ const NameListOrderShiping = ({ data, onCheck }: any) => {
                                 Thành tiền: {formatNumber(total + 30000)} đ
                             </span>
                         </div>
-                            <div className="mt-4 lg:mb-0 lg:ml-auto lg:mr-0 lg:mt-0 flex flex-col space-y-2 ">
+                        <div className="mt-4 flex flex-col space-y-2 lg:mb-0 lg:ml-auto lg:mr-0 lg:mt-0 ">
                             <Link to={`/orders/${data?.id}`}>
-                                    <button className="rounded border border-gray-200 bg-red-500 p-1 pl-10 pr-10 text-sm font-normal  text-white">
+                                <button className="rounded border border-gray-200 bg-red-500 p-1 pl-10 pr-10 text-sm font-normal  text-white">
                                     Xem chi tiết
                                 </button>
-                               
                             </Link>
-                                <button onClick={() => HandleDone(data?.id)} className="rounded border border-gray-200 bg-blue-500 p-1 pl-4 pr-4 text-sm font-normal text-white">
-                                    Đã nhận được hàng
-                                </button>
+                            <button
+                                onClick={() => HandleDone(data?.id)}
+                                className="rounded border border-gray-200 bg-blue-500 p-1 pl-4 pr-4 text-sm font-normal text-white"
+                            >
+                                Đã nhận được hàng
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,9 @@
-import { getAllDistrict, getAllProvince, getAllWard } from '@/api/services/map';
-import { Button, Form, Input, Modal, Select } from 'antd';
-import { useEffect, useState } from 'react';
+import { getAllDistrict, getAllProvince, getAllWard } from "@/api/services/map"
+import { getUser, updateUser } from "@/api/services/UserService"
+import { Button, Form, Input, Modal, Select } from "antd"
 import { Option } from "antd/es/mentions"
-import { getUser, updateUser } from '@/api/services/UserService';
-import { toast } from 'react-toastify';
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
 const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
     const [form] = Form.useForm()
     const [province, setprovince] = useState([])
@@ -19,9 +19,9 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
     const [wardNAME, setwardNAME] = useState<any>()
     const [users, setusers] = useState<any>()
     const handleCancel = () => {
-        onOpen(false);
-        window.location.reload();
-    };
+        onOpen(false)
+        window.location.reload()
+    }
     useEffect(() => {
         const fetchUser = async () => {
             const response = await getUser(user?.data?.id)
@@ -79,33 +79,19 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
         const id = users?.id
         const data = {
             name: name,
-            address: wardNAME && districNAME && privinceNAME ? `${wardNAME}, ${districNAME}, ${privinceNAME}`
-                : form.getFieldValue("address"),
+            address:
+                wardNAME && districNAME && privinceNAME
+                    ? `${wardNAME}, ${districNAME}, ${privinceNAME}`
+                    : form.getFieldValue("address"),
             email: email,
-            number: number
+            number: number,
         }
         const response = await updateUser(id, data)
         if (response) {
-            toast.success('Thành công!')
+            toast.success("Thành công!")
             onOpen(false)
             window.location.reload()
         }
-
-    }
-    const HandleUpdateUser1 = async () => {
-        const id = users?.id
-        const data = {
-            name: name,
-            email: email,
-            number: number
-        }
-        const response = await updateUser(id, data)
-        if (response) {
-            toast.success('Thành công!')
-            onOpen(false)
-            window.location.reload()
-        }
-
     }
     const [check, setcheck] = useState<any>()
     const handleAddress = () => {
@@ -114,29 +100,33 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
     const validatePhone = (
         rule: any,
         value: string,
-        callback: (arg0: string | undefined) => void
+        callback: (arg0: string | undefined) => void,
     ) => {
-        const phonePattern = /^[0-9]{10}$/; // Regular expression for 10-digit Vietnamese phone number
+        console.log(rule)
+
+        const phonePattern = /^[0-9]{10}$/ // Regular expression for 10-digit Vietnamese phone number
 
         if (value && !phonePattern.test(value)) {
-            callback("Số điện thoại không hợp lệ");
+            callback("Số điện thoại không hợp lệ")
         } else {
-            callback(undefined);
+            callback(undefined)
         }
-    };
+    }
     const validateEmail = (
         rule: any,
         value: string,
-        callback: (arg0: string | undefined) => void
+        callback: (arg0: string | undefined) => void,
     ) => {
-        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/; // Basic email pattern
+        console.log(rule)
+
+        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/ // Basic email pattern
 
         if (value && !emailPattern.test(value)) {
-            callback("Email không hợp lệ");
+            callback("Email không hợp lệ")
         } else {
-            callback(undefined);
+            callback(undefined)
         }
-    };
+    }
     return (
         <>
             <Modal
@@ -144,63 +134,76 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                 open={openmodal}
                 onCancel={() => handleCancel()}
                 footer={[
-
                     <Button key="close" onClick={() => handleCancel()}>
                         Đóng
                     </Button>,
                 ]}
                 width={800}
             >
-                <Form form={form} className='mt-2 p-10' onFinish={HandleUpdateUser}>
-
+                <Form form={form} className="mt-2 p-10" onFinish={HandleUpdateUser}>
                     <label htmlFor="">Họ tên</label>
-                    <Form.Item name='name' rules={[
-                        {
-                            required: true,
-                            message:
-                                "Không được để trống tên ",
-                        },
-                    ]}>
-                        <Input type="text" onChange={(e: any) => setname(e.target.value)} />
+                    <Form.Item
+                        name="name"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Không được để trống tên ",
+                            },
+                        ]}
+                    >
+                        <Input
+                            type="text"
+                            onChange={(e: any) => setname(e.target.value)}
+                        />
                     </Form.Item>
-
                     <label htmlFor="">Email</label>
-                    <Form.Item name="email" rules={[
-                        {
-                            required: true,
-                            message:
-                                "Không được để trống email ",
-                        },
-                        {
-                            validator: validateEmail,
-                        },
-                    ]}>
-                        <Input type="email" onChange={(e: any) => setemail(e.target.value)} />
+                    <Form.Item
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Không được để trống email ",
+                            },
+                            {
+                                validator: validateEmail,
+                            },
+                        ]}
+                    >
+                        <Input
+                            type="email"
+                            onChange={(e: any) => setemail(e.target.value)}
+                        />
                     </Form.Item>
-
                     <label htmlFor="">Số điện thoại</label>
-                    <Form.Item name="number" rules={[
-                        {
-                            required: true,
-                            message:
-                                "Không được để trống số điện thoại ",
-                        },
-                        {
-                            validator: validatePhone,
-                        },
-                    ]}>
-                        <Input type="number" onChange={(e: any) => setnumber(e.target.value)} />
+                    <Form.Item
+                        name="number"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Không được để trống số điện thoại ",
+                            },
+                            {
+                                validator: validatePhone,
+                            },
+                        ]}
+                    >
+                        <Input
+                            type="number"
+                            onChange={(e: any) => setnumber(e.target.value)}
+                        />
                     </Form.Item>
                     {check || !users?.address ? (
                         <>
                             <label htmlFor="">Tỉnh</label>
-                            <Form.Item name='province' rules={[
-                                {
-                                    required: true,
-                                    message:
-                                        "Không được để trống tỉnh ",
-                                }
-                            ]}>
+                            <Form.Item
+                                name="province"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Không được để trống tỉnh ",
+                                    },
+                                ]}
+                            >
                                 <Select
                                     className="mt-3 w-5/6"
                                     style={{ height: "42px" }}
@@ -209,21 +212,25 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                                 >
                                     <Option value="">Chọn Tỉnh</Option>
                                     {province?.map((data: any) => (
-                                        <Option key={data?.province_id} value={`${data?.province_name}:${data?.province_id}`}>
+                                        <Option
+                                            key={data?.province_id}
+                                            value={`${data?.province_name}:${data?.province_id}`}
+                                        >
                                             {data?.province_name}
                                         </Option>
                                     ))}
                                 </Select>
                             </Form.Item>
                             <label htmlFor="">Huyện</label>
-                            <Form.Item name='distric' rules={[
-                                {
-                                    required: true,
-                                    message:
-                                        "Không được để trống huyện ",
-                                }
-                            ]}>
-
+                            <Form.Item
+                                name="distric"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Không được để trống huyện ",
+                                    },
+                                ]}
+                            >
                                 <Select
                                     defaultValue="Chọn Huyện"
                                     className="mt-3 w-5/6"
@@ -232,21 +239,25 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                                 >
                                     <Option value="">Chọn Huyện</Option>
                                     {district?.map((data: any) => (
-                                        <Option key={data?.district_id} value={`${data?.district_name}:${data?.district_id}`}>
+                                        <Option
+                                            key={data?.district_id}
+                                            value={`${data?.district_name}:${data?.district_id}`}
+                                        >
                                             {data?.district_name}
                                         </Option>
                                     ))}
                                 </Select>
                             </Form.Item>
                             <label htmlFor="">Xã</label>
-                            <Form.Item name='ward' rules={[
-                                {
-                                    required: true,
-                                    message:
-                                        "Không được để trống xã ",
-                                }
-                            ]}>
-
+                            <Form.Item
+                                name="ward"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Không được để trống xã ",
+                                    },
+                                ]}
+                            >
                                 <Select
                                     defaultValue="Chọn Xã"
                                     style={{ height: "42px" }}
@@ -255,7 +266,10 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                                 >
                                     <Option value="">Chọn Xã</Option>
                                     {ward?.map((data: any) => (
-                                        <Option key={data?.ward_id} value={`${data?.ward_name}:${data?.ward_id}`}>
+                                        <Option
+                                            key={data?.ward_id}
+                                            value={`${data?.ward_name}:${data?.ward_id}`}
+                                        >
                                             {data?.ward_name}
                                         </Option>
                                     ))}
@@ -268,23 +282,38 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                                 <>
                                     <label htmlFor="">Địa chỉ</label>
                                     <div className="flex w-full">
-                                        <Form.Item name="address" className="w-full mr-2">
-                                            <Input type="text" onChange={(e: any) => setnumber(e.target.value)} disabled />
+                                        <Form.Item
+                                            name="address"
+                                            className="mr-2 w-full"
+                                        >
+                                            <Input
+                                                type="text"
+                                                onChange={(e: any) =>
+                                                    setnumber(e.target.value)
+                                                }
+                                                disabled
+                                            />
                                         </Form.Item>
-                                        <Button className="ml-auto" type="primary" onClick={() => handleAddress()}>
+                                        <Button
+                                            className="ml-auto"
+                                            type="primary"
+                                            onClick={() => handleAddress()}
+                                        >
                                             Cập nhập địa chỉ mới
                                         </Button>
                                     </div>
                                 </>
                             ) : (
                                 <>
-                                    <Form.Item name='province' rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Không được để trống tỉnh ",
-                                        }
-                                    ]}>
+                                    <Form.Item
+                                        name="province"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "Không được để trống tỉnh ",
+                                            },
+                                        ]}
+                                    >
                                         <label htmlFor="">Tỉnh</label>
                                         <Select
                                             className="mt-3 w-5/6"
@@ -294,21 +323,26 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                                         >
                                             <Option value="">Chọn Tỉnh</Option>
                                             {province?.map((data: any) => (
-                                                <Option key={data?.province_id} value={`${data?.province_name}:${data?.province_id}`}>
+                                                <Option
+                                                    key={data?.province_id}
+                                                    value={`${data?.province_name}:${data?.province_id}`}
+                                                >
                                                     {data?.province_name}
                                                 </Option>
                                             ))}
                                         </Select>
                                     </Form.Item>
                                     <label htmlFor="">Huyện</label>
-                                    <Form.Item name='district' rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Không được để trống huyện ",
-                                        }
-                                    ]}>
-
+                                    <Form.Item
+                                        name="district"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    "Không được để trống huyện ",
+                                            },
+                                        ]}
+                                    >
                                         <Select
                                             defaultValue="Chọn Huyện"
                                             className="mt-3 w-5/6"
@@ -317,21 +351,25 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                                         >
                                             <Option value="">Chọn Huyện</Option>
                                             {district?.map((data: any) => (
-                                                <Option key={data?.district_id} value={`${data?.district_name}:${data?.district_id}`}>
+                                                <Option
+                                                    key={data?.district_id}
+                                                    value={`${data?.district_name}:${data?.district_id}`}
+                                                >
                                                     {data?.district_name}
                                                 </Option>
                                             ))}
                                         </Select>
                                     </Form.Item>
                                     <label htmlFor="">Xã</label>
-                                    <Form.Item name='ward' rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Không được để trống xã ",
-                                        }
-                                    ]}>
-
+                                    <Form.Item
+                                        name="ward"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "Không được để trống xã ",
+                                            },
+                                        ]}
+                                    >
                                         <Select
                                             defaultValue="Chọn Xã"
                                             style={{ height: "42px" }}
@@ -340,7 +378,10 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                                         >
                                             <Option value="">Chọn Xã</Option>
                                             {ward?.map((data: any) => (
-                                                <Option key={data?.ward_id} value={`${data?.ward_name}:${data?.ward_id}`}>
+                                                <Option
+                                                    key={data?.ward_id}
+                                                    value={`${data?.ward_name}:${data?.ward_id}`}
+                                                >
                                                     {data?.ward_name}
                                                 </Option>
                                             ))}
@@ -350,12 +391,10 @@ const UpdateProfile = ({ openmodal, onOpen, user }: any) => {
                             )}
                         </div>
                     )}
-
-
-
-                    <Button htmlType='submit' type='primary' >
+                    <Button htmlType="submit" type="primary">
                         Cập nhập
-                    </Button>,
+                    </Button>
+                    ,
                 </Form>
             </Modal>
         </>

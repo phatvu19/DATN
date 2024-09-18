@@ -1,8 +1,8 @@
+import { getUser, updateUser } from "@/api/services/UserService"
+import { CameraOutlined } from "@ant-design/icons"
 import { Button, Form, Input, Upload } from "antd"
 import { useEffect, useState } from "react"
 import UpdateProfile from "./UpdateProfile"
-import { getUser, updateUser } from "@/api/services/UserService"
-import { CameraOutlined, UploadOutlined } from "@ant-design/icons"
 
 const Profile = () => {
     const [openmodal, setopenmodel] = useState<any>()
@@ -38,6 +38,8 @@ const Profile = () => {
             avatar: url,
         }
         const response = await updateUser(id, data)
+        console.log(response)
+
         window.location.reload()
     }
     return (

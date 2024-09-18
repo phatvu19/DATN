@@ -1,9 +1,8 @@
 import { RemoveVoucher, addVoucher, getAllVoucher } from "@/api/services/Voucher"
-import { Button, Dropdown, Form, Input, Menu, Modal, Popconfirm } from "antd"
+import formatNumber from "@/utilities/FormatTotal"
+import { Button, Form, Input, Modal, Popconfirm } from "antd"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify"
-import formatNumber from '@/utilities/FormatTotal';
-
 
 const ListVoucher = () => {
     const [vouchers, setvouchers] = useState<any>()
@@ -20,14 +19,14 @@ const ListVoucher = () => {
     }, [check])
     const formRef: any = useRef(null)
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const showModal = () => {
-        setIsModalOpen(true);
-    };
+        setIsModalOpen(true)
+    }
     const handleOk = async () => {
         if (!namevoucher || !discountvoucher || !limitvoucher) {
-            return;
+            return
         }
         const data = {
             voucher_code: namevoucher,
@@ -36,107 +35,169 @@ const ListVoucher = () => {
             minimum_purchase: 100,
             status: 1,
             usage_limit: limitvoucher,
-            description: "voucher"
+            description: "voucher",
         }
         const response = await addVoucher(data)
         if (response) {
-            setIsModalOpen(false);
+            setIsModalOpen(false)
             setcheck(response)
-            toast.success('Thành công')
+            toast.success("Thành công")
             setTimeout(() => {
-                window.location.reload();
-            }, 300);
-
+                window.location.reload()
+            }, 300)
         }
-
-
-    };
+    }
 
     const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+        setIsModalOpen(false)
+    }
     const HandleDelete = async (id: any) => {
         const response = await RemoveVoucher(id)
-        toast.success('Thành công')
+        toast.success("Thành công")
         setcheck(response)
     }
     return (
         <>
-            <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out mb-2" onClick={showModal}>Thêm</button>
-            <Modal title="Thêm voucher" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <Form ref={formRef} >
+            <button
+                type="button"
+                className="focus:shadow-outline mb-2 rounded bg-blue-500 px-4 py-1 font-bold text-white transition duration-150 ease-in-out hover:bg-blue-700 focus:outline-none"
+                onClick={showModal}
+            >
+                Thêm
+            </button>
+            <Modal
+                title="Thêm voucher"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <Form ref={formRef}>
                     <Form.Item
                         name="voucher_code"
                         rules={[
                             {
                                 required: true,
-                                message:
-                                    "Không được để trống tên ",
+                                message: "Không được để trống tên ",
                             },
                         ]}
                     >
-                        <Input type="text" placeholder="Nhập tên voucher" onChange={(e: any) => setnamevoucher(e.target.value)} />
+                        <Input
+                            type="text"
+                            placeholder="Nhập tên voucher"
+                            onChange={(e: any) => setnamevoucher(e.target.value)}
+                        />
                     </Form.Item>
                     <Form.Item
                         name="discount_amount"
                         rules={[
                             {
                                 required: true,
-                                message:
-                                    "Không được để trống phần trăm ",
+                                message: "Không được để trống phần trăm ",
                             },
                         ]}
                     >
-                        <Input type="number" placeholder="Phần trăm giảm giá" onChange={(e: any) => setdiscountvoucher(e.target.value)} />
+                        <Input
+                            type="number"
+                            placeholder="Phần trăm giảm giá"
+                            onChange={(e: any) => setdiscountvoucher(e.target.value)}
+                        />
                     </Form.Item>
                     <Form.Item
                         name="usage_limit"
                         rules={[
                             {
                                 required: true,
-                                message:
-                                    "Không được để trống giới hạn ",
+                                message: "Không được để trống giới hạn ",
                             },
                         ]}
                     >
-                        <Input type="number" placeholder="Giới hạn sử dụng voucher" onChange={(e: any) => setlimitvoucher(e.target.value)} />
+                        <Input
+                            type="number"
+                            placeholder="Giới hạn sử dụng voucher"
+                            onChange={(e: any) => setlimitvoucher(e.target.value)}
+                        />
                     </Form.Item>
                 </Form>
             </Modal>
             <table className="min-w-full divide-y divide-gray-200 border border-gray-200">
                 <thead className="bg-gray-50">
                     <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Voucher code</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Số lượng</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phần trăm giảm</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                        <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                        >
+                            ID
+                        </th>
+                        <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                        >
+                            Voucher code
+                        </th>
+                        <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                        >
+                            Số lượng
+                        </th>
+                        <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                        >
+                            Phần trăm giảm
+                        </th>
+                        <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                        >
+                            Action
+                        </th>
                     </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                    {vouchers ? vouchers?.data?.map((data: any) => {
-                        return (
-                            <>
-                                <tr key={data.id}>
-                                    <td className="px-6 py-4 whitespace-nowrap"><a href="#" className="font-semibold text-blue-600">#{data?.id}</a></td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{data?.voucher_code}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{data?.usage_limit}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{formatNumber(data?.discount_amount)}%</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">    <Popconfirm
-                                        title="Bạn có chắc chắn muốn xóa?"
-                                        onConfirm={() => HandleDelete(data?.id)}
-                                        // onCancel={cancel}
-                                        okText="Yes"
-                                        cancelText="No"
-                                    ><Button>Xóa</Button>
-                                    </Popconfirm></td>
-                                </tr>
-                            </>
-                        )
-                    }) : ""}
+                <tbody className="divide-y divide-gray-200 bg-white">
+                    {vouchers
+                        ? vouchers?.data?.map((data: any) => {
+                              return (
+                                  <>
+                                      <tr key={data.id}>
+                                          <td className="whitespace-nowrap px-6 py-4">
+                                              <a
+                                                  href="#"
+                                                  className="font-semibold text-blue-600"
+                                              >
+                                                  #{data?.id}
+                                              </a>
+                                          </td>
+                                          <td className="whitespace-nowrap px-6 py-4">
+                                              {data?.voucher_code}
+                                          </td>
+                                          <td className="whitespace-nowrap px-6 py-4">
+                                              {data?.usage_limit}
+                                          </td>
+                                          <td className="whitespace-nowrap px-6 py-4">
+                                              {formatNumber(data?.discount_amount)}%
+                                          </td>
+                                          <td className="whitespace-nowrap px-6 py-4">
+                                              {" "}
+                                              <Popconfirm
+                                                  title="Bạn có chắc chắn muốn xóa?"
+                                                  onConfirm={() =>
+                                                      HandleDelete(data?.id)
+                                                  }
+                                                  // onCancel={cancel}
+                                                  okText="Yes"
+                                                  cancelText="No"
+                                              >
+                                                  <Button>Xóa</Button>
+                                              </Popconfirm>
+                                          </td>
+                                      </tr>
+                                  </>
+                              )
+                          })
+                        : ""}
                 </tbody>
             </table>
-
         </>
     )
 }

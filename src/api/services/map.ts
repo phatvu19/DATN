@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
+import axios, { AxiosRequestConfig } from "axios"
 import { toast } from "react-toastify"
 
 const baseUrl = "https://vapi.vnappmob.com/api/province"

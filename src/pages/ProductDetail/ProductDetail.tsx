@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react"
-import { Image, List, Rate } from "antd"
+import { getAllAttributeValue } from "@/api/services/AttributeService"
+import { getProductById } from "@/api/services/ProductService"
 import {
     CarryOutOutlined,
     HddOutlined,
-    HeartOutlined,
     ShoppingCartOutlined,
 } from "@ant-design/icons"
+import { Image } from "antd"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getProductById } from "@/api/services/ProductService"
-import CategoryInProductDetail from "./CategoryInProductDetail"
-import PriceInProductDetail from "./PriceInProductDetail"
-import ColorInProductDetail from "./ColorInProductDetail"
-import SizeInProductDetail from "./SizeInProductDetail"
 import { toast } from "react-toastify"
-import QuantityInProductDetail from "./QuantityInProductDetail"
-import { getAllAttributeValue } from "@/api/services/AttributeService"
+import CategoryInProductDetail from "./CategoryInProductDetail"
+import ColorInProductDetail from "./ColorInProductDetail"
 import Comment from "./Comment"
+import PriceInProductDetail from "./PriceInProductDetail"
+import QuantityInProductDetail from "./QuantityInProductDetail"
+import SizeInProductDetail from "./SizeInProductDetail"
 const ProductDetail = () => {
     const { id }: any = useParams()
     const [selectedColor, setSelectedColor] = useState(null)
@@ -24,7 +23,6 @@ const ProductDetail = () => {
     const carts = JSON.parse(localStorage.getItem("cart") || "[]")
     const [product, setProduct] = useState<any>()
     const [sizevalue, setSizevalue] = useState()
-    const [prices, setprices] = useState()
     const [quantity2, setquantity2] = useState<any>()
     const fetchProducts = async () => {
         const data: any = await getProductById(id)
@@ -65,14 +63,13 @@ const ProductDetail = () => {
         setid_attribute_value(idattributevalue)
         setvalue(idAttributeValues)
     }
-    const [sizevalues, setsizevalue] = useState()
     const sizes = (idvarian: any, idattributevalue: any, sizeValue: any) => {
         setSizevalue(idvarian)
         setid_attribute_size(idattributevalue)
-        setsizevalue(sizeValue)
+        console.log(sizeValue)
     }
     const price = (value: any) => {
-        setprices(value)
+        console.log(value)
     }
 
     const HandleAddtoCart = async () => {

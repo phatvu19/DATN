@@ -13,14 +13,14 @@ const SizeInProductDetail = ({
 }: any) => {
     console.log(data)
     console.log(product)
-
+    console.log(idSize)
+    console.log(index)
+    console.log(color)
     if (!Array.isArray(product) || product.length === 0) {
         return <div></div>
     }
-    let foundValue = undefined
+    let foundValue: any = undefined
     let idvarians: any = undefined
-    const id_attribute_value: any = undefined
-
     product?.forEach((item: any) => {
         const foundObj = item.attribute_values[1]
         if (foundObj?.id == data?.id) {
@@ -31,6 +31,7 @@ const SizeInProductDetail = ({
         }
     })
     console.log(idvarians)
+    console.log(foundValue)
     const variant = value?.find((data1: any) => data1?.size == data?.value)?.variant
     const HandleClick = (values: any) => {
         onSize1(idvarians)

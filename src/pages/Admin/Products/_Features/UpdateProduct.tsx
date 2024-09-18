@@ -1,11 +1,11 @@
 import { Category } from "@/@types/category"
 import { Attribute, Variant } from "@/@types/product"
-import { getAllCategory } from "@/api/services/CategoryService"
-import { getProductById, updateProduct } from "@/api/services/ProductService"
 import {
     getAllAttribute,
     getAllAttributeValue,
 } from "@/api/services/AttributeService"
+import { getAllCategory } from "@/api/services/CategoryService"
+import { getProductById, updateProduct } from "@/api/services/ProductService"
 import {
     ArrowLeftOutlined,
     DeleteOutlined,
@@ -13,7 +13,7 @@ import {
     PlusOutlined,
     UploadOutlined,
 } from "@ant-design/icons"
-import { Button, Form, Image, Input, Select, Space, Upload, UploadFile } from "antd"
+import { Button, Form, Image, Input, Select, Space, Upload } from "antd"
 import { useCallback, useEffect, useState } from "react"
 import { Controller, FieldValues, useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
@@ -24,7 +24,6 @@ const UpdateProduct = () => {
     const [form] = Form.useForm()
     const [categories, setCategories] = useState<Category[]>([])
     const [variants, setVariants] = useState<Variant[]>([])
-    const [fileList, setFileList] = useState<UploadFile[]>([])
     const [attributes, setAttributes] = useState<Attribute[]>([])
     const [attributeValues, setAttributeValues] = useState<any>({})
     const navigate = useNavigate()
@@ -35,7 +34,6 @@ const UpdateProduct = () => {
         handleSubmit,
         setValue,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        formState: { errors },
     } = useForm()
     const formatVariantAttributes = (variant: any, attributeNames: string[]) => {
         const attributes: { [key: string]: string } = {}
@@ -66,18 +64,10 @@ const UpdateProduct = () => {
                 setValue("description", product?.description)
 
                 if (product?.image) {
-                    setFileList([
-                        {
-                            uid: "-1",
-                            name: "Current Image",
-                            status: "done",
-                            url: product.image,
-                        },
-                    ])
                 }
                 if (product.variants.length > 0) {
                     const arr: any = []
-const attributeNames = product.variants.reduce(
+                    const attributeNames = product.variants.reduce(
                         (acc: string[], variant: any) => {
                             variant.attribute_values.forEach((attrValue: any) => {
                                 console.log(attrValue)
@@ -153,7 +143,7 @@ const attributeNames = product.variants.reduce(
         onChange({ file }: any) {
             if (file.status !== "uploading") {
                 // Sử dụng một hàm setState để cập nhật mảng uploadedImages
-setUploadedImages(file.response.secure_url)
+                setUploadedImages(file.response.secure_url)
             }
         },
         data: {
@@ -240,7 +230,7 @@ setUploadedImages(file.response.secure_url)
         setcheck(true)
     }
     return (
-<div className="container mx-auto mt-10 flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
+        <div className="container mx-auto mt-10 flex flex-col space-y-10 rounded-lg bg-white p-5 shadow-lg">
             <h2 className="my-10 text-2xl font-semibold text-gray-700">
                 Cập nhật thông tin sản phẩm
             </h2>
@@ -296,7 +286,7 @@ setUploadedImages(file.response.secure_url)
                                             {categories.map((cat) => (
                                                 <Option key={cat.id} value={cat.id}>
                                                     {cat.name}
-</Option>
+                                                </Option>
                                             ))}
                                         </Select>
                                         {error && (
@@ -353,7 +343,7 @@ setUploadedImages(file.response.secure_url)
                                             <span style={{ color: "red" }}>
                                                 {error.message}
                                             </span>
-)}
+                                        )}
                                     </>
                                 )}
                             />
@@ -416,7 +406,7 @@ setUploadedImages(file.response.secure_url)
                                         e.target.value,
                                     )
                                     setVariants(newVariants)
-}}
+                                }}
                             />
                         </Form.Item>
                         {attributes.map((attribute) => (
@@ -462,7 +452,7 @@ setUploadedImages(file.response.secure_url)
                                                                     .color ===
                                                                     selectedColor && // Trùng color
                                                                 otherVariant
-.attributes
+                                                                    .attributes
                                                                     .size ===
                                                                     value.value, // Trùng size
                                                         )
@@ -506,7 +496,7 @@ setUploadedImages(file.response.secure_url)
                                                                     index && // Loại trừ biến thể hiện tại
                                                                 otherVariant
                                                                     .attributes
-.size ===
+                                                                    .size ===
                                                                     selectedSize && // Trùng size
                                                                 otherVariant
                                                                     .attributes
@@ -557,7 +547,7 @@ setUploadedImages(file.response.secure_url)
                             <Button
                                 size="large"
                                 type="dashed"
-danger
+                                danger
                                 icon={<DeleteOutlined />}
                                 onClick={() => handleRemoveVariant(index)}
                             />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import { RootAuthRouter, RootUnAuthRouter } from "./routes"
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
 function App() {
     const [user, setuser] = useState<any>()
     useEffect(() => {
@@ -25,16 +25,16 @@ function App() {
                                       element={childRoute.element}
                                   />
                               ))}
-                            {route.path === '/admin' && (
-                                <Route
-                                    path="/admin"
-                                    element={<Navigate to="/admin/thong-ke" />}
-                                />
-                            )}
+                              {route.path === "/admin" && (
+                                  <Route
+                                      path="/admin"
+                                      element={<Navigate to="/admin/thong-ke" />}
+                                  />
+                              )}
                           </Route>
                       ))
                     : ""}
-                
+
                 <Route path={"/"} element={RootUnAuthRouter[0]?.element}>
                     {RootUnAuthRouter[0]?.children?.map((route, index) => (
                         <Route
@@ -49,7 +49,6 @@ function App() {
                 ) : (
                     ""
                 )}
-                
             </Routes>
         </Router>
     )

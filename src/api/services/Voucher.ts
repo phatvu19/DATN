@@ -11,10 +11,12 @@ const getAllVoucher = async (): Promise<Variant[]> => {
         return []
     }
 }
-const addVoucher = async (data:any): Promise<Variant[]> => {
+const addVoucher = async (data: any): Promise<Variant[]> => {
     try {
-        const response: AxiosResponse<{ data: any }> =
-            await httpRequest.post("voucher",data)
+        const response: AxiosResponse<{ data: any }> = await httpRequest.post(
+            "voucher",
+            data,
+        )
         return response.data?.data
     } catch (error) {
         return []
@@ -22,11 +24,12 @@ const addVoucher = async (data:any): Promise<Variant[]> => {
 }
 const RemoveVoucher = async (data: any): Promise<Variant[]> => {
     try {
-        const response: AxiosResponse<{ data: any }> =
-            await httpRequest.delete(`voucher/${data}`)
+        const response: AxiosResponse<{ data: any }> = await httpRequest.delete(
+            `voucher/${data}`,
+        )
         return response.data?.data
     } catch (error) {
         return []
     }
 }
-export { getAllVoucher, addVoucher, RemoveVoucher }
+export { addVoucher, getAllVoucher, RemoveVoucher }

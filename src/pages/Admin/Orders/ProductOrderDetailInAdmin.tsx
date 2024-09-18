@@ -1,6 +1,5 @@
 import formatNumber from "@/utilities/FormatTotal"
-import { LoadingOutlined } from "@ant-design/icons"
-import { Skeleton, Spin } from "antd"
+import { Skeleton } from "antd"
 
 const ProductOrderDetailInAdmin = ({ data, loading }: any) => {
     const parts = data?.attribute
@@ -27,7 +26,11 @@ const ProductOrderDetailInAdmin = ({ data, loading }: any) => {
                                 <img src={data?.image} className="w-24" />
                                 <div className="m-2">
                                     <p className="mb-2 text-sm font-bold">
-                                            {data?.product_name.length >= 25 ? <>{data?.product_name?.slice(0, 25)}</> : data?.product_name}
+                                        {data?.product_name.length >= 25 ? (
+                                            <>{data?.product_name?.slice(0, 25)}</>
+                                        ) : (
+                                            data?.product_name
+                                        )}
                                     </p>
                                     <span className="text-sm ">
                                         Kích thước:

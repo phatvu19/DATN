@@ -1,16 +1,15 @@
-
-import { useEffect, useState } from "react"
-import ProductInListProductBuy3 from "./ProductInListProductBuy3"
-import { Link } from "react-router-dom"
 import { ProductSale } from "@/api/services/Sale"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import ProductInListProductBuy3 from "./ProductInListProductBuy3"
 
 const ListProductBuy3 = () => {
     const [products, setProducts] = useState<any>([])
     useEffect(() => {
         const fetchProducts = async () => {
             const allProducts: any = await ProductSale()
-            console.log(allProducts);
-            
+            console.log(allProducts)
+
             const limitedProducts = allProducts?.slice(0, 10)
             setProducts(limitedProducts)
         }
@@ -24,7 +23,7 @@ const ListProductBuy3 = () => {
 
     const filteredProducts = filterProductsBySaleId(products)
     // console.log(products);
-    
+
     return (
         <>
             <div className="block-new-product container mx-auto my-2 flex max-w-7xl flex-col">
@@ -32,7 +31,10 @@ const ListProductBuy3 = () => {
                     {filteredProducts?.map((data: any) => {
                         return (
                             <>
-                                <ProductInListProductBuy3 data={data} key={data?.id}/>
+                                <ProductInListProductBuy3
+                                    data={data}
+                                    key={data?.id}
+                                />
                             </>
                         )
                     })}

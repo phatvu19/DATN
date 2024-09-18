@@ -1,14 +1,14 @@
-import cart from "../../assets/images/icons/icon-bag.svg"
-import cart1 from "../../assets/images/icons/icon-bag-2.svg"
-import cart2 from "../../assets/images/icons/icon-bag-3.svg"
-import { ArrowRightOutlined, LoadingOutlined } from "@ant-design/icons"
-import { useEffect, useState } from "react"
-import ProductInCart from "./ProductInCart"
-import formatNumber from "@/utilities/FormatTotal"
-import { Link } from "react-router-dom"
 import { getCartOrder } from "@/api/services/Order"
 import { getAllSale } from "@/api/services/Sale"
+import formatNumber from "@/utilities/FormatTotal"
+import { ArrowRightOutlined, LoadingOutlined } from "@ant-design/icons"
 import { Button, Spin } from "antd"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import cart1 from "../../assets/images/icons/icon-bag-2.svg"
+import cart2 from "../../assets/images/icons/icon-bag-3.svg"
+import cart from "../../assets/images/icons/icon-bag.svg"
+import ProductInCart from "./ProductInCart"
 
 const Cart = () => {
     const [carts, setCarts] = useState<any>([])

@@ -2,7 +2,13 @@ import AttributeManagement from "@/pages/Admin/Attributes"
 import CategoryManagement from "@/pages/Admin/Categories"
 import Dashboard from "@/pages/Admin/Dashboard"
 import ListOrderAdmin from "@/pages/Admin/Orders/ListOrderAdmin"
+import ListOrderCancel from "@/pages/Admin/Orders/OrderCancel/ListOrderCancel"
+import ListOrderConFirm from "@/pages/Admin/Orders/OrderConFirm/ListOrderConFirm"
 import OrderDetailInListOrderAdmin from "@/pages/Admin/Orders/OrderDetailInListOrderAdmin"
+import ListOrderDones from "@/pages/Admin/Orders/OrderDone/ListOrderDone"
+import ListOrderPaid from "@/pages/Admin/Orders/OrderPaid/ListOrderPaid"
+import ListOrderPending from "@/pages/Admin/Orders/OrderPending/ListOrderPending"
+import ListOrderSiping from "@/pages/Admin/Orders/OrderShiping/ListOrderSiping"
 import AddProduct from "@/pages/Admin/Products/_Features/AddProduct"
 import UpdateProduct from "@/pages/Admin/Products/_Features/UpdateProduct"
 import ProductManagement from "@/pages/Admin/Products/ProductList"
@@ -11,13 +17,7 @@ import UserManagement from "@/pages/Admin/Users"
 import AddUser from "@/pages/Admin/Users/_Features/AddUser"
 import ListVoucher from "@/pages/Admin/Voucher/ListVoucher"
 import { pathName } from "@/routes/path-name"
-import ListComment from '../pages/Admin/Comment/ListComment';
-import ListOrderPaid from "@/pages/Admin/Orders/OrderPaid/ListOrderPaid"
-import ListOrderPending from "@/pages/Admin/Orders/OrderPending/ListOrderPending"
-import ListOrderConFirm from "@/pages/Admin/Orders/OrderConFirm/ListOrderConFirm"
-import ListOrderSiping from "@/pages/Admin/Orders/OrderShiping/ListOrderSiping"
-import ListOrderDones from "@/pages/Admin/Orders/OrderDone/ListOrderDone"
-import ListOrderCancel from "@/pages/Admin/Orders/OrderCancel/ListOrderCancel"
+import ListComment from "../pages/Admin/Comment/ListComment"
 export const AuthRouter = [
     {
         path: pathName.DASHBOARD,
@@ -81,7 +81,7 @@ export const AuthRouter = [
     },
     {
         path: pathName.ALLORDERPENDING,
-        element: <ListOrderPending/>,
+        element: <ListOrderPending />,
     },
     {
         path: pathName.ALLORDERCONFIRM,

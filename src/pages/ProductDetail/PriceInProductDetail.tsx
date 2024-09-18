@@ -1,8 +1,7 @@
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons"
-import formatNumber from "../../utilities/FormatTotal"
-import { useEffect, useState } from "react"
 import { getAllSale } from "@/api/services/Sale"
-import Icon from "@ant-design/icons/lib/components/Icon"
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons"
+import { useEffect, useState } from "react"
+import formatNumber from "../../utilities/FormatTotal"
 
 const PriceInProductDetail = ({
     data,

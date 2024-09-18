@@ -3,17 +3,15 @@ import {
     getAllBillDetail,
     getBillDetail,
     updateCancel,
-    updateConfirm,
     updateDone,
 } from "@/api/services/Bill"
-import { getOrderDetail } from "@/api/services/Order"
+import formatNumber from "@/utilities/FormatTotal"
 import { CarOutlined, LeftOutlined } from "@ant-design/icons"
 import { Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import ProductInOrderDetail from "./ProductInOrderDetail"
-import formatNumber from "@/utilities/FormatTotal"
 import { toast } from "react-toastify"
+import ProductInOrderDetail from "./ProductInOrderDetail"
 
 const OrderDetail = () => {
     const { id } = useParams()
@@ -22,7 +20,6 @@ const OrderDetail = () => {
     const [totalPrice, setTotalPrice] = useState(0)
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
-    const [check, setcheck] = useState<any>(false)
 
     const fetchOrder = async () => {
         const user = JSON.parse(localStorage.getItem("user")!) || []
@@ -70,14 +67,12 @@ const OrderDetail = () => {
         if (bill?.status == "Pending") {
             setcolor("warning")
             setstatus("Chờ xác nhận")
-            setcheck(true)
         } else if (bill?.status == "Confirm") {
             setcolor("processing")
             setstatus("Chờ giao hàng")
         } else if (bill?.status == "Paid") {
             setcolor("brown")
             setstatus("Chờ lấy hàng")
-            setcheck(true)
         } else if (bill?.status == "Shipping") {
             setcolor("purple")
             setstatus("Đang giao hàng")
@@ -92,11 +87,6 @@ const OrderDetail = () => {
     const HandleCancel = async (id: any) => {
         const check = confirm("Bạn có chắc chắn hủy đơn hàng?")
         if (check == true) {
-            const data = {
-                bill_id: bill?.id,
-                user_id: bill?.user_id,
-                description: "Khách hàng xác nhận hủy đơn hàng",
-            }
             await updateCancel(id)
                 .then(async (data: any) => {
                     console.log(data)
@@ -129,7 +119,6 @@ const OrderDetail = () => {
                     toast.success("Thành công")
                     setcolor("processing")
                     setstatus("Chờ giao hàng")
-                    setcheck(false)
                 })
             })
         }

@@ -38,9 +38,9 @@ function VariantManagement() {
         {
             title: "Color",
             key: "color",
-            render: (_, record) => {
+            render: (_, record: any) => {
                 const colorAttribute = record.attribute_values.find(
-                    (attr) => attr.attribute_id === 1,
+                    (attr: any) => attr.attribute_id === 1,
                 )
                 return colorAttribute ? colorAttribute.value : ""
             },
@@ -48,9 +48,9 @@ function VariantManagement() {
         {
             title: "Size",
             key: "size",
-            render: (_, record) => {
+            render: (_, record: any) => {
                 const sizeAttribute = record.attribute_values.find(
-                    (attr) => attr.attribute_id === 2,
+                    (attr: any) => attr.attribute_id === 2,
                 )
                 return sizeAttribute ? sizeAttribute.value : ""
             },

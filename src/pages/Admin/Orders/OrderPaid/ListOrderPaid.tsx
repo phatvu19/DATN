@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react"
-import NameProductListOrderPaid from "./NameProductListOrderPaid"
-import { Button, Pagination, Spin } from "antd"
-import { LoadingOutlined } from "@ant-design/icons"
 import { getBillPaid } from "@/api/services/Bill"
+import { LoadingOutlined } from "@ant-design/icons"
+import { Button, Pagination, Spin } from "antd"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import Search from "antd/es/transfer/search"
+import NameProductListOrderPaid from "./NameProductListOrderPaid"
 
 const ListOrderPaid = () => {
     const [bill, setbill] = useState<any>()
@@ -30,9 +29,6 @@ const ListOrderPaid = () => {
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
     }
-    const onChange = (key: string) => {
-        console.log(key)
-    }
     const check = (key: any) => {
         setcheck(key)
     }
@@ -40,15 +36,36 @@ const ListOrderPaid = () => {
         <>
             <div className="mb-4 flex items-center justify-between">
                 <div className="flex space-x-4">
-                    <Link to="/admin/orders/all"> <Button value="">Tất cả đơn hàng</Button></Link>
-                    <Link to="/admin/orders/paid"> <Button value="paid" className="bg-blue-600 text-white">Đã thanh toán</Button></Link>
-                    <Link to="/admin/orders/pending"><Button value="pending">Chờ xác nhận</Button></Link>
-                    <Link to="/admin/orders/confirm"> <Button value="confirmed">Đã xác nhận</Button></Link>
-                    <Link to="/admin/orders/shipping"><Button value="shipping">Đang giao</Button></Link>
-                    <Link to="/admin/orders/done"> <Button value="delivered">Đã giao</Button></Link>
-                    <Link to="/admin/orders/cancel">    <Button value="cancelled" >Đã hủy</Button></Link>
+                    <Link to="/admin/orders/all">
+                        {" "}
+                        <Button value="">Tất cả đơn hàng</Button>
+                    </Link>
+                    <Link to="/admin/orders/paid">
+                        {" "}
+                        <Button value="paid" className="bg-blue-600 text-white">
+                            Đã thanh toán
+                        </Button>
+                    </Link>
+                    <Link to="/admin/orders/pending">
+                        <Button value="pending">Chờ xác nhận</Button>
+                    </Link>
+                    <Link to="/admin/orders/confirm">
+                        {" "}
+                        <Button value="confirmed">Đã xác nhận</Button>
+                    </Link>
+                    <Link to="/admin/orders/shipping">
+                        <Button value="shipping">Đang giao</Button>
+                    </Link>
+                    <Link to="/admin/orders/done">
+                        {" "}
+                        <Button value="delivered">Đã giao</Button>
+                    </Link>
+                    <Link to="/admin/orders/cancel">
+                        {" "}
+                        <Button value="cancelled">Đã hủy</Button>
+                    </Link>
                 </div>
-            </div >
+            </div>
             <table className="w-full border border-gray-300 bg-gray-100 text-sm text-black">
                 <thead className="text-center align-middle">
                     <tr>

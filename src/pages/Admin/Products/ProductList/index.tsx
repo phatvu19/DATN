@@ -44,7 +44,7 @@ const ProductManagement = () => {
         setSelectedProduct(product)
         setIsModalVisible(true)
     }
-    const  [filter , setfilter]  = useState<any>()
+    const [filter, setfilter] = useState<any>()
     const columns: (ColumnGroupType<Product> | ColumnType<Product>)[] = [
         {
             title: "STT",
@@ -63,7 +63,11 @@ const ProductManagement = () => {
             dataIndex: "image",
             key: "image",
             render: (text, record) => (
-                <img src={record.image} style={{ width: "50px", height: "auto" }} />
+                <img
+                    src={record.image}
+                    style={{ width: "50px", height: "auto" }}
+                    alt={text}
+                />
             ),
         },
         {
@@ -137,29 +141,28 @@ const ProductManagement = () => {
                 )),
         },
     ]
-    
+
     const { Search } = Input
-    const handleSearch=(e:any)=>{
-        const searchValue = e.toLowerCase();
+    const handleSearch = (e: any) => {
+        const searchValue = e.toLowerCase()
 
         if (searchValue === "") {
-            setfilter([]);
+            setfilter([])
         } else {
             const filter = products?.filter((data: any) =>
-                data?.name.toLowerCase().includes(searchValue)
-            );
-            setfilter(filter);
+                data?.name.toLowerCase().includes(searchValue),
+            )
+            setfilter(filter)
         }
-        
     }
-    console.log(filter);
-    
+    console.log(filter)
+
     return (
         <>
             <Search
                 placeholder="Tìm kiếm theo tên sản phẩm"
                 onSearch={handleSearch}
-                className="w-1/4 flex ml-auto m-2"
+                className="m-2 ml-auto flex w-1/4"
             />
             <Table
                 columns={columns}

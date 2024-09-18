@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react"
 import { getCartOrder } from "@/api/services/Order"
+import { useEffect, useState } from "react"
 import ProductInCartCheckOutNow from "./ProductInCartCheckOutNow"
 
 const CartInCheckOutNow = ({ data }: any) => {
     const [carts, setCarts] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
-    const [cartt, setcart] = useState<any>()
-    const [check, setcheck] = useState<any>(false)
     const handleCartUpdate = async () => {
         const storedCarts = JSON.parse(localStorage.getItem("cartnow")!) || []
         setCarts(storedCarts)
         const data = { data: storedCarts }
         const allCart: any = await getCartOrder(data)
-        setcart(allCart)
+        console.log(allCart)
         let total = 0
         let totalQuantity = 0
         let hasSaleId1 = false
@@ -22,12 +19,13 @@ const CartInCheckOutNow = ({ data }: any) => {
                 hasSaleId1 = true
             }
         })
+        console.log(hasSaleId1)
 
         storedCarts.forEach((item: any, index: any) => {
             total += allCart?.data[index]?.price * item.quantity
-            setcheck(false)
+            console.log(false)
         })
-        setTotalPrice(total)
+        console.log(total)
     }
     useEffect(() => {
         handleCartUpdate()

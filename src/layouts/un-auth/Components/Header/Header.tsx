@@ -1,18 +1,12 @@
 import { getAllProduct } from "@/api/services/ProductService"
-import logo from "@/assets/images/logo/logo.webp"
-import {
-    DashboardOutlined,
-    LogoutOutlined,
-    SettingOutlined,
-    UserOutlined,
-} from "@ant-design/icons"
+import { LogoutOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons"
 import { Button, Dropdown, Menu } from "antd"
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import localStorage from "redux-persist/es/storage"
 
-function Header({ onSearch }:any) {
+function Header({ onSearch }: any) {
     const [isScrolled, setIsScrolled] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
@@ -101,18 +95,18 @@ function Header({ onSearch }:any) {
         fetchpro()
     }, [])
     const HandleSearch = (e: any) => {
-        e.preventDefault();
-        const searchValue = e.target.value.toLowerCase();
+        e.preventDefault()
+        const searchValue = e.target.value.toLowerCase()
 
         if (searchValue === "") {
-            onSearch([]);
+            onSearch([])
         } else {
             const filter = product?.filter((data: any) =>
-                data?.name.toLowerCase().includes(searchValue)
-            );
-            onSearch(filter);
+                data?.name.toLowerCase().includes(searchValue),
+            )
+            onSearch(filter)
         }
-    };
+    }
 
     return (
         <>
@@ -143,7 +137,7 @@ function Header({ onSearch }:any) {
                 >
                     <div className="header-content container mx-auto flex h-[63px] max-w-7xl items-center justify-between">
                         <div className="logo">
-                            <a href="/" className="font-bold text-2xl">
+                            <a href="/" className="text-2xl font-bold">
                                 GENTLEMAN'S
                             </a>
                         </div>
@@ -223,9 +217,7 @@ function Header({ onSearch }:any) {
                                         <Button
                                             icon={<UserOutlined />}
                                             className="flex items-center"
-                                        >
-
-                                        </Button>
+                                        ></Button>
                                     </Dropdown>
                                 ) : (
                                     <Dropdown overlay={authMenu} trigger={["hover"]}>
@@ -239,7 +231,6 @@ function Header({ onSearch }:any) {
                                 )}
                             </div>
                         </div>
-
                     </div>
                     <div className="menu-box flex h-[63px] items-center bg-white shadow-md">
                         <nav className="nav container mx-auto flex max-w-7xl justify-start">

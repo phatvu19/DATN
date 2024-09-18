@@ -1,20 +1,11 @@
-import {
-    addHistoryBills,
-    getAllBillDetail,
-    getBillsDetail,
-    updateCancel,
-    updateConfirm,
-    updateShiping,
-} from "@/api/services/Bill"
+import { addHistoryBills, updateShiping } from "@/api/services/Bill"
 import formatNumber from "@/utilities/FormatTotal"
-import { LoadingOutlined } from "@ant-design/icons"
-import { Skeleton, Spin, Tag } from "antd"
+import { Tag } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const NameProductListOrderPaid = ({ data, onCheck }: any) => {
-    const user = JSON.parse(localStorage.getItem("user")!)
     // const billsProduct = billdetail?.find((item: any) => item?.bill_id == data?.id)
     const [color, setcolor] = useState<any>()
     const [status, setstatus] = useState<any>()
@@ -24,33 +15,7 @@ const NameProductListOrderPaid = ({ data, onCheck }: any) => {
             setstatus("Chờ lấy hàng")
         }
     }, [data])
-    const HandleCancel = async (id: any) => {
-        let input: any = ""
-        while (input.trim() === "") {
-            input = window.prompt("Lý do hủy đơn hàng:")
-            if (input === null) {
-                return
-            }
-            if (input.trim() !== "") {
-                const data1 = {
-                    bill_id: data?.id,
-                    user_id: user?.data?.id,
-                    description: `Admin xác nhận hủy đơn hàng; Lý do: ${input}`,
-                }
-                await updateCancel(id).then(async () => {
-                    await addHistoryBills(data1).then(() => {
-                        toast.success("Bạn đã hủy đơn hàng")
-                        setcolor("error")
-                        setstatus("Hủy hàng")
-                        onCheck(data?.id)
-                    })
-                })
-                return
-            } else {
-                alert("Vui lòng nhập lý do hủy đơn hàng.")
-            }
-        }
-    }
+
     const HandleConfirm = async (id: any) => {
         const check = confirm("Bạn chắc chắn muốn giao đơn hàng này?")
         if (check == true) {

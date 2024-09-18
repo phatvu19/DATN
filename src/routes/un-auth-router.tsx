@@ -1,6 +1,8 @@
 import Cart from "@/pages/Cart/Cart"
 import CheckOut from "@/pages/CheckOut/CheckOut"
+import CheckOutNow from "@/pages/CheckoutNow/CheckOutNow"
 import HomePage from "@/pages/HomePage/HomePage"
+import { default as LienHe, default as ListTinTuc } from "@/pages/LieHe/ListTinTuc"
 import ListProduct from "@/pages/ListProduct/ListProduct"
 import ListProductSale from "@/pages/ListProductSale/ListProductSale"
 import LoginPage from "@/pages/LoginPage/LoginPage"
@@ -8,12 +10,9 @@ import ListOrder from "@/pages/Order/ListOrder"
 import OrderDetail from "@/pages/OrderDetail/OrderDetail"
 import OrderDone from "@/pages/OrderDone/OrderDone"
 import ProductDetail from "@/pages/ProductDetail/ProductDetail"
-import RegisterPage from "@/pages/RegisterPage/RegisterPage"
-import ListTinTuc from "@/pages/LieHe/ListTinTuc"
-import { pathName } from "@/routes/path-name"
-import LienHe from "@/pages/LieHe/ListTinTuc"
-import CheckOutNow from "@/pages/CheckoutNow/CheckOutNow"
 import Profile from "@/pages/Profile/Profile"
+import RegisterPage from "@/pages/RegisterPage/RegisterPage"
+import { pathName } from "@/routes/path-name"
 
 export const UnAuthRouter = [
     {

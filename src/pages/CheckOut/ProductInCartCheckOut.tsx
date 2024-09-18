@@ -1,6 +1,6 @@
+import { GetSaleId } from "@/api/services/Sale"
 import { useEffect, useState } from "react"
 import formatNumber from "../../utilities/FormatTotal"
-import { GetSaleId, getAllSaleProduct } from "@/api/services/Sale"
 
 const ProductInCartCheckOut = ({ data, index, quantity }: any) => {
     const [sales, setsale] = useState<any>([])
@@ -23,7 +23,11 @@ const ProductInCartCheckOut = ({ data, index, quantity }: any) => {
                 <td className="ml-10 mr-10 mt-10 w-60 whitespace-normal text-center align-middle">
                     <h6>
                         <a href="#" className="text-sl font-bold">
-                            {quantity?.name_product.length >= 25 ? <>{quantity?.name_product?.slice(0, 25)}</> :quantity?.name_product}
+                            {quantity?.name_product.length >= 25 ? (
+                                <>{quantity?.name_product?.slice(0, 25)}</>
+                            ) : (
+                                quantity?.name_product
+                            )}
                         </a>
                     </h6>
                     <p className="mt-2">

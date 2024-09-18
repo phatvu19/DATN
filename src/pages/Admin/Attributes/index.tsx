@@ -1,15 +1,13 @@
 import { Attribute, AttributeValue } from "@/@types/product"
 import {
     createAttribute,
-    deleteAttribute,
-    getAllAttribute,
-    updateAttribute,
     createAttributeValue,
-    deleteAttributeValue,
-    updateAttributeValue,
+    getAllAttribute,
     getAttributeById,
+    updateAttribute,
+    updateAttributeValue,
 } from "@/api/services/AttributeService"
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons"
+import { EditOutlined, PlusOutlined } from "@ant-design/icons"
 import { Button, Form, Input, Modal, Space, Table } from "antd"
 import { useEffect, useState } from "react"
 
@@ -19,7 +17,7 @@ const AttributeManagement = () => {
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
     const [isValueModalVisible, setIsValueModalVisible] = useState(false)
     const [currentAttribute, setCurrentAttribute] = useState<any>(null)
-    const [currentAttributeValue, setCurrentAttributeValue] = useState<any>(null)
+    const [currentAttributeValue] = useState<any>(null)
     const [attributesid, setAttributesid] = useState<any>([])
     const [form] = Form.useForm()
     console.log(attributesid)
@@ -48,10 +46,6 @@ const AttributeManagement = () => {
 
     const handleAddAttribute = async (values: Attribute) => {
         try {
-            const data: any = {
-                value: values,
-                attribute_id: currentAttribute?.id,
-            }
             await createAttribute(values)
             fetchAttributes()
             setIsAddModalVisible(false)
@@ -72,14 +66,14 @@ const AttributeManagement = () => {
         }
     }
 
-    const handleDeleteAttribute = async (attributeId: number) => {
-        try {
-            await deleteAttribute(attributeId)
-            fetchAttributes()
-        } catch (error) {
-            console.error("Failed to delete attribute:", error)
-        }
-    }
+    // const handleDeleteAttribute = async (attributeId: number) => {
+    //     try {
+    //         await deleteAttribute(attributeId)
+    //         fetchAttributes()
+    //     } catch (error) {
+    //         console.error("Failed to delete attribute:", error)
+    //     }
+    // }
 
     const handleAddAttributeValue = async (values: AttributeValue) => {
         try {
@@ -111,42 +105,44 @@ const AttributeManagement = () => {
         }
     }
 
-    const handleDeleteAttributeValue = async (
-        attributeId: number,
-        attributeValueId: any,
-    ) => {
-        try {
-            await deleteAttributeValue(attributeId)
-            fetchAttributes()
-        } catch (error) {
-            console.error("Failed to delete attribute value:", error)
-        }
-    }
+    // const handleDeleteAttributeValue = async (
+    //     attributeId: number,
+    //     attributeValueId: any,
+    // ) => {
+    //     try {
+    //         console.log(attributeValueId);
 
-    const showDeleteConfirm = (attribute: Attribute) => {
-        Modal.confirm({
-            title: "Confirm Deletion",
-            content: "Are you sure you want to delete this attribute?",
-            okText: "Delete",
-            okType: "danger",
-            cancelText: "Cancel",
-            onOk: () => handleDeleteAttribute(attribute.id),
-        })
-    }
+    //         await deleteAttributeValue(attributeId)
+    //         fetchAttributes()
+    //     } catch (error) {
+    //         console.error("Failed to delete attribute value:", error)
+    //     }
+    // }
 
-    const showDeleteValueConfirm = (
-        attributeId: number,
-        attributeValue: AttributeValue,
-    ) => {
-        Modal.confirm({
-            title: "Confirm Deletion",
-            content: "Are you sure you want to delete this attribute value?",
-            okText: "Delete",
-            okType: "danger",
-            cancelText: "Cancel",
-            onOk: () => handleDeleteAttributeValue(attributeId, attributeValue.id),
-        })
-    }
+    // const showDeleteConfirm = (attribute: Attribute) => {
+    //     Modal.confirm({
+    //         title: "Confirm Deletion",
+    //         content: "Are you sure you want to delete this attribute?",
+    //         okText: "Delete",
+    //         okType: "danger",
+    //         cancelText: "Cancel",
+    //         onOk: () => handleDeleteAttribute(attribute.id),
+    //     })
+    // }
+
+    // const showDeleteValueConfirm = (
+    //     attributeId: number,
+    //     attributeValue: AttributeValue,
+    // ) => {
+    //     Modal.confirm({
+    //         title: "Confirm Deletion",
+    //         content: "Are you sure you want to delete this attribute value?",
+    //         okText: "Delete",
+    //         okType: "danger",
+    //         cancelText: "Cancel",
+    //         onOk: () => handleDeleteAttributeValue(attributeId, attributeValue.id),
+    //     })
+    // }
 
     const attributeColumns = [
         {
@@ -220,6 +216,8 @@ const AttributeManagement = () => {
             dataIndex: "value",
             key: "value",
             render: (text: string, record: AttributeValue) => {
+                console.log(text)
+
                 return record.value
             },
         },

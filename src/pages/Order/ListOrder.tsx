@@ -1,14 +1,14 @@
+import { GetBillWithUser } from "@/api/services/Bill"
+import { LoadingOutlined } from "@ant-design/icons"
 import { Spin, Tabs, TabsProps } from "antd"
 import { useEffect, useState } from "react"
 import AllOrderInListOrder from "./AllOrderInListOrder"
-import { GetBillWithUser } from "@/api/services/Bill"
-import { LoadingOutlined } from "@ant-design/icons"
-import ListOrderPending from "./OrderPending/ListOrderPending"
-import ListOrderConFirm from "./OrderConfirm/ListOrderConfirm"
-import ListOrderSiping from "./OrderShiping/ListOrderShiping"
-import ListOrderDones from "./OrderDone/ListOrderDone"
 import ListOrderCancel from "./OrderCancel/ListOrderCancel"
-import ListOrderPaid from './OrderPaid/ListOrderPaid';
+import ListOrderConFirm from "./OrderConfirm/ListOrderConfirm"
+import ListOrderDones from "./OrderDone/ListOrderDone"
+import ListOrderPaid from "./OrderPaid/ListOrderPaid"
+import ListOrderPending from "./OrderPending/ListOrderPending"
+import ListOrderSiping from "./OrderShiping/ListOrderShiping"
 
 const ListOrder = () => {
     const [bills, setBill] = useState<any>()

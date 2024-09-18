@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
 
-import { Pagination, Spin } from "antd"
-import {  GetBillPaidWithUser } from "@/api/services/Bill"
+import { GetBillPaidWithUser } from "@/api/services/Bill"
+import { Pagination } from "antd"
 import NameListOrderPaid from "./NameListOrderPaid"
 
 const ListOrderPaid = () => {
     const [bill, setbill] = useState<any>()
-    const [loading, setLoading] = useState<boolean>(true)
     const user: any = localStorage.getItem("user")
     const users = JSON.parse(user) || []
     const fetchBills = async () => {
@@ -15,7 +14,6 @@ const ListOrderPaid = () => {
             setbill(allBills)
         } catch {
         } finally {
-            setLoading(false)
         }
     }
 

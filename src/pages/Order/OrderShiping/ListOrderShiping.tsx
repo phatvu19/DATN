@@ -1,12 +1,10 @@
-import { Pagination, Spin } from "antd"
-import React, { useEffect, useState } from "react"
-import { LoadingOutlined } from "@ant-design/icons"
-import { GetBillShipingWithUser, getBillShiping } from "@/api/services/Bill"
+import { GetBillShipingWithUser } from "@/api/services/Bill"
+import { Pagination } from "antd"
+import { useEffect, useState } from "react"
 import NameListOrderShiping from "./NameListOrderShiping"
 
 const ListOrderSiping = () => {
     const [bill, setbill] = useState<any>()
-    const [loading, setLoading] = useState<boolean>(true)
     const [check1, setcheck] = useState<boolean>()
     const user: any = localStorage.getItem("user")
     const users = JSON.parse(user) || []
@@ -16,7 +14,6 @@ const ListOrderSiping = () => {
             setbill(allBills)
         } catch {
         } finally {
-            setLoading(false)
         }
     }
 
@@ -31,9 +28,6 @@ const ListOrderSiping = () => {
 
     const handlePageChange = (page: any) => {
         setCurrentPage(page)
-    }
-    const onChange = (key: string) => {
-        console.log(key)
     }
     const check = (key: any) => {
         setcheck(key)
