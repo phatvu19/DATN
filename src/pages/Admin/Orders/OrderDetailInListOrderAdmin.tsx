@@ -16,7 +16,7 @@ import { getUser } from "@/api/services/UserService"
 import HistoryOrder from "./HistoryOrder"
 
 const OrderDetailInListOrderAdmin = () => {
-    const { id }:any = useParams()
+    const { id }: any = useParams()
     const [bill, setBill] = useState<any>()
     const [totalPrice, setTotalPrice] = useState(0)
     const [loading, setloading] = useState(true)
@@ -36,8 +36,8 @@ const OrderDetailInListOrderAdmin = () => {
             const billStory = data.bill_story
 
             // Iterate through bill_story to fetch user names
-            const updatedBillHistory:any = await Promise.all(
-                billStory.map(async (bill:any) => {
+            const updatedBillHistory: any = await Promise.all(
+                billStory.map(async (bill: any) => {
                     const userId = bill.user_id
                     const { name } = await getUser(userId)
                     return {
@@ -107,8 +107,8 @@ const OrderDetailInListOrderAdmin = () => {
         ? bill?.Recipient_address?.split(";").map((part: any) => part.trim())
         : ""
     const [name, descbill, address] = parts
-    console.log(billHistory);
-    
+    console.log(billHistory)
+
     return (
         <>
             <div className="w-full bg-white p-5 pl-10 pr-10">
@@ -119,7 +119,6 @@ const OrderDetailInListOrderAdmin = () => {
                                 <LeftOutlined /> Quay lại
                             </button>
                         </Link>
-                     
                     </div>
                     {loading ? (
                         <>
@@ -299,16 +298,25 @@ const OrderDetailInListOrderAdmin = () => {
                                     <thead>
                                         <tr>
                                             <th className="p-2">Người hành động</th>
-                                            <th className="p-2">Nội dung hành động</th>
-                                            <th className="p-2">Thời gian hành động</th>
+                                            <th className="p-2">
+                                                Nội dung hành động
+                                            </th>
+                                            <th className="p-2">
+                                                Thời gian hành động
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white text-center align-middle">
-                                        {billHistory?.map((item: any, index: any) => {
-                                            return (
-                                                <HistoryOrder key={index} data={item}/>
-                                            )
-                                        })}
+                                        {billHistory?.map(
+                                            (item: any, index: any) => {
+                                                return (
+                                                    <HistoryOrder
+                                                        key={index}
+                                                        data={item}
+                                                    />
+                                                )
+                                            },
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
