@@ -348,12 +348,7 @@ const ProductDetail = () => {
                             <CarryOutOutlined style={{ color: "white" }} /> Mua ngay
                         </button>
                     </div>
-                    <button
-                        className="mt-3 w-full rounded  border border-black p-2"
-                        style={{ color: "black" }}
-                    >
-                        <HddOutlined style={{ color: "black" }} /> Mua tại quầy
-                    </button>
+                   
                 </div>
             </div>
             <div className=" pb-20 pl-80 pr-80 pt-20">
